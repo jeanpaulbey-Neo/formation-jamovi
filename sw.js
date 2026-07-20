@@ -1,4 +1,4 @@
-const CACHE = "formations-v7";
+const CACHE = "formations-v8";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png",
   "./katex/katex.min.css", "./katex/katex.min.js", "./katex/auto-render.min.js"];
