@@ -1,4 +1,4 @@
-const CACHE = "formations-v5";
+const CACHE = "formations-v6";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png",
   "./katex/katex.min.css", "./katex/katex.min.js", "./katex/auto-render.min.js"];
@@ -12,18 +12,40 @@ self.addEventListener("activate", e => {
       .then(() => self.clients.claim())
   );
 });
+
+function isHTML(req){
+  return req.mode === "navigate" ||
+    req.destination === "document" ||
+    (req.url && (req.url.endsWith("/") || req.url.endsWith("index.html")));
+}
+
 self.addEventListener("fetch", e => {
-  if (e.request.method !== "GET") return;
+  const req = e.request;
+  if (req.method !== "GET") return;
+
+  // HTML : réseau d'abord (toujours à jour en ligne), cache en secours (hors-ligne)
+  if (isHTML(req)) {
+    e.respondWith(
+      fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put("./index.html", copy));
+        return res;
+      }).catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match("./index.html")))
+    );
+    return;
+  }
+
+  // Ressources statiques (KaTeX, polices, icônes) : cache d'abord
   e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(cached =>
+    caches.match(req, { ignoreSearch: true }).then(cached =>
       cached ||
-      fetch(e.request).then(res => {
-        if (res.ok && new URL(e.request.url).origin === location.origin) {
+      fetch(req).then(res => {
+        if (res.ok && new URL(req.url).origin === location.origin) {
           const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
+          caches.open(CACHE).then(c => c.put(req, copy));
         }
         return res;
-      }).catch(() => caches.match("./index.html"))
+      })
     )
   );
 });

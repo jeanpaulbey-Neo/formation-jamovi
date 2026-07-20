@@ -583,7 +583,11 @@ $("#overlay").addEventListener("click",closeMenu);
 function boot(){ render(); }
 if(document.readyState!=="loading") boot(); else document.addEventListener("DOMContentLoaded",boot);
 window.addEventListener("load",()=>typeset());
-if("serviceWorker" in navigator && location.protocol==="https:"){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
+if("serviceWorker" in navigator && location.protocol==="https:"){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+  let reloaded=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{ if(reloaded)return; reloaded=true; location.reload(); });
+}
 </script>
 </body>
 </html>
