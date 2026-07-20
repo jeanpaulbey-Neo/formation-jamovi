@@ -1,7 +1,7 @@
 {
-  "name": "Formation Statistiques avec Jamovi",
-  "short_name": "Stats Jamovi",
-  "description": "Formation interactive aux statistiques avec Jamovi : leçons, quiz corrigés, exercices pratiques et glossaire.",
+  "name": "Formations interactives — Jamovi & Zaremba",
+  "short_name": "Formations",
+  "description": "Formations interactives : statistiques avec Jamovi et reconstruction de l'article Zaremba.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",
