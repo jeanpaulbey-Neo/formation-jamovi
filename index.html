@@ -867,11 +867,27 @@ function renderScratch(){
 function clearScratch(){ padSave('scratch','pad',''); render(); }
 
 // ---- math typesetting ----
-function typeset(el){
-  const target=el||$("#main");
-  if(window.renderMathInElement){
-    try{ renderMathInElement(target,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false,ignoredClasses:["katex"]}); }catch(e){}
+let katexTries=0, katexFallbackLoading=false;
+function loadKatexFallback(cb){
+  if(katexFallbackLoading) return; katexFallbackLoading=true;
+  const base="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/";
+  if(!document.querySelector('link[data-katex-fb]')){
+    const css=document.createElement("link"); css.rel="stylesheet"; css.href=base+"katex.min.css"; css.setAttribute("data-katex-fb","1"); document.head.appendChild(css);
   }
+  const s1=document.createElement("script"); s1.src=base+"katex.min.js";
+  s1.onload=()=>{ const s2=document.createElement("script"); s2.src=base+"contrib/auto-render.min.js"; s2.onload=cb; document.head.appendChild(s2); };
+  document.head.appendChild(s1);
+}
+function typeset(el){
+  const target=el||$("#main"); if(!target) return;
+  if(window.renderMathInElement){
+    katexTries=0;
+    try{ renderMathInElement(target,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false,ignoredClasses:["katex"]}); }catch(e){}
+    return;
+  }
+  // KaTeX pas encore prêt : réessayer, puis basculer sur le CDN
+  if(katexTries++ < 25){ setTimeout(()=>typeset(el),140); }
+  else loadKatexFallback(()=>typeset(el));
 }
 
 // ---- render ----
