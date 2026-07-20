@@ -225,6 +225,8 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .mathpad-ta:focus{outline:none;border-color:var(--accent)}
 .mathpad-prev-wrap{margin-top:8px}
 .mathpad-prev-lbl{font-size:.68rem;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+.mathpad-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0}
+.mathpad-hint code{background:#eef1f5;border-radius:4px;padding:0 4px;font-size:.9em}
 .mathpad-prev{min-height:34px;background:#fff;border:1px dashed var(--border);border-radius:8px;padding:9px 13px;font-size:.96rem}
 .katex{font-size:1.02em}
 .katex-display{margin:.5em 0;overflow-x:auto;overflow-y:hidden}
@@ -812,7 +814,7 @@ function launchRolePlay(id){ conv.theme=id; conv.mode="script"; resetConv(); set
 // ============ ÉDITEUR DE FORMULES (palette + aperçu) ============
 let editorOpen = {};
 const PALETTE = [
-  {g:"Structure", it:[["xⁿ","^{‸}"],["xᵢ","_{‸}"],["√","\\sqrt{‸}"],["a⁄b","\\frac{‸}{}"],["∫","\\int_{‸}^{}"],["∑","\\sum_{‸}"],["( )","\\left(‸\\right)"],["‖·‖","\\|‸\\|"],["|·|","|‸|"]]},
+  {g:"Structure", it:[["xⁿ","^{‸}"],["xᵢ","_{‸}"],["√","\\sqrt{‸}"],["a⁄b","\\frac{‸}{}"],["∫","\\int_{‸}^{}"],["∑","\\sum_{‸}"],["( )","\\left(‸\\right)"],["‖·‖","\\|‸\\|"],["|·|","|‸|"],["Aa texte","\\text{‸}"]]},
   {g:"Analyse (notations de l'article)", it:[["∇g","\\gradg ‸"],["Δg","\\Delta_g ‸"],["div","\\divg ‸"],["∂","\\partial_{‸}"],["∂ν","\\dnu ‸"],["Hess","\\Hessg ‸"],["⟨,⟩g","\\innerg{‸}{}"],["⟨,⟩","\\inner{‸}{}"],["dVg","\\dxg"],["dσg","\\dsg"]]},
   {g:"Domaines & espaces", it:[["Ω","\\Om "],["Γ","\\Gamma "],["Γ_D","\\GD "],["Γ_N","\\GN "],["ℝ","\\R "],["Hˢ","H^{‸}"],["Lᵖ","L^{‸}"],["Kᵦ","K^{‸}_{}"],["∇","\\nabla "]]},
   {g:"Lettres grecques", it:[["α","\\alpha "],["β","\\beta "],["γ","\\gamma "],["δ","\\delta "],["ε","\\varepsilon "],["η","\\eta "],["θ","\\theta "],["λ","\\lambda "],["μ","\\mu "],["ν","\\nu "],["ρ","\\rho "],["σ","\\sigma "],["τ","\\tau "],["φ","\\varphi "],["ψ","\\psi "],["ω","\\omega "],["Δ","\\Delta "]]},
@@ -830,7 +832,8 @@ function paletteHTML(n,key){
 function editorPanel(n,key){
   const nn=(n==='scratch')?"'scratch'":n; const val=padLoad(n,key);
   return `<div class="mathpad">${paletteHTML(n,key)}
-    <textarea id="pad-${n}-${key}" class="mathpad-ta" spellcheck="false" placeholder="Rédigez votre version. Écrivez les maths entre $ … $  —  ex : Pour $u\\in H^1$, on a $\\|\\gradg u\\|_{L^2}\\le C$." oninput="padInput(${nn},'${key}')">${esc(val)}</textarea>
+    <textarea id="pad-${n}-${key}" class="mathpad-ta" spellcheck="false" placeholder="Tapez du LaTeX, il est rendu directement — ex : \\lambda_k=k+\\tfrac12,\\quad S=r^{1/2}\\sin(\\theta/2). Pour du texte dans une formule, utilisez « Aa texte ». Pour beaucoup de prose, entourez les maths de $ … $." oninput="padInput(${nn},'${key}')">${esc(val)}</textarea>
+    <div class="mathpad-hint">💡 Sans <code>$</code> : tout est rendu comme une formule (une par ligne). Avec des <code>$…$</code> : seules les parties entre <code>$</code> sont des maths.</div>
     <div class="mathpad-prev-wrap"><div class="mathpad-prev-lbl">Aperçu rendu</div><div class="mathpad-prev" id="prev-${n}-${key}"></div></div>
   </div>`;
 }
@@ -846,8 +849,23 @@ function padInput(n,key){ const ta=document.getElementById(`pad-${n}-${key}`); i
 function padRenderPreview(n,key){
   const ta=document.getElementById(`pad-${n}-${key}`), prev=document.getElementById(`prev-${n}-${key}`);
   if(!ta||!prev)return;
-  prev.innerHTML = ta.value.trim()? esc(ta.value).replace(/\n/g,"<br>") : `<span style="color:#9aa7b4">(l'aperçu de vos formules apparaît ici)</span>`;
-  if(window.renderMathInElement){ try{ renderMathInElement(prev,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false}); }catch(e){} }
+  const val=ta.value;
+  if(!val.trim()){ prev.innerHTML=`<span style="color:#9aa7b4">(l'aperçu de vos formules apparaît ici)</span>`; return; }
+  const ready = window.renderMathInElement && window.katex;
+  if(!ready){
+    prev.innerHTML=esc(val).replace(/\n/g,"<br>");
+    if(katexTries++<25) setTimeout(()=>padRenderPreview(n,key),140); else loadKatexFallback(()=>padRenderPreview(n,key));
+    return;
+  }
+  katexTries=0;
+  if(val.indexOf("$")>=0){
+    // mélange texte + maths entre $ … $
+    prev.innerHTML=esc(val).replace(/\n/g,"<br>");
+    try{ renderMathInElement(prev,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false}); }catch(e){}
+  } else {
+    // pas de $ : tout le contenu est du LaTeX, rendu ligne par ligne
+    prev.innerHTML=val.split("\n").map(l=> l.trim()? `<div style="margin:.15em 0">${katex.renderToString(l,{macros:MACROS,displayMode:true,throwOnError:false})}</div>` : `<div style="height:.5em"></div>`).join("");
+  }
 }
 function toggleEditor(n,key){ const k=n+"~"+key; editorOpen[k]=!editorOpen[k]; render(); }
 function refreshOpenPads(){
