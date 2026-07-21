@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Formations interactives</title>
 <meta name="theme-color" content="#2d5183">
 <meta name="description" content="Formations interactives : statistiques avec Jamovi et reconstruction de l'article Zaremba.">
@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="katex/katex.min.css">
 <script defer src="katex/katex.min.js"></script>
 <script defer src="katex/auto-render.min.js"></script>
@@ -23,7 +24,7 @@
   --radius:12px; --shadow:0 1px 3px rgba(16,32,54,.08),0 4px 14px rgba(16,32,54,.06);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.6}
 button{font-family:inherit;cursor:pointer}
 html,body{overflow-x:hidden;max-width:100%}
@@ -54,7 +55,7 @@ body.landing #main{margin-left:0}
 #burger{display:none;position:fixed;top:14px;left:14px;z-index:50;background:var(--sidebar);color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:1.2rem;box-shadow:var(--shadow)}
 body.landing #burger{display:none!important}
 #overlay{display:none;position:fixed;inset:0;background:rgba(10,20,30,.45);z-index:35}
-@media(max-width:900px){
+@media(max-width:1024px){
   #sidebar{transform:translateX(-100%)}
   #sidebar.open{transform:translateX(0)}
   #main{margin-left:0;padding-top:70px}
@@ -238,21 +239,48 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .mathpad-hint code{background:#eef1f5;border-radius:4px;padding:0 4px;font-size:.9em}
 .mathpad-prev{min-height:34px;background:#fff;border:1px dashed var(--border);border-radius:8px;padding:9px 13px;font-size:.96rem;overflow-x:auto}
 .recon-body,.formula-card .f,.gterm p,.exemple-box,.retenir-box,.q-text,.explain{overflow-x:auto;overflow-y:hidden}
-@media(max-width:600px){
-  #main{padding-left:14px;padding-right:14px}
-  h2.page-title{font-size:1.3rem}
+@media(max-width:760px){
+  body{font-size:17px}
+  #main{padding-left:15px;padding-right:15px}
+  h2.page-title{font-size:1.4rem}
+  .page-sub{font-size:1rem}
   .hero{padding:22px 20px}
+  .hero h2{font-size:1.5rem}
+  .hero p{font-size:1rem}
   .card{padding:18px 16px}
+  /* lecture : textes plus grands */
+  .section-block h3{font-size:1.18rem}
+  .section-block p{font-size:1.08rem;line-height:1.65}
+  .section-block li{font-size:1.06rem}
+  .objectifs-box li,.retenir-box li{font-size:1.06rem}
+  .objectifs-box h4{font-size:1rem}
+  .exemple-box,.retenir-box,.jamovi-box p{font-size:1.04rem}
+  .q-text{font-size:1.18rem}
+  .opt{font-size:1.06rem;padding:14px 16px}
+  .opt .letter{flex-basis:30px;height:30px;font-size:.9rem}
+  .explain{font-size:1rem}
+  .bubble{max-width:92%;font-size:1.05rem}
+  .sugg-btn{font-size:1.04rem;padding:13px 16px}
+  .lex-table{font-size:1.02rem}
+  .lex-ex{font-size:.95rem}
+  .gterm b{font-size:1.05rem}
+  .gterm p{font-size:1rem}
+  .recon-name{font-size:1.08rem}
+  .recon-body{font-size:1.05rem}
+  .chip{font-size:.9rem}
   .picker{min-width:0;flex:1 1 100%}
+  .lvl-btn{font-size:.95rem;padding:8px 14px}
   .recon-head{flex-wrap:wrap}
   .recon-actions{gap:6px}
   .recon-actions .assess{margin-left:0;width:100%}
-  .bubble{max-width:92%}
-  .tabs{gap:5px}
-  .tab{padding:7px 13px;font-size:.83rem}
-  .pal-btn{padding:5px 8px}
+  .tabs{gap:6px}
+  .tab{padding:9px 15px;font-size:.95rem}
+  .btn{padding:11px 20px;font-size:.98rem}
+  .btn.sm{padding:8px 14px;font-size:.9rem}
+  .pal-btn{padding:7px 11px;font-size:1rem}
   .stats-row{grid-template-columns:repeat(2,1fr)}
-  .katex{font-size:1em}
+  .chap-card h3,.theme-card h3{font-size:1.05rem}
+  .nav-item{padding:11px 12px;font-size:.95rem}
 }
 .katex{font-size:1.02em}
 .katex-display{margin:.5em 0;overflow-x:auto;overflow-y:hidden}
