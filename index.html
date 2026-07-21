@@ -26,6 +26,11 @@
 html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.6}
 button{font-family:inherit;cursor:pointer}
+html,body{overflow-x:hidden;max-width:100%}
+img,svg,table{max-width:100%}
+/* formules : jamais de débordement horizontal */
+.katex-display{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.kx{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
 #app{display:flex;min-height:100vh}
 #sidebar{width:292px;background:var(--sidebar);color:var(--sidebar-ink);position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:40;transition:transform .25s ease;display:flex;flex-direction:column}
 #main{flex:1;margin-left:292px;padding:32px clamp(18px,4vw,56px) 80px;max-width:1150px}
@@ -205,9 +210,10 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .sugg-btn .fr{display:block;font-size:.8rem;color:var(--muted);margin-top:2px}
 .free-row{display:flex;gap:8px;flex-wrap:wrap}
 .free-row input{flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.95rem;font-family:inherit}
-.lex-table{width:100%;border-collapse:collapse;font-size:.92rem}
-.lex-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-.lex-en{font-weight:700;color:var(--accent-dark);white-space:nowrap}
+.lex-table{width:100%;border-collapse:collapse;font-size:.92rem;table-layout:fixed}
+.lex-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;word-break:break-word;overflow-wrap:anywhere}
+.lex-table td:first-child{width:40%}
+.lex-en{font-weight:700;color:var(--accent-dark)}
 .lex-ex{font-size:.85rem;color:var(--muted);font-style:italic}
 .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .theme-card{background:var(--card);border-radius:12px;box-shadow:var(--shadow);padding:18px;border:none;text-align:left;transition:transform .12s}
@@ -230,7 +236,24 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .mathpad-prev-lbl{font-size:.68rem;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
 .mathpad-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0}
 .mathpad-hint code{background:#eef1f5;border-radius:4px;padding:0 4px;font-size:.9em}
-.mathpad-prev{min-height:34px;background:#fff;border:1px dashed var(--border);border-radius:8px;padding:9px 13px;font-size:.96rem}
+.mathpad-prev{min-height:34px;background:#fff;border:1px dashed var(--border);border-radius:8px;padding:9px 13px;font-size:.96rem;overflow-x:auto}
+.recon-body,.formula-card .f,.gterm p,.exemple-box,.retenir-box,.q-text,.explain{overflow-x:auto;overflow-y:hidden}
+@media(max-width:600px){
+  #main{padding-left:14px;padding-right:14px}
+  h2.page-title{font-size:1.3rem}
+  .hero{padding:22px 20px}
+  .card{padding:18px 16px}
+  .picker{min-width:0;flex:1 1 100%}
+  .recon-head{flex-wrap:wrap}
+  .recon-actions{gap:6px}
+  .recon-actions .assess{margin-left:0;width:100%}
+  .bubble{max-width:92%}
+  .tabs{gap:5px}
+  .tab{padding:7px 13px;font-size:.83rem}
+  .pal-btn{padding:5px 8px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .katex{font-size:1em}
+}
 .katex{font-size:1.02em}
 .katex-display{margin:.5em 0;overflow-x:auto;overflow-y:hidden}
 </style>
@@ -927,7 +950,7 @@ function padRenderPreview(n,key){
   if(val.indexOf("$")>=0){
     // mélange texte + maths entre $ … $
     prev.innerHTML=esc(val).replace(/\n/g,"<br>");
-    try{ renderMathInElement(prev,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false}); }catch(e){}
+    try{ renderMathInElement(prev,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false}); wrapInlineKatex(prev); }catch(e){}
   } else {
     // pas de $ : tout le contenu est du LaTeX, rendu ligne par ligne
     prev.innerHTML=val.split("\n").map(l=> l.trim()? `<div style="margin:.15em 0">${katex.renderToString(l,{macros:MACROS,displayMode:true,throwOnError:false})}</div>` : `<div style="height:.5em"></div>`).join("");
@@ -962,11 +985,18 @@ function loadKatexFallback(cb){
   s1.onload=()=>{ const s2=document.createElement("script"); s2.src=base+"contrib/auto-render.min.js"; s2.onload=cb; document.head.appendChild(s2); };
   document.head.appendChild(s1);
 }
+function wrapInlineKatex(root){
+  root.querySelectorAll(".katex").forEach(k=>{
+    const par=k.parentElement; if(!par||par.classList.contains("kx")) return;
+    if(k.classList.contains("katex-display")||k.closest(".katex-display")) return;
+    const w=document.createElement("span"); w.className="kx"; par.insertBefore(w,k); w.appendChild(k);
+  });
+}
 function typeset(el){
   const target=el||$("#main"); if(!target) return;
   if(window.renderMathInElement){
     katexTries=0;
-    try{ renderMathInElement(target,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false,ignoredClasses:["katex"]}); }catch(e){}
+    try{ renderMathInElement(target,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:MACROS,throwOnError:false,ignoredClasses:["katex"]}); wrapInlineKatex(target); }catch(e){}
     return;
   }
   // KaTeX pas encore prêt : réessayer, puis basculer sur le CDN
