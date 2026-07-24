@@ -246,6 +246,15 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .sugg-btn{text-align:left;border:1.5px solid var(--border);background:#f8fafc;border-radius:10px;padding:10px 14px;font-size:.93rem}
 .sugg-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
 .sugg-btn .fr{display:block;font-size:.8rem;color:var(--muted);margin-top:2px}
+.sugg-row{display:flex;gap:6px;align-items:stretch;margin-bottom:8px}
+.sugg-row .sugg-btn{flex:1;margin-bottom:0}
+.spk-btn{background:none;border:none;cursor:pointer;font-size:.9rem;padding:2px 6px;border-radius:6px;line-height:1;vertical-align:middle}
+.spk-btn:hover{background:var(--accent-soft)}
+.bubble .spk-btn{opacity:.65}
+.mic-btn{background:var(--accent-soft);border:1px solid var(--border);border-radius:10px;padding:0 14px;font-size:1.15rem;color:var(--accent-dark)}
+.mic-btn.rec{background:var(--red);color:#fff;border-color:var(--red);animation:micpulse 1s infinite}
+.mic-btn:disabled{opacity:.5}
+@keyframes micpulse{0%,100%{opacity:1}50%{opacity:.5}}
 .free-row{display:flex;gap:8px;flex-wrap:wrap}
 .free-row input{flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.95rem;font-family:inherit}
 .lex-table{width:100%;border-collapse:collapse;font-size:.92rem;table-layout:fixed}
@@ -779,6 +788,28 @@ let conv = { theme:null, niveau:"A2", mode:"script", stepIdx:0, log:[], waitStep
 let ia = { messages:[], loading:false, started:false, correct:true, error:null };
 let apiCfg = {}; try{ apiCfg=JSON.parse(localStorage.getItem("english-api")||"{}"); }catch(e){}
 function saveApiCfg(){ try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
+// ---- voix : synthèse (écouter) & reconnaissance (parler) ----
+const escA = s => esc(s).replace(/"/g,"&quot;");
+let ttsAuto = localStorage.getItem("ttsAuto")==="1";
+let ttsVoice=null;
+function pickVoice(){ try{ const vs=speechSynthesis.getVoices(); ttsVoice=vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }catch(e){} }
+if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschanged=pickVoice; }catch(e){} }
+function speak(t){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice)u.voice=ttsVoice; u.rate=0.95; speechSynthesis.speak(u); }catch(e){} }
+function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
+const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+let recog=null;
+function dictate(inputId){
+  if(!SR){ alert("La reconnaissance vocale n'est pas disponible sur ce navigateur. Essayez Chrome ou Opera, et autorisez le microphone."); return; }
+  const el=document.getElementById(inputId); if(!el) return;
+  if(recog){ try{recog.stop();}catch(e){} recog=null; setMic(false); return; }
+  recog=new SR(); recog.lang="en-US"; recog.interimResults=true; recog.continuous=false;
+  let fin="";
+  recog.onresult=e=>{ let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); };
+  recog.onend=()=>{ recog=null; setMic(false); };
+  recog.onerror=()=>{ recog=null; setMic(false); };
+  setMic(true); try{ recog.start(); }catch(e){ recog=null; setMic(false); }
+}
+function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
 function bandeOf(code){ const n=(F().niveaux||[]).find(x=>x.code===code); return n?n.bande:"debutant"; }
@@ -814,7 +845,7 @@ function advanceScript(){
   const d=currentDialogue(); if(!d){ conv.done=true; return; }
   while(conv.stepIdx<d.steps.length){
     const st=d.steps[conv.stepIdx];
-    if(st.app!==undefined){ conv.log.push({who:'app',en:st.app,fr:st.fr}); conv.stepIdx++; }
+    if(st.app!==undefined){ conv.log.push({who:'app',en:st.app,fr:st.fr}); if(ttsAuto) speak(st.app); conv.stepIdx++; }
     else { conv.waitStep=st.user; return; }
   }
   conv.done=true; conv.waitStep=null;
@@ -830,7 +861,7 @@ function submitFree(){
   conv.stepIdx++; conv.waitStep=null; advanceScript(); render();
 }
 function chatBubbles(log){
-  return `<div class="chat" id="chatbox">`+log.map(m=>`<div class="bubble ${m.who}">${esc(m.en)}${m.fr?`<span class="fr">${esc(m.fr)}</span>`:""}${m.modele?`<span class="modele">✔ Réponse-modèle : ${esc(m.modele)}</span>`:""}</div>`).join("")+`</div>`;
+  return `<div class="chat" id="chatbox">`+log.map(m=>`<div class="bubble ${m.who}">${esc(m.en)} <button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(m.en)}">🔊</button>${m.fr?`<span class="fr">${esc(m.fr)}</span>`:""}${m.modele?`<span class="modele">✔ Réponse-modèle : ${esc(m.modele)} <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(m.modele)}">🔊</button></span>`:""}</div>`).join("")+`</div>`;
 }
 
 function renderConversation(){
@@ -847,16 +878,18 @@ function renderConversation(){
   // mode scripté
   const d=currentDialogue();
   h+=`<div class="card">
-    <div class="role-ctx"><b>Situation :</b> ${esc(d.contexte)}<br><b>Vous jouez :</b> ${esc(d.roleUser)} — <b>l'app joue :</b> ${esc(d.roleApp)}</div>`;
+    <div class="role-ctx"><b>Situation :</b> ${esc(d.contexte)}<br><b>Vous jouez :</b> ${esc(d.roleUser)} — <b>l'app joue :</b> ${esc(d.roleApp)}
+      <label style="display:block;margin-top:6px;font-size:.85rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les répliques anglaises à voix haute</label></div>`;
   h+=chatBubbles(conv.log);
   if(conv.waitStep){
     const w=conv.waitStep;
     h+=`<div class="resp-panel">
       ${w.indice?`<div class="indice">💡 ${esc(w.indice)}</div>`:""}
-      <div class="sugg">${(w.suggestions||[]).map((s,i)=>`<button class="sugg-btn" onclick="pickSuggestion(${i})">${esc(s.en)}<span class="fr">${esc(s.fr)}</span></button>`).join("")}</div>
-      <div class="free-row"><input id="freeInput" type="text" placeholder="…ou écrivez votre réponse en anglais" onkeydown="if(event.key==='Enter')submitFree()">
+      <div class="sugg">${(w.suggestions||[]).map((s,i)=>`<div class="sugg-row"><button class="sugg-btn" onclick="pickSuggestion(${i})">${esc(s.en)}<span class="fr">${esc(s.fr)}</span></button><button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(s.en)}">🔊</button></div>`).join("")}</div>
+      <div class="free-row"><input id="freeInput" type="text" placeholder="…écrivez ou dictez (🎤) votre réponse" onkeydown="if(event.key==='Enter')submitFree()">
+        <button class="mic-btn" title="Parler" onclick="dictate('freeInput')">🎤</button>
         <button class="btn" onclick="submitFree()">Envoyer</button></div>
-      <p style="font-size:.78rem;color:var(--muted);margin-top:6px">En écrivant vous-même, vous verrez la réponse-modèle pour comparer.</p>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:6px">🎤 Parlez, ou écrivez : vous verrez la réponse-modèle pour comparer.</p>
     </div>`;
   } else if(conv.done){
     h+=`<div class="resp-panel" style="text-align:center">
@@ -889,7 +922,8 @@ function renderIA(t){
   }
   const d=t.dialogues[bandeOf(conv.niveau)];
   h+=`<div class="role-ctx"><b>Situation :</b> ${esc(d.contexte)} — <b>niveau ${esc(conv.niveau)}</b>. L'IA joue ${esc(d.roleApp)}, vous jouez ${esc(d.roleUser)}.
-    <label style="display:block;margin-top:6px;font-size:.82rem"><input type="checkbox" ${ia.correct?'checked':''} onchange="ia.correct=this.checked"> corriger mes erreurs (astuce en français)</label></div>`;
+    <label style="display:block;margin-top:6px;font-size:.82rem"><input type="checkbox" ${ia.correct?'checked':''} onchange="ia.correct=this.checked"> corriger mes erreurs (astuce en français)</label>
+    <label style="display:block;margin-top:4px;font-size:.82rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les réponses de l'IA à voix haute</label></div>`;
   if(!ia.started){
     h+=`<div style="text-align:center;padding:14px"><button class="btn" onclick="iaStart()">▶ Démarrer la conversation</button>
       <div style="margin-top:8px"><button class="btn ghost sm" onclick="forgetAI()">Changer de clé API</button></div></div>`;
@@ -898,7 +932,8 @@ function renderIA(t){
     if(ia.loading) h+=`<div class="typing">L'IA écrit…</div>`;
     if(ia.error) h+=`<div class="explain bad"><b>Erreur API</b>${esc(ia.error)}</div>`;
     h+=`<div class="resp-panel"><div class="free-row">
-      <input id="iaInput" type="text" placeholder="Type your reply in English…" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
+      <input id="iaInput" type="text" placeholder="Écrivez ou dictez (🎤) en anglais…" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
+      <button class="mic-btn" title="Parler" onclick="dictate('iaInput')" ${ia.loading?'disabled':''}>🎤</button>
       <button class="btn" onclick="iaSend()" ${ia.loading?'disabled':''}>Envoyer</button></div>
       <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" onclick="iaReset()">🔄 Nouvelle conversation</button><button class="btn ghost sm" onclick="forgetAI()">Changer de clé</button></div></div>`;
   }
@@ -914,7 +949,7 @@ function iaSystem(t){
 }
 async function iaStart(){
   const t=themeById(conv.theme); ia.started=true; ia.messages=[]; ia.error=null; ia.loading=true; render();
-  try{ const txt=await callAI(iaSystem(t),[{role:"user",content:"Please start the role-play with your first line."}]); ia.messages.push({role:"assistant",content:txt}); }
+  try{ const txt=await callAI(iaSystem(t),[{role:"user",content:"Please start the role-play with your first line."}]); ia.messages.push({role:"assistant",content:txt}); if(ttsAuto) speak(txt); }
   catch(e){ ia.error=String(e.message||e); }
   ia.loading=false; render();
 }
@@ -922,7 +957,7 @@ async function iaSend(){
   const el=$("#iaInput"); const v=(el?el.value:"").trim(); if(!v||ia.loading) return;
   const t=themeById(conv.theme);
   ia.messages.push({role:"user",content:v}); ia.error=null; ia.loading=true; render();
-  try{ const txt=await callAI(iaSystem(t),ia.messages.slice()); ia.messages.push({role:"assistant",content:txt}); }
+  try{ const txt=await callAI(iaSystem(t),ia.messages.slice()); ia.messages.push({role:"assistant",content:txt}); if(ttsAuto) speak(txt); }
   catch(e){ ia.error=String(e.message||e); }
   ia.loading=false; render();
 }
@@ -956,10 +991,10 @@ function renderThemeDetail(){
   let h=`<h2 class="page-title">${t.emoji} ${esc(t.nom)}</h2><p class="page-sub">${esc(t.intro||"")}</p>
   <div style="margin-bottom:16px"><button class="btn ghost sm" onclick="setView('themes')">← Tous les thèmes</button></div>
   <div class="card"><b>📚 Champ lexical</b><table class="lex-table" style="margin-top:10px"><tbody>`;
-  h+=t.lexique.map(l=>`<tr><td class="lex-en">${esc(l.en)}</td><td>${esc(l.fr)}<div class="lex-ex">${esc(l.ex||"")}</div></td></tr>`).join("");
+  h+=t.lexique.map(l=>`<tr><td class="lex-en">${esc(l.en)} <button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(l.en)}">🔊</button></td><td>${esc(l.fr)}<div class="lex-ex">${esc(l.ex||"")}${l.ex?` <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(l.ex)}">🔊</button>`:""}</div></td></tr>`).join("");
   h+=`</tbody></table></div>
   <div class="card"><b>💬 Phrases-clés</b><table class="lex-table" style="margin-top:10px"><tbody>`;
-  h+=t.expressions.map(e=>`<tr><td class="lex-en">${esc(e.en)}</td><td>${esc(e.fr)}</td></tr>`).join("");
+  h+=t.expressions.map(e=>`<tr><td class="lex-en">${esc(e.en)} <button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(e.en)}">🔊</button></td><td>${esc(e.fr)}</td></tr>`).join("");
   h+=`</tbody></table></div>
   <div style="text-align:center"><button class="btn" onclick="launchRolePlay('${t.id}')">🎭 Lancer un jeu de rôle sur ce thème</button></div>`;
   $("#main").innerHTML=h;
