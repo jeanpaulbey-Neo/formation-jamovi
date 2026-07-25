@@ -835,26 +835,61 @@ if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschang
 function speak(t){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice)u.voice=ttsVoice; u.rate=0.95; speechSynthesis.speak(u); }catch(e){} }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null;
+let recog=null, mediaRec=null, recChunks=[];
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
-async function dictate(inputId){
-  if(!SR){ micSay("⚠️ Reconnaissance vocale indisponible sur ce navigateur — essayez Chrome ou Opera (pas Firefox), en HTTPS."); return; }
+// clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
+function voiceKey(){ if(apiCfg.voiceKey && apiCfg.voiceKey.trim()) return apiCfg.voiceKey.trim(); if(apiCfg.provider==='openai' && apiCfg.key) return apiCfg.key; return null; }
+// Point d'entrée : si une clé OpenAI est dispo → transcription Whisper (fiable partout, même iPhone / app installée) ; sinon reconnaissance du navigateur.
+function dictate(inputId){ if(voiceKey()) return recordWhisper(inputId); return webSpeech(inputId); }
+
+// --- Voie 1 : enregistrer puis transcrire via Whisper (OpenAI) ---
+async function recordWhisper(inputId){
   const el=document.getElementById(inputId); if(!el) return;
-  if(recog){ try{ recog.stop(); }catch(e){} return; }        // 2e appui = arrêter
-  // demander explicitement l'autorisation micro (fait apparaître la demande et remonte les refus)
-  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-    try{ const st=await navigator.mediaDevices.getUserMedia({audio:true}); st.getTracks().forEach(t=>t.stop()); }
-    catch(e){ micSay("⚠️ Microphone refusé. Autorisez le micro pour ce site (icône 🔒 dans la barre d'adresse → Autorisations)."); return; }
-  }
+  if(mediaRec){ try{ mediaRec.stop(); }catch(e){} return; }   // 2e appui = arrêter + transcrire
+  if(!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) || !window.MediaRecorder){ micSay("⚠️ Enregistrement non disponible sur ce navigateur."); return; }
+  let stream;
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); }
+  catch(e){ micSay("⚠️ Micro refusé. Touchez le cadenas 🔒 (barre d'adresse) → autorisez le microphone, puis réessayez."); return; }
+  recChunks=[];
+  let mime=""; ["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg"].forEach(m=>{ if(!mime && MediaRecorder.isTypeSupported(m)) mime=m; });
+  try{ mediaRec = mime ? new MediaRecorder(stream,{mimeType:mime}) : new MediaRecorder(stream); }
+  catch(e){ stream.getTracks().forEach(t=>t.stop()); mediaRec=null; micSay("⚠️ Enregistrement non supporté ici."); return; }
+  mediaRec.ondataavailable=e=>{ if(e.data && e.data.size) recChunks.push(e.data); };
+  mediaRec.onstop=async()=>{
+    setMic(false); try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+    const type=(mediaRec&&mediaRec.mimeType)||mime||"audio/webm"; mediaRec=null;
+    const blob=new Blob(recChunks,{type});
+    if(!blob.size){ micSay("Rien enregistré — réessayez."); return; }
+    micSay("⏳ Transcription en cours…");
+    try{ const txt=await whisperTranscribe(blob,type); if(txt && txt.trim()){ el.value=txt.trim(); micSay("✓ « "+txt.trim()+" »"); setTimeout(()=>{ if(!mediaRec) micSay(""); },3500); } else micSay("(rien compris — réessayez)"); }
+    catch(e){ micSay("⚠️ Transcription : "+((e&&e.message)||e)); }
+  };
+  setMic(true); micSay("🔴 J'enregistre… parlez en anglais, puis retouchez 🎤 pour arrêter.");
+  try{ mediaRec.start(); }catch(e){ setMic(false); stream.getTracks().forEach(t=>t.stop()); mediaRec=null; micSay("⚠️ "+((e&&e.message)||e)); }
+}
+async function whisperTranscribe(blob,type){
+  const key=voiceKey(); if(!key) throw new Error("clé OpenAI manquante");
+  const ext = type.indexOf("mp4")>=0 ? "mp4" : type.indexOf("ogg")>=0 ? "ogg" : "webm";
+  const fd=new FormData(); fd.append("file", blob, "audio."+ext); fd.append("model","whisper-1"); fd.append("language","en");
+  const r=await fetch("https://api.openai.com/v1/audio/transcriptions",{method:"POST",headers:{"Authorization":"Bearer "+key},body:fd});
+  if(!r.ok) throw new Error(r.status+" "+(await r.text()).slice(0,140));
+  const d=await r.json(); return d.text||"";
+}
+
+// --- Voie 2 : reconnaissance vocale native du navigateur (gratuit, sans clé) ---
+function webSpeech(inputId){
+  if(!SR){ micSay("⚠️ Reconnaissance vocale indisponible ici. Astuce : renseignez une clé OpenAI dans « IA en direct » → la dictée passera par une transcription qui marche partout (iPhone, app installée…)."); return; }
+  const el=document.getElementById(inputId); if(!el) return;
+  if(recog){ try{ recog.stop(); }catch(e){} return; }
   try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
   recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
   let fin="";
   recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… parlez en anglais."); };
   recog.onresult=e=>{ let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
-  recog.onerror=e=>{ const m={"not-allowed":"Micro refusé : autorisez le microphone pour ce site.","service-not-allowed":"Micro bloqué par le navigateur ou le système.","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté.","network":"La dictée nécessite une connexion Internet."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
+  recog.onerror=e=>{ const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Micro bloqué par le navigateur/système. Ouvrez le site dans un onglet Chrome plutôt que l'app installée, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté.","network":"La dictée du navigateur nécessite Internet. Avec une clé OpenAI, la transcription marche aussi."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
   recog.onend=()=>{ recog=null; setMic(false); setTimeout(()=>{ if(!recog) micSay(""); },4000); };
-  try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+(e.message||e)); }
+  try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
 }
 
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
@@ -963,6 +998,7 @@ function renderIA(t){
         <option value="anthropic" ${apiCfg.provider==='anthropic'?'selected':''}>Anthropic (Claude)</option></select></label>
       <label>Clé API<br><input class="sel" id="aiKey" type="password" placeholder="sk-… / clé Anthropic" value="${esc(apiCfg.key||'')}"></label>
       ${renderModelPicker()}
+      <label style="font-size:.85rem">Clé OpenAI pour la dictée 🎤 (optionnel — pour un micro fiable partout, même iPhone/app installée)<br><input class="sel" id="aiVoiceKey" type="password" placeholder="sk-… (laisser vide si clé OpenAI ci-dessus)" value="${esc(apiCfg.voiceKey||'')}"></label>
       <div><button class="btn" onclick="saveAI()">Enregistrer</button></div>
     </div></div>`;
     return h;
@@ -973,7 +1009,8 @@ function renderIA(t){
   h+=`<div class="role-ctx"><b>Situation :</b> ${esc(ctx)} — <b>niveau ${esc(conv.niveau)}</b>. L'IA joue ${esc(rApp)}, vous jouez ${esc(rUser)}.${t?"":' <span style="color:var(--muted)">(choisissez un thème ci-dessus pour un jeu de rôle ciblé)</span>'}
     <label style="display:block;margin-top:6px;font-size:.82rem"><input type="checkbox" ${ia.correct?'checked':''} onchange="ia.correct=this.checked"> corriger mes erreurs (astuce en français)</label>
     <label style="display:block;margin-top:4px;font-size:.82rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les réponses de l'IA à voix haute</label></div>`;
-  h+=`<div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px">${renderModelPicker()}<div style="font-size:.78rem;color:var(--muted)">Modèle actuel : <b>${esc(apiCfg.model||"(défaut)")}</b>. En cas d'erreur 404, cliquez « Charger mes modèles » et choisissez-en un.</div></div>`;
+  h+=`<div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px">${renderModelPicker()}<div style="font-size:.78rem;color:var(--muted)">Modèle actuel : <b>${esc(apiCfg.model||"(défaut)")}</b>. En cas d'erreur 404, cliquez « Charger mes modèles » et choisissez-en un.</div>
+    <div style="margin-top:10px">${voiceKey()?`<div style="font-size:.78rem;color:var(--muted)">🎤 Dictée : transcription fiable activée (Whisper).</div>`:`<label style="font-size:.82rem">🎤 Clé OpenAI pour la dictée <span style="color:var(--muted)">(optionnel — micro fiable partout)</span><br><input class="sel" id="iaVoiceKey" type="password" placeholder="sk-…" value="${esc(apiCfg.voiceKey||'')}"><button class="btn ghost sm" style="margin-top:6px" onclick="saveVoiceKey()">Enregistrer la clé voix</button></label>`}</div></div>`;
   if(!ia.started){
     h+=`<div style="text-align:center;padding:14px"><button class="btn" onclick="iaStart()">▶ Démarrer la conversation</button>
       <div style="margin-top:8px"><button class="btn ghost sm" onclick="forgetAI()">Changer de clé API</button></div></div>`;
@@ -992,12 +1029,14 @@ function renderIA(t){
   return h;
 }
 function saveAI(){
-  const prov=$("#aiProv"), key=$("#aiKey"), sel=$("#aiModelSel"), mdl=$("#aiModel");
+  const prov=$("#aiProv"), key=$("#aiKey"), sel=$("#aiModelSel"), mdl=$("#aiModel"), vk=$("#aiVoiceKey");
   if(prov) apiCfg.provider=prov.value;
   if(key) apiCfg.key=key.value.trim();
+  if(vk) apiCfg.voiceKey=vk.value.trim();
   if(sel) apiCfg.model=sel.value; else if(mdl) apiCfg.model=mdl.value.trim();
   saveApiCfg(); render();
 }
+function saveVoiceKey(){ const v=$("#iaVoiceKey"); if(v) apiCfg.voiceKey=v.value.trim(); saveApiCfg(); render(); }
 function forgetAI(){ apiCfg={}; saveApiCfg(); ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaReset(){ ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaSystem(t){
