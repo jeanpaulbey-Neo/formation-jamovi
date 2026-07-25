@@ -869,12 +869,12 @@ function renderConversation(){
   let h=`<h2 class="page-title">🎭 Conversation — jeu de rôle</h2>
   <p class="page-sub">Choisissez un thème et un niveau, puis dialoguez : en mode scripté l'app vous guide ; en mode IA, un partenaire répond librement.</p>`;
   h+=pickerRow();
+  if(conv.mode==='ia'){ h+=renderIA(conv.theme?themeById(conv.theme):null); $("#main").innerHTML=h; return; }
   if(!conv.theme){
-    h+=`<div class="card" style="text-align:center;color:var(--muted)">Choisissez un thème ci-dessus (ou 🎲 aléatoire) pour commencer.</div>`;
+    h+=`<div class="card" style="text-align:center;color:var(--muted)">Choisissez un thème ci-dessus (ou 🎲 aléatoire) pour le mode scripté — ou passez en <b>🤖 IA en direct</b> pour discuter librement.</div>`;
     $("#main").innerHTML=h; return;
   }
   const t=themeById(conv.theme);
-  if(conv.mode==='ia'){ h+=renderIA(t); $("#main").innerHTML=h; return; }
   // mode scripté
   const d=currentDialogue();
   h+=`<div class="card">
@@ -920,8 +920,10 @@ function renderIA(t){
     </div></div>`;
     return h;
   }
-  const d=t.dialogues[bandeOf(conv.niveau)];
-  h+=`<div class="role-ctx"><b>Situation :</b> ${esc(d.contexte)} — <b>niveau ${esc(conv.niveau)}</b>. L'IA joue ${esc(d.roleApp)}, vous jouez ${esc(d.roleUser)}.
+  const d=t?t.dialogues[bandeOf(conv.niveau)]:null;
+  const ctx=d?d.contexte:"Conversation libre en anglais sur des sujets du quotidien.";
+  const rApp=d?d.roleApp:"un partenaire anglophone", rUser=d?d.roleUser:"vous-même";
+  h+=`<div class="role-ctx"><b>Situation :</b> ${esc(ctx)} — <b>niveau ${esc(conv.niveau)}</b>. L'IA joue ${esc(rApp)}, vous jouez ${esc(rUser)}.${t?"":' <span style="color:var(--muted)">(choisissez un thème ci-dessus pour un jeu de rôle ciblé)</span>'}
     <label style="display:block;margin-top:6px;font-size:.82rem"><input type="checkbox" ${ia.correct?'checked':''} onchange="ia.correct=this.checked"> corriger mes erreurs (astuce en français)</label>
     <label style="display:block;margin-top:4px;font-size:.82rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les réponses de l'IA à voix haute</label></div>`;
   if(!ia.started){
@@ -944,8 +946,11 @@ function saveAI(){ apiCfg={provider:$("#aiProv").value,key:$("#aiKey").value.tri
 function forgetAI(){ apiCfg={}; saveApiCfg(); ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaReset(){ ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaSystem(t){
-  const d=t.dialogues[bandeOf(conv.niveau)];
-  return `You are role-playing with a French learner of English at CEFR level ${conv.niveau}. Situation: ${d.contexte}. You play the role of ${d.roleApp}; the learner plays ${d.roleUser}. Stay in character and speak ONLY English. Keep your replies short and natural, using vocabulary and grammar appropriate for a ${conv.niveau} learner. Ask questions to keep the conversation going.${ia.correct? " If the learner makes an important English mistake, add at the very end a new line starting with 'Tip: ' giving a short correction IN FRENCH." : ""}`;
+  const d=t?t.dialogues[bandeOf(conv.niveau)]:null;
+  const base = d
+    ? `You are role-playing with a French learner of English at CEFR level ${conv.niveau}. Situation: ${d.contexte}. You play the role of ${d.roleApp}; the learner plays ${d.roleUser}.`
+    : `You are a friendly English conversation partner for a French learner at CEFR level ${conv.niveau}. Have a natural, everyday conversation on topics the learner brings up.`;
+  return `${base} Stay in character and speak ONLY English. Keep your replies short and natural, using vocabulary and grammar appropriate for a ${conv.niveau} learner. Ask questions to keep the conversation going.${ia.correct? " If the learner makes an important English mistake, add at the very end a new line starting with 'Tip: ' giving a short correction IN FRENCH." : ""}`;
 }
 async function iaStart(){
   const t=themeById(conv.theme); ia.started=true; ia.messages=[]; ia.error=null; ia.loading=true; render();
