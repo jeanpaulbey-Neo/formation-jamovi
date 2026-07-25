@@ -255,6 +255,7 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .mic-btn.rec{background:var(--red);color:#fff;border-color:var(--red);animation:micpulse 1s infinite}
 .mic-btn:disabled{opacity:.5}
 @keyframes micpulse{0%,100%{opacity:1}50%{opacity:.5}}
+.mic-status{font-size:.85rem;color:var(--accent-dark);margin-top:8px;min-height:1.2em;font-weight:600}
 .free-row{display:flex;gap:8px;flex-wrap:wrap}
 .free-row input{flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.95rem;font-family:inherit}
 .lex-table{width:100%;border-collapse:collapse;font-size:.92rem;table-layout:fixed}
@@ -835,18 +836,26 @@ function speak(t){ if(!t||!("speechSynthesis" in window)) return; try{ speechSyn
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
 let recog=null;
-function dictate(inputId){
-  if(!SR){ alert("La reconnaissance vocale n'est pas disponible sur ce navigateur. Essayez Chrome ou Opera, et autorisez le microphone."); return; }
-  const el=document.getElementById(inputId); if(!el) return;
-  if(recog){ try{recog.stop();}catch(e){} recog=null; setMic(false); return; }
-  recog=new SR(); recog.lang="en-US"; recog.interimResults=true; recog.continuous=false;
-  let fin="";
-  recog.onresult=e=>{ let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); };
-  recog.onend=()=>{ recog=null; setMic(false); };
-  recog.onerror=()=>{ recog=null; setMic(false); };
-  setMic(true); try{ recog.start(); }catch(e){ recog=null; setMic(false); }
-}
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
+function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
+async function dictate(inputId){
+  if(!SR){ micSay("⚠️ Reconnaissance vocale indisponible sur ce navigateur — essayez Chrome ou Opera (pas Firefox), en HTTPS."); return; }
+  const el=document.getElementById(inputId); if(!el) return;
+  if(recog){ try{ recog.stop(); }catch(e){} return; }        // 2e appui = arrêter
+  // demander explicitement l'autorisation micro (fait apparaître la demande et remonte les refus)
+  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+    try{ const st=await navigator.mediaDevices.getUserMedia({audio:true}); st.getTracks().forEach(t=>t.stop()); }
+    catch(e){ micSay("⚠️ Microphone refusé. Autorisez le micro pour ce site (icône 🔒 dans la barre d'adresse → Autorisations)."); return; }
+  }
+  try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
+  recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
+  let fin="";
+  recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… parlez en anglais."); };
+  recog.onresult=e=>{ let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
+  recog.onerror=e=>{ const m={"not-allowed":"Micro refusé : autorisez le microphone pour ce site.","service-not-allowed":"Micro bloqué par le navigateur ou le système.","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté.","network":"La dictée nécessite une connexion Internet."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
+  recog.onend=()=>{ recog=null; setMic(false); setTimeout(()=>{ if(!recog) micSay(""); },4000); };
+  try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+(e.message||e)); }
+}
 
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
 function bandeOf(code){ const n=(F().niveaux||[]).find(x=>x.code===code); return n?n.bande:"debutant"; }
@@ -926,7 +935,8 @@ function renderConversation(){
       <div class="free-row"><input id="freeInput" type="text" placeholder="…écrivez ou dictez (🎤) votre réponse" onkeydown="if(event.key==='Enter')submitFree()">
         <button class="mic-btn" title="Parler" onclick="dictate('freeInput')">🎤</button>
         <button class="btn" onclick="submitFree()">Envoyer</button></div>
-      <p style="font-size:.78rem;color:var(--muted);margin-top:6px">🎤 Parlez, ou écrivez : vous verrez la réponse-modèle pour comparer.</p>
+      <div id="micStatus" class="mic-status"></div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:2px">🎤 Parlez, ou écrivez : vous verrez la réponse-modèle pour comparer.</p>
     </div>`;
   } else if(conv.done){
     h+=`<div class="resp-panel" style="text-align:center">
@@ -975,6 +985,7 @@ function renderIA(t){
       <input id="iaInput" type="text" placeholder="Écrivez ou dictez (🎤) en anglais…" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
       <button class="mic-btn" title="Parler" onclick="dictate('iaInput')" ${ia.loading?'disabled':''}>🎤</button>
       <button class="btn" onclick="iaSend()" ${ia.loading?'disabled':''}>Envoyer</button></div>
+      <div id="micStatus" class="mic-status"></div>
       <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" onclick="iaReset()">🔄 Nouvelle conversation</button><button class="btn ghost sm" onclick="forgetAI()">Changer de clé</button></div></div>`;
   }
   h+=`</div>`;
