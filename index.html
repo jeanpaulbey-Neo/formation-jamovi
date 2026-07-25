@@ -894,11 +894,11 @@ function webSpeech(inputId){
   if(recog){ try{ recog.stop(); }catch(e){} return; }
   try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
   recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
-  let fin="", got=false;
+  let fin="", got=false, errShown=false;
   recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… parlez en anglais."); };
   recog.onresult=e=>{ got=true; let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
-  recog.onerror=e=>{ const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté.","network":"Dictée indisponible ici (service de transcription injoignable). Utilisez Google Chrome, ou renseignez une clé OpenAI ci-dessus."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
-  recog.onend=()=>{ const empty=!got; recog=null; setMic(false); if(empty) micSay("⚠️ Aucun texte capté. Si le micro est bien autorisé, ce navigateur ne transcrit probablement pas — utilisez Google Chrome, ou renseignez une clé OpenAI ci-dessus."); else setTimeout(()=>{ if(!recog) micSay(""); },4000); };
+  recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée de Google injoignable — c'est souvent un VPN ou un pare-feu qui le bloque. Désactivez le VPN et réessayez, OU renseignez une clé OpenAI ci-dessus (marche même avec VPN)."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
+  recog.onend=()=>{ const empty=!got&&!errShown; recog=null; setMic(false); if(empty) micSay("⚠️ Rien capté (aucune erreur signalée). Vérifiez le micro sélectionné et coupez le VPN, ou renseignez une clé OpenAI ci-dessus pour une dictée fiable."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },4000); };
   try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
 }
 
