@@ -788,6 +788,43 @@ let conv = { theme:null, niveau:"A2", mode:"script", stepIdx:0, log:[], waitStep
 let ia = { messages:[], loading:false, started:false, correct:true, error:null };
 let apiCfg = {}; try{ apiCfg=JSON.parse(localStorage.getItem("english-api")||"{}"); }catch(e){}
 function saveApiCfg(){ try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
+// ---- modèles IA : liste réelle depuis l'API du fournisseur ----
+let aiModels=[], aiModelsLoading=false, aiModelsErr=null;
+async function loadModels(){
+  const p=apiCfg.provider||"openai";
+  const url = p==="anthropic" ? "https://api.anthropic.com/v1/models?limit=1000" : "https://api.openai.com/v1/models";
+  const headers = p==="anthropic"
+    ? {"x-api-key":apiCfg.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"}
+    : {"Authorization":"Bearer "+apiCfg.key};
+  const r=await fetch(url,{headers});
+  if(!r.ok) throw new Error(r.status+" "+(await r.text()).slice(0,120));
+  const d=await r.json();
+  let ids=(d.data||[]).map(m=>m.id);
+  if(p==="openai") ids=ids.filter(id=>/^(gpt-|o[13457]|chatgpt)/i.test(id));
+  ids.sort();
+  return ids;
+}
+function setModel(m){ apiCfg.model=m; saveApiCfg(); }
+async function doLoadModels(){
+  const provEl=document.getElementById("aiProv"), keyEl=document.getElementById("aiKey");
+  if(provEl) apiCfg.provider=provEl.value;
+  if(keyEl && keyEl.value.trim()) apiCfg.key=keyEl.value.trim();
+  if(!apiCfg.key){ aiModelsErr="Entrez d'abord votre clé API."; render(); return; }
+  aiModelsLoading=true; aiModelsErr=null; render();
+  try{ aiModels=await loadModels(); if(aiModels.length && !aiModels.includes(apiCfg.model)) apiCfg.model=aiModels[0]; saveApiCfg(); }
+  catch(e){ aiModelsErr="Impossible de charger les modèles : "+String(e.message||e); }
+  aiModelsLoading=false; render();
+}
+function renderModelPicker(){
+  let h=`<div style="margin:8px 0">`;
+  if(aiModels.length)
+    h+=`<label style="font-size:.85rem">Modèle IA<br><select class="sel" id="aiModelSel" onchange="setModel(this.value)">`+aiModels.map(m=>`<option ${apiCfg.model===m?"selected":""}>${esc(m)}</option>`).join("")+`</select></label>`;
+  else
+    h+=`<label style="font-size:.85rem">Modèle (optionnel)<br><input class="sel" id="aiModel" type="text" placeholder="ex : gpt-4o-mini" value="${esc(apiCfg.model||"")}" oninput="apiCfg.model=this.value"></label>`;
+  h+=`<div style="margin-top:6px"><button class="btn ghost sm" onclick="doLoadModels()" ${aiModelsLoading?"disabled":""}>${aiModelsLoading?"⏳ Chargement…":"🔄 Charger mes modèles disponibles"}</button></div>`;
+  if(aiModelsErr) h+=`<div style="color:var(--red);font-size:.8rem;margin-top:5px">${esc(aiModelsErr)}</div>`;
+  return h+`</div>`;
+}
 // ---- voix : synthèse (écouter) & reconnaissance (parler) ----
 const escA = s => esc(s).replace(/"/g,"&quot;");
 let ttsAuto = localStorage.getItem("ttsAuto")==="1";
@@ -915,7 +952,7 @@ function renderIA(t){
         <option value="openai" ${apiCfg.provider==='openai'?'selected':''}>OpenAI</option>
         <option value="anthropic" ${apiCfg.provider==='anthropic'?'selected':''}>Anthropic (Claude)</option></select></label>
       <label>Clé API<br><input class="sel" id="aiKey" type="password" placeholder="sk-… / clé Anthropic" value="${esc(apiCfg.key||'')}"></label>
-      <label>Modèle (optionnel)<br><input class="sel" id="aiModel" type="text" placeholder="gpt-4o-mini / claude-3-5-haiku-latest" value="${esc(apiCfg.model||'')}"></label>
+      ${renderModelPicker()}
       <div><button class="btn" onclick="saveAI()">Enregistrer</button></div>
     </div></div>`;
     return h;
@@ -926,6 +963,7 @@ function renderIA(t){
   h+=`<div class="role-ctx"><b>Situation :</b> ${esc(ctx)} — <b>niveau ${esc(conv.niveau)}</b>. L'IA joue ${esc(rApp)}, vous jouez ${esc(rUser)}.${t?"":' <span style="color:var(--muted)">(choisissez un thème ci-dessus pour un jeu de rôle ciblé)</span>'}
     <label style="display:block;margin-top:6px;font-size:.82rem"><input type="checkbox" ${ia.correct?'checked':''} onchange="ia.correct=this.checked"> corriger mes erreurs (astuce en français)</label>
     <label style="display:block;margin-top:4px;font-size:.82rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les réponses de l'IA à voix haute</label></div>`;
+  h+=`<div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px">${renderModelPicker()}<div style="font-size:.78rem;color:var(--muted)">Modèle actuel : <b>${esc(apiCfg.model||"(défaut)")}</b>. En cas d'erreur 404, cliquez « Charger mes modèles » et choisissez-en un.</div></div>`;
   if(!ia.started){
     h+=`<div style="text-align:center;padding:14px"><button class="btn" onclick="iaStart()">▶ Démarrer la conversation</button>
       <div style="margin-top:8px"><button class="btn ghost sm" onclick="forgetAI()">Changer de clé API</button></div></div>`;
@@ -942,7 +980,13 @@ function renderIA(t){
   h+=`</div>`;
   return h;
 }
-function saveAI(){ apiCfg={provider:$("#aiProv").value,key:$("#aiKey").value.trim(),model:$("#aiModel").value.trim()}; saveApiCfg(); render(); }
+function saveAI(){
+  const prov=$("#aiProv"), key=$("#aiKey"), sel=$("#aiModelSel"), mdl=$("#aiModel");
+  if(prov) apiCfg.provider=prov.value;
+  if(key) apiCfg.key=key.value.trim();
+  if(sel) apiCfg.model=sel.value; else if(mdl) apiCfg.model=mdl.value.trim();
+  saveApiCfg(); render();
+}
 function forgetAI(){ apiCfg={}; saveApiCfg(); ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaReset(){ ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaSystem(t){
