@@ -449,6 +449,16 @@ function renderLanding(){
         <div class="cta" style="color:${f.accentDark}">${done>0?`Reprendre · ${pct}% du parcours`:"Commencer →"}</div>
       </div></button>`;
   }
+  // --- Programme transversal : sous-app autonome (renforcement du transverse) ---
+  h+=`<a class="formation-card" href="./transverse/" style="text-decoration:none;color:inherit">
+      <div class="banner" style="background:linear-gradient(120deg,#14120f,#b08d57)">
+        <div class="emoji">💪</div><h3>Le Transverse</h3><p>Renforcement du transverse — 6 semaines</p>
+      </div>
+      <div class="body">
+        <div class="meta">Programme d'entraînement · suivi quotidien</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#d4af7a;--accent-dark:#b08d57"></div></div>
+        <div class="cta" style="color:#8c6a2f">Ouvrir le programme →</div>
+      </div></a>`;
   h+=`</div>
     <p class="footer-note">Jamovi : d'après Navarro &amp; Foxcroft (trad. Meunier), CC BY-SA 4.0. — Zaremba : d'après les documents de reconstruction fournis.</p>
   </div>`;

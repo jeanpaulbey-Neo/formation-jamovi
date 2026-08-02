@@ -1,4 +1,4 @@
-const CACHE = "formations-v25";
+const CACHE = "formations-v26";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png",
   "./katex/katex.min.css", "./katex/katex.min.js", "./katex/auto-render.min.js"];
@@ -8,7 +8,7 @@ self.addEventListener("install", e => {
 });
 self.addEventListener("activate", e => {
   e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+    caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith("formations-") && k !== CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -24,6 +24,9 @@ self.addEventListener("fetch", e => {
   if (req.method !== "GET") return;
 
   // HTML : réseau d'abord (toujours à jour en ligne), cache en secours (hors-ligne)
+  // La sous-app "/transverse/" a son propre service worker : ne pas l'intercepter ni polluer le shell.
+  if (req.url.indexOf("/transverse/") !== -1) return;
+
   if (isHTML(req)) {
     e.respondWith(
       fetch(req).then(res => {
