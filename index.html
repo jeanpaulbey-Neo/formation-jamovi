@@ -861,10 +861,10 @@ let ttsAuto = localStorage.getItem("ttsAuto")==="1";
 let ttsVoice=null;
 function pickVoice(){ try{ const vs=speechSynthesis.getVoices(); ttsVoice=vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }catch(e){} }
 if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschanged=pickVoice; }catch(e){} }
-function speak(t){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice)u.voice=ttsVoice; u.rate=0.95; speechSynthesis.speak(u); }catch(e){} }
+function speak(t,onDone){ if(!t||!("speechSynthesis" in window)){ if(onDone) setTimeout(onDone,300); return; } try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/^\s*Tip\s*:.*$/im,"").trim()||t); u.lang="en-US"; if(ttsVoice)u.voice=ttsVoice; u.rate=0.95; if(onDone){ u.onend=()=>onDone(); u.onerror=()=>onDone(); } speechSynthesis.speak(u); }catch(e){ if(onDone) setTimeout(onDone,300); } }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null, mediaRec=null, recChunks=[];
+let recog=null, mediaRec=null, recChunks=[], handsMode=false;
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
 // clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
@@ -926,13 +926,43 @@ function webSpeech(inputId){
   // v30 : une phrase à la fois, texte reconstruit à chaque événement (aucune répétition possible) ; on ré-appuie pour ajouter une phrase
   recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
   let got=false, errShown=false;
-  recog.onstart=()=>{ setMic(true); micSay("🎤 [v30] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
+  recog.onstart=()=>{ setMic(true); micSay("🎤 [v31] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
   recog.onresult=e=>{ got=true; let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
   recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
-  recog.onend=()=>{ recog=null; setMic(false); if(!got&&!errShown) micSay("⚠️ Rien capté — réessayez plus près du micro."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },3000); };
+  recog.onend=()=>{ recog=null; setMic(false); const text=(el.value||"").trim();
+    if(!got&&!errShown) micSay("⚠️ Rien capté — réessayez plus près du micro."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },3000);
+    if(handsMode && el.id==="iaInput"){
+      if(!errShown && got && text){ handsTurn('wait'); iaSend(); }
+      else if(!errShown){ handsTurn('you'); }   // rien entendu → on reste sur votre tour
+    }
+  };
   try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
 }
 
+// ---- mode mains-libres (tour par tour, façon pendule d'échecs) ----
+function handsTurn(who){ // 'you' (à vous) | 'wait' (IA réfléchit) | 'ai' (IA parle)
+  const el=document.getElementById("handsTurn"); if(!el) return;
+  const map={you:["#1f8a70","🎤 À VOUS — parlez maintenant"],wait:["#8a7d1f","⏳ L'IA réfléchit…"],ai:["#2d5183","🔊 L'IA parle… écoutez"]};
+  const m=map[who]||map.you; el.style.background=m[0]; el.textContent=m[1];
+}
+function toggleHands(){
+  handsMode=!handsMode;
+  if(handsMode){ ttsAuto=true; try{localStorage.setItem("ttsAuto","1");}catch(e){}
+    render();
+    if(!ia.started){ iaStart(); } else { handsUserTurn(); }
+  } else {
+    try{ if(recog) recog.stop(); }catch(e){}
+    try{ speechSynthesis.cancel(); }catch(e){}
+    render();
+  }
+}
+function handsUserTurn(){
+  if(!handsMode) return;
+  handsTurn('you');
+  const inp=document.getElementById("iaInput"); if(inp){ inp.value=""; }
+  if(recog){ return; }               // déjà en écoute
+  try{ webSpeech("iaInput"); }catch(e){ handsTurn('you'); }
+}
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
 function bandeOf(code){ const n=(F().niveaux||[]).find(x=>x.code===code); return n?n.bande:"debutant"; }
 function currentDialogue(){ const t=themeById(conv.theme); return t?t.dialogues[bandeOf(conv.niveau)]:null; }
@@ -1059,7 +1089,13 @@ function renderIA(t){
     h+=chatBubbles(ia.messages.map(m=>({who:m.role==='assistant'?'app':'user',en:m.content})));
     if(ia.loading) h+=`<div class="typing">L'IA écrit…</div>`;
     if(ia.error) h+=`<div class="explain bad"><b>Erreur API</b>${esc(ia.error)}</div>`;
-    h+=`<div class="resp-panel"><div class="free-row">
+    h+=`<div class="resp-panel">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+        <button class="btn ${handsMode?'':'ghost'} sm" onclick="toggleHands()">${handsMode?'⏹ Quitter le mode mains-libres':'🎭 Mode mains-libres (tour par tour)'}</button>
+        ${handsMode?`<span style="font-size:.78rem;color:var(--muted)">l'IA parle, puis c'est à vous — automatiquement</span>`:''}
+      </div>
+      ${handsMode?`<div id="handsTurn" style="text-align:center;color:#fff;font-weight:700;font-size:1.02rem;padding:12px;border-radius:12px;margin-bottom:10px;background:#1f8a70">🎤 À VOUS — parlez maintenant</div>`:''}
+      <div class="free-row">
       <input id="iaInput" type="text" placeholder="Écrivez ou dictez (🎤) en anglais…" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
       <button class="mic-btn" title="Parler" onclick="dictate('iaInput')" ${ia.loading?'disabled':''}>🎤</button>
       <button class="btn" onclick="iaSend()" ${ia.loading?'disabled':''}>Envoyer</button></div>
@@ -1087,19 +1123,26 @@ function iaSystem(t){
     : `You are a friendly English conversation partner for a French learner at CEFR level ${conv.niveau}. Have a natural, everyday conversation on topics the learner brings up.`;
   return `${base} Stay in character and speak ONLY English. Keep your replies short and natural, using vocabulary and grammar appropriate for a ${conv.niveau} learner. Ask questions to keep the conversation going.${ia.correct? " If the learner makes an important English mistake, add at the very end a new line starting with 'Tip: ' giving a short correction IN FRENCH." : ""}`;
 }
+function iaAfterReply(){
+  const last=ia.messages[ia.messages.length-1];
+  if(!ia.error && last && last.role==="assistant"){
+    if(handsMode){ handsTurn('ai'); speak(last.content, handsUserTurn); }
+    else if(ttsAuto){ speak(last.content); }
+  } else if(handsMode && ia.error){ handsTurn('you'); }
+}
 async function iaStart(){
-  const t=themeById(conv.theme); ia.started=true; ia.messages=[]; ia.error=null; ia.loading=true; render();
-  try{ const txt=await callAI(iaSystem(t),[{role:"user",content:"Please start the role-play with your first line."}]); ia.messages.push({role:"assistant",content:txt}); if(ttsAuto) speak(txt); }
+  const t=themeById(conv.theme); ia.started=true; ia.messages=[]; ia.error=null; ia.loading=true; if(handsMode) handsTurn('wait'); render();
+  try{ const txt=await callAI(iaSystem(t),[{role:"user",content:"Please start the role-play with your first line."}]); ia.messages.push({role:"assistant",content:txt}); }
   catch(e){ ia.error=String(e.message||e); }
-  ia.loading=false; render();
+  ia.loading=false; render(); iaAfterReply();
 }
 async function iaSend(){
   const el=$("#iaInput"); const v=(el?el.value:"").trim(); if(!v||ia.loading) return;
   const t=themeById(conv.theme);
-  ia.messages.push({role:"user",content:v}); ia.error=null; ia.loading=true; render();
-  try{ const txt=await callAI(iaSystem(t),ia.messages.slice()); ia.messages.push({role:"assistant",content:txt}); if(ttsAuto) speak(txt); }
+  ia.messages.push({role:"user",content:v}); ia.error=null; ia.loading=true; if(handsMode) handsTurn('wait'); render();
+  try{ const txt=await callAI(iaSystem(t),ia.messages.slice()); ia.messages.push({role:"assistant",content:txt}); }
   catch(e){ ia.error=String(e.message||e); }
-  ia.loading=false; render();
+  ia.loading=false; render(); iaAfterReply();
 }
 async function callAI(system,messages){
   const p=apiCfg.provider||"openai";
@@ -1359,7 +1402,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v30";
+const APP_VERSION="v31";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
