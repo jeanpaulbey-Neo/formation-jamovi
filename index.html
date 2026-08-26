@@ -459,6 +459,15 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#39466f;--accent-dark:#232d52"></div></div>
         <div class="cta" style="color:#232d52">🔐 Déverrouiller →</div>
       </div></a>`;
+  h+=`<a class="formation-card" href="./reunion/" style="text-decoration:none;color:inherit">
+      <div class="banner" style="background:linear-gradient(120deg,#20406b,#2f5891)">
+        <div class="emoji">🗒️</div><h3>Prépa réunion</h3><p>Espace personnel protégé</p>
+      </div>
+      <div class="body">
+        <div class="meta">Contenu chiffré · phrase secrète requise</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#2f5891;--accent-dark:#20406b"></div></div>
+        <div class="cta" style="color:#20406b">🔐 Déverrouiller →</div>
+      </div></a>`;
   // --- Programme transversal : sous-app autonome (renforcement du transverse) ---
   h+=`<a class="formation-card" href="./transverse/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#14120f,#b08d57)">
@@ -858,6 +867,9 @@ function renderModelPicker(){
 // ---- voix : synthèse (écouter) & reconnaissance (parler) ----
 const escA = s => esc(s).replace(/"/g,"&quot;");
 let ttsAuto = localStorage.getItem("ttsAuto")==="1";
+let iaScenario=""; try{ iaScenario=localStorage.getItem("ia-scenario")||""; }catch(e){}
+function saveScenario(){ const el=document.getElementById("iaScenario"); if(el){ iaScenario=el.value; try{ localStorage.setItem("ia-scenario",iaScenario); }catch(e){} } ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
+function clearScenario(){ iaScenario=""; try{ localStorage.removeItem("ia-scenario"); }catch(e){} ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 let ttsVoice=null;
 function pickVoice(){ try{ const vs=speechSynthesis.getVoices(); ttsVoice=vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }catch(e){} }
 if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschanged=pickVoice; }catch(e){} }
@@ -926,7 +938,7 @@ function webSpeech(inputId){
   // v30 : une phrase à la fois, texte reconstruit à chaque événement (aucune répétition possible) ; on ré-appuie pour ajouter une phrase
   recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
   let got=false, errShown=false;
-  recog.onstart=()=>{ setMic(true); micSay("🎤 [v31] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
+  recog.onstart=()=>{ setMic(true); micSay("🎤 [v33] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
   recog.onresult=e=>{ got=true; let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
   recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
   recog.onend=()=>{ recog=null; setMic(false); const text=(el.value||"").trim();
@@ -1082,8 +1094,14 @@ function renderIA(t){
     <label style="display:block;margin-top:4px;font-size:.82rem"><input type="checkbox" ${ttsAuto?'checked':''} onchange="toggleTtsAuto(this.checked)"> 🔊 lire les réponses de l'IA à voix haute</label></div>`;
   h+=`<div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px">${renderModelPicker()}<div style="font-size:.78rem;color:var(--muted)">Modèle actuel : <b>${esc(apiCfg.model||"(défaut)")}</b>. En cas d'erreur 404, cliquez « Charger mes modèles » et choisissez-en un.</div>
     <div style="margin-top:10px">${voiceKey()?`<div style="font-size:.78rem;color:var(--muted)">🎤 Dictée : transcription fiable activée (Whisper).</div>`:`<label style="font-size:.82rem">🎤 Clé OpenAI pour la dictée <span style="color:var(--muted)">(optionnel — micro fiable partout)</span><br><input class="sel" id="iaVoiceKey" type="password" placeholder="sk-…" value="${esc(apiCfg.voiceKey||'')}"><button class="btn ghost sm" style="margin-top:6px" onclick="saveVoiceKey()">Enregistrer la clé voix</button></label>`}</div></div>`;
+  h+=`<details style="border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin-bottom:10px" ${iaScenario?'open':''}>
+    <summary style="cursor:pointer;font-weight:600;font-size:.9rem">🎬 Scénario personnalisé ${iaScenario?'· ✓ actif':'(optionnel)'}</summary>
+    <p style="font-size:.78rem;color:var(--muted);margin:6px 0">Décrivez le rôle que l'IA doit jouer et la situation (en anglais). <b>Reste dans ce navigateur</b>, n'est jamais publié. Idéal avec le mode mains-libres pour répéter une réunion. Videz le champ pour revenir à la conversation libre.</p>
+    <textarea id="iaScenario" style="min-height:90px;width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:8px;padding:8px;font:inherit;font-size:.9rem" placeholder="You play … / The situation is …">${esc(iaScenario)}</textarea>
+    <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="saveScenario()">Appliquer le scénario</button>${iaScenario?`<button class="btn ghost sm" onclick="clearScenario()">Effacer</button>`:''}</div>
+  </details>`;
   if(!ia.started){
-    h+=`<div style="text-align:center;padding:14px"><button class="btn" onclick="iaStart()">▶ Démarrer la conversation</button>
+    h+=`<div style="text-align:center;padding:14px"><button class="btn" onclick="iaStart()">▶ ${iaScenario?'Démarrer le scénario':'Démarrer la conversation'}</button>
       <div style="margin-top:8px"><button class="btn ghost sm" onclick="forgetAI()">Changer de clé API</button></div></div>`;
   } else {
     h+=chatBubbles(ia.messages.map(m=>({who:m.role==='assistant'?'app':'user',en:m.content})));
@@ -1117,6 +1135,9 @@ function saveVoiceKey(){ const v=$("#iaVoiceKey"); if(v) apiCfg.voiceKey=v.value
 function forgetAI(){ apiCfg={}; saveApiCfg(); ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaReset(){ ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function iaSystem(t){
+  if(iaScenario && iaScenario.trim()){
+    return `You are role-playing to help a French professional practise spoken English at CEFR level ${conv.niveau}. SCENARIO — play your role exactly as described here: ${iaScenario.trim()} Stay fully in character, speak ONLY English, keep each turn fairly short and natural, make ONE point or ask ONE question at a time, and react to what the user says.${ia.correct? " If the user makes an important English mistake, add at the very end a new line starting with 'Tip: ' giving a short correction IN FRENCH." : ""}`;
+  }
   const d=t?t.dialogues[bandeOf(conv.niveau)]:null;
   const base = d
     ? `You are role-playing with a French learner of English at CEFR level ${conv.niveau}. Situation: ${d.contexte}. You play the role of ${d.roleApp}; the learner plays ${d.roleUser}.`
@@ -1402,7 +1423,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v31";
+const APP_VERSION="v33";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
