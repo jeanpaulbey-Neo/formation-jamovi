@@ -923,11 +923,11 @@ function webSpeech(inputId){
   if(recog){ try{ recog.stop(); }catch(e){} return; }   // 2e appui = arrêter
   const base=(el.value||"").trim();
   try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
-  // écoute continue : ne se coupe pas sur les petites pauses ; s'arrête au 2e appui
-  recog.lang="en-US"; recog.interimResults=true; recog.continuous=true; recog.maxAlternatives=1;
-  let finalText="", got=false, errShown=false;
-  recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… parlez, prenez votre temps. Retouchez 🎤 quand vous avez fini."); };
-  recog.onresult=e=>{ got=true; let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) finalText+=t+" "; else itr+=t; } el.value=((base?base+" ":"")+finalText+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
+  // v30 : une phrase à la fois, texte reconstruit à chaque événement (aucune répétition possible) ; on ré-appuie pour ajouter une phrase
+  recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
+  let got=false, errShown=false;
+  recog.onstart=()=>{ setMic(true); micSay("🎤 [v30] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
+  recog.onresult=e=>{ got=true; let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
   recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
   recog.onend=()=>{ recog=null; setMic(false); if(!got&&!errShown) micSay("⚠️ Rien capté — réessayez plus près du micro."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },3000); };
   try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
@@ -1359,7 +1359,16 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-function boot(){ applyTextScale(); render(); }
+const APP_VERSION="v30";
+function showVersionBadge(){
+  try{
+    let b=document.getElementById("appver");
+    if(!b){ b=document.createElement("div"); b.id="appver"; document.body.appendChild(b);
+      b.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9999;background:rgba(35,45,82,.88);color:#fff;font:600 11px -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:3px 9px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.2);pointer-events:none;letter-spacing:.3px"; }
+    b.textContent="Version "+APP_VERSION;
+  }catch(e){}
+}
+function boot(){ applyTextScale(); render(); showVersionBadge(); }
 if(document.readyState!=="loading") boot(); else document.addEventListener("DOMContentLoaded",boot);
 window.addEventListener("load",()=>typeset());
 if("serviceWorker" in navigator && location.protocol==="https:"){
