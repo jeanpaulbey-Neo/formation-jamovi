@@ -449,6 +449,16 @@ function renderLanding(){
         <div class="cta" style="color:${f.accentDark}">${done>0?`Reprendre · ${pct}% du parcours`:"Commencer →"}</div>
       </div></button>`;
   }
+  // --- Espace protégé (contenu chiffré, phrase secrète requise) ---
+  h+=`<a class="formation-card" href="./entretien/" style="text-decoration:none;color:inherit">
+      <div class="banner" style="background:linear-gradient(120deg,#232d52,#39466f)">
+        <div class="emoji">🎯</div><h3>Préparation entretien</h3><p>Espace personnel protégé</p>
+      </div>
+      <div class="body">
+        <div class="meta">Contenu chiffré · phrase secrète requise</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#39466f;--accent-dark:#232d52"></div></div>
+        <div class="cta" style="color:#232d52">🔐 Déverrouiller →</div>
+      </div></a>`;
   // --- Programme transversal : sous-app autonome (renforcement du transverse) ---
   h+=`<a class="formation-card" href="./transverse/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#14120f,#b08d57)">
