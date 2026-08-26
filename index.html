@@ -864,7 +864,7 @@ if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschang
 function speak(t){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice)u.voice=ttsVoice; u.rate=0.95; speechSynthesis.speak(u); }catch(e){} }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null, mediaRec=null, recChunks=[];
+let recog=null, mediaRec=null, recChunks=[], webWant=false, webBase="", webFails=0;
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
 // clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
@@ -920,15 +920,25 @@ function webSpeech(inputId){
   const nc=nonChromeVoiceNote();
   if(!SR || nc){ micSay("⚠️ "+(nc||"Reconnaissance vocale indisponible ici.")+" → Ouvrez l'app dans Google Chrome, OU renseignez une clé OpenAI (champ « Clé OpenAI pour la dictée » ci-dessus) : la dictée marchera alors dans n'importe quel navigateur."); return; }
   const el=document.getElementById(inputId); if(!el) return;
-  if(recog){ try{ recog.stop(); }catch(e){} return; }
-  try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
-  recog.lang="en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
-  let fin="", got=false, errShown=false;
-  recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… parlez en anglais."); };
-  recog.onresult=e=>{ got=true; let itr=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=(fin+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
-  recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée de Google injoignable — c'est souvent un VPN ou un pare-feu qui le bloque. Désactivez le VPN et réessayez, OU renseignez une clé OpenAI ci-dessus (marche même avec VPN)."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
-  recog.onend=()=>{ const empty=!got&&!errShown; recog=null; setMic(false); if(empty) micSay("⚠️ Rien capté (aucune erreur signalée). Vérifiez le micro sélectionné et coupez le VPN, ou renseignez une clé OpenAI ci-dessus pour une dictée fiable."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },4000); };
-  try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
+  if(recog){ webWant=false; try{ recog.stop(); }catch(e){} return; }   // 2e appui = arrêter pour de bon
+  webWant=true; webFails=0; webBase=(el.value||"").trim();
+  startWeb(el);
+}
+// écoute en continu : ne s'arrête pas sur les pauses ; se relance seule après un silence tant que l'utilisateur n'a pas retouché le micro
+function startWeb(el){
+  try{ recog=new SR(); }catch(e){ webWant=false; setMic(false); micSay("⚠️ Micro non disponible ici."); return; }
+  recog.lang="en-US"; recog.interimResults=true; recog.continuous=true; recog.maxAlternatives=1;
+  let fin="";
+  recog.onstart=()=>{ setMic(true); micSay("🎤 J'écoute… prenez tout votre temps. Retouchez 🎤 quand vous avez fini."); };
+  recog.onresult=e=>{ webFails=0; let itr=""; fin=""; for(let i=0;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; } el.value=((webBase?webBase+" ":"")+fin+itr).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
+  recog.onerror=e=>{ if(["not-allowed","service-not-allowed","audio-capture"].indexOf(e.error)>=0){ webWant=false; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné."}[e.error]; micSay("⚠️ "+m); } else { webFails++; } };
+  recog.onend=()=>{
+    if(fin) webBase=((webBase?webBase+" ":"")+fin).replace(/\s+/g," ").trim();
+    recog=null;
+    if(webWant && webFails<5){ try{ startWeb(el); }catch(e){ setMic(false); } }   // pause/silence → on relance
+    else { const stalled=webWant && webFails>=5; webWant=false; setMic(false); micSay(stalled?"⚠️ Dictée interrompue (rien capté). Réessayez, ou renseignez une clé OpenAI pour une dictée plus fiable.":""); }
+  };
+  try{ recog.start(); }catch(e){ recog=null; setMic(false); webWant=false; micSay("⚠️ "+((e&&e.message)||e)); }
 }
 
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
