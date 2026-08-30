@@ -878,7 +878,7 @@ if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschang
 function speak(t,onDone){ if(!t||!("speechSynthesis" in window)){ if(onDone) setTimeout(onDone,300); return; } try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/^\s*Tip\s*:.*$/im,"").trim()||t); const fr=scnFr(); u.lang=fr?"fr-FR":"en-US"; const v=fr?ttsVoiceFr:ttsVoice; if(v)u.voice=v; u.rate=0.95; if(onDone){ u.onend=()=>onDone(); u.onerror=()=>onDone(); } speechSynthesis.speak(u); }catch(e){ if(onDone) setTimeout(onDone,300); } }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null, mediaRec=null, recChunks=[], handsMode=false;
+let recog=null, mediaRec=null, recChunks=[], handsMode=false, micHold=false, lastHeard=0, silenceTimer=null;
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
 // clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
@@ -934,23 +934,43 @@ function webSpeech(inputId){
   const nc=nonChromeVoiceNote();
   if(!SR || nc){ micSay("⚠️ "+(nc||"Reconnaissance vocale indisponible ici.")+" → Ouvrez l'app dans Google Chrome, OU renseignez une clé OpenAI (champ « Clé OpenAI pour la dictée » ci-dessus) : la dictée marchera alors dans n'importe quel navigateur."); return; }
   const el=document.getElementById(inputId); if(!el) return;
-  if(recog){ try{ recog.stop(); }catch(e){} return; }   // 2e appui = arrêter
-  const base=(el.value||"").trim();
-  try{ recog=new SR(); }catch(e){ micSay("⚠️ Micro non disponible ici."); return; }
-  // v30 : une phrase à la fois, texte reconstruit à chaque événement (aucune répétition possible) ; on ré-appuie pour ajouter une phrase
-  recog.lang=scnFr()?"fr-FR":"en-US"; recog.interimResults=true; recog.continuous=false; recog.maxAlternatives=1;
-  let got=false, errShown=false;
-  recog.onstart=()=>{ setMic(true); micSay("🎤 [v34] Micro actif — dites votre phrase, puis re-touchez 🎤 pour en ajouter une autre."); };
-  recog.onresult=e=>{ got=true; let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
-  recog.onerror=e=>{ errShown=true; const m={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","no-speech":"Rien entendu — réessayez plus près du micro.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]||("Erreur : "+e.error); micSay("⚠️ "+m); };
-  recog.onend=()=>{ recog=null; setMic(false); const text=(el.value||"").trim();
-    if(!got&&!errShown) micSay("⚠️ Rien capté — réessayez plus près du micro."); else if(!errShown) setTimeout(()=>{ if(!recog) micSay(""); },3000);
+  if(recog||micHold){ micHold=false; try{ if(recog) recog.stop(); }catch(e){} return; }   // 2e appui = arrêter
+  // v35 : le navigateur coupe parfois en pleine phrase → on relance sans coupure visible.
+  // Zéro doublon possible : chaque session reconstruit son texte complet à partir d'une base figée au démarrage de la session.
+  micHold=true; let emptyRuns=0;
+  lastHeard=Date.now();
+  if(silenceTimer){ clearInterval(silenceTimer); }
+  silenceTimer=setInterval(()=>{
+    if(!micHold){ clearInterval(silenceTimer); silenceTimer=null; return; }
     if(handsMode && el.id==="iaInput"){
-      if(!errShown && got && text){ handsTurn('wait'); iaSend(); }
-      else if(!errShown){ handsTurn('you'); }   // rien entendu → on reste sur votre tour
+      const text=(el.value||"").trim();
+      if(text && Date.now()-lastHeard>3000){ micHold=false; try{ if(recog) recog.stop(); }catch(e){} }  // vrai silence → fin de votre tour
     }
+  },400);
+  const startSession=()=>{
+    const base=(el.value||"").trim();
+    try{ recog=new SR(); }catch(e){ micHold=false; setMic(false); micSay("⚠️ Micro non disponible ici."); return; }
+    recog.lang=scnFr()?"fr-FR":"en-US"; recog.interimResults=true; recog.continuous=true; recog.maxAlternatives=1;
+    let got=false, fatal=false;
+    recog.onstart=()=>{ setMic(true); micSay(handsMode?"🎤 [v35] À vous — parlez ; l'envoi part après ~3 s de silence.":"🎤 [v35] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    recog.onresult=e=>{ got=true; lastHeard=Date.now(); let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
+    recog.onerror=e=>{ const fx={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]; if(fx){ fatal=true; micHold=false; micSay("⚠️ "+fx); } };
+    recog.onend=()=>{ recog=null;
+      if(micHold){                                     // coupure du navigateur, pas de l'utilisateur → on relance sans bruit
+        if(!got) emptyRuns++; else emptyRuns=0;
+        if(emptyRuns>=5){ micHold=false; setMic(false); micSay("⚠️ Rien capté — vérifiez le micro et réessayez."); if(handsMode&&el.id==="iaInput") handsTurn('you'); return; }
+        try{ startSession(); return; }catch(e){}
+      }
+      setMic(false);
+      const text=(el.value||"").trim();
+      if(handsMode && el.id==="iaInput"){
+        if(!fatal && text){ handsTurn('wait'); iaSend(); }
+        else if(!fatal){ handsTurn('you'); }
+      } else if(!fatal){ setTimeout(()=>{ if(!recog) micSay(""); },3000); }
+    };
+    try{ recog.start(); }catch(e){ recog=null; micHold=false; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
   };
-  try{ recog.start(); }catch(e){ recog=null; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
+  startSession();
 }
 
 // ---- mode mains-libres (tour par tour, façon pendule d'échecs) ----
@@ -965,7 +985,7 @@ function toggleHands(){
     render();
     if(!ia.started){ iaStart(); } else { handsUserTurn(); }
   } else {
-    try{ if(recog) recog.stop(); }catch(e){}
+    micHold=false; try{ if(recog) recog.stop(); }catch(e){}
     try{ speechSynthesis.cancel(); }catch(e){}
     render();
   }
@@ -1429,7 +1449,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v34";
+const APP_VERSION="v35";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
