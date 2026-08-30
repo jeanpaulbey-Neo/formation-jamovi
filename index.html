@@ -955,19 +955,13 @@ function webSpeech(inputId){
   let finalAcc="", emptyRuns=0;
   lastHeard=Date.now();
   if(silenceTimer) clearInterval(silenceTimer);
-  silenceTimer=setInterval(()=>{
-    if(myGen!==micGen||!micHold){ clearInterval(silenceTimer); silenceTimer=null; return; }
-    if(handsMode && inputId==="iaInput"){
-      const t=(el.value||"").trim();
-      if(t && t!==turnBase && Date.now()-lastHeard>3000){ stopDictation(); handsTurn('wait'); iaSend(); }
-    }
-  },400);
+  // v38 : en mains-libres, PLUS d'envoi automatique au silence — c'est VOUS qui terminez, via le bandeau.
   const startSession=()=>{
     if(myGen!==micGen||!micHold) return;
     let r; try{ r=new SR(); }catch(e){ stopDictation(); micSay("⚠️ Micro non disponible ici."); return; }
     recog=r; r.__folded=false; let got=false;
     r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=false; r.maxAlternatives=1;
-    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); micSay(handsMode?"🎤 [v37] À vous — parlez ; envoi après ~3 s de silence (ou re-touchez 🎤).":"🎤 [v37] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); if(handsMode&&inputId==="iaInput") handsTurn("rec"); micSay(handsMode?"🎙️ [v38] Micro ouvert — appuyez sur le bandeau rouge pour terminer et envoyer.":"🎤 [v38] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
     r.onresult=e=>{ if(myGen!==micGen) return; got=true; lastHeard=Date.now();
       // Android re-émet des copies grandissantes du même passage : on ne garde QUE le dernier segment, jamais de concaténation.
       const lastRes=e.results[e.results.length-1]; if(!lastRes) return;
@@ -1000,10 +994,20 @@ function webSpeech(inputId){
 }
 
 // ---- mode mains-libres (tour par tour, façon pendule d'échecs) ----
-function handsTurn(who){ // 'you' (à vous) | 'wait' (IA réfléchit) | 'ai' (IA parle)
+let handsState="you";
+function handsTurn(who){ // 'you' | 'rec' (j'écoute) | 'wait' | 'ai'
+  handsState=who;
   const el=document.getElementById("handsTurn"); if(!el) return;
-  const map={you:["#1f8a70","🎤 À VOUS — parlez maintenant"],wait:["#8a7d1f","⏳ L'IA réfléchit…"],ai:["#2d5183","🔊 L'IA parle… écoutez"]};
+  const map={you:["#1f8a70","🎤 APPUYEZ ICI pour commencer votre réponse"],
+             rec:["#b03a3a","🎙️ Je vous écoute — parlez, prenez votre temps. APPUYEZ ICI pour terminer et envoyer"],
+             wait:["#8a7d1f","⏳ L'IA réfléchit…"],
+             ai:["#2d5183","🔊 L'IA parle… écoutez"]};
   const m=map[who]||map.you; el.style.background=m[0]; el.textContent=m[1];
+}
+function handsBannerTap(){
+  if(!handsMode||ia.loading) return;
+  if(handsState==="you" && !micHold && !recog){ webSpeech("iaInput"); }
+  else if(handsState==="rec" && (micHold||recog)){ webSpeech("iaInput"); }
 }
 function toggleHands(){
   handsMode=!handsMode;
@@ -1018,10 +1022,8 @@ function toggleHands(){
 }
 function handsUserTurn(){
   if(!handsMode) return;
-  handsTurn('you');
   const inp=document.getElementById("iaInput"); if(inp){ inp.value=""; }
-  if(recog||micHold){ return; }      // une écoute est déjà en cours : ne JAMAIS en démarrer une seconde
-  try{ webSpeech("iaInput"); }catch(e){ handsTurn('you'); }
+  handsTurn('you');                  // la main est à vous : appuyez sur le bandeau quand vous êtes prêt
 }
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
 function bandeOf(code){ const n=(F().niveaux||[]).find(x=>x.code===code); return n?n.bande:"debutant"; }
@@ -1159,9 +1161,9 @@ function renderIA(t){
     h+=`<div class="resp-panel">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
         <button class="btn ${handsMode?'':'ghost'} sm" onclick="toggleHands()">${handsMode?'⏹ Quitter le mode mains-libres':'🎭 Mode mains-libres (tour par tour)'}</button>
-        ${handsMode?`<span style="font-size:.78rem;color:var(--muted)">l'IA parle, puis c'est à vous — automatiquement</span>`:''}
+        ${handsMode?`<span style="font-size:.78rem;color:var(--muted)">l'IA parle, puis appuyez sur le bandeau : une fois pour répondre, une seconde fois pour envoyer</span>`:''}
       </div>
-      ${handsMode?`<div id="handsTurn" style="text-align:center;color:#fff;font-weight:700;font-size:1.02rem;padding:12px;border-radius:12px;margin-bottom:10px;background:#1f8a70">🎤 À VOUS — parlez maintenant</div>`:''}
+      ${handsMode?`<div id="handsTurn" onclick="handsBannerTap()" style="text-align:center;color:#fff;font-weight:700;font-size:1.02rem;padding:14px;border-radius:12px;margin-bottom:10px;background:#1f8a70;cursor:pointer;user-select:none">🎤 APPUYEZ ICI pour commencer votre réponse</div>`:''}
       <div class="free-row">
       <input id="iaInput" type="text" placeholder="${scnFr()?"Écrivez ou dictez (🎤) en français…":"Écrivez ou dictez (🎤) en anglais…"}" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
       <button class="mic-btn" title="Parler" onclick="dictate('iaInput')" ${ia.loading?'disabled':''}>🎤</button>
@@ -1475,7 +1477,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v37";
+const APP_VERSION="v38";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
