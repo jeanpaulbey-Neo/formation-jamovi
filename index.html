@@ -965,20 +965,26 @@ function webSpeech(inputId){
   const startSession=()=>{
     if(myGen!==micGen||!micHold) return;
     let r; try{ r=new SR(); }catch(e){ stopDictation(); micSay("⚠️ Micro non disponible ici."); return; }
-    recog=r; r.__fin=""; let got=false;
-    r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=true; r.maxAlternatives=1;
-    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); micSay(handsMode?"🎤 [v36] À vous — parlez ; envoi après ~3 s de silence (ou re-touchez 🎤).":"🎤 [v36] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    recog=r; r.__folded=false; let got=false;
+    r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=false; r.maxAlternatives=1;
+    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); micSay(handsMode?"🎤 [v37] À vous — parlez ; envoi après ~3 s de silence (ou re-touchez 🎤).":"🎤 [v37] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
     r.onresult=e=>{ if(myGen!==micGen) return; got=true; lastHeard=Date.now();
-      let fin="", itr="";
-      for(let i=0;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; }
-      r.__fin=fin;
-      el.value=((turnBase?turnBase+" ":"")+finalAcc+fin+itr).replace(/\s+/g," ").trim();
+      // Android re-émet des copies grandissantes du même passage : on ne garde QUE le dernier segment, jamais de concaténation.
+      const lastRes=e.results[e.results.length-1]; if(!lastRes) return;
+      const t=(lastRes[0].transcript||"").trim();
+      if(lastRes.isFinal){
+        if(t && !r.__folded){ const acc=finalAcc.trim();
+          if(!(acc && (acc===t || acc.endsWith(t)))) finalAcc=(acc?acc+" ":"")+t+" ";   // garde anti-redite
+          r.__folded=true; }
+        el.value=((turnBase?turnBase+" ":"")+finalAcc).replace(/\s+/g," ").trim();
+      } else {
+        el.value=((turnBase?turnBase+" ":"")+finalAcc+t).replace(/\s+/g," ").trim();
+      }
       micSay("… "+(el.value||"")); };
     r.onerror=e=>{ if(myGen!==micGen) return;
       const fx={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée sur ce navigateur — utilisez Google Chrome, ou renseignez une clé OpenAI.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (VPN/pare-feu ?). Coupez le VPN, ou renseignez une clé OpenAI."}[e.error];
       if(fx){ stopDictation(); micSay("⚠️ "+fx); if(handsMode&&inputId==="iaInput") handsTurn('you'); } };
     r.onend=()=>{ if(myGen!==micGen) return;
-      if(r.__fin) finalAcc=finalAcc+r.__fin;               // on ne garde que le définitif
       recog=null;
       if(micHold){
         if(!got) emptyRuns++; else emptyRuns=0;
@@ -1469,7 +1475,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v36";
+const APP_VERSION="v37";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
