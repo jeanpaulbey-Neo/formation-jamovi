@@ -878,7 +878,7 @@ if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschang
 function speak(t,onDone){ if(!t||!("speechSynthesis" in window)){ if(onDone) setTimeout(onDone,300); return; } try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/^\s*Tip\s*:.*$/im,"").trim()||t); const fr=scnFr(); u.lang=fr?"fr-FR":"en-US"; const v=fr?ttsVoiceFr:ttsVoice; if(v)u.voice=v; u.rate=0.95; if(onDone){ u.onend=()=>onDone(); u.onerror=()=>onDone(); } speechSynthesis.speak(u); }catch(e){ if(onDone) setTimeout(onDone,300); } }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null, mediaRec=null, recChunks=[], handsMode=false, micHold=false, lastHeard=0, silenceTimer=null;
+let recog=null, mediaRec=null, recChunks=[], handsMode=false, micHold=false, micGen=0, lastHeard=0, silenceTimer=null;
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
 // clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
@@ -930,45 +930,65 @@ function nonChromeVoiceNote(){
   if(/\bBrave\b/i.test(ua)||navigator.brave) return "Vous êtes sur Brave : la dictée vocale est désactivée.";
   return null;
 }
+function stopDictation(){
+  micHold=false; micGen++;
+  const r=recog; recog=null;
+  if(silenceTimer){ clearInterval(silenceTimer); silenceTimer=null; }
+  try{ if(r){ if(r.abort) r.abort(); else r.stop(); } }catch(e){}
+  setMic(false);
+}
 function webSpeech(inputId){
   const nc=nonChromeVoiceNote();
-  if(!SR || nc){ micSay("⚠️ "+(nc||"Reconnaissance vocale indisponible ici.")+" → Ouvrez l'app dans Google Chrome, OU renseignez une clé OpenAI (champ « Clé OpenAI pour la dictée » ci-dessus) : la dictée marchera alors dans n'importe quel navigateur."); return; }
+  if(!SR || nc){ micSay("⚠️ "+(nc||"Reconnaissance vocale indisponible ici.")+" → Ouvrez l'app dans Google Chrome, OU renseignez une clé OpenAI (champ « Clé OpenAI pour la dictée » ci-dessus)."); return; }
   const el=document.getElementById(inputId); if(!el) return;
-  if(recog||micHold){ micHold=false; try{ if(recog) recog.stop(); }catch(e){} return; }   // 2e appui = arrêter
-  // v35 : le navigateur coupe parfois en pleine phrase → on relance sans coupure visible.
-  // Zéro doublon possible : chaque session reconstruit son texte complet à partir d'une base figée au démarrage de la session.
-  micHold=true; let emptyRuns=0;
+  if(micHold||recog){                                   // 2e appui = fin de votre prise de parole
+    stopDictation();
+    const text=(el.value||"").trim();
+    if(handsMode && inputId==="iaInput"){ if(text){ handsTurn('wait'); iaSend(); } else handsTurn('you'); }
+    else setTimeout(()=>{ if(!recog) micSay(""); },1500);
+    return;
+  }
+  // v36 : UN seul propriétaire du micro. Toute session périmée (micGen) est ignorée.
+  // Entre deux relances, seuls les segments DÉFINITIFS sont conservés — un intérim ne peut jamais s'accumuler.
+  micHold=true; const myGen=++micGen;
+  const turnBase=(el.value||"").trim();
+  let finalAcc="", emptyRuns=0;
   lastHeard=Date.now();
-  if(silenceTimer){ clearInterval(silenceTimer); }
+  if(silenceTimer) clearInterval(silenceTimer);
   silenceTimer=setInterval(()=>{
-    if(!micHold){ clearInterval(silenceTimer); silenceTimer=null; return; }
-    if(handsMode && el.id==="iaInput"){
-      const text=(el.value||"").trim();
-      if(text && Date.now()-lastHeard>3000){ micHold=false; try{ if(recog) recog.stop(); }catch(e){} }  // vrai silence → fin de votre tour
+    if(myGen!==micGen||!micHold){ clearInterval(silenceTimer); silenceTimer=null; return; }
+    if(handsMode && inputId==="iaInput"){
+      const t=(el.value||"").trim();
+      if(t && t!==turnBase && Date.now()-lastHeard>3000){ stopDictation(); handsTurn('wait'); iaSend(); }
     }
   },400);
   const startSession=()=>{
-    const base=(el.value||"").trim();
-    try{ recog=new SR(); }catch(e){ micHold=false; setMic(false); micSay("⚠️ Micro non disponible ici."); return; }
-    recog.lang=scnFr()?"fr-FR":"en-US"; recog.interimResults=true; recog.continuous=true; recog.maxAlternatives=1;
-    let got=false, fatal=false;
-    recog.onstart=()=>{ setMic(true); micSay(handsMode?"🎤 [v35] À vous — parlez ; l'envoi part après ~3 s de silence.":"🎤 [v35] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
-    recog.onresult=e=>{ got=true; lastHeard=Date.now(); let s=""; for(let i=0;i<e.results.length;i++){ s+=e.results[i][0].transcript+(e.results[i].isFinal?" ":""); } el.value=((base?base+" ":"")+s).replace(/\s+/g," ").trim(); micSay("… "+(el.value||"")); };
-    recog.onerror=e=>{ const fx={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée : ce navigateur n'a pas le service de transcription. Utilisez Google Chrome, ou renseignez une clé OpenAI (dictée fiable partout).","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (souvent un VPN/pare-feu). Coupez le VPN, ou renseignez une clé OpenAI ci-dessus."}[e.error]; if(fx){ fatal=true; micHold=false; micSay("⚠️ "+fx); } };
-    recog.onend=()=>{ recog=null;
-      if(micHold){                                     // coupure du navigateur, pas de l'utilisateur → on relance sans bruit
+    if(myGen!==micGen||!micHold) return;
+    let r; try{ r=new SR(); }catch(e){ stopDictation(); micSay("⚠️ Micro non disponible ici."); return; }
+    recog=r; r.__fin=""; let got=false;
+    r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=true; r.maxAlternatives=1;
+    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); micSay(handsMode?"🎤 [v36] À vous — parlez ; envoi après ~3 s de silence (ou re-touchez 🎤).":"🎤 [v36] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    r.onresult=e=>{ if(myGen!==micGen) return; got=true; lastHeard=Date.now();
+      let fin="", itr="";
+      for(let i=0;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) fin+=t+" "; else itr+=t; }
+      r.__fin=fin;
+      el.value=((turnBase?turnBase+" ":"")+finalAcc+fin+itr).replace(/\s+/g," ").trim();
+      micSay("… "+(el.value||"")); };
+    r.onerror=e=>{ if(myGen!==micGen) return;
+      const fx={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée sur ce navigateur — utilisez Google Chrome, ou renseignez une clé OpenAI.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (VPN/pare-feu ?). Coupez le VPN, ou renseignez une clé OpenAI."}[e.error];
+      if(fx){ stopDictation(); micSay("⚠️ "+fx); if(handsMode&&inputId==="iaInput") handsTurn('you'); } };
+    r.onend=()=>{ if(myGen!==micGen) return;
+      if(r.__fin) finalAcc=finalAcc+r.__fin;               // on ne garde que le définitif
+      recog=null;
+      if(micHold){
         if(!got) emptyRuns++; else emptyRuns=0;
-        if(emptyRuns>=5){ micHold=false; setMic(false); micSay("⚠️ Rien capté — vérifiez le micro et réessayez."); if(handsMode&&el.id==="iaInput") handsTurn('you'); return; }
-        try{ startSession(); return; }catch(e){}
+        if(emptyRuns>=5){ stopDictation(); micSay("⚠️ Rien capté — vérifiez le micro et réessayez."); if(handsMode&&inputId==="iaInput") handsTurn('you'); return; }
+        el.value=((turnBase?turnBase+" ":"")+finalAcc).replace(/\s+/g," ").trim();   // l'intérim en suspens est abandonné
+        startSession(); return;
       }
       setMic(false);
-      const text=(el.value||"").trim();
-      if(handsMode && el.id==="iaInput"){
-        if(!fatal && text){ handsTurn('wait'); iaSend(); }
-        else if(!fatal){ handsTurn('you'); }
-      } else if(!fatal){ setTimeout(()=>{ if(!recog) micSay(""); },3000); }
     };
-    try{ recog.start(); }catch(e){ recog=null; micHold=false; setMic(false); micSay("⚠️ "+((e&&e.message)||e)); }
+    try{ r.start(); }catch(e){ stopDictation(); micSay("⚠️ "+((e&&e.message)||e)); }
   };
   startSession();
 }
@@ -985,7 +1005,7 @@ function toggleHands(){
     render();
     if(!ia.started){ iaStart(); } else { handsUserTurn(); }
   } else {
-    micHold=false; try{ if(recog) recog.stop(); }catch(e){}
+    stopDictation();
     try{ speechSynthesis.cancel(); }catch(e){}
     render();
   }
@@ -994,7 +1014,7 @@ function handsUserTurn(){
   if(!handsMode) return;
   handsTurn('you');
   const inp=document.getElementById("iaInput"); if(inp){ inp.value=""; }
-  if(recog){ return; }               // déjà en écoute
+  if(recog||micHold){ return; }      // une écoute est déjà en cours : ne JAMAIS en démarrer une seconde
   try{ webSpeech("iaInput"); }catch(e){ handsTurn('you'); }
 }
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
@@ -1137,7 +1157,7 @@ function renderIA(t){
       </div>
       ${handsMode?`<div id="handsTurn" style="text-align:center;color:#fff;font-weight:700;font-size:1.02rem;padding:12px;border-radius:12px;margin-bottom:10px;background:#1f8a70">🎤 À VOUS — parlez maintenant</div>`:''}
       <div class="free-row">
-      <input id="iaInput" type="text" placeholder="Écrivez ou dictez (🎤) en anglais…" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
+      <input id="iaInput" type="text" placeholder="${scnFr()?"Écrivez ou dictez (🎤) en français…":"Écrivez ou dictez (🎤) en anglais…"}" ${ia.loading?'disabled':''} onkeydown="if(event.key==='Enter')iaSend()">
       <button class="mic-btn" title="Parler" onclick="dictate('iaInput')" ${ia.loading?'disabled':''}>🎤</button>
       <button class="btn" onclick="iaSend()" ${ia.loading?'disabled':''}>Envoyer</button></div>
       <div id="micStatus" class="mic-status"></div>
@@ -1449,7 +1469,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v35";
+const APP_VERSION="v36";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
