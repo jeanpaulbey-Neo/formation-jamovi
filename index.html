@@ -449,6 +449,19 @@ function renderLanding(){
         <div class="cta" style="color:${f.accentDark}">${done>0?`Reprendre · ${pct}% du parcours`:"Commencer →"}</div>
       </div></button>`;
   }
+  // --- Coach 5 minutes : rituel quotidien d'anglais oral ---
+  {
+    const cs=coachStreak(); const srs=coachStore().srs||{}; const seen=Object.keys(srs).length;
+    h+=`<button class="formation-card" onclick="goCoach()">
+      <div class="banner" style="background:linear-gradient(120deg,#0e5a4a,#1f8a70)">
+        <div class="emoji">🗣️</div><h3>Coach 5 minutes</h3><p>Parler anglais chaque jour — micro-séance guidée</p>
+      </div>
+      <div class="body">
+        <div class="meta">Échauffement · conversation IA · débrief${seen?` · ${seen}/${COACH_BRICKS.length} briques vues`:""}</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${Math.round(seen/COACH_BRICKS.length*100)}%;--accent:#1f8a70;--accent-dark:#0e5a4a"></div></div>
+        <div class="cta" style="color:#0e5a4a">${cs.doneToday?`✅ Fait aujourd'hui · 🔥 ${cs.count} j`:(cs.count?`🔥 Série ${cs.count} j — séance du jour →`:"Commencer aujourd'hui →")}</div>
+      </div></button>`;
+  }
   // --- Espace protégé (contenu chiffré, phrase secrète requise) ---
   h+=`<a class="formation-card" href="./entretien/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#232d52,#39466f)">
@@ -869,7 +882,7 @@ const escA = s => esc(s).replace(/"/g,"&quot;");
 let ttsAuto = localStorage.getItem("ttsAuto")==="1";
 let iaScenario=""; try{ iaScenario=localStorage.getItem("ia-scenario")||""; }catch(e){}
 let iaScenLang="en"; try{ iaScenLang=localStorage.getItem("ia-scenario-lang")||"en"; }catch(e){}
-function scnFr(){ return !!(iaScenario && iaScenario.trim() && iaScenLang==="fr" && typeof conv!=="undefined" && conv.mode==="ia"); }
+function scnFr(){ if(typeof view!=="undefined" && view.page==="coach") return false; return !!(iaScenario && iaScenario.trim() && iaScenLang==="fr" && typeof conv!=="undefined" && conv.mode==="ia"); }
 function saveScenario(){ const el=document.getElementById("iaScenario"); if(el){ iaScenario=el.value; try{ localStorage.setItem("ia-scenario",iaScenario); }catch(e){} } const lg=document.getElementById("iaScenLang"); if(lg){ iaScenLang=lg.value; try{ localStorage.setItem("ia-scenario-lang",iaScenLang); }catch(e){} } ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 function clearScenario(){ iaScenario=""; try{ localStorage.removeItem("ia-scenario"); }catch(e){} ia={messages:[],loading:false,started:false,correct:ia.correct,error:null}; render(); }
 let ttsVoice=null, ttsVoiceFr=null;
@@ -878,7 +891,7 @@ if("speechSynthesis" in window){ pickVoice(); try{ speechSynthesis.onvoiceschang
 function speak(t,onDone){ if(!t||!("speechSynthesis" in window)){ if(onDone) setTimeout(onDone,300); return; } try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/^\s*Tip\s*:.*$/im,"").trim()||t); const fr=scnFr(); u.lang=fr?"fr-FR":"en-US"; const v=fr?ttsVoiceFr:ttsVoice; if(v)u.voice=v; u.rate=0.95; if(onDone){ u.onend=()=>onDone(); u.onerror=()=>onDone(); } speechSynthesis.speak(u); }catch(e){ if(onDone) setTimeout(onDone,300); } }
 function toggleTtsAuto(v){ ttsAuto=v; try{ localStorage.setItem("ttsAuto",v?"1":"0"); }catch(e){} }
 const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-let recog=null, mediaRec=null, recChunks=[], handsMode=false, micHold=false, micGen=0, lastHeard=0, silenceTimer=null;
+let recog=null, mediaRec=null, recChunks=[], handsMode=false, handsInput="iaInput", micHold=false, micGen=0, lastHeard=0, silenceTimer=null;
 function setMic(on){ document.querySelectorAll(".mic-btn").forEach(b=>b.classList.toggle("rec",on)); }
 function micSay(msg){ const s=document.getElementById("micStatus"); if(s) s.textContent=msg||""; }
 // clé OpenAI utilisable pour la dictée (Whisper) : clé dédiée voix, sinon la clé de chat si c'est OpenAI
@@ -944,7 +957,7 @@ function webSpeech(inputId){
   if(micHold||recog){                                   // 2e appui = fin de votre prise de parole
     stopDictation();
     const text=(el.value||"").trim();
-    if(handsMode && inputId==="iaInput"){ if(text){ handsTurn('wait'); iaSend(); } else handsTurn('you'); }
+    if(handsMode && inputId===handsInput){ if(text){ handsTurn('wait'); handsSend(); } else handsTurn('you'); }
     else setTimeout(()=>{ if(!recog) micSay(""); },1500);
     return;
   }
@@ -961,7 +974,7 @@ function webSpeech(inputId){
     let r; try{ r=new SR(); }catch(e){ stopDictation(); micSay("⚠️ Micro non disponible ici."); return; }
     recog=r; r.__folded=false; let got=false;
     r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=false; r.maxAlternatives=1;
-    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); if(handsMode&&inputId==="iaInput") handsTurn("rec"); micSay(handsMode?"🎙️ [v38] Micro ouvert — appuyez sur le bandeau rouge pour terminer et envoyer.":"🎤 [v38] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); if(handsMode&&inputId===handsInput) handsTurn("rec"); micSay(handsMode?"🎙️ [v39] Micro ouvert — appuyez sur le bandeau rouge pour terminer et envoyer.":"🎤 [v39] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
     r.onresult=e=>{ if(myGen!==micGen) return; got=true; lastHeard=Date.now();
       // Android re-émet des copies grandissantes du même passage : on ne garde QUE le dernier segment, jamais de concaténation.
       const lastRes=e.results[e.results.length-1]; if(!lastRes) return;
@@ -977,12 +990,12 @@ function webSpeech(inputId){
       micSay("… "+(el.value||"")); };
     r.onerror=e=>{ if(myGen!==micGen) return;
       const fx={"not-allowed":"Micro refusé : autorisez le microphone (icône 🔒).","service-not-allowed":"Dictée bloquée sur ce navigateur — utilisez Google Chrome, ou renseignez une clé OpenAI.","audio-capture":"Aucun micro détecté — vérifiez le micro sélectionné.","network":"Service de dictée injoignable (VPN/pare-feu ?). Coupez le VPN, ou renseignez une clé OpenAI."}[e.error];
-      if(fx){ stopDictation(); micSay("⚠️ "+fx); if(handsMode&&inputId==="iaInput") handsTurn('you'); } };
+      if(fx){ stopDictation(); micSay("⚠️ "+fx); if(handsMode&&inputId===handsInput) handsTurn('you'); } };
     r.onend=()=>{ if(myGen!==micGen) return;
       recog=null;
       if(micHold){
         if(!got) emptyRuns++; else emptyRuns=0;
-        if(emptyRuns>=5){ stopDictation(); micSay("⚠️ Rien capté — vérifiez le micro et réessayez."); if(handsMode&&inputId==="iaInput") handsTurn('you'); return; }
+        if(emptyRuns>=5){ stopDictation(); micSay("⚠️ Rien capté — vérifiez le micro et réessayez."); if(handsMode&&inputId===handsInput) handsTurn('you'); return; }
         el.value=((turnBase?turnBase+" ":"")+finalAcc).replace(/\s+/g," ").trim();   // l'intérim en suspens est abandonné
         startSession(); return;
       }
@@ -1005,11 +1018,14 @@ function handsTurn(who){ // 'you' | 'rec' (j'écoute) | 'wait' | 'ai'
   const m=map[who]||map.you; el.style.background=m[0]; el.textContent=m[1];
 }
 function handsBannerTap(){
-  if(!handsMode||ia.loading) return;
-  if(handsState==="you" && !micHold && !recog){ webSpeech("iaInput"); }
-  else if(handsState==="rec" && (micHold||recog)){ webSpeech("iaInput"); }
+  if(!handsMode||handsBusy()) return;
+  if(handsState==="you" && !micHold && !recog){ webSpeech(handsInput); }
+  else if(handsState==="rec" && (micHold||recog)){ webSpeech(handsInput); }
 }
+function handsBusy(){ return handsInput==="coachInput" ? coach.loading : ia.loading; }
+function handsSend(){ if(handsInput==="coachInput") coachSend(); else iaSend(); }
 function toggleHands(){
+  handsInput="iaInput";
   handsMode=!handsMode;
   if(handsMode){ ttsAuto=true; try{localStorage.setItem("ttsAuto","1");}catch(e){}
     render();
@@ -1022,7 +1038,7 @@ function toggleHands(){
 }
 function handsUserTurn(){
   if(!handsMode) return;
-  const inp=document.getElementById("iaInput"); if(inp){ inp.value=""; }
+  const inp=document.getElementById(handsInput); if(inp){ inp.value=""; }
   handsTurn('you');                  // la main est à vous : appuyez sur le bandeau quand vous êtes prêt
 }
 function themeById(id){ return (F().themes||[]).find(t=>t.id===id); }
@@ -1230,6 +1246,266 @@ async function callAI(system,messages){
     if(!r.ok) throw new Error(" — "+r.status+" : "+(await r.text()).slice(0,160));
     const d=await r.json(); return d.choices[0].message.content.trim();
   }
+}
+
+// ============ COACH 5 MINUTES — micro-séance quotidienne d'anglais oral ============
+// 3 briques du jour (répétition espacée) → 3 min de conversation IA qui force leur emploi → débrief 1 correction.
+const COACH_BRICKS=[
+ {id:"p01",cat:"pro",en:"Could you walk me through it?",fr:"Pouvez-vous me l'expliquer pas à pas ?",ex:"Could you walk me through the new process?"},
+ {id:"p02",cat:"pro",en:"Let me make sure I've got this right.",fr:"Laissez-moi vérifier que j'ai bien compris.",ex:"Let me make sure I've got this right: we start Monday?"},
+ {id:"p03",cat:"pro",en:"From my point of view, …",fr:"De mon point de vue…",ex:"From my point of view, the deadline is too tight."},
+ {id:"p04",cat:"pro",en:"What I mean is…",fr:"Ce que je veux dire, c'est…",ex:"What I mean is we need more time."},
+ {id:"p05",cat:"pro",en:"Could we come back to that later?",fr:"Peut-on y revenir plus tard ?",ex:"Good point — could we come back to that later?"},
+ {id:"p06",cat:"pro",en:"Let's move on to the next point.",fr:"Passons au point suivant.",ex:"OK, let's move on to the next point."},
+ {id:"p07",cat:"pro",en:"To sum up, …",fr:"Pour résumer…",ex:"To sum up, we agreed on two actions."},
+ {id:"p08",cat:"pro",en:"Who will take care of that?",fr:"Qui va s'en occuper ?",ex:"Great idea — who will take care of that?"},
+ {id:"p09",cat:"pro",en:"By when do you need it?",fr:"Pour quand en avez-vous besoin ?",ex:"I can do it — by when do you need it?"},
+ {id:"p10",cat:"pro",en:"I'd like to double-check one thing.",fr:"Je voudrais vérifier une chose.",ex:"Before we finish, I'd like to double-check one thing."},
+ {id:"p11",cat:"pro",en:"I'm not sure I follow — could you rephrase?",fr:"Je ne suis pas sûr de suivre — pouvez-vous reformuler ?",ex:"Sorry, I'm not sure I follow — could you rephrase?"},
+ {id:"p12",cat:"pro",en:"We're running out of time.",fr:"Le temps nous manque.",ex:"We're running out of time, let's decide."},
+ {id:"p13",cat:"pro",en:"Sorry to interrupt, but…",fr:"Désolé de vous couper, mais…",ex:"Sorry to interrupt, but there's an urgent issue."},
+ {id:"p14",cat:"pro",en:"As far as I know, …",fr:"Pour autant que je sache…",ex:"As far as I know, the release is on track."},
+ {id:"p15",cat:"pro",en:"I'll get back to you on that.",fr:"Je reviendrai vers vous là-dessus.",ex:"I don't have the figure — I'll get back to you on that."},
+ {id:"p16",cat:"pro",en:"It depends on…",fr:"Cela dépend de…",ex:"It depends on the budget we get."},
+ {id:"p17",cat:"pro",en:"The main risk I see is…",fr:"Le principal risque que je vois est…",ex:"The main risk I see is the migration."},
+ {id:"p18",cat:"pro",en:"Let's set up a follow-up call.",fr:"Planifions un point de suivi.",ex:"Let's set up a follow-up call next week."},
+ {id:"p19",cat:"pro",en:"What are the next steps?",fr:"Quelles sont les prochaines étapes ?",ex:"Before we close, what are the next steps?"},
+ {id:"p20",cat:"pro",en:"My team is in charge of…",fr:"Mon équipe est responsable de…",ex:"My team is in charge of testing."},
+ {id:"p21",cat:"pro",en:"We need a decision on this today.",fr:"Il nous faut une décision aujourd'hui.",ex:"We need a decision on this today, please."},
+ {id:"p22",cat:"pro",en:"I'd rather keep it simple.",fr:"Je préfère faire simple.",ex:"I'd rather keep it simple for version one."},
+ {id:"p23",cat:"pro",en:"How long will it take?",fr:"Combien de temps cela prendra-t-il ?",ex:"Sounds good — how long will it take?"},
+ {id:"p24",cat:"pro",en:"That works for me.",fr:"Ça me convient.",ex:"Tuesday at 10? That works for me."},
+ {id:"p25",cat:"pro",en:"I see it differently.",fr:"Je vois les choses autrement.",ex:"I see it differently: quality comes first."},
+ {id:"p26",cat:"pro",en:"Let me give you an example.",fr:"Laissez-moi vous donner un exemple.",ex:"Let me give you an example from last month."},
+ {id:"p27",cat:"pro",en:"Just to be clear, …",fr:"Pour être clair…",ex:"Just to be clear, this is not a commitment yet."},
+ {id:"p28",cat:"pro",en:"Could you speak up a little?",fr:"Pouvez-vous parler un peu plus fort ?",ex:"Sorry, could you speak up a little?"},
+ {id:"p29",cat:"pro",en:"That raises a question about…",fr:"Cela soulève une question sur…",ex:"That raises a question about security."},
+ {id:"p30",cat:"pro",en:"Can everyone hear me OK?",fr:"Tout le monde m'entend bien ?",ex:"Before I start — can everyone hear me OK?"},
+ {id:"c01",cat:"conv",en:"I've been working on… lately.",fr:"Je travaille sur… ces derniers temps.",ex:"I've been working on a big project lately."},
+ {id:"c02",cat:"conv",en:"It took me a while to…",fr:"Il m'a fallu du temps pour…",ex:"It took me a while to get used to it."},
+ {id:"c03",cat:"conv",en:"What do you do in your free time?",fr:"Que faites-vous pendant votre temps libre ?",ex:"So, what do you do in your free time?"},
+ {id:"c04",cat:"conv",en:"I'm really into…",fr:"Je suis passionné de…",ex:"I'm really into running these days."},
+ {id:"c05",cat:"conv",en:"To be honest, …",fr:"Pour être honnête…",ex:"To be honest, I didn't enjoy the movie."},
+ {id:"c06",cat:"conv",en:"It's been a long day.",fr:"La journée a été longue.",ex:"I'm tired — it's been a long day."},
+ {id:"c07",cat:"conv",en:"How was your weekend?",fr:"Comment s'est passé votre week-end ?",ex:"Hi! How was your weekend?"},
+ {id:"c08",cat:"conv",en:"I'm looking forward to…",fr:"J'ai hâte de…",ex:"I'm looking forward to the holidays."},
+ {id:"c09",cat:"conv",en:"That reminds me of…",fr:"Ça me rappelle…",ex:"That reminds me of my first job."},
+ {id:"c10",cat:"conv",en:"I couldn't agree more.",fr:"Je suis entièrement d'accord.",ex:"Exactly — I couldn't agree more."},
+ {id:"c11",cat:"conv",en:"It's not a big deal.",fr:"Ce n'est pas grave.",ex:"Don't worry, it's not a big deal."},
+ {id:"c12",cat:"conv",en:"Guess what happened to me!",fr:"Devinez ce qui m'est arrivé !",ex:"Guess what happened to me this morning!"},
+ {id:"c13",cat:"conv",en:"I have no idea, to be honest.",fr:"Aucune idée, pour être honnête.",ex:"Good question — I have no idea, to be honest."},
+ {id:"c14",cat:"conv",en:"It's worth a try.",fr:"Ça vaut le coup d'essayer.",ex:"Why not? It's worth a try."},
+ {id:"c15",cat:"conv",en:"The best part was…",fr:"Le meilleur moment, c'était…",ex:"The best part was the food."},
+ {id:"c16",cat:"conv",en:"I used to…, but now I…",fr:"Avant je…, mais maintenant je…",ex:"I used to drive to work, but now I cycle."},
+ {id:"c17",cat:"conv",en:"If I were you, I would…",fr:"À votre place, je…",ex:"If I were you, I would ask for help."},
+ {id:"c18",cat:"conv",en:"It sounds like a great idea.",fr:"Ça a l'air d'une super idée.",ex:"A trip together? It sounds like a great idea."},
+ {id:"c19",cat:"conv",en:"What's it like living in…?",fr:"C'est comment de vivre à… ?",ex:"What's it like living in Lisbon?"},
+ {id:"c20",cat:"conv",en:"I'm getting used to…",fr:"Je m'habitue à…",ex:"I'm getting used to the new schedule."},
+ {id:"c21",cat:"conv",en:"At first I thought…, but then…",fr:"Au début je pensais…, puis…",ex:"At first I thought it was easy, but then I tried."},
+ {id:"c22",cat:"conv",en:"The thing is, …",fr:"Le problème, c'est que…",ex:"I'd love to come — the thing is, I'm busy."},
+ {id:"c23",cat:"conv",en:"It turned out to be…",fr:"Ça s'est révélé être…",ex:"It turned out to be a great evening."},
+ {id:"c24",cat:"conv",en:"As soon as I get home, I'll…",fr:"Dès que je rentre, je…",ex:"As soon as I get home, I'll call you."},
+ {id:"c25",cat:"conv",en:"I'd rather stay in tonight.",fr:"Je préfère rester à la maison ce soir.",ex:"Thanks, but I'd rather stay in tonight."},
+ {id:"c26",cat:"conv",en:"It's up to you.",fr:"C'est vous qui voyez.",ex:"Pizza or sushi? It's up to you."},
+ {id:"c27",cat:"conv",en:"How come you…?",fr:"Comment ça se fait que vous… ?",ex:"How come you speak Spanish so well?"},
+ {id:"c28",cat:"conv",en:"I ended up doing…",fr:"J'ai fini par faire…",ex:"I ended up staying two more days."},
+ {id:"c29",cat:"conv",en:"Long story short, …",fr:"Bref…",ex:"Long story short, we missed the train."},
+ {id:"c30",cat:"conv",en:"I can't help thinking that…",fr:"Je ne peux pas m'empêcher de penser que…",ex:"I can't help thinking that we were lucky."}
+];
+const COACH_SCENARIOS=[
+ {fr:"Point d'équipe hebdo avec un collègue international",en:"You are a colleague from an international delivery team; you and the learner are preparing the agenda and decisions of a weekly project meeting."},
+ {fr:"Pause café en conférence : small talk",en:"You are a friendly stranger at a conference coffee break; make small talk about work, travel and the event."},
+ {fr:"Entretien d'embauche pour un poste de manager IT",en:"You are a recruiter interviewing the learner for an IT management position; ask about experience, team leadership and motivation."},
+ {fr:"Un prestataire est en retard sur une livraison",en:"You are a service provider whose delivery is late; the learner must get explanations, a new date and commitments from you."},
+ {fr:"Accueillir un nouveau collègue dans l'équipe",en:"You are a new team member on your first day; the learner explains how the team works and answers your questions."},
+ {fr:"Appel pour déplacer une réunion",en:"You call the learner to reschedule an important meeting; negotiate a new time slot and agree on the agenda."},
+ {fr:"Dîner au restaurant à l'étranger",en:"You are a waiter in a restaurant abroad; take the learner's order, make recommendations and handle a small problem with the bill."},
+ {fr:"Débrief d'un déplacement professionnel",en:"You are a colleague asking the learner about a recent business trip: how it went, what was decided, what happens next."}
+];
+const COACH_INT=[1,3,7,15,30,60];
+let coach={phase:"idle",bricks:[],scn:null,messages:[],loading:false,error:null,t0:0,wrap:false,debrief:null,used:{},timer:null};
+function coachStore(){ try{ return JSON.parse(localStorage.getItem("coach5")||"{}"); }catch(e){ return {}; } }
+function coachSaveStore(st){ try{ localStorage.setItem("coach5",JSON.stringify(st)); }catch(e){} }
+function coachDate(off){ const d=new Date(Date.now()+(off||0)*864e5); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function coachStreak(){ const s=(coachStore().streak)||{count:0,last:null};
+  if(!s.last) return {count:0,doneToday:false};
+  if(s.last===coachDate(0)) return {count:s.count,doneToday:true};
+  return {count:s.last===coachDate(-1)?s.count:0,doneToday:false}; }
+function coachPickBricks(){
+  const srs=coachStore().srs||{}, today=coachDate(0);
+  const due=COACH_BRICKS.filter(b=>srs[b.id]&&srs[b.id].due<=today).sort((a,b)=>srs[a.id].due<srs[b.id].due?-1:1);
+  const out=due.slice(0,3);
+  const fresh=COACH_BRICKS.filter(b=>!srs[b.id]&&!out.includes(b));
+  let want=(out.length&&out[out.length-1].cat==="pro")?"conv":"pro";
+  while(out.length<3&&fresh.length){
+    let i=fresh.findIndex(b=>b.cat===want); if(i<0)i=0;
+    out.push(fresh.splice(i,1)[0]); want=want==="pro"?"conv":"pro";
+  }
+  // tout vu et rien d'échu : réviser les plus anciennes
+  if(out.length<3){ const rest=COACH_BRICKS.filter(b=>!out.includes(b)).sort((a,b)=>((srs[a.id]||{}).due||"")<((srs[b.id]||{}).due||"")?-1:1); while(out.length<3&&rest.length) out.push(rest.shift()); }
+  return out;
+}
+function coachApplySRS(usedIds){
+  const st=coachStore(); st.srs=st.srs||{};
+  for(const b of coach.bricks){ const e=st.srs[b.id]||{box:0,seen:0}; e.seen=(e.seen||0)+1;
+    if(usedIds.includes(b.id)){ e.box=Math.min((e.box||0)+1,COACH_INT.length-1); e.due=coachDate(COACH_INT[e.box]); }
+    else { e.box=Math.max(0,(e.box||0)-1); e.due=coachDate(1); }
+    st.srs[b.id]=e; }
+  const s=coachStreak(); if(!s.doneToday) st.streak={count:s.count+1,last:coachDate(0)};
+  coachSaveStore(st);
+}
+function goCoach(){ view={formation:null,page:"coach",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
+function coachStopAudio(){ stopDictation(); try{ speechSynthesis.cancel(); }catch(e){} if(coach.timer){ clearInterval(coach.timer); coach.timer=null; } handsMode=false; handsInput="iaInput"; }
+function coachExit(){ coachStopAudio(); coach={phase:"idle",bricks:[],scn:null,messages:[],loading:false,error:null,t0:0,wrap:false,debrief:null,used:{},timer:null}; goHomeSelector(); }
+function coachBegin(){
+  coach.bricks=coachPickBricks();
+  const d=new Date(); coach.scn=COACH_SCENARIOS[(d.getDate()+d.getMonth())%COACH_SCENARIOS.length];
+  coach.phase="warmup"; coach.messages=[]; coach.error=null; coach.debrief=null; coach.used={}; coach.wrap=false;
+  render(); window.scrollTo({top:0});
+}
+function coachSystem(){
+  const br=coach.bricks.map((b,i)=>`${i+1}) "${b.en}"`).join(" ");
+  let s=`You are an English speaking coach having a SHORT spoken-style conversation (about 3 minutes) with a French professional learner (CEFR B1-B2). SCENARIO: ${coach.scn.en} Stay in character, speak ONLY English, keep every turn to one or two short sentences, and ask ONE question at a time. HIDDEN GOAL: gently steer the dialogue so the learner naturally needs to use these target phrases — never reveal this goal and avoid saying these exact phrases yourself: ${br}`;
+  if(coach.wrap) s+=` TIME IS UP: bring the conversation to a natural, friendly close in ONE short sentence and do not ask another question.`;
+  return s;
+}
+function coachTimerStart(){
+  if(coach.timer) clearInterval(coach.timer);
+  coach.timer=setInterval(()=>{ const el=document.getElementById("coachClock"); if(!el) return;
+    const s=Math.max(0,180-Math.round((Date.now()-coach.t0)/1000));
+    if(s>0) el.textContent="⏱ "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+    else { el.textContent="⏱ 0:00 — finissez votre phrase, l'IA va conclure"; coach.wrap=true; } },1000);
+}
+async function coachStartConv(){
+  coach.phase="conv"; coach.messages=[]; coach.error=null; coach.wrap=false; coach.t0=Date.now();
+  handsMode=true; handsInput="coachInput"; ttsAuto=true;
+  coach.loading=true; render(); coachTimerStart();
+  try{ const txt=await callAI(coachSystem(),[{role:"user",content:"Please start the conversation with your first line."}]); coach.messages.push({role:"assistant",content:txt}); }
+  catch(e){ coach.error=String(e.message||e); }
+  coach.loading=false; render(); coachAfterReply();
+}
+async function coachSend(){
+  const el=document.getElementById("coachInput"); const v=(el?el.value:"").trim(); if(!v||coach.loading) return;
+  coach.messages.push({role:"user",content:v}); coach.error=null; coach.loading=true;
+  if(Date.now()-coach.t0>150000) coach.wrap=true;
+  if(handsMode) handsTurn('wait'); render();
+  try{ const txt=await callAI(coachSystem(),coach.messages.slice()); coach.messages.push({role:"assistant",content:txt}); }
+  catch(e){ coach.error=String(e.message||e); }
+  coach.loading=false; render(); coachAfterReply();
+}
+function coachAfterReply(){
+  const last=coach.messages[coach.messages.length-1];
+  if(!coach.error && last && last.role==="assistant"){
+    if(coach.wrap){ if(handsMode) handsTurn('ai'); speak(last.content,()=>coachDebrief()); }
+    else if(handsMode){ handsTurn('ai'); speak(last.content,handsUserTurn); }
+    else if(ttsAuto) speak(last.content);
+  } else if(handsMode && coach.error){ handsTurn('you'); }
+}
+async function coachDebrief(){
+  coachStopAudio();
+  coach.phase="debrief"; coach.loading=true; coach.debrief=null; render(); window.scrollTo({top:0});
+  const transcript=coach.messages.map(m=>(m.role==="user"?"LEARNER: ":"COACH: ")+m.content).join("\n");
+  const br=coach.bricks.map((b,i)=>`${i+1}) "${b.en}"`).join(" ");
+  const sys=`You are an English coach. Analyse only the LEARNER lines of the conversation. Reply in FRENCH, warmly: give ONE short correction of the single most important English mistake the learner made (three sentences maximum, with the corrected sentence); if the English was fine, say so and offer one more natural alternative phrasing. Then, on the very LAST line, output exactly: USED: followed by the numbers of the target phrases the learner actually used (close variants count), comma-separated, or NONE. Target phrases: ${br}`;
+  try{
+    const txt=await callAI(sys,[{role:"user",content:transcript||"(aucun échange)"}]);
+    const m=txt.match(/USED\s*:\s*([0-9,\s]+|NONE)/i);
+    const used={}; if(m && !/NONE/i.test(m[1])) m[1].split(/[\s,]+/).forEach(n=>{ const i=parseInt(n,10)-1; if(coach.bricks[i]) used[coach.bricks[i].id]=true; });
+    coach.used=used; coach.debrief=txt.replace(/USED\s*:.*$/im,"").trim();
+  }catch(e){ coach.error=String(e.message||e); coach.used={}; }
+  coach.loading=false; render();
+}
+function coachToggleUsed(id){ coach.used[id]=!coach.used[id]; render(); }
+function coachValidate(){
+  coachApplySRS(coach.bricks.map(b=>b.id).filter(id=>coach.used[id]));
+  coach.phase="done"; render(); window.scrollTo({top:0});
+}
+function coachBrickCard(b,i,withCheck){
+  return `<div style="border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--card)">
+    <div style="display:flex;align-items:flex-start;gap:8px">
+      ${withCheck?`<input type="checkbox" ${coach.used[b.id]?'checked':''} onchange="coachToggleUsed('${b.id}')" style="margin-top:4px;transform:scale(1.3)">`:`<span style="font-weight:800;color:#1f8a70">${i+1}.</span>`}
+      <div style="flex:1"><b>${esc(b.en)}</b> <button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(b.en)}">🔊</button>
+      <div style="color:var(--muted);font-size:.88rem">${esc(b.fr)}</div>
+      <div style="font-size:.85rem;margin-top:3px;font-style:italic">${esc(b.ex)} <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(b.ex)}">🔊</button></div></div>
+    </div></div>`;
+}
+function renderCoach(){
+  $("#sidebar").innerHTML="";
+  const cs=coachStreak(); const srs=coachStore().srs||{}; const seen=Object.keys(srs).length;
+  const acq=COACH_BRICKS.filter(b=>srs[b.id]&&srs[b.id].box>=3).length;
+  let h=`<div class="landing-wrap"><div style="max-width:760px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+      <button class="btn ghost sm" onclick="coachExit()">← Accueil</button>
+      <div style="font-weight:700;color:#0e5a4a">🔥 Série : ${cs.count} jour${cs.count>1?"s":""}${cs.doneToday?" · séance du jour ✅":""}</div></div>
+    <h2 class="page-title" style="margin-top:4px">🗣️ Coach 5 minutes</h2>`;
+  if(!(apiCfg.key&&apiCfg.provider)){
+    h+=`<div class="card"><div class="ai-note">🔐 Le coach utilise <b>votre</b> clé API (OpenAI ou Anthropic), stockée uniquement dans ce navigateur.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:460px">
+      <label>Fournisseur<br><select class="sel" id="aiProv"><option value="openai" ${apiCfg.provider==='openai'?'selected':''}>OpenAI</option><option value="anthropic" ${apiCfg.provider==='anthropic'?'selected':''}>Anthropic (Claude)</option></select></label>
+      <label>Clé API<br><input class="sel" id="aiKey" type="password" placeholder="sk-… / clé Anthropic" value="${esc(apiCfg.key||'')}"></label>
+      ${renderModelPicker()}
+      <div><button class="btn" onclick="saveAI()">Enregistrer</button></div></div></div></div></div>`;
+    $("#main").innerHTML=h; return;
+  }
+  if(coach.phase==="idle"){
+    h+=`<p class="page-sub">Un rituel quotidien en 3 temps : <b>1 min</b> d'échauffement (3 phrases-briques à voix haute), <b>3 min</b> de conversation avec l'IA qui vous amène à les placer, <b>1 min</b> de débrief (une seule correction). Les briques reviennent à J+1, J+3, J+7… jusqu'à être acquises.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="v">🔥 ${cs.count}</div><div class="l">Jours d'affilée</div></div>
+      <div class="stat"><div class="v">${seen} / ${COACH_BRICKS.length}</div><div class="l">Briques travaillées</div></div>
+      <div class="stat"><div class="v">${acq}</div><div class="l">Briques acquises</div></div>
+    </div>
+    <div style="text-align:center;padding:18px"><button class="btn" style="font-size:1.05rem;padding:14px 26px" onclick="coachBegin()">▶ ${cs.doneToday?"Refaire une séance":"Démarrer la séance du jour"}</button>
+    <div style="margin-top:10px;color:var(--muted);font-size:.85rem">💡 Astuce : installez l'app sur votre téléphone et faites la séance en marchant, mains libres.</div></div>`;
+  }
+  else if(coach.phase==="warmup"){
+    h+=`<div class="card"><b>Étape 1/3 — Échauffement (1 min)</b>
+    <p style="font-size:.9rem;color:var(--muted)">Vos 3 briques du jour. Écoutez chacune (🔊), puis répétez-la <b>deux fois à voix haute</b>. Pendant la conversation, vous devrez les placer naturellement.</p>
+    ${coach.bricks.map((b,i)=>coachBrickCard(b,i,false)).join("")}
+    <div style="margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3);font-size:.9rem">🎬 Scénario du jour : <b>${esc(coach.scn.fr)}</b></div>
+    <div style="text-align:center;margin-top:14px"><button class="btn" onclick="coachStartConv()">✅ C'est répété → Étape 2 : conversation</button></div></div>`;
+  }
+  else if(coach.phase==="conv"){
+    h+=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <b>Étape 2/3 — Conversation (3 min)</b><span id="coachClock" style="font-weight:700;color:#b03a3a">⏱ 3:00</span></div>
+    <div style="font-size:.85rem;color:var(--muted);margin:4px 0 8px">🎬 ${esc(coach.scn.fr)} — glissez vos 3 briques : <i>${coach.bricks.map(b=>esc(b.en)).join(" · ")}</i></div>`;
+    h+=chatBubbles(coach.messages.map(m=>({who:m.role==='assistant'?'app':'user',en:m.content})));
+    if(coach.loading) h+=`<div class="typing">L'IA écrit…</div>`;
+    if(coach.error) h+=`<div class="explain bad"><b>Erreur API</b>${esc(coach.error)}</div>`;
+    h+=`<div class="resp-panel">
+      ${handsMode?`<div id="handsTurn" onclick="handsBannerTap()" style="text-align:center;color:#fff;font-weight:700;font-size:1.02rem;padding:14px;border-radius:12px;margin-bottom:10px;background:#1f8a70;cursor:pointer;user-select:none">🎤 APPUYEZ ICI pour commencer votre réponse</div>`:''}
+      <div class="free-row">
+        <input id="coachInput" type="text" placeholder="Écrivez ou dictez (🎤) en anglais…" ${coach.loading?'disabled':''} onkeydown="if(event.key==='Enter')coachSend()">
+        <button class="mic-btn" title="Parler" onclick="dictate('coachInput')" ${coach.loading?'disabled':''}>🎤</button>
+        <button class="btn" onclick="coachSend()" ${coach.loading?'disabled':''}>Envoyer</button></div>
+      <div id="micStatus" class="mic-status"></div>
+      <div style="margin-top:8px"><button class="btn ghost sm" onclick="coachDebrief()">🏁 Terminer maintenant → débrief</button></div></div></div>`;
+  }
+  else if(coach.phase==="debrief"){
+    h+=`<div class="card"><b>Étape 3/3 — Débrief (1 min)</b>`;
+    if(coach.loading) h+=`<div class="typing">Le coach analyse votre anglais…</div>`;
+    if(coach.error) h+=`<div class="explain bad"><b>Erreur API</b>${esc(coach.error)} <div style="margin-top:6px">Cochez vous-même les briques placées, puis validez.</div></div>`;
+    if(coach.debrief) h+=`<div style="border-left:4px solid #1f8a70;padding:10px 14px;margin:10px 0;background:var(--accent-soft,#eef6f3);border-radius:0 10px 10px 0">${esc(coach.debrief).replace(/\n/g,"<br>")} <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(coach.debrief)}">🔊</button></div>`;
+    if(!coach.loading){
+      h+=`<p style="font-size:.9rem;color:var(--muted)">Briques placées pendant la conversation (détectées par l'IA — corrigez si besoin) :</p>
+      ${coach.bricks.map((b,i)=>coachBrickCard(b,i,true)).join("")}
+      <div style="text-align:center;margin-top:12px"><button class="btn" onclick="coachValidate()">✅ Valider ma séance</button></div>`;
+    }
+    h+=`</div>`;
+  }
+  else if(coach.phase==="done"){
+    const cs2=coachStreak();
+    const nUsed=coach.bricks.filter(b=>coach.used[b.id]).length;
+    h+=`<div class="card" style="text-align:center">
+      <div style="font-size:2.4rem">🎉</div><h3>Séance terminée !</h3>
+      <p>🔥 Série : <b>${cs2.count} jour${cs2.count>1?"s":""}</b> · Briques placées aujourd'hui : <b>${nUsed}/3</b></p>
+      <p style="font-size:.88rem;color:var(--muted)">Les briques placées reviendront plus tard (mémoire espacée) ; les autres reviennent dès demain. Rendez-vous demain pour garder la série !</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+        <button class="btn ghost sm" onclick="coachBegin()">🔁 Encore une séance</button>
+        <button class="btn" onclick="coachExit()">← Retour à l'accueil</button></div></div>`;
+  }
+  h+=`</div></div>`;
+  $("#main").innerHTML=h;
+  const box=document.getElementById("chatbox"); if(box) box.scrollTop=box.scrollHeight;
 }
 
 // ---- thèmes & champ lexical ----
@@ -1458,7 +1734,7 @@ function typeset(el){
 
 // ---- render ----
 function render(){
-  if(view.formation===null){ document.body.classList.add("landing"); renderLanding(); typeset(); return; }
+  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else renderLanding(); typeset(); return; }
   document.body.classList.remove("landing");
   clearStudioTimers();
   applyAccent(F());
@@ -1477,7 +1753,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v38";
+const APP_VERSION="v39";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
