@@ -4,7 +4,7 @@
  "titre": "Démonstrations — Article Zaremba (version publiable)",
  "sousTitre": "Tous les théorèmes, lemmes et preuves, dans l'ordre logique",
  "tagline": "énoncés, preuves à reconstruire, quiz",
- "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat de la version publiable révisée (septembre 2026 : orientation N→D, forme divergence, potentiel d'arête en n ≥ 3), formule par formule et lemme par lemme, y compris les outils classiques importés, avec un parcours pas à pas au début de chaque chapitre.",
+ "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat de la version publiable révisée (21 septembre 2026 : orientation N→D, forme divergence, Proposition 3.1 scindée par dimension, potentiel d'arête 𝒦_edge η en n ≥ 3 jusque dans le lemme de compensation, constante C_N′ = C_cross + C_q + C_θ), formule par formule et lemme par lemme, y compris les outils classiques importés, avec un parcours pas à pas au début de chaque chapitre. La version resserrée (n = 2) correspond aux chapitres 1–4, 6–8, 11–14.",
  "accent": "#7a3e1d",
  "accentDark": "#4e2611",
  "accentSoft": "#f5ece4",
@@ -440,14 +440,14 @@
    "titre": "La singularité de Zaremba et la décomposition d'arête",
    "objectifs": [
     "Savoir calculer le gradient du mode de Shamir et situer $S$ dans l'échelle de Sobolev.",
-    "Savoir énoncer la Proposition 3.1 sous ses deux formes : $\\eta S+u_R$ ($n=2$) et $K\\eta+w$ ($n\\ge3$).",
+    "Savoir énoncer la Proposition 3.1 sous ses deux formes : $\\eta S+u_R$ ($n=2$) et $\\mathcal K_{\\mathrm{edge}}\\eta+w$ ($n\\ge3$).",
     "Savoir démontrer la propagation temporelle de la structure asymptotique (Proposition 3.3)."
    ],
    "sections": [
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Pas 1 : coordonnées $(s,r,\\theta)$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ $(10)$. Pas 2 : $S=\\operatorname{Im}z^{1/2}$ $(11)$ ; vérifier $\\Delta S=0$, $S|_{\\theta=0}=0$, $\\partial_\\theta S|_{\\theta=\\pi}=\\tfrac12r^{1/2}\\cos(\\pi/2)=0$. Pas 3 : gradient $(12)$. Pas 4 : énoncer les deux niveaux de la Proposition 3.1 et, pour $n\\ge3$, la forme $K\\eta+w$. Pas 5 : propagation temporelle, en repérant où $D(\\A^2)$ est nécessaire. Pas 6 : Lemme B.11 (bornes uniformes en $t$)."
+      "Pas 1 : coordonnées $(s,r,\\theta)$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ $(10)$. Pas 2 : $S=\\operatorname{Im}z^{1/2}$ $(11)$ ; vérifier $\\Delta S=0$, $S|_{\\theta=0}=0$, $\\partial_\\theta S|_{\\theta=\\pi}=\\tfrac12r^{1/2}\\cos(\\pi/2)=0$. Pas 3 : gradient $(12)$. Pas 4 : énoncer les deux niveaux de la Proposition 3.1 et, pour $n\\ge3$, la forme $\\mathcal K_{\\mathrm{edge}}\\eta+w$. Pas 5 : propagation temporelle, en repérant où $D(\\A^2)$ est nécessaire. Pas 6 : Lemme B.11 (bornes uniformes en $t$)."
      ],
      "retenir": [
       "$S$ résout le Zaremba plat exactement ; pour $L$ général, $LS=O(r^{-1/2})$ et la correction est $H^2$."
@@ -457,7 +457,7 @@
      "titre": "Le mode de Shamir et les deux niveaux",
      "paragraphes": [
       "Dans le $2$-plan normal, $S=r^{1/2}\\sin(\\theta/2)=\\operatorname{Im}z^{1/2}$ est harmonique, nul en $\\theta=0$ (Dirichlet) et de dérivée normale nulle en $\\theta=\\pi$ (Neumann). Son gradient explose en $r^{-1/2}$ : $S\\in H^{3/2-\\delta}\\setminus H^{3/2}$, donc $S\\notin H^2$, et l'identité de Rellich doit être amendée près de $\\Gamma$.",
-      "Premier niveau (classe de graphe) : $u=\\eta S+u_R$, $u_R\\in H^2$, $\\eta\\in H^{1/2}(\\Gamma)$. Second niveau ($Lu\\in K^0_0$, données $D(\\A^2)$) : $u=\\eta S+u_\\flat+u_R$ avec $u_\\flat=c\\,r^{3/2}(a+b\\log r)\\varphi_1$ et $u_R\\in K^2_2$. En dimension $n\\ge3$, la forme exacte est le potentiel tronqué $K\\eta$, non le produit $\\eta S$."
+      "Premier niveau (classe de graphe) : $u=\\eta S+u_R$, $u_R\\in H^2$, $\\eta\\in H^{1/2}(\\Gamma)$. Second niveau ($Lu\\in K^0_0$, données $D(\\A^2)$) : $u=\\eta S+u_\\flat+u_R$ avec $u_\\flat=c\\,r^{3/2}(a+b\\log r)\\varphi_1$ et $u_R\\in K^2_2$. En dimension $n\\ge3$, la forme exacte est le potentiel tronqué $\\mathcal K_{\\mathrm{edge}}\\eta$, non le produit $\\eta S$."
      ],
      "retenir": [
       "$|\\gradg S|^2=1/(4r)$ : intégrable, mais $\\nabla^2S\\sim r^{-3/2}\\notin L^2$.",
@@ -476,7 +476,7 @@
     {
      "type": "Proposition 3.1",
      "nom": "Décomposition d'arête",
-     "enonce": "En classe de graphe : $u=\\eta S+u_R$ ($n=2$, Théorème B.2) ou $u=K\\eta+w$ ($n\\ge3$, Lemme B.6), $u_R,w\\in H^2$ près de $\\Gamma$, $\\eta\\in H^{1/2}(\\Gamma)$, opérateur de décomposition continu pour la norme du graphe. Second niveau sous $Lu\\in K^0_0$ : mode résonant $u_\\flat$ et $u_R\\in K^2_2$.",
+     "enonce": "Deux alinéas autonomes. (a) $n=2$ (démontré, Théorème B.2) : $u=\\eta S+u_R$, $u_R\\in H^2$ près de $\\Gamma$, $\\eta$ scalaire en chaque point de $\\Gamma$ ; second niveau sous $Lu\\in K^0_0$ : $u=\\eta S+u_\\flat+u_R$, $u_\\flat=c\\,r^{3/2}(a+b\\log r)\\varphi_1$, $u_R\\in K^2_2$. (b) $n\\ge3$ (emprunté à [29]) : $u=\\mathcal K_{\\mathrm{edge}}\\eta+w$, $\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{[\\zeta]\\tilde c_0\\sin(\\theta/2)(r[\\zeta])^{1/2}\\omega(r[\\zeta])\\}$, $\\eta=\\mathcal F^{-1}([\\zeta]^{3/2}\\tilde c_0)\\in H^{1/2}(\\Gamma)$, $w\\in H^2$ ; opérateur continu pour la norme du graphe dans les deux cas. Chaque énoncé qui consomme la décomposition (Théorème A, Lemme 7.2, C.3) est écrit dans les deux lectures.",
      "depend": [
       "Théorème B.2",
       "Lemme B.6",
@@ -530,7 +530,7 @@
      "definition": "$S=r^{1/2}\\sin(\\theta/2)$, singularité dominante du problème de Zaremba plat, exposant $\\lambda_0=1/2$."
     },
     {
-     "terme": "Potentiel d'arête $K\\eta$",
+     "terme": "Potentiel d'arête $\\mathcal K_{\\mathrm{edge}}\\eta$ ($K$ seul est le champ de Killing)",
      "definition": "$\\mathcal F^{-1}_{\\zeta\\to s}\\{[\\zeta]\\tilde c_0(\\zeta)\\sin(\\theta/2)(r[\\zeta])^{1/2}\\omega(r[\\zeta])\\}$ : forme exacte de la singularité en $n\\ge3$, tronquée en fréquence tangentielle."
     },
     {
@@ -559,7 +559,7 @@
       "Parce que $\\Gamma$ est courbe"
      ],
      "bonne": 1,
-     "explication": "C'est la troncature $\\omega(r[\\zeta])$ qui rend $\\partial_s(K\\eta)$ contrôlable avec $\\eta\\in H^{1/2}$ seulement."
+     "explication": "C'est la troncature $\\omega(r[\\zeta])$ qui rend $\\partial_s(\\mathcal K_{\\mathrm{edge}}\\eta)$ contrôlable avec $\\eta\\in H^{1/2}$ seulement."
     },
     {
      "question": "Sous quelle classe de données a-t-on $u_t=(u_R)_t+\\eta_tS+(u_\\flat)_t$ ?",
@@ -571,6 +571,17 @@
      ],
      "bonne": 2,
      "explication": "Il faut $u\\in C^1([0,T];D(\\A))$, ce que donne $D(\\A^2)$."
+    },
+    {
+     "question": "Pourquoi la Proposition 3.1 est-elle scindée en deux alinéas plutôt qu'énoncée pour tout $n$ ?",
+     "options": [
+      "Par convention typographique",
+      "Parce que la forme produit $\\eta S$ n'est exacte qu'en $n=2$ ; en $n\\ge3$ la forme exacte est $\\mathcal K_{\\mathrm{edge}}\\eta+w$, et un théorème ne peut énoncer le produit puis le retirer",
+      "Parce que $\\Gamma$ est compacte",
+      "Parce que $u_\\flat$ n'existe qu'en $n=2$"
+     ],
+     "bonne": 1,
+     "explication": "Exigence P1-1 du quatrième rapport ; le symbole $\\mathcal K_{\\mathrm{edge}}$ évite la collision avec le champ de Killing $K$."
     }
    ]
   },
@@ -632,6 +643,12 @@
      "nom": "Stabilité des exposants",
      "enonce": "Le faisceau de Mellin de $L=\\operatorname{div}(A\\nabla\\cdot)$ le long de $\\Gamma$ est celui du modèle gelé : mêmes $\\lambda_k$, mêmes $\\varphi_k$, mêmes bornes de résolvante.",
      "depend": []
+    },
+    {
+     "type": "Cadre",
+     "nom": "Inverse modèle : dièdre infini et paramétrice locale",
+     "enonce": "Dans le Lemme B.1, les $K^\\ell_\\beta$ sont pris sur le dièdre infini $\\{r>0\\}$ ; $G_\\beta$ est l'inverse de la droite de Mellin $\\Re\\lambda=\\beta$, sans condition en $r=1$, appliqué à des seconds membres à support compact fournis par la troncature $\\chi$ : c'est une paramétrice locale, non une bijectivité globale.",
+     "depend": []
     }
    ],
    "preuves": [
@@ -657,7 +674,7 @@
      "cible": "Résonance logarithmique",
      "strategie": "Identifier le pôle double, dériver $r^\\lambda$ en $\\lambda$.",
      "etapes": [
-      "Mellin de $r^2\\cdot r^{-1/2}f_0=r^{3/2}f_0$ (tronqué près de $0$) : pôle simple en $\\lambda=\\tfrac32$ de résidu $f_0$ ; $f_{rem}$ holomorphe jusqu'à $\\Re\\lambda=\\beta$.",
+      "Convention $\\widehat v(\\lambda)=\\int_0^\\infty r^{-\\lambda}v\\,\\tfrac{\\mathrm dr}r$ : pour $\\Re\\lambda<\\tfrac32$, $\\int_0^1r^{3/2-\\lambda}\\tfrac{\\mathrm dr}r=\\tfrac1{3/2-\\lambda}$ ; la transformée de $r^{3/2}f_0$ (tronquée) est donc $\\tfrac{f_0}{3/2-\\lambda}+$holomorphe, pôle simple de résidu $-f_0$ en la variable $\\lambda$. Le contour est déplacé de gauche à droite à travers $\\tfrac32$, ce qui compte le résidu avec le signe $-$ : les deux signes se compensent et l'on peut écrire la partie principale $\\tfrac{f_0}{\\lambda-3/2}$ avec résidu $+f_0$, ce que fait la suite.",
       "Produit avec $\\mathcal L(\\lambda)^{-1}=P_1/(3(\\lambda-\\tfrac32))+O(1)$ : partie principale $P_1f_0/(3(\\lambda-\\tfrac32)^2)$, pôle double.",
       "Résidu de $r^\\lambda\\times$(pôle double) : $\\partial_\\lambda r^\\lambda=r^\\lambda\\log r$ fournit $b\\,r^{3/2}\\log r\\,\\varphi_1$ avec $b=\\langle f_0,\\varphi_1\\rangle/(3\\cdot\\pi/2)$ ; le pôle simple résiduel donne $a\\,r^{3/2}\\varphi_1$."
      ]
@@ -729,6 +746,17 @@
      ],
      "bonne": 1,
      "explication": "C'est le point qui rend la conormale variable respectée et non contournée."
+    },
+    {
+     "question": "Avec la convention $\\widehat v(\\lambda)=\\int r^{-\\lambda}v\\,\\mathrm dr/r$, la transformée tronquée de $r^{3/2}f_0$ vaut :",
+     "options": [
+      "$f_0/(\\lambda-3/2)$",
+      "$f_0/(3/2-\\lambda)$, et l'orientation du contour (gauche→droite) rétablit le signe du résidu",
+      "$f_0\\log\\lambda$",
+      "$0$"
+     ],
+     "bonne": 1,
+     "explication": "Point de forme signalé par le quatrième rapport ; $b$ final inchangé, conforme au calcul direct $\\Delta_0(r^{3/2}\\log r\\,\\varphi_1)=3r^{-1/2}\\varphi_1$."
     }
    ]
   },
@@ -738,14 +766,14 @@
    "objectifs": [
     "Savoir lire les énoncés de Dines–Harutjunjan–Schulze utilisés (Th. 3, 13, 16, 30, Cor. 15, 17) avec leurs hypothèses.",
     "Savoir démontrer les trois compléments : absence de conditions d'interface au poids $1$ (B.5), traduction du reste (B.6), transport à $\\operatorname{div}(A\\nabla\\cdot)$ (B.7).",
-    "Savoir expliquer pourquoi le flux du potentiel $K\\eta$ a la même limite que celui de $\\eta S$."
+    "Savoir expliquer pourquoi le flux du potentiel $\\mathcal K_{\\mathrm{edge}}\\eta$ a la même limite que celui de $\\eta S$."
    ],
    "sections": [
     {
      "titre": "Ce qui est cité, ce qui est démontré",
      "paragraphes": [
       "Le symbole d'arête $\\sigma_\\wedge(\\zeta)=r^{-2}((-r\\partial_r)^2+\\partial_\\theta^2-r^2|\\zeta|^2)$ est Fredholm entre espaces de cône à poids ; l'opérateur se complète par $d(\\gamma)$ conditions de potentiel et $e(\\gamma)$ de trace, $e-d=k$ sur $(\\tfrac12-k,\\tfrac32-k)$ ; paramétrice, Fredholm, asymptotique d'arête en $(r[\\zeta])^{j+1/2}$ modulo reste plat. Tout cela est [29].",
-      "Ce qui est démontré ici : au poids variationnel $\\gamma=1$, $d=e=0$ (noyau trivial par intégration par parties) ; le reste au poids $\\gamma+1$ est $H^2$ et la fonction singulière $j=0$ est un potentiel $K\\eta$ avec $\\eta\\in H^{s-3/2}(\\Gamma)$ ; le problème pour $L$ est elliptique dans l'algèbre d'arête avec le même symbole conormal."
+      "Ce qui est démontré ici : au poids variationnel $\\gamma=1$, $d=e=0$ (noyau trivial par intégration par parties) ; le reste au poids $\\gamma+1$ est $H^2$ et la fonction singulière $j=0$ est un potentiel $\\mathcal K_{\\mathrm{edge}}\\eta$ avec $\\eta\\in H^{s-3/2}(\\Gamma)$ ; le problème pour $L$ est elliptique dans l'algèbre d'arête avec le même symbole conormal."
      ],
      "retenir": [
       "Au poids $\\gamma=1$, aucune condition d'interface supplémentaire n'est nécessaire.",
@@ -776,7 +804,7 @@
     {
      "type": "Lemme B.6",
      "nom": "Traduction du reste",
-     "enonce": "En classe de graphe ($s=2$), $u=u_{sing}+w$ avec $w\\in H^2_{loc}$, $u_{sing}=K\\eta$, $\\eta\\in H^{1/2}(\\Gamma)$ ($H^{3/2}$ sous $D(\\A^2)$) ; $\\|\\nabla w\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$ ; $\\|\\nabla u_{sing}\\|^2_{L^2(\\Sigma_\\varepsilon)}\\to\\tfrac\\pi4\\|\\eta\\|^2$, $\\|\\partial_su_{sing}\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$, et le calcul angulaire donne la même limite $-\\tfrac\\pi8\\int\\innerg{H}{\\tau}\\eta^2$.",
+     "enonce": "En classe de graphe ($s=2$), $u=u_{sing}+w$ avec $w\\in H^2_{loc}$, $u_{sing}=\\mathcal K_{\\mathrm{edge}}\\eta$, $\\eta\\in H^{1/2}(\\Gamma)$ ($H^{3/2}$ sous $D(\\A^2)$) ; $\\|\\nabla w\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$ ; $\\|\\nabla u_{sing}\\|^2_{L^2(\\Sigma_\\varepsilon)}\\to\\tfrac\\pi4\\|\\eta\\|^2$, $\\|\\partial_su_{sing}\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$, et le calcul angulaire donne la même limite $-\\tfrac\\pi8\\int\\innerg{H}{\\tau}\\eta^2$.",
      "depend": []
     },
     {
@@ -1357,7 +1385,8 @@
      "retenir": [
       "$f\\mapsto\\lambda f$ multiplie identiquement $\\rho$ et $C_\\star$ : Hyp. 6 est une vraie hypothèse.",
       "Courbure $\\le0$ : $\\rho=1$ ; courbure $\\le b>0$ : $\\rho=\\sqrt bR\\cot(\\sqrt bR)$ sous $R<\\pi/(2\\sqrt b)$.",
-      "La courbure négative facilite mais n'implique pas $q\\ge0$ : vérifier point par point."
+      "La courbure négative facilite mais n'implique pas $q\\ge0$ : vérifier point par point.",
+      "La courbure négative améliore la convexité de $\\tfrac12d_g^2$ et peut faciliter la construction ; le signe de bord $q\\ge0$ reste une hypothèse indépendante, vérifiée point par point (jamais déduite de $K_g<0$)."
      ]
     }
    ],
@@ -1649,6 +1678,16 @@
       "Lemme 7.2",
       "Proposition 10.1(ii)"
      ]
+    },
+    {
+     "type": "Lemme 7.2 (cas $n\\ge3$)",
+     "nom": "Compensation à l'arête avec le potentiel d'arête",
+     "enonce": "Pour $u=\\mathcal K_{\\mathrm{edge}}\\eta+w$, $u_t=\\mathcal K_{\\mathrm{edge}}\\eta_t+w_t$ : mêmes conclusions (1)–(3), la densité principale étant $\\tfrac14aH_r\\partial_t(\\eta_\\omega^2)$ avec $\\int_\\Gamma\\eta_\\omega^2\\,\\mathrm ds=\\int|\\widehat\\eta|^2\\omega(r[\\zeta])^2\\mathrm d\\zeta\\le\\|\\eta\\|^2$ ; $K_\\delta$ est lu avec $\\eta_\\omega^2$.",
+     "depend": [
+      "Plancherel tangentiel",
+      "Hardy",
+      "Troncature $\\omega$"
+     ]
     }
    ],
    "preuves": [
@@ -1686,6 +1725,17 @@
       "Étape 1 : sur $\\GN\\setminus V_\\delta$, $q\\ge c_\\delta$ : $|au_t\\innerg{H_T}{\\nabla_Tu}|\\le\\tfrac14q|\\nabla_Tu|^2+\\tfrac{\\|a\\|\\|H_T\\|^2}{c_\\delta}au_t^2$, moyennant $N\\ge C_N'(\\delta)$.",
       "Étape 2 : sur $V_\\delta$, contribution $\\tfrac{\\mathrm d}{\\mathrm dt}K_\\delta+R_\\delta$, $K_\\delta=\\tfrac14\\int_\\Gamma(\\int_0^\\delta aH_r)\\eta^2$, $|K_\\delta|\\le C\\delta(E(t)+E_1(0))$ ; $\\tilde L:=NE+\\Phi-K_\\delta$ vérifie $\\tfrac{c_1}2E-C\\delta E_1(0)\\le\\tilde L\\le2c_2E+C\\delta E_1(0)$.",
       "Étape 3 : $\\tilde L'\\le-\\tfrac34\\rho'E+C\\delta^{1/2}E^\\sharp(0)$. Étape 4 : $Z=\\tilde L-C\\delta E_1(0)$ vérifie $Z'\\le-\\omega_\\delta Z$ tant que $E\\ge2\\beta/\\alpha$ ; barrière $\\Rightarrow Z(t)\\le\\max(Z(0)e^{-\\omega_\\delta t},2c_2\\cdot2\\beta/\\alpha+C\\delta E_1(0))$ ; revenir à $E$."
+     ]
+    },
+    {
+     "cible": "Compensation à l'arête avec le potentiel d'arête",
+     "strategie": "Refaire les blocs par Plancherel sur $\\Gamma$ à $r$ fixé ; le reste issu de $\\omega'$ vit en $[\\zeta]\\ge c/\\delta$ ; les blocs mixtes par Hardy avec une borne uniforme en $r$ ; le bloc tangentiel par la troncature.",
+     "etapes": [
+      "Sur la face $\\theta=\\pi$ : $\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta\\,r^{1/2}\\omega(r[\\zeta])\\}$, $\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta(\\tfrac12r^{-1/2}\\omega+r^{1/2}[\\zeta]\\omega')(r[\\zeta])\\}$, avec $\\widehat\\eta=[\\zeta]^{3/2}\\tilde c_0$.",
+      "Bloc singulier×singulier, Plancherel : $\\int_\\Gamma\\mathcal K_{\\mathrm{edge}}\\eta_t\\,\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta\\,\\mathrm ds=\\tfrac12\\int\\widehat{\\eta_t}\\overline{\\widehat\\eta}\\,\\omega^2+r\\int\\widehat{\\eta_t}\\overline{\\widehat\\eta}[\\zeta]\\omega\\omega'$. Premier terme $=\\tfrac14\\partial_t\\int|\\widehat\\eta|^2\\omega(r[\\zeta])^2$ : dérivée totale, contribution $O(\\delta)\\|\\eta\\|\\|\\eta_t\\|$.",
+      "Second terme : $\\omega'$ supporté en $r[\\zeta]\\sim1$, donc $[\\zeta]\\ge c/\\delta$ sur la bande ; $\\int_0^\\delta r[\\zeta]|\\omega\\omega'|\\,\\mathrm dr\\le C[\\zeta]^{-1}$ ; contribution $\\le C\\int_{[\\zeta]\\ge c/\\delta}[\\zeta]^{-1}|\\widehat{\\eta_t}||\\widehat\\eta|\\le C\\delta\\|\\eta_t\\|\\|\\eta\\|$.",
+      "Blocs mixtes : $w_t|_\\Gamma=0$ donne $|w_t|\\le r^{1/2}g(s)$ (Hardy) ; $r^{1/2}\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta(\\tfrac12\\omega+t\\omega')(r[\\zeta])\\}$ a une norme $L^2(\\Gamma)\\le C\\|\\eta\\|$ uniformément en $r$ ($\\omega$, $t\\omega'(t)$ bornées) ; d'où $\\int\\!\\!\\int|w_t||\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta|\\le C\\delta\\|\\partial_rw_t\\|\\|\\eta\\|$ ; symétrique pour $\\mathcal K_{\\mathrm{edge}}\\eta_t\\cdot\\partial_rw$.",
+      "Bloc tangentiel : $\\nabla_\\Gamma\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{i\\zeta\\widehat\\eta\\,r^{1/2}\\omega(r[\\zeta])\\}$ et $|\\zeta|\\omega(r[\\zeta])\\le C/r$ : c'est la troncature seule qui le rend contrôlable ; contribution $O(\\delta^2)$. Pas de bloc $u_\\flat$. (3) inchangé : $H_r(0,s)=-\\langle H,\\tau\\rangle_g(s)$."
      ]
     }
    ],
@@ -1736,6 +1786,17 @@
      ],
      "bonne": 1,
      "explication": "Avec $\\tau$ orienté $N\\to D$."
+    },
+    {
+     "question": "En $n\\ge3$, qu'est-ce qui remplace $\\eta^2$ dans la densité principale $\\tfrac14aH_r\\partial_t(\\cdot)$ ?",
+     "options": [
+      "$\\|\\eta\\|^2_{L^2}$",
+      "$\\eta_\\omega^2$, dont l'intégrale en $s$ vaut $\\int|\\widehat\\eta|^2\\omega(r[\\zeta])^2\\mathrm d\\zeta\\le\\|\\eta\\|^2$",
+      "$\\eta^2\\log r$",
+      "$|\\nabla_\\Gamma\\eta|^2$"
+     ],
+     "bonne": 1,
+     "explication": "La troncature $\\omega(r[\\zeta])$ lisse le carré du coefficient en fréquence ; $K_\\delta$ est lu avec cette quantité."
     }
    ]
   },
@@ -1780,7 +1841,7 @@
     {
      "type": "(31)–(33)",
      "nom": "Inégalité de $\\Phi'$ et équivalence",
-     "enonce": "$\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int_{\\GN}au_t^2$ ; $c_1E\\le L\\le c_2E$ avec $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$, $C_\\Phi=\\|H\\|_{C^0}+(\\tfrac12\\|p\\|_{C^0}+\\tfrac\\rho2)\\sqrt{C_P}$.",
+     "enonce": "$\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int_{\\GN}au_t^2$ ; $c_1E\\le L\\le c_2E$ avec $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$, $C_\\Phi=\\|H\\|_{C^0}+(\\tfrac12\\|p\\|_{C^0}+\\tfrac\\rho2)\\sqrt{C_P}$. ; $C_N'=C_{\\mathrm{cross}}+C_q+C_\\theta$ (Annexe E, corrigée).",
      "depend": []
     },
     {
@@ -1824,7 +1885,7 @@
      "etapes": [
       "Bords : Dirichlet $-\\int_{\\GD}\\mathcal B_\\mu\\le0$ ; interface $+\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\le0$ ; Neumann $(24)$ : absorbant jeté, dissipatif dominé, traces passées au volume. D'où $(31)$.",
       "$|\\Phi|\\le C_\\Phi E$ par Cauchy–Schwarz et Poincaré ; $N:=1+\\max\\{C_\\Phi,C_N'\\}$ donne $(33)$.",
-      "$L'=NE'+\\Phi'\\le-(N-C_N')\\int au_t^2-\\tfrac34\\rho'E\\le-\\tfrac34\\rho'E\\le-\\tfrac{3\\rho'}{4c_2}L$ ; Gronwall : $L(t)\\le L(0)e^{-2\\omega t}$ ; $E\\le L/c_1$, $L(0)\\le c_2E(0)$ : $E(t)\\le\\tfrac{c_2}{c_1}e^{-\\omega t}E(0)$ (demi-taux conservé).",
+      "$L'=NE'+\\Phi'\\le-(N-C_N')\\int au_t^2-\\tfrac34\\rho'E\\le-\\tfrac34\\rho'E\\le-\\tfrac{3\\rho'}{4c_2}L$ ; Gronwall : $L(t)\\le L(0)e^{-2\\omega t}$ ; $E\\le L/c_1$, $L(0)\\le c_2E(0)$ : $E(t)\\le\\tfrac{c_2}{c_1}e^{-\\omega t}E(0)$ (taux garanti choisi avec marge : le passage $L\\to E$ ne coûte que $c_2/c_1$, pas de division du taux).",
       "Classes : identités sur $D(\\A^2)$ ; passage à $D(\\A)$ par estimations uniformes en norme de graphe (Lemme B.11), sans continuité de $\\eta$ en énergie ; l'inégalité finale ne porte que sur $E$, continue sur $\\HH$ : densité de $D(\\A)$."
      ]
     },
@@ -1840,7 +1901,7 @@
    "glossaire": [
     {
      "terme": "$C_N'$",
-     "definition": "$\\tfrac{b_1^2\\|H_T\\|^2}{b_0}$ ou $C_N$, plus $\\tfrac12\\|\\tfrac12p-\\mu\\|(1+C_{tr})+\\tfrac12$ : constante de bord, payée par la dissipation."
+     "definition": "$C_N'=C_{\\mathrm{cross}}+C_q+C_\\theta$ : $C_{\\mathrm{cross}}=b_1^2\\|H_T\\|^2/b_0$ (i) ou $C_N$ (ii) ou le max (iii) ; $C_q$ par régime ; $C_\\theta=c^2\\|a\\|/(4\\theta)=2c^2\\|a\\|C_{tr}/\\rho'$ avec $\\theta=\\rho'/(8C_{tr})$. Constante de bord, payée par la dissipation ; c'est exactement celle de $(24)$, sans agrégation."
     },
     {
      "terme": "$\\rho'$",
@@ -1884,6 +1945,17 @@
      ],
      "bonne": 1,
      "explication": "Traçable ligne à ligne dans l'Annexe E."
+    },
+    {
+     "question": "Quelle formule de $C_N'$ est la bonne ?",
+     "options": [
+      "$C_{\\mathrm{cross}}+\\tfrac12c(1+C_{tr})+\\tfrac12$",
+      "$C_{\\mathrm{cross}}+C_q+C_\\theta$ avec $C_\\theta=c^2\\|a\\|/(4\\theta)$",
+      "$C_{\\mathrm{cross}}$ seul",
+      "$C_\\Phi$"
+     ],
+     "bonne": 1,
+     "explication": "L'ancienne formule de l'Annexe E omettait $C_q$ et $\\|a\\|/\\theta$ et était linéaire en $c$ ; corrigée après le quatrième rapport."
     }
    ]
   },
