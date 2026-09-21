@@ -1,10 +1,10 @@
 {
  "id": "zaremba-preuves",
  "emoji": "📐",
- "titre": "Démonstrations — Article Zaremba (version publiable)",
- "sousTitre": "Tous les théorèmes, lemmes et preuves, dans l'ordre logique",
+ "titre": "Démonstrations — Article Zaremba (manuscrits aux normes)",
+ "sousTitre": "Tous les théorèmes, lemmes et preuves des deux manuscrits (long, n général ; resserré, n = 2)",
  "tagline": "énoncés, preuves à reconstruire, quiz",
- "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat de la version publiable révisée (21 septembre 2026 : orientation N→D, forme divergence, Proposition 3.1 scindée par dimension, potentiel d'arête 𝒦_edge η en n ≥ 3 jusque dans le lemme de compensation, constante C_N′ = C_cross + C_q + C_θ), formule par formule et lemme par lemme, y compris les outils classiques importés, avec un parcours pas à pas au début de chaque chapitre. La version resserrée (n = 2) correspond aux chapitres 1–4, 6–8, 11–14.",
+ "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat des deux manuscrits mis aux normes de rédaction le 21 septembre 2026 — 5_LONGUE_normes (54 pages, n général, potentiel d'arête en n ≥ 3) et 6_RESSERREE_normes (38 pages, autoportant en dimension deux) — formule par formule et lemme par lemme, outils classiques compris, avec un parcours pas à pas par chapitre. Numérotation de référence : celle du manuscrit long (§1 Introduction, §2 Cadre fonctionnel et géométrique, §3 Singularité de Zaremba, §4 Identité de flux d'interface, §5 Criticité, §6 Hypothèses et existence du multiplicateur, §7 Rellich et stabilisation, §8 Exemple, §9 Géométries, §10 Taux et coefficient singulier, §11 Application, §12 Problèmes ouverts ; Annexes A–F). Version resserrée : chapitres 1–4, 6–8, 11–14 ; les chapitres 5, 9, 10 et le cas n ≥ 3 du chapitre 12 y sont renvoyés à la prépublication compagnon.",
  "accent": "#7a3e1d",
  "accentDark": "#4e2611",
  "accentSoft": "#f5ece4",
@@ -58,6 +58,12 @@
    "chapters": [
     14,
     15
+   ]
+  },
+  {
+   "label": "Rédaction",
+   "chapters": [
+    16
    ]
   }
  ],
@@ -916,7 +922,7 @@
      ]
     },
     {
-     "titre": "La convention de signe, une fois pour toutes",
+     "titre": "La convention de signe, de façon définitive",
      "paragraphes": [
       "$\\tau$ est orienté de la face de Neumann vers la face de Dirichlet (orientation de BLM1999). Dans le repère de la preuve ($\\theta=0$ Dirichlet, $\\theta=\\pi$ Neumann), $\\tau=e_1$ et $h_1=\\innerg{H}{\\tau}$. La normale sortante de $\\Om\\setminus T_\\varepsilon$ sur $\\Sigma_\\varepsilon$ est $-e_r$. Un terme de bord est favorable ssi $\\mathcal B\\ge0$, convention ancrée sur la face de Dirichlet : $\\mathcal B_\\mu|_{\\GD}=-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2\\ge0$ sous $q\\le0$.",
       "Le Théorème A donne $\\lim I_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\innerg{H}{\\tau}\\eta^2\\ge0$ sous $\\innerg{H}{\\tau}\\le0$ : favorable. C'est exactement le point sur lequel le premier rapport a bloqué, avec l'orientation inverse."
@@ -961,7 +967,7 @@
     },
     {
      "type": "Remarque 4.4",
-     "nom": "Cohérence avec 1999",
+     "nom": "Cas plat",
      "enonce": "En plat avec $H=m=x-x_0$ : $(3)$ redonne $-\\tfrac\\pi8\\int_\\Gamma(m\\cdot\\tau)\\eta^2$ et $(4)$ est exactement la condition $m\\cdot\\tau\\le0$ de [1], orientation comprise.",
      "depend": []
     }
@@ -997,7 +1003,7 @@
      ]
     },
     {
-     "cible": "Cohérence avec 1999",
+     "cible": "Cas plat",
      "strategie": "Spécialiser $g=\\delta$, $H=m$.",
      "etapes": [
       "$\\innerg{H}{\\tau}=m\\cdot\\tau$, $\\sqrt{\\det A}=1$, les deux lectures coïncident ; la constante $\\kappa=\\pi/8$ est explicite.",
@@ -1377,7 +1383,7 @@
    ],
    "sections": [
     {
-     "titre": "Le verrou géométrique",
+     "titre": "La difficulté géométrique",
      "paragraphes": [
       "On cherche $f\\in C^4$ avec $\\Hessg f\\ge\\rho g$ (Hyp. 1), $\\innerg{\\gradg f}{\\tau}\\le0$ sur $\\Gamma$ (Hyp. 2), $\\innerg{\\gradg f}{\\nu_g}\\le0$ sur $\\GD$ (Hyp. 3), $q=H\\cdot\\nu\\ge0$ sur $\\GN$ (Hyp. 4), la compatibilité feedback–multiplicateur (Hyp. 5, trois régimes) et la domination quantitative $\\rho>C_\\star=\\tfrac12C_P\\|(Lp)_+\\|+\\tfrac12C_{tr}\\|\\dnu^Ap\\|$ (Hyp. 6). Le candidat naturel est $f=\\tfrac12\\dg(\\cdot,x_0)^2$, dont le hessien se compare par la courbure sectionnelle.",
       "Le champ de Killing $K$ ($\\sym\\nabla K=0$) ne change pas $\\sym\\gradg H$ mais tord les composantes de bord : il découple coercivité de volume et signes de bord. C'est le multiplicateur tourné de Cornilleau–Lohéac–Osses, abstrait en champ d'échappement de Yao."
@@ -1802,11 +1808,11 @@
   },
   {
    "numero": 13,
-   "titre": "Théorème C : la fermeture de Lyapunov et le registre des absorptions",
+   "titre": "Théorème C : la fermeture de Lyapunov et le annexe des constantes de fermeture (Annexe E)",
    "objectifs": [
     "Savoir démontrer le bilan de volume $(30)$, l'inégalité $(31)$, l'équivalence $(33)$ et conclure par Gronwall.",
     "Savoir expliquer le cadre de preuve en quatre temps et pourquoi $\\omega=3\\rho'/(8c_2)$ est un demi-taux.",
-    "Savoir reconstituer le registre des absorptions (Annexe E) et situer la variante par compacité–unicité."
+    "Savoir reconstituer le annexe des constantes de fermeture (Annexe E) (Annexe E) et situer la variante par compacité–unicité."
    ],
    "sections": [
     {
@@ -2233,6 +2239,71 @@
      ],
      "bonne": 1,
      "explication": "Le troisième rapport a signalé une lecture non factorisée ; la source était déjà cohérente."
+    }
+   ]
+  },
+  {
+   "numero": 16,
+   "titre": "Rédiger aux normes de la communauté EDP",
+   "objectifs": [
+    "Savoir ce qu'un rapporteur attend d'un manuscrit d'EDP : énoncés propres, preuves sans commentaire, résumé autonome, déclarations.",
+    "Savoir relire son propre texte pour en retirer les marqueurs de réponse aux rapporteurs et les jugements de valeur."
+   ],
+   "sections": [
+    {
+     "titre": "Parcours pas à pas",
+     "paragraphes": [
+      "Pas 1 — Résumé : 120–200 mots, autoportant, aucun renvoi interne (pas de « Annexe E », pas de « galeries »), les objets nommés une fois, le résultat principal en une phrase, l'hypothèse-clé en une autre. Pas 2 — Introduction : cadre, résultat principal, travaux antérieurs, plan ; pas de paragraphe « périmètre » défensif, une phrase sobre sur la portée suffit. Pas 3 — Énoncés : hypothèses numérotées citées par leur numéro, aucun commentaire méta (« cette restriction est constitutive de l'énoncé »), aucune phrase en gras ; ce qui commente l'énoncé va après lui, en prose. Pas 4 — Preuves : étapes numérotées admises ; ni « honnêtement », ni « sans détour », ni « remarquable », ni « illusoire » ; un lemme importé est cité avec son numéro exact. Pas 5 — Titres : descriptifs (« Comptage de puissances »), jamais métaphoriques (« le verrou »). Pas 6 — Fin : déclarations (financement, conflits, données), remerciements aux rapporteurs, bibliographie avec DOI.",
+      "Ce que la mise aux normes ne fait pas : elle ne traduit pas (JMPA et ESAIM:COCV acceptent le français ; SICON, Comm. PDE, JDE non), elle ne choisit pas la classe (amsart/elsarticle) ni le style BibTeX, et elle ne réorganise pas les preuves du §7 — ces trois décisions dépendent de la revue."
+     ],
+     "retenir": [
+      "Un encadré « Mise en garde » devient une remarque numérotée.",
+      "La phrase « aucun argument de continuation unique n'est requis » est vraie, mais c'est une phrase de prose après le théorème, pas une ligne en gras dans l'énoncé.",
+      "Un tableau de constantes (Annexe E) sera probablement contesté : savoir le fondre dans la preuve si on le demande."
+     ]
+    }
+   ],
+   "enonces": [
+    {
+     "type": "Liste de contrôle",
+     "nom": "Relecture avant soumission",
+     "enonce": "(1) Résumé sans renvoi ; (2) aucun \\textbf dans les énoncés ; (3) aucun mot de la liste : honnête, sans détour, sans main levée, remarquable, illusoire, certificat, mode d'emploi ; (4) titres descriptifs ; (5) chaque résultat importé cité avec numéro et DOI ; (6) déclarations présentes ; (7) même orientation de $\\tau$ et même définition de $q=H\\cdot\\nu$ partout ; (8) langue et classe fixées par la revue.",
+     "depend": []
+    }
+   ],
+   "preuves": [],
+   "glossaire": [
+    {
+     "terme": "Déclarations",
+     "definition": "Section finale : financement, conflits d'intérêts, disponibilité des données, remerciements ; exigée par la plupart des revues."
+    },
+    {
+     "terme": "Résumé autoportant",
+     "definition": "Résumé lisible sans le texte : pas de numéro d'équation, d'annexe ou de figure, pas de référence bibliographique numérotée."
+    }
+   ],
+   "quiz": [
+    {
+     "question": "Où doit aller la phrase « aucun argument de continuation unique n'est requis » ?",
+     "options": [
+      "En gras dans l'énoncé du théorème",
+      "Dans le résumé, avec renvoi à l'Annexe E",
+      "En prose, après l'énoncé, avec le renvoi aux hypothèses",
+      "Nulle part"
+     ],
+     "bonne": 2,
+     "explication": "L'énoncé contient les hypothèses et la conclusion ; le commentaire vient après."
+    },
+    {
+     "question": "Quel titre est conforme ?",
+     "options": [
+      "Le comptage de puissances décide de tout",
+      "Comptage de puissances",
+      "Le verrou géométrique",
+      "Ce que la compensation montre, et ce qu'elle ne montre pas"
+     ],
+     "bonne": 1,
+     "explication": "Descriptif, sans métaphore ni promesse."
     }
    ]
   }
