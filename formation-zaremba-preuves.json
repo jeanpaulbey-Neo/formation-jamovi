@@ -1,10 +1,10 @@
 {
  "id": "zaremba-preuves",
  "emoji": "📐",
- "titre": "Démonstrations — Article Zaremba (manuscrits aux normes)",
- "sousTitre": "Tous les théorèmes, lemmes et preuves des deux manuscrits (long, n général ; resserré, n = 2)",
+ "titre": "Démonstrations — Article Zaremba (v18, soumission JMPA)",
+ "sousTitre": "Tous les théorèmes, lemmes et preuves de la version longue v18, dans l'ordre logique",
  "tagline": "énoncés, preuves à reconstruire, quiz",
- "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat des deux manuscrits mis aux normes de rédaction le 21 septembre 2026 — 5_LONGUE_normes (54 pages, n général, potentiel d'arête en n ≥ 3) et 6_RESSERREE_normes (38 pages, autoportant en dimension deux) — formule par formule et lemme par lemme, outils classiques compris, avec un parcours pas à pas par chapitre. Numérotation de référence : celle du manuscrit long (§1 Introduction, §2 Cadre fonctionnel et géométrique, §3 Singularité de Zaremba, §4 Identité de flux d'interface, §5 Criticité, §6 Hypothèses et existence du multiplicateur, §7 Rellich et stabilisation, §8 Exemple, §9 Géométries, §10 Taux et coefficient singulier, §11 Application, §12 Problèmes ouverts ; Annexes A–F). Version resserrée : chapitres 1–4, 6–8, 11–14 ; les chapitres 5, 9, 10 et le cas n ≥ 3 du chapitre 12 y sont renvoyés à la prépublication compagnon. Niveau : les preuves marquées « Preuve complète » énoncent leurs hypothèses, suivent chaque formule et nomment chaque constante (outils du chapitre 1, cadre fonctionnel, Lemme 4.2, lemme bilinéaire, Théorème A, tangence forcée, fenêtre de Neumann, excision, bilan de volume, Théorème C, coercivité et Hyp. 6 de l'exemple) ; les autres sont des esquisses détaillées, signalées comme telles.",
+ "intro": "Objectif : savoir démontrer, sans le texte sous les yeux, chaque résultat du manuscrit long 33_LONGUE_v18_JMPA (66 pages, 23 septembre 2026, version soumise aux Journal de Mathématiques Pures et Appliquées ; traduction anglaise EN_v18 alignée) — formule par formule et lemme par lemme, outils classiques compris, avec un parcours pas à pas par chapitre. Numérotation de référence : celle de la v18 (Théorème A = identité de flux, Proposition 1.1 = trichotomie, Théorème B = décroissance exponentielle ; §1 Introduction, §2 Cadre, §3 Singularité de Zaremba, §4 Identité de flux, §5 Criticité, §6 Hypothèses (H1)–(H6) et existence du multiplicateur, §7 Rellich et stabilisation, §8 Exemple : le disque à arc de Dirichlet, §9 Géométries, §10 Taux et coefficient singulier, §11 Application, §12 Problèmes ouverts ; Annexes A–F, équations (D.1)–(D.3)). Changements depuis la tuile du 21 septembre : le demi-disque conforme est remplacé par le disque à arc de Dirichlet avec pôle extérieur $x_0=(1/\\cos\\alpha_0,0)$ (chapitre 15) ; la dimension $n\\ge3$ passe par le potentiel intrinsèque $\\mathcal K_\\Gamma\\eta$ et l'hypothèse (H$_{\\mathrm{edge}}$) établie depuis Dines–Harutjunjan–Schulze, avec Costabel–Dauge en seconde source (chapitre 5) ; le Lemme 7.2 d'intégrabilité jusqu'à l'arête rend le Théorème B valable en toute dimension sous (H5) (chapitre 12) ; la Conjecture 10.3 devient une Question. Niveau : les preuves marquées « Preuve complète » énoncent leurs hypothèses, suivent chaque formule et nomment chaque constante ; les autres sont des esquisses détaillées, signalées comme telles.",
  "accent": "#7a3e1d",
  "accentDark": "#4e2611",
  "accentSoft": "#f5ece4",
@@ -46,7 +46,7 @@
    ]
   },
   {
-   "label": "Théorème C",
+   "label": "Théorème B",
    "chapters": [
     11,
     12,
@@ -79,7 +79,7 @@
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Chaque preuve de l'article s'appuie sur une poignée d'outils génériques. Les voici dans l'ordre où ils apparaissent : (1) Green et traces (§2, cadre) ; (2) Lax–Milgram et Lumer–Phillips (générateur) ; (3) Young (toutes les absorptions du §7) ; (4) Poincaré et trace $L^2(\\GN)$ (Hyp. 6, bilan de volume) ; (5) Hardy 1D fibré (Lemme 7.2, Prop. 10.1, poids d'énergie $K^1_0$) ; (6) Wirtinger (exemple conforme) ; (7) Parseval–Mellin et résidus (Annexe B) ; (8) comparaison de Riccati et Cartan–Hadamard (Hyp. 1) ; (9) Gronwall (Théorème C) et Komornik (variante).",
+      "Chaque preuve de l'article s'appuie sur une poignée d'outils génériques. Les voici dans l'ordre où ils apparaissent : (1) Green et traces (§2, cadre) ; (2) Lax–Milgram et Lumer–Phillips (générateur) ; (3) Young (toutes les absorptions du §7) ; (4) Poincaré et trace $L^2(\\GN)$ (Hyp. 6, bilan de volume) ; (5) Hardy 1D fibré (Lemme 7.4, Prop. 10.1, poids d'énergie $K^1_0$) ; (6) Wirtinger (outil de réserve : la v18 n'en a plus besoin, la Prop. 8.4 passant par Poincaré sur les rayons) ; (7) Parseval–Mellin et résidus (Annexe B) ; (8) comparaison de Riccati et Cartan–Hadamard (Hyp. 1) ; (9) Gronwall (Théorème B) et Komornik (variante).",
       "Pour chaque outil : énoncé exact, preuve courte, puis « où » dans l'article. Ne passe au chapitre suivant que lorsque tu peux refaire les neuf sans notes."
      ],
      "retenir": [
@@ -128,7 +128,7 @@
     {
      "type": "Outil 7",
      "nom": "Wirtinger sur $(0,\\pi)$",
-     "enonce": "Pour $u\\in H^1(0,\\pi)$ avec $u(0)=0$ : $\\int_0^\\pi u^2\\le4\\int_0^\\pi(u')^2$ (valeur propre $\\tfrac14$ du problème mêlé $u(0)=0$, $u'(\\pi)=0$).",
+     "enonce": "Pour $u\\in H^1(0,\\pi)$ avec $u(0)=0$ : $\\int_0^\\pi u^2\\le4\\int_0^\\pi(u')^2$ (valeur propre $\\tfrac14$ du problème mêlé $u(0)=0$, $u'(\\pi)=0$). (Outil de réserve en v18 : non consommé.)",
      "depend": []
     },
     {
@@ -200,7 +200,7 @@
       "Poincaré par l'absurde : sinon il existe $u_k\\in H^1_{\\GD}$ avec $\\|u_k\\|_{L^2}=1$, $\\|\\nabla u_k\\|\\to0$ ; $(u_k)$ bornée dans $H^1$, Rellich donne $u_k\\to u$ dans $L^2$ (sous-suite) ; $\\nabla u_k\\to0$ dans $L^2$ donc $u\\in H^1$, $\\nabla u=0$, $u$ constante (connexité), $\\|u\\|=1$ ; la trace est continue $H^1\\to L^2(\\partial\\Om)$ donc $u|_{\\GD}=\\lim u_k|_{\\GD}=0$, ce qui force la constante à $0$ : contradiction.",
       "Passage à la norme $A$ : $\\alpha_0|\\nabla u|^2\\le\\nabla u\\cdot A\\nabla u$, d'où $\\|u\\|^2_{L^2}\\le C_P^{(0)}\\|\\nabla u\\|^2\\le(C_P^{(0)}/\\alpha_0)\\|\\nabla u\\|^2_A=:C_P\\|\\nabla u\\|^2_A$.",
       "Trace : $\\|u\\|_{L^2(\\GN)}\\le\\|\\gamma_0\\|\\,\\|u\\|_{H^1}\\le\\|\\gamma_0\\|(1+C_P)^{1/2}\\|\\nabla u\\|_{A}$ ; donc $C_{tr}=\\|\\gamma_0\\|^2(1+C_P)$.",
-      "Calcul explicite sur le demi-disque (Prop. 8.5) : $\\int_{r=1}u^2\\,d\\sigma=\\int_\\Om\\operatorname{div}(xu^2)$ car $x\\cdot n=0$ sur les deux axes ; $\\operatorname{div}(xu^2)=2u^2+2u\\,x\\cdot\\nabla u$, $|x|\\le1$ : $\\int_{\\text{arc}}u^2\\le2\\|u\\|^2+2\\|u\\|\\|\\nabla u\\|\\le(2C_P^{(0)}+2\\sqrt{C_P^{(0)}})\\|\\nabla u\\|^2\\le12\\|\\nabla u\\|^2$ avec $C_P^{(0)}\\le4$ (Wirtinger)."
+      "Calcul explicite sur le disque à arc de Dirichlet (Prop. 8.4) : $\\int_{\\partial\\Om}u^2\\,d\\sigma=\\int_\\Om\\operatorname{div}(xu^2)$ car $x\\cdot n=0$ sur les deux axes ; $\\operatorname{div}(xu^2)=2u^2+2u\\,x\\cdot\\nabla u$, $|x|\\le1$ : $\\int_{\\text{arc}}u^2\\le2\\|u\\|^2+2\\|u\\|\\|\\nabla u\\|\\le(2C_P^{(0)}+2\\sqrt{C_P^{(0)}})\\|\\nabla u\\|^2\\le12\\|\\nabla u\\|^2$ avec $C_P^{(0)}\\le4$ (Wirtinger)."
      ]
     },
     {
@@ -211,7 +211,7 @@
       "Intégral, régularisation : soit $\\varepsilon\\in(0,\\delta)$ ; $\\int_\\varepsilon^\\delta f^2/r^2=[-f^2/r]_\\varepsilon^\\delta+\\int_\\varepsilon^\\delta2ff'/r\\le f(\\varepsilon)^2/\\varepsilon+2(\\int_\\varepsilon^\\delta f^2/r^2)^{1/2}\\|f'\\|$ ; par le ponctuel $f(\\varepsilon)^2/\\varepsilon\\le\\int_0^\\varepsilon(f')^2\\to0$.",
       "Posons $X=(\\int_\\varepsilon^\\delta f^2/r^2)^{1/2}$ : $X^2\\le o(1)+2X\\|f'\\|$, donc $X\\le\\|f'\\|+\\sqrt{\\|f'\\|^2+o(1)}$ ; à la limite $\\varepsilon\\to0$ (monotone), $\\int_0^\\delta f^2/r^2\\le4\\|f'\\|^2$.",
       "Version fibrée : pour $f(r,s)$ avec $f(0,s)=0$ p.p. en $s$, intégrer les deux inégalités en $s\\in\\Gamma$ : $\\int\\!\\!\\int f^2/r^2\\le4\\|\\partial_rf\\|^2_{L^2}$ et $\\|f(r,\\cdot)\\|_{L^2(\\Gamma)}\\le r^{1/2}\\|\\partial_rf\\|_{L^2((0,\\delta)\\times\\Gamma)}$.",
-      "Où : Lemme 7.2 (blocs mixtes, avec $f=u_R,(u_R)_t$ ou $w,w_t$ nulles sur $\\Gamma$) ; Prop. 10.1 (contamination) ; B.0(f) : $u\\in H^1$ nulle sur $\\GD$ donne $\\int|u|^2\\,dr/r\\cdot r^{-2}\\cdot r\\dots$, soit $u\\in K^1_0$."
+      "Où : Lemme 7.4 (blocs mixtes, avec $f=u_R,(u_R)_t$ ou $w,w_t$ nulles sur $\\Gamma$) ; Prop. 10.1 (contamination) ; B.0(f) : $u\\in H^1$ nulle sur $\\GD$ donne $\\int|u|^2\\,dr/r\\cdot r^{-2}\\cdot r\\dots$, soit $u\\in K^1_0$."
      ]
     },
     {
@@ -221,7 +221,7 @@
       "Le problème de Sturm–Liouville $-\\varphi''=\\lambda\\varphi$, $\\varphi(0)=0$, $\\varphi'(\\pi)=0$ est régulier et auto-adjoint ; ses fonctions propres $\\varphi_k(\\theta)=\\sin((k+\\tfrac12)\\theta)$, $k\\ge0$, de valeurs propres $(k+\\tfrac12)^2$, forment une base hilbertienne de $L^2(0,\\pi)$ (à la normalisation $\\sqrt{2/\\pi}$ près).",
       "Pour $u(0)=0$ dans $H^1$, développons $u=\\sum c_k\\varphi_k$ ; alors $u'=\\sum c_k(k+\\tfrac12)\\cos((k+\\tfrac12)\\theta)$ et $\\{\\cos((k+\\tfrac12)\\theta)\\}$ est orthogonale de même norme : $\\int_0^\\pi(u')^2=\\tfrac\\pi2\\sum(k+\\tfrac12)^2c_k^2\\ge\\tfrac14\\cdot\\tfrac\\pi2\\sum c_k^2=\\tfrac14\\int_0^\\pi u^2$.",
       "La condition $u'(\\pi)=0$ n'est pas requise : la formule $\\int(u')^2=\\tfrac\\pi2\\sum(k+\\tfrac12)^2c_k^2$ vaut pour tout $u\\in H^1$ nul en $0$, par densité des combinaisons finies (elles sont denses dans $\\{u\\in H^1:u(0)=0\\}$ pour la norme $H^1$).",
-      "Conséquence (Prop. 8.5) : $\\int_\\Om u^2\\,dx=\\int_0^1\\int_0^\\pi u^2\\,d\\theta\\,r\\,dr\\le4\\int_0^1\\int_0^\\pi(\\partial_\\theta u)^2\\,d\\theta\\,r\\,dr\\le4\\int_\\Om|\\nabla u|^2$ car $(\\partial_\\theta u)^2\\le r^2|\\nabla u|^2\\le|\\nabla u|^2$ pour $r\\le1$ : $C_P^{(0)}\\le4$."
+      "Conséquence (sur le demi-disque de l'ancien exemple ; en v18, la Prop. 8.4 obtient $C_P^{(0)}$ par Poincaré le long des rayons issus de $x_0$, et Wirtinger n'est plus consommé) : $\\int_\\Om u^2\\,dx=\\int_0^1\\int_0^\\pi u^2\\,d\\theta\\,r\\,dr\\le4\\int_0^1\\int_0^\\pi(\\partial_\\theta u)^2\\,d\\theta\\,r\\,dr\\le4\\int_\\Om|\\nabla u|^2$ car $(\\partial_\\theta u)^2\\le r^2|\\nabla u|^2\\le|\\nabla u|^2$ pour $r\\le1$ : $C_P^{(0)}\\le4$."
      ]
     },
     {
@@ -233,7 +233,7 @@
       "Dérivation : $r\\partial_r=-\\partial_x$ ; $\\widehat{r\\partial_rv}(\\lambda)=\\int e^{\\lambda x}(-\\partial_x)v(e^{-x})dx=\\lambda\\widehat v(\\lambda)$ après intégration par parties (termes de bord nuls pour $v$ dans l'espace pondéré). Donc $\\widehat{r^2\\Delta_0v}=\\mathcal L(\\lambda)\\widehat v$ avec $\\mathcal L(\\lambda)=\\partial_{\\theta\\theta}+\\lambda^2$ (car $r^2\\Delta_0=(r\\partial_r)^2+\\partial_{\\theta\\theta}$).",
       "Inversion : $v(r)=\\tfrac1{2\\pi i}\\int_{\\Re\\lambda=\\beta}r^\\lambda\\widehat v(\\lambda)d\\lambda$ (Fourier inverse en $x$).",
       "Résidus : si $\\widehat v$ est méromorphe dans la bande $\\beta_0<\\Re\\lambda<\\beta_1$, holomorphe sur les deux droites, et $|\\widehat v(\\lambda)|\\to0$ uniformément quand $|\\Im\\lambda|\\to\\infty$ dans la bande (ce que donne la borne de résolvante $\\|\\mathcal L(\\lambda)^{-1}\\|\\le C/(1+|\\lambda|^2)$), alors, sur le rectangle $[\\beta_0,\\beta_1]\\times[-T,T]$ et $T\\to\\infty$ : $\\tfrac1{2\\pi i}\\int_{\\Re\\lambda=\\beta_1}-\\tfrac1{2\\pi i}\\int_{\\Re\\lambda=\\beta_0}=\\sum_{\\text{pôles}}\\operatorname{Res}(r^\\lambda\\widehat v)$ (contour orienté positivement : droite $\\beta_1$ montante, droite $\\beta_0$ descendante). Un pôle simple $c_k/(\\lambda-\\lambda_k)$ contribue $c_kr^{\\lambda_k}$ ; un pôle double $d/(\\lambda-\\lambda_k)^2$ contribue $d\\,r^{\\lambda_k}\\log r$ (dérivée de $r^\\lambda$ en $\\lambda$).",
-      "Où : Lemme B.1 (inversion sur une droite, décalage), Lemme de résonance (pôle double), Théorème B.2 (montée en poids)."
+      "Où : Lemme B.1 (inversion sur une droite, décalage), Lemme de résonance (pôle double), Théorème B.3 (montée en poids)."
      ]
     },
     {
@@ -254,7 +254,7 @@
       "Gronwall : $(e^{ct}L)'=e^{ct}(L'+cL)\\le0$ p.p., donc $e^{ct}L(t)\\le L(0)$.",
       "Komornik, étape 1 : $\\Psi(t):=\\int_t^\\infty E$ est décroissante, absolument continue, $\\Psi'=-E\\le-\\Psi/T_0$ ; Gronwall donne $\\Psi(t)\\le\\Psi(0)e^{-t/T_0}\\le T_0E(0)e^{-t/T_0}$.",
       "Étape 2 : pour $t\\ge T_0$, la décroissance de $E$ donne $T_0E(t)\\le\\int_{t-T_0}^tE\\le\\Psi(t-T_0)\\le T_0E(0)e^{-(t-T_0)/T_0}$, soit $E(t)\\le E(0)e^{1-t/T_0}$.",
-      "Où : Gronwall sur $L=NE+\\Phi$ (Théorème C) ; Komornik pour la variante par compacité–unicité (Remarque 7.6), où l'on dispose d'une observabilité $\\int_0^TE\\le C(E(0)+E(T))+C\\int\\!\\!\\int au_t^2$ et non d'une inégalité différentielle."
+      "Où : Gronwall sur $L=NE+\\Phi$ (Théorème B) ; Komornik pour la variante par compacité–unicité (Remarque 7.8), où l'on dispose d'une observabilité $\\int_0^TE\\le C(E(0)+E(T))+C\\int\\!\\!\\int au_t^2$ et non d'une inégalité différentielle."
      ]
     }
    ],
@@ -265,12 +265,12 @@
     },
     {
      "terme": "$C_P$, $C_{tr}$",
-     "definition": "Constantes de Poincaré et de trace de $H^1_{\\GD}$ pour la norme $|\\nabla\\cdot|_A$ ; explicites sur le demi-disque : $4e^\\beta$, $28e^\\beta$."
+     "definition": "Constantes de Poincaré et de trace de $H^1_{\\GD}$ pour la norme $|\\nabla\\cdot|_A$ ; explicites sur le disque à arc de Dirichlet (Prop. 8.4) : $C_P\\le e^{\\beta\\rho_+^2}\\tfrac{4(1+\\cos\\alpha_0)}{1-\\cos\\alpha_0}$, $C_{\\mathrm{tr}}\\le e^{\\beta\\rho_+^2}(2C_P^{(0)}+2\\sqrt{C_P^{(0)}})$."
     }
    ],
    "quiz": [
     {
-     "question": "Quelle inégalité contrôle les blocs mixtes du Lemme 7.2 ?",
+     "question": "Quelle inégalité contrôle les blocs mixtes du Lemme 7.4 ?",
      "options": [
       "Poincaré",
       "Hardy 1D fibré, grâce à $u_R|_\\Gamma=0$",
@@ -283,8 +283,8 @@
     {
      "question": "Le lemme de Komornik sert :",
      "options": [
-      "Au Théorème C",
-      "À la variante par compacité–unicité (Remarque 7.6)",
+      "Au Théorème B",
+      "À la variante par compacité–unicité (Remarque 7.8)",
       "Au Théorème A",
       "À l'exemple conforme"
      ],
@@ -305,7 +305,7 @@
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Pas 1 : écrire $(6)$ et vérifier que $\\gradg u=A\\nabla u$ (composantes $g^{ij}\\partial_ju$, $g^{ij}=A^{ij}$), donc $|\\gradg u|^2_g=g_{ij}(A\\nabla u)^i(A\\nabla u)^j=\\nabla u\\cdot A\\nabla u$. Pas 2 : Lemme 2.1, formule par formule, en contrôlant chaque fois sur $g=c^2\\delta$. Pas 3 : Bochner (Lemme 2.2) en coordonnées, puis symétrisation. Pas 4 : dissipation. Pas 5 : générateur, domaine, maximalité. Pas 6 : relèvement de Neumann, seul point non standard.",
+      "Pas 1 : écrire $(7)$ et vérifier que $\\gradg u=A\\nabla u$ (composantes $g^{ij}\\partial_ju$, $g^{ij}=A^{ij}$), donc $|\\gradg u|^2_g=g_{ij}(A\\nabla u)^i(A\\nabla u)^j=\\nabla u\\cdot A\\nabla u$. Pas 2 : Lemme 2.1, formule par formule, en contrôlant chaque fois sur $g=c^2\\delta$. Pas 3 : Bochner (Lemme 2.2) en coordonnées, puis symétrisation. Pas 4 : dissipation. Pas 5 : générateur, domaine, maximalité. Pas 6 : relèvement de Neumann, seul point non standard.",
       "Contrôle final : sur le demi-disque plat, $A=I$, retrouver $E'=-\\int_{\\GN}au_t^2$ et $D(\\A)$ de Komornik–Zuazua."
      ],
      "retenir": [
@@ -327,7 +327,7 @@
    ],
    "enonces": [
     {
-     "type": "(6)–(9)",
+     "type": "(7)–(10)",
      "nom": "Le système et son énergie",
      "enonce": "$u_{tt}-\\operatorname{div}(A\\nabla u)=0$ dans $\\Om\\times(0,\\infty)$, $u=0$ sur $\\GD$, $\\dnu^Au=-a(x)u_t$ sur $\\GN$ ($a\\in C^1$, $a\\ge0$), données $(u_0,u_1)$ ; $E(t)=\\tfrac12\\int_\\Om(u_t^2+|\\gradg u|_g^2)\\mathrm dx$ avec $|\\gradg u|^2_g=\\nabla u\\cdot A\\nabla u$.",
      "depend": []
@@ -345,7 +345,7 @@
      "depend": []
     },
     {
-     "type": "Lemme 2.3",
+     "type": "Lemme 2.4",
      "nom": "Dissipation",
      "enonce": "Pour toute solution régulière, $E'(t)=-\\int_{\\GN}a\\,u_t^2\\,\\mathrm d\\sigma\\le0$, avec $E=\\tfrac12\\int_\\Om(u_t^2+|\\nabla u|_A^2)$.",
      "depend": []
@@ -416,7 +416,7 @@
       "Prolongement : $\\GN$ est un ouvert relatif de $\\partial\\Om$ à bord lisse ($\\Gamma$) ; il existe un opérateur de prolongement continu $\\mathcal E:H^{1/2}(\\GN)\\to H^{1/2}(\\partial\\Om)$ (réflexion à travers $\\Gamma$ en cartes locales). Posons $\\tilde h=\\mathcal Eh$.",
       "Relèvement à deux traces : pour $\\partial\\Om\\in C^2$, l'application $Z\\mapsto(Z|_{\\partial\\Om},\\dnu^AZ)$ est continue et surjective de $H^2(\\Om)$ sur $H^{3/2}(\\partial\\Om)\\times H^{1/2}(\\partial\\Om)$ (Grisvard, Th. 1.5.1.2, pour $\\partial_\\nu$ ; pour $\\dnu^A=\\nu\\cdot A\\nu\\,\\partial_\\nu+$ termes tangentiels d'ordre un, on résout d'abord la trace tangentielle puis divise par $\\nu\\cdot A\\nu\\ge\\alpha_0$, la partie tangentielle de $A\\nabla Z\\cdot\\nu$ étant déterminée par $Z|_{\\partial\\Om}$). Choisir $Z$ avec $Z|_{\\partial\\Om}=0$, $\\dnu^AZ=\\tilde h$, $\\|Z\\|_{H^2}\\le C\\|\\tilde h\\|_{H^{1/2}}$ ; tronquer par $\\chi Z$ avec $\\chi\\equiv1$ près de $\\Gamma$ (toujours $H^2$, traces inchangées près de $\\Gamma$).",
       "$v:=u-Z$ : $v\\in H^1$, $v|_{\\GD}=0-0=0$, $Lv=Lu-LZ\\in L^2$ (car $Z\\in H^2$), et sur $\\GN$ près de $\\Gamma$ : $\\dnu^Av=\\dnu^Au-\\tilde h=-au_t-h=0$. Donc $v$ est de classe de graphe avec conditions mêlées \\emph{homogènes} au voisinage de $\\Gamma$ : la Proposition 3.1 s'applique à $v$ : $v=\\eta S+v_R$.",
-      "Retour à $u$ : $u=\\eta S+(v_R+Z)$ avec $v_R+Z\\in H^2$. Par unicité de la décomposition (l'espace $H^2$ ne contient pas $S$, cf. Lemme 3.6), le coefficient $\\eta$ de $u$ est celui de $v$, et $\\|\\eta\\|+\\|v_R+Z\\|_{H^2}\\le C(\\|v\\|_{H^1}+\\|Lv\\|)+C\\|Z\\|_{H^2}\\le C(\\|u\\|_{H^1}+\\|Lu\\|+\\|u_t\\|_{H^1})$ : estimation de graphe pour la solution dynamique."
+      "Retour à $u$ : $u=\\eta S+(v_R+Z)$ avec $v_R+Z\\in H^2$. Par unicité de la décomposition (l'espace $H^2$ ne contient pas $S$, cf. Lemme 3.7), le coefficient $\\eta$ de $u$ est celui de $v$, et $\\|\\eta\\|+\\|v_R+Z\\|_{H^2}\\le C(\\|v\\|_{H^1}+\\|Lv\\|)+C\\|Z\\|_{H^2}\\le C(\\|u\\|_{H^1}+\\|Lu\\|+\\|u_t\\|_{H^1})$ : estimation de graphe pour la solution dynamique."
      ]
     }
    ],
@@ -476,13 +476,13 @@
    "objectifs": [
     "Savoir calculer le gradient du mode de Shamir et situer $S$ dans l'échelle de Sobolev.",
     "Savoir énoncer la Proposition 3.1 sous ses deux formes : $\\eta S+u_R$ ($n=2$) et $\\mathcal K_{\\mathrm{edge}}\\eta+w$ ($n\\ge3$).",
-    "Savoir démontrer la propagation temporelle de la structure asymptotique (Proposition 3.3)."
+    "Savoir démontrer la propagation temporelle de la structure asymptotique (Proposition 3.4)."
    ],
    "sections": [
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Pas 1 : coordonnées $(s,r,\\theta)$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ $(10)$. Pas 2 : $S=\\operatorname{Im}z^{1/2}$ $(11)$ ; vérifier $\\Delta S=0$, $S|_{\\theta=0}=0$, $\\partial_\\theta S|_{\\theta=\\pi}=\\tfrac12r^{1/2}\\cos(\\pi/2)=0$. Pas 3 : gradient $(12)$. Pas 4 : énoncer les deux niveaux de la Proposition 3.1 et, pour $n\\ge3$, la forme $\\mathcal K_{\\mathrm{edge}}\\eta+w$. Pas 5 : propagation temporelle, en repérant où $D(\\A^2)$ est nécessaire. Pas 6 : Lemme B.11 (bornes uniformes en $t$)."
+      "Pas 1 : coordonnées $(s,r,\\theta)$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ $(12)$. Pas 2 : $S=\\operatorname{Im}z^{1/2}$ $(13)$ ; vérifier $\\Delta S=0$, $S|_{\\theta=0}=0$, $\\partial_\\theta S|_{\\theta=\\pi}=\\tfrac12r^{1/2}\\cos(\\pi/2)=0$. Pas 3 : gradient $(15)$. Pas 4 : énoncer les deux niveaux de la Proposition 3.1 et, pour $n\\ge3$, la forme $\\mathcal K_{\\mathrm{edge}}\\eta+w$. Pas 5 : propagation temporelle, en repérant où $D(\\A^2)$ est nécessaire. Pas 6 : Lemme B.19 (bornes uniformes en $t$)."
      ],
      "retenir": [
       "$S$ résout le Zaremba plat exactement ; pour $L$ général, $LS=O(r^{-1/2})$ et la correction est $H^2$."
@@ -496,14 +496,14 @@
      ],
      "retenir": [
       "$|\\gradg S|^2=1/(4r)$ : intégrable, mais $\\nabla^2S\\sim r^{-3/2}\\notin L^2$.",
-      "Le second niveau n'est consommé qu'au Lemme 7.2 et à la Proposition 7.4, en dimension deux.",
+      "Le second niveau n'est consommé qu'au Lemme 7.4 et à la Proposition 7.6, en dimension deux.",
       "Le coefficient $\\eta$ n'est pas une fonctionnelle $H^1$-bornée : la topologie d'usage est celle du graphe."
      ]
     }
    ],
    "enonces": [
     {
-     "type": "Lemme 3.6",
+     "type": "Lemme 3.7",
      "nom": "Gradient et défaut de régularité",
      "enonce": "$\\gradg S=\\tfrac12r^{-1/2}(\\sin(\\theta/2)e_r+\\cos(\\theta/2)e_\\theta)$, $|\\gradg S|^2=1/(4r)$ ; $S\\in H^{3/2-\\delta}\\setminus H^{3/2}$ pour tout $\\delta>0$.",
      "depend": []
@@ -511,21 +511,21 @@
     {
      "type": "Proposition 3.1",
      "nom": "Décomposition d'arête",
-     "enonce": "Deux alinéas autonomes. (a) $n=2$ (démontré, Théorème B.2) : $u=\\eta S+u_R$, $u_R\\in H^2$ près de $\\Gamma$, $\\eta$ scalaire en chaque point de $\\Gamma$ ; second niveau sous $Lu\\in K^0_0$ : $u=\\eta S+u_\\flat+u_R$, $u_\\flat=c\\,r^{3/2}(a+b\\log r)\\varphi_1$, $u_R\\in K^2_2$. (b) $n\\ge3$ (emprunté à [29]) : $u=\\mathcal K_{\\mathrm{edge}}\\eta+w$, $\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{[\\zeta]\\tilde c_0\\sin(\\theta/2)(r[\\zeta])^{1/2}\\omega(r[\\zeta])\\}$, $\\eta=\\mathcal F^{-1}([\\zeta]^{3/2}\\tilde c_0)\\in H^{1/2}(\\Gamma)$, $w\\in H^2$ ; opérateur continu pour la norme du graphe dans les deux cas. Chaque énoncé qui consomme la décomposition (Théorème A, Lemme 7.2, C.3) est écrit dans les deux lectures.",
+     "enonce": "Deux alinéas autonomes. (a) $n=2$ (démontré, Théorème B.3) : $u=\\eta S+u_R$, $u_R\\in H^2$ près de $\\Gamma$, $\\eta$ scalaire en chaque point de $\\Gamma$ ; second niveau sous $Lu\\in K^0_0$ : $u=\\eta S+u_\\flat+u_R$, $u_\\flat=c\\,r^{3/2}(a+b\\log r)\\varphi_1$, $u_R\\in K^2_2$. (b) $n\\ge3$ (emprunté à [44]) : $u=\\mathcal K_{\\mathrm{edge}}\\eta+w$, $\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{[\\zeta]\\tilde c_0\\sin(\\theta/2)(r[\\zeta])^{1/2}\\omega(r[\\zeta])\\}$, $\\eta=\\mathcal F^{-1}([\\zeta]^{3/2}\\tilde c_0)\\in H^{1/2}(\\Gamma)$, $w\\in H^2$ ; opérateur continu pour la norme du graphe dans les deux cas. Chaque énoncé qui consomme la décomposition (Théorème A, Lemme 7.4, C.3) est écrit dans les deux lectures.",
      "depend": [
-      "Théorème B.2",
-      "Lemme B.6",
+      "Théorème B.3",
+      "Lemme B.13",
       "Espaces de Kondrat'ev"
      ]
     },
     {
-     "type": "Proposition 3.3",
+     "type": "Proposition 3.4",
      "nom": "Propagation temporelle",
      "enonce": "Pour $(u_0,u_1)\\in D(\\A)$ : $u\\in C^0([0,T];D(\\A))\\cap C^1([0,T];\\HH)$, la Proposition 3.1 s'applique à chaque instant, $t\\mapsto(u_R,\\eta,u_\\flat)$ est continue ; pour $D(\\A^2)$, $u_t=(u_R)_t+\\eta_tS+(u_\\flat)_t$.",
      "depend": []
     },
     {
-     "type": "Lemme B.11",
+     "type": "Lemme B.19",
      "nom": "Domaine du générateur, décomposition et évolution",
      "enonce": "$\\sup_{[0,T]}(\\|u_R\\|_{H^2_{loc}}+\\|\\eta\\|_{H^{1/2}(\\Gamma)})\\le C(E(0)+E_1(0))^{1/2}$ pour $(u_0,u_1)\\in D(\\A)$ ; borne analogue au second niveau avec $E_2(0)$, constantes indépendantes de $T$.",
      "depend": []
@@ -554,7 +554,7 @@
      "cible": "Domaine du générateur, décomposition et évolution",
      "strategie": "Esquisse détaillée (à porter au niveau complet). Borne elliptique à $t$ fixé + décroissance des énergies $E,E_1,E_2$ le long du flot.",
      "etapes": [
-      "À $t$ fixé, $\\|u_R(t)\\|+\\|\\eta(t)\\|\\le C(\\|u(t)\\|_{H^1}+\\|u_{tt}(t)\\|_{L^2})$ (Théorème B.2 / Lemme B.6).",
+      "À $t$ fixé, $\\|u_R(t)\\|+\\|\\eta(t)\\|\\le C(\\|u(t)\\|_{H^1}+\\|u_{tt}(t)\\|_{L^2})$ (Théorème B.3 / Lemme B.13).",
       "$\\|u_{tt}\\|^2_{L^2}\\le2E_1(t)$ ; $E$ et $E_1$ décroissent (système et système dérivé, licite sous $D(\\A)$) : dominer par les valeurs initiales."
      ]
     }
@@ -626,7 +626,7 @@
    "objectifs": [
     "Savoir manipuler les espaces $K^\\ell_\\beta$ (six faits de B.0) et la transformée de Mellin.",
     "Savoir calculer le spectre complet $\\mathbb Z+\\tfrac12$ du faisceau et démontrer le gain de régularité (Lemme B.1).",
-    "Savoir démontrer le critère de résonance logarithmique et le Théorème B.2 avec sa localisation."
+    "Savoir démontrer le critère de résonance logarithmique et le Théorème B.3 avec sa localisation."
    ],
    "sections": [
     {
@@ -664,7 +664,7 @@
      "depend": []
     },
     {
-     "type": "Théorème B.2",
+     "type": "Théorème B.3",
      "nom": "Régularité pondérée du reste, $n=2$",
      "enonce": "Pour $\\partial\\Om\\in C^2$, $A\\in C^\\infty$, $\\Gamma=\\{P\\}$, $\\alpha=\\pi$ : sur $T_{r_1}$, $u=\\eta S+u_R$, $u_R\\in K^2_1\\subset H^2$, $|\\eta|+\\|u_R\\|_{K^2_1}\\le C(\\|u\\|_{H^1}+\\|Lu\\|_{L^2})$ ; second niveau sous $Lu\\in K^0_0$.",
      "depend": [
@@ -674,7 +674,7 @@
      ]
     },
     {
-     "type": "Lemme B.10",
+     "type": "Lemme B.18",
      "nom": "Stabilité des exposants",
      "enonce": "Le faisceau de Mellin de $L=\\operatorname{div}(A\\nabla\\cdot)$ le long de $\\Gamma$ est celui du modèle gelé : mêmes $\\lambda_k$, mêmes $\\varphi_k$, mêmes bornes de résolvante.",
      "depend": []
@@ -772,7 +772,7 @@
      "explication": "Un pôle simple donne $r^{3/2}\\varphi_1$ ; le logarithme exige un pôle double."
     },
     {
-     "question": "Pourquoi la troncature $\\chi$ est-elle prise radiale dans la preuve du Théorème B.2 ?",
+     "question": "Pourquoi la troncature $\\chi$ est-elle prise radiale dans la preuve du Théorème B.3 ?",
      "options": [
       "Pour que $\\chi u\\in L^2$",
       "Pour que $\\nabla\\chi$ soit tangent aux faces, donc $\\dnu^A(\\chi u)=\\chi\\dnu^Au$ : les conditions mêlées sont préservées",
@@ -799,15 +799,27 @@
    "numero": 5,
    "titre": "L'entrée elliptique en dimension $n\\ge3$ : calcul d'arête",
    "objectifs": [
-    "Savoir lire les énoncés de Dines–Harutjunjan–Schulze utilisés (Th. 3, 13, 16, 30, Cor. 15, 17) avec leurs hypothèses.",
-    "Savoir démontrer les trois compléments : absence de conditions d'interface au poids $1$ (B.5), traduction du reste (B.6), transport à $\\operatorname{div}(A\\nabla\\cdot)$ (B.7).",
-    "Savoir expliquer pourquoi le flux du potentiel $\\mathcal K_{\\mathrm{edge}}\\eta$ a la même limite que celui de $\\eta S$."
+    "Savoir citer, avec leurs numéros, les trois énoncés de Dines–Harutjunjan–Schulze [44] consommés (Th. 3, 13, Cor. 15 ; Th. 16, Cor. 17, Th. 30, Rem. 31) et la convention de poids $\\gamma_{\\mathrm{DHS}}=\\beta+1$.",
+    "Savoir démontrer les compléments : absence de conditions d'interface au poids $1$ (Lemme B.12), traduction du reste (Lemme B.13), convergence forte des opérateurs d'arête (Lemme B.14), transport à $\\operatorname{div}(A\\nabla\\cdot)$ (Lemme B.15).",
+    "Savoir définir le potentiel intrinsèque $\\mathcal K_\\Gamma\\eta$ (5), énoncer (H$_{\\mathrm{edge}}$), et démontrer la Proposition B.5 (flux sous (H$_{\\mathrm{edge}}$)) et la Proposition B.6 ((H$_{\\mathrm{edge}}$) en $n\\ge3$).",
+    "Savoir expliquer pourquoi le flux d'interface est lu en toute dimension par convergence forte, sans carte ni partition de l'unité, et ce que Costabel–Dauge apportent comme seconde source (Remarque B.8)."
    ],
    "sections": [
     {
+     "titre": "Parcours pas à pas (v18)",
+     "paragraphes": [
+      "Pas 1 : la convention de poids. Dans [44], $r^\\lambda\\varphi(\\theta)\\in\\mathcal K^{s,\\gamma}(I^\\wedge)$ ssi $\\lambda>\\gamma-1$ ; donc $\\gamma_{\\mathrm{DHS}}=\\beta+1$, $\\mathcal K^{s,\\gamma}\\leftrightarrow K^s_{\\gamma-1}$, poids variationnel $\\gamma=1\\leftrightarrow\\beta=0$, $\\mathcal K^{2,2}=K^2_1$. Refaire le tableau de traduction de B.7 ligne à ligne. Pas 2 : Théorèmes B.10 et B.11 (cités) : symbole d'arête, Fredholm, $e(\\gamma)-d(\\gamma)=k$, paramétrice, asymptotique en $(r[\\zeta])^{j+1/2}\\omega(r[\\zeta])$. Pas 3 : Lemme B.12, noyau trivial par identité variationnelle à coupures radiales. Pas 4 : Lemme B.13, platitude $\\nu=1$, seule $j=0$ extraite, $\\eta=F^{-1}([\\zeta]^{3/2}\\tilde c_0)\\in H^{1/2}(\\Gamma)$, traces (ii)–(iii). Pas 5 : Lemme B.14, cinq propriétés des multiplicateurs $T_\\varepsilon$, $T'_\\varepsilon$. Pas 6 : Lemme B.15, les trois symboles principaux de $L$. Pas 7 : le potentiel intrinsèque $\\mathcal K_\\Gamma\\eta=\\chi(r)\\,r^{1/2}\\sin(\\theta/2)\\,\\omega(r\\Lambda)\\eta$ avec $\\Lambda=(1-\\Delta_\\Gamma)^{1/2}$, et (H$_{\\mathrm{edge}}$) : $u=\\mathcal K_\\Gamma\\eta+w+u_R$ avec $r^{-1/2}w|_{\\Sigma_r}\\to0$ et $r^{1/2}\\nabla w|_{\\Sigma_r}\\to0$ dans $L^2(\\Gamma\\times(0,\\pi))$. Pas 8 : Proposition B.5 en six étapes (théorème spectral pour $\\Lambda$, traces du potentiel, coefficients gelés, calcul angulaire fibre par fibre, restes, stabilisation). Pas 9 : Proposition B.6 en quatre étapes (décomposition locale [44] et ses traces, $\\eta$ intrinsèque, mêmes traces limites pour $\\mathcal K_\\Gamma\\eta$, différence).",
+      "Contrôle final : dire en une phrase ce que (H$_{\\mathrm{edge}}$) demande de moins que l'identification globale « potentiel intrinsèque = potentiels locaux modulo opérateur de Green » (Remarque B.7), et pourquoi cela suffit au Théorème A et au Théorème B."
+     ],
+     "retenir": [
+      "Aucun énoncé n'est « conditionnel » : (H$_{\\mathrm{edge}}$) est établie depuis [44] par la Proposition B.6, et le Théorème B vaut en $n\\ge3$ sous (H1)–(H6) et (H5) via le Lemme 7.2.",
+      "Deux sources indépendantes donnent la même structure : Schulze ([44], $n\\ge3$, $C^\\infty$) et Costabel–Dauge ([CD1993a, CD1993b], $n=3$, analytique) ; une erreur de traduction de l'une serait détectée par l'autre."
+     ]
+    },
+    {
      "titre": "Ce qui est cité, ce qui est démontré",
      "paragraphes": [
-      "Le symbole d'arête $\\sigma_\\wedge(\\zeta)=r^{-2}((-r\\partial_r)^2+\\partial_\\theta^2-r^2|\\zeta|^2)$ est Fredholm entre espaces de cône à poids ; l'opérateur se complète par $d(\\gamma)$ conditions de potentiel et $e(\\gamma)$ de trace, $e-d=k$ sur $(\\tfrac12-k,\\tfrac32-k)$ ; paramétrice, Fredholm, asymptotique d'arête en $(r[\\zeta])^{j+1/2}$ modulo reste plat. Tout cela est [29].",
+      "Le symbole d'arête $\\sigma_\\wedge(\\zeta)=r^{-2}((-r\\partial_r)^2+\\partial_\\theta^2-r^2|\\zeta|^2)$ est Fredholm entre espaces de cône à poids ; l'opérateur se complète par $d(\\gamma)$ conditions de potentiel et $e(\\gamma)$ de trace, $e-d=k$ sur $(\\tfrac12-k,\\tfrac32-k)$ ; paramétrice, Fredholm, asymptotique d'arête en $(r[\\zeta])^{j+1/2}$ modulo reste plat. Tout cela est [44].",
       "Ce qui est démontré ici : au poids variationnel $\\gamma=1$, $d=e=0$ (noyau trivial par intégration par parties) ; le reste au poids $\\gamma+1$ est $H^2$ et la fonction singulière $j=0$ est un potentiel $\\mathcal K_{\\mathrm{edge}}\\eta$ avec $\\eta\\in H^{s-3/2}(\\Gamma)$ ; le problème pour $L$ est elliptique dans l'algèbre d'arête avec le même symbole conormal."
      ],
      "retenir": [
@@ -819,33 +831,78 @@
    ],
    "enonces": [
     {
-     "type": "Théorème B.3 (cité)",
+     "type": "Convention de poids",
+     "nom": "Dictionnaire $K^s_\\beta$ (B.0) $\\leftrightarrow$ $\\mathcal K^{s,\\gamma}$ de [44]",
+     "enonce": "Dans [44], $r^\\lambda\\varphi(\\theta)\\in\\mathcal K^{s,\\gamma}(I^\\wedge)$ près de $r=0$ ssi $\\lambda>\\gamma-1$ (base de dimension un) ; leur poids $\\gamma$ est notre $\\beta+1$ : $\\mathcal K^{s,\\gamma}(I^\\wedge)$ a pour modèle $K^s_{\\gamma-1}$, le poids variationnel est $\\gamma=1$ (notre $\\beta=0$), $\\mathcal K^{2,2}(I^\\wedge)=K^2_1$. Espaces d'arête à poids : $\\mathcal W^{s,\\gamma}(\\Om)$, localement $\\mathcal W^s(\\R^{n-2},\\mathcal K^{s,\\gamma}(I^\\wedge))$, action de groupe $(\\kappa_\\lambda u)(r,\\theta)=\\lambda u(\\lambda r,\\theta)$.",
+     "depend": []
+    },
+    {
+     "type": "Théorème B.10 (cité)",
      "nom": "Symbole d'arête du problème de Zaremba",
      "enonce": "Pour $\\zeta\\ne0$, $s>\\tfrac32$, $\\gamma\\notin\\mathbb Z+\\tfrac12$ : famille Fredholm $K^{s,\\gamma}(I^\\wedge)\\to K^{s-2,\\gamma-2}\\oplus K^{s-1/2,\\gamma-1/2}(\\mathbb R_-)\\oplus K^{s-3/2,\\gamma-3/2}(\\mathbb R_+)$, symbole conormal $\\partial_\\theta^2+w^2$ à points $\\mathbb Z+\\tfrac12$ simples ; complétion par $d(\\gamma),e(\\gamma)$ conditions avec $e-d=k$ sur $(\\tfrac12-k,\\tfrac32-k)$.",
      "depend": []
     },
     {
-     "type": "Théorème B.4 (cité)",
+     "type": "Théorème B.11 (cité)",
      "nom": "Paramétrice et asymptotique d'arête",
      "enonce": "L'opérateur complété est Fredholm avec régularité elliptique dans $W^{s,\\gamma}$ ; $u$ est somme de fonctions singulières $\\mathcal F^{-1}\\{[\\zeta]c_j(\\theta,\\zeta)(r[\\zeta])^{j+1/2}\\omega(r[\\zeta])\\}$, $-j-\\tfrac12<1-\\gamma$, modulo un reste dans $W^{s,\\gamma+\\nu}$.",
      "depend": []
     },
     {
-     "type": "Lemme B.5",
+     "type": "Lemme B.12",
      "nom": "Absence de conditions d'interface au poids variationnel",
      "enonce": "Pour $\\gamma=1$, $d(1)=e(1)=0$ : $\\sigma_\\wedge(\\zeta)$ est un isomorphisme pour tout $\\zeta\\ne0$.",
      "depend": []
     },
     {
-     "type": "Lemme B.6",
+     "type": "Lemme B.13",
      "nom": "Traduction du reste",
      "enonce": "En classe de graphe ($s=2$), $u=u_{sing}+w$ avec $w\\in H^2_{loc}$, $u_{sing}=\\mathcal K_{\\mathrm{edge}}\\eta$, $\\eta\\in H^{1/2}(\\Gamma)$ ($H^{3/2}$ sous $D(\\A^2)$) ; $\\|\\nabla w\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$ ; $\\|\\nabla u_{sing}\\|^2_{L^2(\\Sigma_\\varepsilon)}\\to\\tfrac\\pi4\\|\\eta\\|^2$, $\\|\\partial_su_{sing}\\|_{L^2(\\Sigma_\\varepsilon)}\\to0$, et le calcul angulaire donne la même limite $-\\tfrac\\pi8\\int\\innerg{H}{\\tau}\\eta^2$.",
      "depend": []
     },
     {
-     "type": "Lemme B.7",
+     "type": "Lemme B.15",
      "nom": "Du laplacien à $\\operatorname{div}(A\\nabla\\cdot)$",
      "enonce": "Pour $\\partial\\Om,\\Gamma,A\\in C^\\infty$, le problème de Zaremba pour $L$ est elliptique dans l'algèbre d'arête pour tout $\\gamma\\notin\\mathbb Z+\\tfrac12$, avec le même symbole conormal.",
+     "depend": []
+    },
+    {
+     "type": "Définition (5)",
+     "nom": "Potentiel d'arête intrinsèque et hypothèse (H$_{\\mathrm{edge}}$)",
+     "enonce": "$\\Lambda:=(1-\\Delta_\\Gamma)^{1/2}$ sur $L^2(\\Gamma)$, $T_r:=\\omega(r\\Lambda)$, $Q_r:=(r\\Lambda)\\omega'(r\\Lambda)$ (calcul fonctionnel), et $(\\mathcal K_\\Gamma\\eta)(r,\\theta,s):=\\chi(r)\\,r^{1/2}\\sin(\\theta/2)\\,(T_r\\eta)(s)$. (H$_{\\mathrm{edge}}$) : près de $\\Gamma$, $u=\\mathcal K_\\Gamma\\eta+w+u_R$ avec $\\eta\\in L^2(\\Gamma)$, $u_R\\in H^2$, et $r^{-1/2}w|_{\\Sigma_r}\\to0$, $r^{1/2}\\nabla w|_{\\Sigma_r}\\to0$ dans $L^2(\\Gamma\\times(0,\\pi))$ (mesure $\\mathrm d\\theta\\,\\mathrm ds$).",
+     "depend": [
+      "Lemme B.13"
+     ]
+    },
+    {
+     "type": "Proposition B.5",
+     "nom": "Flux d'interface sous (H$_{\\mathrm{edge}}$), $n\\ge3$",
+     "enonce": "$\\partial\\Om$, $A$, partition et $\\Gamma$ lisses, $\\Gamma$ compacte sans bord, $H\\in C^1$. Si $u$ admet la décomposition de (H$_{\\mathrm{edge}}$), alors $\\lim_{r\\downarrow0}I^g_r(u,H)=-\\tfrac\\pi8\\int_\\Gamma\\innerg{H}{\\tau}\\eta^2\\,\\mathrm ds_\\Gamma$, la lecture euclidienne s'en déduisant par $\\sqrt{\\det A}$. Sous (H1)–(H6) et (H$_{\\mathrm{edge}}$), le Théorème B vaut en dimension $n\\ge3$ avec les mêmes formules de constantes.",
+     "depend": [
+      "Définition (5)",
+      "Lemme 4.2",
+      "Lemme 7.2"
+     ]
+    },
+    {
+     "type": "Proposition B.6",
+     "nom": "(H$_{\\mathrm{edge}}$) en dimension $n\\ge3$",
+     "enonce": "Sous les hypothèses de régularité de l'entrée elliptique ($\\partial\\Om$, $\\Gamma$, $A$ de classe $C^\\infty$, $\\Gamma$ compacte sans bord), toute solution forte vérifie (H$_{\\mathrm{edge}}$) à chaque instant, avec le potentiel intrinsèque (5), par la lecture de [44] faite au Lemme B.13 ; $\\|\\eta\\|_{L^2(\\Gamma)}\\le C(\\|u\\|_{H^1}+\\|Lu\\|_{L^2})$.",
+     "depend": [
+      "Lemme B.13",
+      "Lemme B.14"
+     ]
+    },
+    {
+     "type": "Lemme B.14",
+     "nom": "Convergence forte des opérateurs d'arête",
+     "enonce": "$\\omega\\in C^\\infty_c([0,\\infty))$, $0\\le\\omega\\le1$, $\\omega\\equiv1$ près de $0$ ; $T_\\varepsilon=\\mathrm{Op}(\\omega(\\varepsilon[\\zeta]))$, $T'_\\varepsilon=\\mathrm{Op}((t\\omega'(t))|_{t=\\varepsilon[\\zeta]})$. (i) $\\|T_\\varepsilon\\|\\le1$, $\\|T'_\\varepsilon\\|\\le\\|t\\omega'\\|_\\infty$ ; (ii) $T_\\varepsilon\\eta\\to\\eta$, $T'_\\varepsilon\\eta\\to0$ dans $L^2$ ; (iii) $\\int m(S^{(1)}_\\varepsilon\\eta)(S^{(2)}_\\varepsilon\\eta)\\to c_1c_2\\int m\\eta^2$ pour $m\\in L^\\infty$, $S^{(i)}_\\varepsilon\\in\\{T_\\varepsilon,\\tfrac12T_\\varepsilon+T'_\\varepsilon\\}$ ; (iv) $\\|[\\chi,T_\\varepsilon]\\|,\\|[\\chi,T'_\\varepsilon]\\|\\le C\\varepsilon\\|\\nabla\\chi\\|_\\infty$ ; (v) recollement en cartes à $O(\\varepsilon)$ près.",
+     "depend": []
+    },
+    {
+     "type": "Remarque B.8",
+     "nom": "Seconde source : Costabel–Dauge",
+     "enonce": "Pour un opérateur du second ordre à coefficients analytiques dans un domaine de $\\R^3$ à arêtes analytiques, [CD1993b, Th. 1.8] donne, au voisinage d'un intervalle $I$ de l'arête et pour $s=1$ : $u=w+(c*\\Phi)(y,r)\\,r^{1/2}\\psi(y,\\theta)$, $\\mathcal F_{y\\to\\xi}\\Phi(\\xi,r)=\\phi(r|\\xi|)$, $c\\in H^{1/2-\\varepsilon}(I)$, $w\\in V^{2-\\varepsilon}_0$ ; exposant $\\gamma=\\pi/(2\\omega)=\\tfrac12$ pour $\\omega=\\pi$. C'est, à Fourier près, le potentiel $\\mathcal F^{-1}\\{\\phi(r|\\xi|)\\hat c\\}r^{1/2}\\psi$ : la « régularisation des coefficients » est la troncature $\\omega(r[\\zeta])$ de [44] et le $\\omega(r\\Lambda)$ de (5). La preuve de la Proposition B.6 s'applique sans changement.",
      "depend": []
     }
    ],
@@ -863,7 +920,7 @@
      "cible": "Traduction du reste",
      "strategie": "Esquisse détaillée (à porter au niveau complet). Platitude $\\nu=1$ ne retient que $j=0$ ; Fourier tangentiel + Plancherel sur $\\Sigma_\\varepsilon$ ; la troncature coupe les hautes fréquences.",
      "etapes": [
-      "$r^{j+1/2}\\omega\\in K^{s,\\gamma'}$ dès que $\\gamma'<j+\\tfrac32$ : pour $\\nu=1$ seule $j=0$ est à extraire ; $W^{2,2}$ est localement $H^2$ ($[29$, Rem. 10$]$), d'où $w\\in H^2$ et (ii) par le lemme de trace.",
+      "$r^{j+1/2}\\omega\\in K^{s,\\gamma'}$ dès que $\\gamma'<j+\\tfrac32$ : pour $\\nu=1$ seule $j=0$ est à extraire ; $W^{2,2}$ est localement $H^2$ ($[44$, Rem. 10$]$), d'où $w\\in H^2$ et (ii) par le lemme de trace.",
       "(i) Le coefficient de $\\sin(\\theta/2)$ à $r$ fixé et $[\\zeta]r$ petit est $\\mathcal F^{-1}([\\zeta]^{3/2}\\tilde c_0)r^{1/2}$ ; $[\\zeta]^{3/2}\\tilde c_0\\in\\widehat H^{s-3/2}$.",
       "(iii) Sur $\\Sigma_\\varepsilon$, transformée $[\\zeta]^{3/2}\\tilde c_0\\varepsilon^{1/2}\\sin(\\theta/2)\\omega(\\varepsilon[\\zeta])$ supportée dans $\\{\\varepsilon[\\zeta]\\le c_1\\}$. Radial/angulaire : $\\tfrac\\pi4\\int[\\zeta]^3|\\tilde c_0|^2\\omega^2\\to\\tfrac\\pi4\\|\\eta\\|^2$ (dominée) ; le terme en $\\omega'$ est $O(\\varepsilon)$ car $[\\zeta]\\le c_2/\\varepsilon$ sur son support.",
       "Tangentiel : $\\partial_s$ produit $i\\zeta[\\zeta]^{3/2}\\tilde c_0\\varepsilon^{1/2}\\omega$ ; intégré contre $\\varepsilon\\,\\mathrm d\\theta$ : $\\varepsilon^2\\int_{[\\zeta]\\le c_1/\\varepsilon}[\\zeta]^5|\\tilde c_0|^2\\le C\\varepsilon\\int[\\zeta]^4|\\tilde c_0|^2=O(\\varepsilon)$ avec $\\tilde c_0\\in\\widehat H^2$ seulement. Le calcul angulaire ne voit que $\\sin(\\theta/2)$ et $r^{1/2}$ : il s'applique fréquence par fréquence."
@@ -875,8 +932,41 @@
      "etapes": [
       "Intérieur : $\\sigma_\\psi(L)=-A^{ij}\\xi_i\\xi_j\\ne0$ pour $\\xi\\ne0$.",
       "Bord : Dirichlet et conormale vérifient Shapiro–Lopatinskij pour tout opérateur du second ordre à symbole réel défini, jusqu'à $\\Gamma$ de chaque côté.",
-      "Arête : en coordonnées de Fermi de $g=A^{-1}$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ ; $\\sigma_\\wedge(L)(s,\\zeta)=r^{-2}((-r\\partial_r)^2+\\partial_\\theta^2-r^2|\\zeta|^2_{g_\\Gamma(s)})$ : c'est $[29,(24)]$ avec $|\\zeta|$ remplacé par une norme définie positive lisse en $s$, dont la preuve de Th. 3 n'utilise que la stricte positivité.",
+      "Arête : en coordonnées de Fermi de $g=A^{-1}$, $g=g_\\Gamma(s)\\oplus(\\mathrm dr^2+r^2\\mathrm d\\theta^2)+O(r)$ ; $\\sigma_\\wedge(L)(s,\\zeta)=r^{-2}((-r\\partial_r)^2+\\partial_\\theta^2-r^2|\\zeta|^2_{g_\\Gamma(s)})$ : c'est $[44,(24)]$ avec $|\\zeta|$ remplacé par une norme définie positive lisse en $s$, dont la preuve de Th. 3 n'utilise que la stricte positivité.",
       "La conormale $\\dnu^A=\\sqrt{\\nu\\cdot A\\nu}\\,\\partial_{\\nu_g}$ diffère de la dérivée normale par un facteur lisse positif : ellipticité inchangée ; $rP_2+P_1$ ne contribue à aucun symbole principal."
+     ]
+    },
+    {
+     "cible": "Flux d'interface sous (H$_{\\mathrm{edge}}$) (Proposition B.5)",
+     "strategie": "Preuve complète. Hypothèses : $\\Gamma$ compacte sans bord, $H\\in C^1$, $u$ vérifiant (H$_{\\mathrm{edge}}$). Six étapes ; la convergence forte est celle du théorème spectral, aucune carte.",
+     "etapes": [
+      "Étape 1 (convergences spectrales). $(e_j)$ base hilbertienne de $L^2(\\Gamma)$, $\\Lambda e_j=\\lambda_je_j$, $\\lambda_j\\ge1$. Pour $\\eta=\\sum\\eta_je_j$ : $\\|(T_r-I)\\eta\\|^2=\\sum|\\omega(r\\lambda_j)-1|^2|\\eta_j|^2\\to0$ (convergence dominée, $|\\omega|\\le1$, $\\omega(r\\lambda_j)\\to1$). De même $Q_r\\to0$ et $r\\Lambda T_r\\to0$ fortement : les multiplicateurs $z\\omega'(z)$, $z\\omega(z)$ sont bornés et nuls en $0$ ; les trois familles sont uniformément bornées par $\\|\\omega\\|_\\infty$, $\\|z\\omega'\\|_\\infty$, $\\|z\\omega\\|_\\infty$.",
+      "Étape 2 (traces du potentiel). Là où $\\chi=1$ : $r^{-1/2}\\mathcal K_\\Gamma\\eta=\\sin(\\theta/2)T_r\\eta$ ; $r^{1/2}\\partial_r\\mathcal K_\\Gamma\\eta=\\sin(\\theta/2)(\\tfrac12T_r+Q_r)\\eta$ (dériver $r^{1/2}\\omega(r\\Lambda)$ : $\\tfrac12r^{-1/2}\\omega(r\\Lambda)+r^{1/2}\\Lambda\\omega'(r\\Lambda)$) ; $r^{1/2}r^{-1}\\partial_\\theta\\mathcal K_\\Gamma\\eta=\\tfrac12\\cos(\\theta/2)T_r\\eta$. Convergence forte dans $L^2(\\Gamma\\times(0,\\pi))$ vers les traces de $\\eta S$. Tangentiel : $\\|r\\nabla_\\Gamma T_r\\eta\\|^2=\\langle-\\Delta_\\Gamma rT_r\\eta,rT_r\\eta\\rangle\\le\\|r\\Lambda T_r\\eta\\|^2\\to0$.",
+      "Étape 3 (coefficients gelés). En Fermi, $g=g(s,0)+O(r)$, $H=H(s,0)+O(r)$ uniformément ; les $O(r)$ multiplient des familles quadratiques bornées dans $L^1$ et s'annulent à la limite. Pour $m\\in L^\\infty(\\Gamma)$ : $\\|\\,|T_r\\eta|^2-|\\eta|^2\\|_{L^1}\\le\\|T_r\\eta-\\eta\\|(\\|T_r\\eta\\|+\\|\\eta\\|)\\to0$, donc $\\int m|T_r\\eta|^2\\to\\int m|\\eta|^2$.",
+      "Étape 4 (calcul angulaire). À $s$ fixé, les limites de l'Étape 2 sont les traces du profil modèle $\\eta S$ ; le calcul des Étapes 2–4 du Théorème A s'applique fibre par fibre : $-\\tfrac\\pi8\\innerg{H(s)}{\\tau(s)}\\eta(s)^2$, puis intégration en $s$.",
+      "Étape 5 (reste et croisés). Par les deux limites de traces de (H$_{\\mathrm{edge}}$), reste$\\times$reste $=o(1)$ après multiplication par $r\\,\\mathrm d\\theta\\,\\mathrm ds$ ; potentiel$\\times$reste $=o(1)$ par Cauchy–Schwarz (un facteur $O(1)$, l'autre $o(1)$) ; $u_R\\in H^2$ par le Lemme 4.2.",
+      "Étape 6 (stabilisation). Sur $\\GN$ : $\\|\\nabla_T\\mathcal K_\\Gamma\\eta(r,\\cdot)\\|^2_{L^2(\\Gamma)}\\le Cr^{-1}\\|\\eta\\|^2$ (Étape 2) et $q=O(r)$ par tangence forcée : c'est exactement ce que consomme le Lemme 7.2, dont la preuve s'applique avec $\\mathcal K_\\Gamma$ à la place de $\\mathcal K_{\\mathrm{edge}}$ ; les autres étapes du Théorème B ne dépendent pas de la dimension."
+     ]
+    },
+    {
+     "cible": "(H$_{\\mathrm{edge}}$) en dimension $n\\ge3$ (Proposition B.6)",
+     "strategie": "Preuve complète, à partir du Lemme B.13 (lecture de [44, Th. 30, Rem. 31]). Quatre étapes : traces des potentiels locaux, $\\eta$ intrinsèque, traces du potentiel intrinsèque, différence. Aucune identification globale d'opérateurs.",
+     "etapes": [
+      "Étape 1. Atlas fini $(U_j,\\kappa_j)$ de $\\Gamma$, partition $(\\varphi_j)$. Lemme B.13 : $\\varphi_ju=\\mathcal K^{(j)}_{\\mathrm{edge}}\\eta_j+w_j$, $\\mathcal K^{(j)}_{\\mathrm{edge}}\\eta_j=\\mathcal F^{-1}\\{\\widehat{\\eta_j}\\,r^{1/2}\\sin(\\theta/2)\\omega(r[\\zeta])\\}$, $\\eta_j\\in H^{1/2}$, $w_j\\in\\mathcal W^{2,2}_{\\mathrm{loc}}$, $\\|\\eta_j\\|_{H^{1/2}}+\\|w_j\\|_{\\mathcal W^{2,2}}\\le C(\\|u\\|_{H^1}+\\|Lu\\|_{L^2})$. Traces renormalisées sur $\\Sigma_r$ : $r^{-1/2}\\mathcal K^{(j)}\\eta_j\\to\\sin(\\theta/2)\\eta_j$ ; $r^{1/2}\\partial_r\\mathcal K^{(j)}\\eta_j=\\sin(\\theta/2)\\mathcal F^{-1}\\{(\\tfrac12\\omega+t\\omega')(r[\\zeta])\\widehat{\\eta_j}\\}\\to\\tfrac12\\sin(\\theta/2)\\eta_j$ ; $r^{1/2}r^{-1}\\partial_\\theta\\mathcal K^{(j)}\\eta_j\\to\\tfrac12\\cos(\\theta/2)\\eta_j$ ; $r^{1/2}\\nabla_s\\mathcal K^{(j)}\\eta_j=\\sin(\\theta/2)\\mathcal F^{-1}\\{ri\\zeta\\omega(r[\\zeta])\\widehat{\\eta_j}\\}\\to0$ — convergence dominée en $\\zeta$ (multiplicateurs bornés, limites ponctuelles $1,0,0$, $\\widehat{\\eta_j}\\in L^2$). Pour $w_j$ : fibre normale $K^2_1$, gradient dans $K^1_0$ (B.0(e)), donc par B.0(d) intégrée en $s$ : $\\|w_j\\|^2_{L^2(\\Sigma_r)}\\le Cr^3$, $\\|\\nabla w_j\\|^2_{L^2(\\Sigma_r)}\\le Cr$ ; en mesure $\\mathrm d\\theta\\,\\mathrm ds$ : $\\|r^{-1/2}w_j\\|^2\\le Cr\\to0$, $\\|r^{1/2}\\nabla w_j\\|^2\\le Cr\\to0$.",
+      "Étape 2. Sommer en $j$ (changements de cartes lisses, transport des convergences fortes) : $r^{-1/2}u|_{\\Sigma_r}\\to\\sin(\\theta/2)\\eta$ avec $\\eta:=\\sum_j\\eta_j\\circ\\kappa_j\\in L^2(\\Gamma)$, et de même pour $r^{1/2}\\partial_ru$, $r^{1/2}r^{-1}\\partial_\\theta u$, $r^{1/2}\\nabla_\\Gamma u\\to0$. $\\eta$ est caractérisé par une limite de trace de $u$ : indépendant des cartes, de $\\omega$, de $[\\zeta]$ ; $\\|\\eta\\|\\le C(\\|u\\|_{H^1}+\\|Lu\\|_{L^2})$.",
+      "Étape 3. Étape 1 de la Proposition B.5 : $r^{-1/2}\\mathcal K_\\Gamma\\eta|_{\\Sigma_r}\\to\\sin(\\theta/2)\\eta$, $r^{1/2}\\partial_r\\mathcal K_\\Gamma\\eta\\to\\tfrac12\\sin(\\theta/2)\\eta$, $r^{1/2}r^{-1}\\partial_\\theta\\mathcal K_\\Gamma\\eta\\to\\tfrac12\\cos(\\theta/2)\\eta$, $r^{1/2}\\nabla_\\Gamma\\mathcal K_\\Gamma\\eta\\to0$.",
+      "Étape 4. $w:=u-\\mathcal K_\\Gamma\\eta$ près de $\\Gamma$, $u_R:=0$ dans la bande. Différence des Étapes 2 et 3 : $r^{-1/2}w|_{\\Sigma_r}\\to0$ et $r^{1/2}\\nabla w|_{\\Sigma_r}\\to0$ dans $L^2(\\Gamma\\times(0,\\pi))$ : c'est (H$_{\\mathrm{edge}}$). Aucune estimation de $\\omega(r\\Lambda)-\\mathrm{Op}(\\omega(r[\\zeta]))$ à $r$ fixé n'est nécessaire : les deux troncatures convergent fortement vers l'identité."
+     ]
+    },
+    {
+     "cible": "Convergence forte des opérateurs d'arête (Lemme B.14)",
+     "strategie": "Preuve complète, cinq points.",
+     "etapes": [
+      "(i) Plancherel, symboles bornés : $|\\omega(\\varepsilon[\\zeta])|\\le1$, $|t\\omega'(t)|\\le\\|t\\omega'\\|_\\infty$.",
+      "(ii) $\\omega(\\varepsilon[\\zeta])\\to1$ ponctuellement ; $t\\omega'(t)|_{t=\\varepsilon[\\zeta]}\\to0$ ponctuellement car le support de $t\\omega'$ est compact dans $(0,\\infty)$, donc $\\varepsilon[\\zeta]$ n'y est que si $[\\zeta]\\ge c/\\varepsilon$ ; domination par $|\\widehat\\eta|^2\\in L^1$.",
+      "(iii) $\\|S^{(1)}_\\varepsilon\\eta\\,S^{(2)}_\\varepsilon\\eta-c_1c_2\\eta^2\\|_{L^1}\\le\\|S^{(1)}_\\varepsilon\\eta-c_1\\eta\\|\\|S^{(2)}_\\varepsilon\\eta\\|+c_1\\|\\eta\\|\\|S^{(2)}_\\varepsilon\\eta-c_2\\eta\\|\\to0$ par (i)–(ii), puis $m$ borné.",
+      "(iv) Calcul symbolique au premier ordre : $\\partial_\\zeta\\,\\omega(\\varepsilon[\\zeta])=\\varepsilon\\omega'(\\varepsilon[\\zeta])\\partial_\\zeta[\\zeta]=O(\\varepsilon)$, donc $[\\chi,T_\\varepsilon]=O(\\varepsilon\\|\\nabla\\chi\\|_\\infty)$.",
+      "(v) Recollement : les commutateurs de (iv) absorbent les changements de cartes ; $\\eta$ est intrinsèque comme coefficient de $r^{1/2}\\sin(\\theta/2)$ dans le premier terme de l'asymptotique d'arête (unicité, [44, Th. 30])."
      ]
     }
    ],
@@ -892,6 +982,18 @@
     {
      "terme": "Troncature $\\omega(r[\\zeta])$",
      "definition": "Facteur qui rend la fonction singulière anisotrope en $(r,s)$ et coupe, sur $\\Sigma_\\varepsilon$, les fréquences tangentielles au-delà de $1/\\varepsilon$."
+    },
+    {
+     "terme": "$\\mathcal K_\\Gamma\\eta$",
+     "definition": "Potentiel d'arête intrinsèque (5) : $\\chi(r)r^{1/2}\\sin(\\theta/2)\\,\\omega(r\\Lambda)\\eta$, $\\Lambda=(1-\\Delta_\\Gamma)^{1/2}$ ; ne dépend ni des cartes ni du poids $[\\zeta]$."
+    },
+    {
+     "terme": "(H$_{\\mathrm{edge}}$)",
+     "definition": "Décomposition $u=\\mathcal K_\\Gamma\\eta+w+u_R$ avec deux limites de traces renormalisées nulles pour $w$ ; établie en $n\\ge3$ par la Proposition B.6."
+    },
+    {
+     "terme": "$\\gamma_{\\mathrm{DHS}}=\\beta+1$",
+     "definition": "Convention de poids : $\\mathcal K^{s,\\gamma}(I^\\wedge)$ de [44] est notre $K^s_{\\gamma-1}$."
     }
    ],
    "quiz": [
@@ -899,7 +1001,7 @@
      "question": "Que vaut $e(1)-d(1)$ et pourquoi est-ce insuffisant ?",
      "options": [
       "$1$, il faut une condition de trace",
-      "$0$ par B.3, mais l'indice nul ne donne pas l'isomorphisme : il faut le noyau trivial (Lemme B.5)",
+      "$0$ par B.3, mais l'indice nul ne donne pas l'isomorphisme : il faut le noyau trivial (Lemme B.12)",
       "$0$, donc c'est un isomorphisme automatiquement",
       "$-1$"
      ],
@@ -926,7 +1028,29 @@
       "Rien du tout"
      ],
      "bonne": 1,
-     "explication": "Seule la forme quadratique tangentielle change ; la preuve de [29, Th. 3] n'en utilise que la positivité."
+     "explication": "Seule la forme quadratique tangentielle change ; la preuve de [44, Th. 3] n'en utilise que la positivité."
+    },
+    {
+     "question": "Que demande exactement (H$_{\\mathrm{edge}}$) ?",
+     "options": [
+      "L'identification globale du potentiel intrinsèque avec les potentiels locaux modulo un opérateur de Green",
+      "Seulement deux limites de traces sur $\\Sigma_r$ : $r^{-1/2}w\\to0$ et $r^{1/2}\\nabla w\\to0$ dans $L^2(\\Gamma\\times(0,\\pi))$",
+      "Que $\\eta\\in H^1(\\Gamma)$",
+      "Que $w\\in H^2$ jusqu'à l'arête"
+     ],
+     "bonne": 1,
+     "explication": "C'est la Remarque B.7 : l'identification globale reste un énoncé attendu du calcul d'arête, mais elle n'est plus consommée ; les deux limites suffisent au Théorème A et au Théorème B."
+    },
+    {
+     "question": "Quelle est la correspondance de poids entre [44] et B.0 ?",
+     "options": [
+      "$\\gamma_{\\mathrm{DHS}}=\\beta$",
+      "$\\gamma_{\\mathrm{DHS}}=\\beta+1$",
+      "$\\gamma_{\\mathrm{DHS}}=\\beta-1$",
+      "$\\gamma_{\\mathrm{DHS}}=2\\beta$"
+     ],
+     "bonne": 1,
+     "explication": "$r^\\lambda\\varphi\\in\\mathcal K^{s,\\gamma}$ ssi $\\lambda>\\gamma-1$, contre $\\beta<\\lambda$ pour $K^s_\\beta$ ; le poids variationnel est $\\gamma=1$, soit $\\beta=0$."
     }
    ]
   },
@@ -942,7 +1066,7 @@
     {
      "titre": "Parcours pas à pas : les sept formules à écrire au tableau",
      "paragraphes": [
-      "(F1) $\\mathcal Mu=H(u)+\\tfrac12pu$ et le flux $\\mathcal B(u)=\\tfrac12(H\\cdot\\nu)(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)+(\\text{termes en }pu)$ $(13)$–$(14)$. (F2) Dictionnaire des flux : $\\mathcal B^g\\mathrm d\\sigma_g=\\sqrt{\\det g}\\,\\mathcal B\\,\\mathrm d\\sigma$ $(15)$ pour les termes principaux, puisque $\\innerg{H}{\\nu_g}\\mathrm d\\sigma_g=\\sqrt{\\det g}(H\\cdot\\nu)\\mathrm d\\sigma$ et $\\partial_{\\nu_g}u\\,\\mathrm d\\sigma_g=\\sqrt{\\det g}\\,\\dnu^Au\\,\\mathrm d\\sigma$. (F3) Sur $\\Sigma_\\varepsilon$ : $\\nu=-e_r$, $\\mathrm d\\sigma_g=\\varepsilon\\,\\mathrm d\\theta\\,\\dsG(1+O(\\varepsilon))$. (F4) Tableau des ordres : $|\\eta\\gradg S|^2\\sim r^{-1}$ (fini), $u_t^2\\sim$ trace $H^1$ ($\\to0$), $|\\nabla u_R|^2\\sim r^0$, $|S\\nabla_\\Gamma\\eta|^2\\sim r^{+1}$, $\\eta\\gradg S\\cdot\\nabla u_R\\sim r^{-1/2}$, $\\eta\\gradg S\\cdot S\\nabla_\\Gamma\\eta\\sim r^0$, $pu\\,\\partial_\\nu u\\sim r^0$.",
+      "(F1) $\\mathcal Mu=H(u)+\\tfrac12pu$ et le flux $\\mathcal B(u)=\\tfrac12(H\\cdot\\nu)(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)+(\\text{termes en }pu)$ $(16)$–$(17)$. (F2) Dictionnaire des flux : $\\mathcal B^g\\mathrm d\\sigma_g=\\sqrt{\\det g}\\,\\mathcal B\\,\\mathrm d\\sigma$ $(18)$ pour les termes principaux, puisque $\\innerg{H}{\\nu_g}\\mathrm d\\sigma_g=\\sqrt{\\det g}(H\\cdot\\nu)\\mathrm d\\sigma$ et $\\partial_{\\nu_g}u\\,\\mathrm d\\sigma_g=\\sqrt{\\det g}\\,\\dnu^Au\\,\\mathrm d\\sigma$. (F3) Sur $\\Sigma_\\varepsilon$ : $\\nu=-e_r$, $\\mathrm d\\sigma_g=\\varepsilon\\,\\mathrm d\\theta\\,\\dsG(1+O(\\varepsilon))$. (F4) Tableau des ordres : $|\\eta\\gradg S|^2\\sim r^{-1}$ (fini), $u_t^2\\sim$ trace $H^1$ ($\\to0$), $|\\nabla u_R|^2\\sim r^0$, $|S\\nabla_\\Gamma\\eta|^2\\sim r^{+1}$, $\\eta\\gradg S\\cdot\\nabla u_R\\sim r^{-1/2}$, $\\eta\\gradg S\\cdot S\\nabla_\\Gamma\\eta\\sim r^0$, $pu\\,\\partial_\\nu u\\sim r^0$.",
       "(F5) Avec $u=\\eta S$ : $|\\gradg u|^2=\\eta^2/(4\\varepsilon)$, $\\partial_\\nu u=-\\tfrac\\eta2\\varepsilon^{-1/2}\\sin(\\theta/2)$, $\\innerg{H}{\\gradg u}=\\tfrac\\eta2\\varepsilon^{-1/2}(H_r\\sin(\\theta/2)+H_\\theta\\cos(\\theta/2))$. (F6) $\\mathcal B=-H_r\\tfrac{\\eta^2}{8\\varepsilon}+\\tfrac{\\eta^2}{4\\varepsilon}\\{H_r\\sin^2(\\theta/2)+H_\\theta\\sin(\\theta/2)\\cos(\\theta/2)\\}=\\tfrac{\\eta^2}{\\varepsilon}A(\\theta)$, $A(\\theta)=\\tfrac18(-H_r\\cos\\theta+H_\\theta\\sin\\theta)=-\\tfrac{h_1}8$. (F7) $\\int_0^\\pi A\\,\\mathrm d\\theta=-\\tfrac\\pi8h_1$, $h_1=\\innerg{H}{\\tau}$ ($\\tau=e_{x_1}$, $N\\to D$) : $\\lim I^g_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\innerg{H}{\\tau}\\eta^2\\dsG$, puis $\\lim I_\\varepsilon$ avec le poids $\\sqrt{\\det A}$."
      ],
      "retenir": [
@@ -966,7 +1090,7 @@
    ],
    "enonces": [
     {
-     "type": "(13)–(15)",
+     "type": "(16)–(18)",
      "nom": "Multiplicateur de Yao et flux dans les deux lectures",
      "enonce": "$\\mathcal Mu=H(u)+\\tfrac12pu$, $p=\\operatorname{div}H$ ; $\\mathcal B(u)=\\tfrac12(H\\cdot\\nu)(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)+(pu)$ ; $\\mathcal B^g\\mathrm d\\sigma_g=\\sqrt{\\det g}\\,\\mathcal B\\,\\mathrm d\\sigma$ pour les termes principaux, les termes en $pu$ étant évanescents à l'interface.",
      "depend": []
@@ -986,12 +1110,14 @@
     {
      "type": "Théorème A",
      "nom": "Identité de flux d'interface",
-     "enonce": "Pour $u$ solution forte et la décomposition d'arête de la Proposition 3.1 : $\\lim_{\\varepsilon\\to0}I^g_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\innerg{H}{\\tau}\\eta^2\\dsG$, $\\lim I_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\dsG$, $\\tau$ orienté $N\\to D$ ; sous $\\innerg{H}{\\tau}\\le0$ la limite est $\\ge0$ (favorable).",
+     "enonce": "Pour $u$ solution forte et la décomposition d'arête de la Proposition 3.1 : $\\lim_{\\varepsilon\\to0}I^g_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\innerg{H}{\\tau}\\eta^2\\dsG$, $\\lim I_\\varepsilon=-\\tfrac\\pi8\\int_\\Gamma\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\dsG$, $\\tau$ orienté $N\\to D$ ; sous $\\innerg{H}{\\tau}\\le0$ la limite est $\\ge0$ (favorable). En dimension $n\\ge3$, l'énoncé vaut sous (H$_{\\mathrm{edge}}$) avec le potentiel intrinsèque (5) (Proposition B.5), hypothèse établie pour toute solution forte par la Proposition B.6 ; les éléments cités de [44] et de Costabel–Dauge sont listés en B.7 et C.0.",
      "depend": [
       "Lemme 4.2",
       "Lemme bilinéaire",
       "Proposition 3.1",
-      "Remarque 7.1"
+      "Remarque 7.1",
+      "Proposition B.5",
+      "Proposition B.6"
      ]
     },
     {
@@ -1004,7 +1130,7 @@
    "preuves": [
     {
      "cible": "Trace évanescente",
-     "strategie": "Preuve complète. Hypothèses : $f\\in H^1(T_{\\varepsilon_0})$, coordonnées $(r,\\theta,s)$ du tube avec $d\\sigma\\asymp\\varepsilon\\,d\\theta\\,ds$ sur $\\Sigma_\\varepsilon$ et $dx\\asymp r\\,dr\\,d\\theta\\,ds$ (constantes de comparaison uniformes, Remarque 3.5). Pour $H^1$, $f(\\cdot,\\theta,s)$ est absolument continue en $r$ pour p.p. $(\\theta,s)$ (Fubini + caractérisation ACL).",
+     "strategie": "Preuve complète. Hypothèses : $f\\in H^1(T_{\\varepsilon_0})$, coordonnées $(r,\\theta,s)$ du tube avec $d\\sigma\\asymp\\varepsilon\\,d\\theta\\,ds$ sur $\\Sigma_\\varepsilon$ et $dx\\asymp r\\,dr\\,d\\theta\\,ds$ (constantes de comparaison uniformes, Remarque 3.6). Pour $H^1$, $f(\\cdot,\\theta,s)$ est absolument continue en $r$ pour p.p. $(\\theta,s)$ (Fubini + caractérisation ACL).",
      "etapes": [
       "Pour $0<\\varepsilon<\\rho<\\varepsilon_0$ : $f(\\varepsilon)=f(\\rho)-\\int_\\varepsilon^\\rho\\partial_rf$, donc $f(\\varepsilon)^2\\le2f(\\rho)^2+2(\\int_\\varepsilon^\\rho|\\partial_rf|dr)^2$.",
       "Cauchy–Schwarz à poids : $(\\int_\\varepsilon^\\rho|\\partial_rf|dr)^2=(\\int_\\varepsilon^\\rho r^{-1/2}\\cdot r^{1/2}|\\partial_rf|)^2\\le\\int_\\varepsilon^\\rho\\tfrac{dr}r\\cdot\\int_\\varepsilon^{\\varepsilon_0}|\\partial_rf|^2r\\,dr=\\log(\\rho/\\varepsilon)\\int_\\varepsilon^{\\varepsilon_0}|\\partial_rf|^2r\\,dr$.",
@@ -1104,7 +1230,7 @@
    "titre": "Trichotomie de criticité et tangence forcée",
    "objectifs": [
     "Savoir démontrer le comptage de puissances $\\varepsilon^{2\\lambda-1}$ et écrire le coefficient $c_\\alpha(H)$.",
-    "Savoir démontrer la tangence forcée à $\\alpha=\\pi$ et situer le Théorème B comme énoncé local."
+    "Savoir démontrer la tangence forcée à $\\alpha=\\pi$ et situer le Proposition 1.1 comme énoncé local."
    ],
    "sections": [
     {
@@ -1127,9 +1253,9 @@
      "depend": []
     },
     {
-     "type": "Théorème B",
-     "nom": "Trichotomie de criticité (énoncé local)",
-     "enonce": "$\\lambda=\\pi/(2\\alpha)$ : (1) $\\alpha<\\pi$ : $I_\\varepsilon\\to0$, l'interface n'impose rien ; (2) $\\alpha=\\pi$ : tangence forcée et $\\innerg{H}{\\tau}\\le0$ ; (3) $\\alpha>\\pi$ en $s_0$ et $c_\\alpha(H)\\eta\\ne0$ près de $s_0$ : $I_\\varepsilon\\to\\infty$, un poids $r^{1-2\\lambda}$ ou le microlocal est nécessaire.",
+     "type": "Proposition 1.1",
+     "nom": "Trichotomie de criticité (énoncé local, Proposition 1.1 de la v18)",
+     "enonce": "$\\lambda=\\pi/(2\\alpha)$ : (1) $\\alpha<\\pi$ : $I_\\varepsilon\\to0$, l'interface n'impose rien ; (2) $\\alpha=\\pi$ : tangence forcée et $\\innerg{H}{\\tau}\\le0$ ; (3) $\\alpha>\\pi$ en $s_0$ et $c_\\alpha(H)\\eta\\ne0$ près de $s_0$ (avec $c_\\alpha(H)=\\tfrac{\\lambda^2}2\\int_0^\\alpha[-H_r\\cos2\\lambda\\theta+H_\\theta\\sin2\\lambda\\theta]$, condition à vérifier sur la formule, non réductible à une tangence) : $I_\\varepsilon\\to\\infty$, un poids $r^{1-2\\lambda}$ ou le microlocal est nécessaire.",
      "depend": [
       "Théorème A",
       "Lemme 5.2"
@@ -1150,7 +1276,7 @@
      "cible": "Trichotomie de criticité",
      "strategie": "Esquisse détaillée (à porter au niveau complet). Auto-terme du flux avec $\\lambda$ quelconque.",
      "etapes": [
-      "$|\\gradg(\\eta S_\\alpha)|^2\\mathrm d\\sigma\\sim\\eta^2\\lambda^2r^{2\\lambda-2}\\varepsilon\\,\\mathrm d\\theta$, d'où $I_\\varepsilon\\sim c_\\alpha(H)\\varepsilon^{2\\lambda-1}\\int_\\Gamma\\eta^2$ avec $c_\\alpha(H)=\\tfrac\\lambda2\\int_0^\\alpha[(\\lambda-\\tfrac12)H_r(1-\\cos2\\lambda\\theta)+\\lambda H_\\theta\\sin2\\lambda\\theta]\\mathrm d\\theta$ (calcul angulaire de l'Étape 3 repris).",
+      "Auto-terme avec $S_\\alpha=r^\\lambda\\sin(\\lambda\\theta)$ : $\\gradg S_\\alpha=\\lambda r^{\\lambda-1}(\\sin\\lambda\\theta\\,e_r+\\cos\\lambda\\theta\\,e_\\theta)$, $|\\gradg S_\\alpha|^2=\\lambda^2r^{2\\lambda-2}$, $\\partial_\\nu u=-\\lambda r^{\\lambda-1}\\eta\\sin\\lambda\\theta$ ; $\\mathcal B=\\lambda^2r^{2\\lambda-2}\\eta^2[-\\tfrac12H_r+H_r\\sin^2\\lambda\\theta+H_\\theta\\sin\\lambda\\theta\\cos\\lambda\\theta]=\\tfrac{\\lambda^2}2r^{2\\lambda-2}\\eta^2[-H_r\\cos2\\lambda\\theta+H_\\theta\\sin2\\lambda\\theta]$ ; d'où $I_\\varepsilon\\sim c_\\alpha(H)\\varepsilon^{2\\lambda-1}\\int\\eta^2$ avec $c_\\alpha(H)=\\tfrac{\\lambda^2}2\\int_0^\\alpha[-H_r\\cos2\\lambda\\theta+H_\\theta\\sin2\\lambda\\theta]\\,d\\theta$. Contrôle $\\alpha=\\pi$, $\\lambda=\\tfrac12$ : intégrande $=-h_1/8$, $c_\\pi=-\\tfrac\\pi8\\langle H,\\tau\\rangle_g$. (L'ancienne formule affichée dans le manuscrit était fausse : elle ne redonnait que la moitié du terme critique ; corrigée après le pré-rapport du 21 septembre.)",
       "(1) $2\\lambda-1>0$ : $I_\\varepsilon\\to0$ quel que soit $H$ ; les sous-dominants tendent vers $0$ a fortiori. (2) $2\\lambda-1=0$ : Théorème A + Lemme 5.2. (3) $2\\lambda-1<0$ : divergence si $c_\\alpha(H)\\eta\\ne0$ près de $s_0$ ; le réétalonnage $\\mathcal B\\mapsto r^{1-2\\lambda}\\mathcal B$ restaure l'exposant $0$ (multiplicateur à poids, hors cadre)."
      ]
     }
@@ -1187,6 +1313,17 @@
      ],
      "bonne": 1,
      "explication": "C'est un phénomène propre au point critique : pour $\\alpha\\ne\\pi$, la normale saute."
+    },
+    {
+     "question": "Que vaut $c_\\alpha(H)$ ?",
+     "options": [
+      "$\\tfrac\\lambda2\\int[(\\lambda-\\tfrac12)H_r(1-\\cos2\\lambda\\theta)+\\lambda H_\\theta\\sin2\\lambda\\theta]$",
+      "$\\tfrac{\\lambda^2}2\\int_0^\\alpha[-H_r\\cos2\\lambda\\theta+H_\\theta\\sin2\\lambda\\theta]\\,d\\theta$, qui redonne $-\\tfrac\\pi8\\langle H,\\tau\\rangle_g$ à $\\alpha=\\pi$",
+      "$\\lambda\\int H_r$",
+      "$0$"
+     ],
+     "bonne": 1,
+     "explication": "La première formule était celle du manuscrit avant le pré-rapport : elle ne reproduit pas le cas critique."
     }
    ]
   },
@@ -1419,7 +1556,7 @@
    "titre": "Existence du multiplicateur : hypothèses, hessien, Killing",
    "objectifs": [
     "Savoir énoncer les Hypothèses 1–6 et démontrer l'invariance d'échelle de l'Hypothèse 6.",
-    "Savoir démontrer la comparaison du hessien (18) et la Proposition 6.4, y compris l'augmentation de Killing (20)."
+    "Savoir démontrer la comparaison du hessien (21) et la Proposition 6.4, y compris l'augmentation de Killing (22)."
    ],
    "sections": [
     {
@@ -1432,19 +1569,26 @@
       "$f\\mapsto\\lambda f$ multiplie identiquement $\\rho$ et $C_\\star$ : Hyp. 6 est une vraie hypothèse.",
       "Courbure $\\le0$ : $\\rho=1$ ; courbure $\\le b>0$ : $\\rho=\\sqrt bR\\cot(\\sqrt bR)$ sous $R<\\pi/(2\\sqrt b)$.",
       "La courbure négative facilite mais n'implique pas $q\\ge0$ : vérifier point par point.",
-      "La courbure négative améliore la convexité de $\\tfrac12d_g^2$ et peut faciliter la construction ; le signe de bord $q\\ge0$ reste une hypothèse indépendante, vérifiée point par point (jamais déduite de $K_g<0$)."
+      "La courbure négative améliore la convexité de $\\tfrac12d_g^2$ et peut faciliter la construction ; le signe de bord $q\\ge0$ reste une hypothèse indépendante, vérifiée point par point (jamais déduite de $K_g<0$).",
+      "Cartan–Hadamard exige la complétude de la variété ambiante : un domaine à bord n'est pas complet ; on suppose $(\\Omega,g)$ prolongé en une variété complète simplement connexe à $\\sec\\le0$. Écrire $\\Hessg(\\tfrac12d_g^2)\\ge g$, pas « $2$-convexe » ; la divergence des Jacobi est une comparaison de Rauch sous $K\\le-\\kappa<0$, exacte seulement en courbure constante."
      ]
     }
    ],
    "enonces": [
     {
-     "type": "(18)",
+     "type": "Hypothèses 1–3 (forme définitive)",
+     "nom": "Hypothèses écrites pour le champ total $H$",
+     "enonce": "$\\sym\\gradg H\\ge\\rho g$ ; $\\langle H,\\tau\\rangle_g\\le0$ sur $\\Gamma$ ; $\\langle H,\\nu_g\\rangle_g\\le0$ (i.e. $q=H\\cdot\\nu\\le0$) sur $\\Gamma_D$. Pour $H=\\gradg f+K$, $K$ de Killing, la première équivaut à $\\Hessg f\\ge\\rho g$ ; les deux autres portent sur $H$ et non sur $\\gradg f$ : si $K\\ne0$, le signe de $\\langle\\gradg f,\\tau\\rangle$ ne contrôle pas celui de $\\langle H,\\tau\\rangle$.",
+     "depend": []
+    },
+    {
+     "type": "(21)",
      "nom": "Comparaison du hessien",
      "enonce": "Si $\\sec_g\\le b$, $r=\\dg(\\cdot,x_0)$ : $\\Hessg(\\tfrac12r^2)=\\mathrm dr\\otimes\\mathrm dr+r\\Hessg r$ et $\\Hessg r\\ge\\operatorname{ct}_b(r)(g-\\mathrm dr\\otimes\\mathrm dr)$, $\\operatorname{ct}_b=\\operatorname{sn}_b'/\\operatorname{sn}_b$.",
      "depend": []
     },
     {
-     "type": "(20)",
+     "type": "(22)",
      "nom": "Augmentation de Killing",
      "enonce": "$H=\\gradg f+K$, $K$ de Killing : $\\sym\\nabla H=\\Hessg f\\ge\\rho g$ ; seules les composantes de bord $\\innerg{H}{\\nu}$, $\\innerg{H}{\\tau}$ changent.",
      "depend": []
@@ -1460,9 +1604,9 @@
      "nom": "Condition suffisante d'existence",
      "enonce": "Sous (a) prolongement de Cartan–Hadamard ou (b) $\\sec\\le b>0$ et $\\Om$ dans une boule normale de rayon $<\\pi/(2\\sqrt b)$, s'il existe $x_0$ avec $\\dg(\\cdot,x_0)$ lisse sur $\\Om$ et $x_0\\in\\mathcal A_g$ (au besoin après Killing), alors $H=\\gradg\\tfrac12\\dg^2+K$ vérifie Hyp. 1–3 ; Hyp. 4–6 à vérifier au cas par cas.",
      "depend": [
-      "(18)",
+      "(21)",
       "Théorème 5.7",
-      "(20)"
+      "(22)"
      ]
     }
    ],
@@ -1494,11 +1638,11 @@
     },
     {
      "cible": "Condition suffisante d'existence",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Régularité de $\\tfrac12\\dg^2$, coercivité par (18), signes par $\\mathcal A_g$, Killing par (20).",
+     "strategie": "Esquisse détaillée (à porter au niveau complet). Régularité de $\\tfrac12\\dg^2$, coercivité par (21), signes par $\\mathcal A_g$, Killing par (22).",
      "etapes": [
       "(a) Cartan–Hadamard : $\\exp_{x_0}$ difféomorphisme, $\\dg^2=|\\exp_{x_0}^{-1}|^2$ lisse ; (b) boule normale de rayon $R<\\pi/(2\\sqrt b)$ : lisse et avant le premier point focal.",
-      "(18) donne $\\Hessg(\\tfrac12r^2)\\ge\\rho g$ avec $\\rho=1$ ($b\\le0$) ou $\\rho=\\sqrt bR\\cot(\\sqrt bR)$ ($b>0$), minimum du coefficient radial $1$ et du tangentiel.",
-      "Signes : $x_0\\in\\mathcal A_g$ et Théorème 5.7(1), $\\gradg f(p)=-\\log_px_0$. Killing : (20) transfère la coercivité sans perte ; $H\\in C^1$ comme somme. Hyp. 4–6 portent sur $q|_{\\GN}$, $a$, $p$ et ses dérivées : non contraintes par la construction."
+      "(21) donne $\\Hessg(\\tfrac12r^2)\\ge\\rho g$ avec $\\rho=1$ ($b\\le0$) ou $\\rho=\\sqrt bR\\cot(\\sqrt bR)$ ($b>0$), minimum du coefficient radial $1$ et du tangentiel.",
+      "Signes : $x_0\\in\\mathcal A_g$ et Théorème 5.7(1), $\\gradg f(p)=-\\log_px_0$. Killing : (22) transfère la coercivité sans perte ; $H\\in C^1$ comme somme. Hyp. 4–6 portent sur $q|_{\\GN}$, $a$, $p$ et ses dérivées : non contraintes par la construction."
      ]
     }
    ],
@@ -1549,6 +1693,17 @@
      ],
      "bonne": 1,
      "explication": "Au-delà du rayon focal, $\\sqrt br\\cot(\\sqrt br)$ change de signe."
+    },
+    {
+     "question": "Pourquoi Hyp. 2–3 doivent-elles être écrites avec $H$ et non $\\gradg f$ ?",
+     "options": [
+      "Par convention",
+      "Parce que le flux, les faces et le Théorème B utilisent $H=\\gradg f+K$, et $K$ modifie les composantes de bord",
+      "Parce que $f$ n'existe pas toujours",
+      "Parce que $K=0$ en général"
+     ],
+     "bonne": 1,
+     "explication": "Point majeur 5.4 du pré-rapport : sans cela, le multiplicateur tourné n'est pas couvert par le théorème."
     }
    ]
   },
@@ -1556,7 +1711,7 @@
    "numero": 11,
    "titre": "L'identité du multiplicateur modifié (Annexe D) et l'excision",
    "objectifs": [
-    "Savoir dériver $(29)$ de bout en bout à partir de trois intégrations par parties euclidiennes et de Bochner.",
+    "Savoir dériver $(33)$ de bout en bout à partir de trois intégrations par parties euclidiennes et de Bochner.",
     "Savoir justifier le passage à la limite $\\varepsilon\\to0$ dans l'identité excisée et le branchement du Théorème A avec le bon signe."
    ],
    "sections": [
@@ -1570,10 +1725,10 @@
      ]
     },
     {
-     "titre": "De $\\Phi$ à $(29)$",
+     "titre": "De $\\Phi$ à $(33)$",
      "paragraphes": [
       "$\\Phi(t)=\\int_\\Om u_t\\mathcal M_\\mu u$ avec $\\mathcal M_\\mu u=H(u)+(\\tfrac12p-\\mu)u$, $\\mu=\\rho/2$. Trois blocs : D.1 (dérivation en temps, les $\\tfrac12pu_t^2$ se compensent), D.2 (partie $H(u)$, Bochner puis divergence de $\\tfrac12H|\\nabla u|^2_A$), D.3 (partie $\\xi u$). Bilan : $\\Phi'=-\\int\\sym\\gradg H(\\gradg u,\\gradg u)+\\mu\\int(|\\gradg u|^2-u_t^2)+\\tfrac14\\int(Lp)u^2-\\oint\\mathcal B_\\mu$, avec $\\mathcal B_\\mu=\\tfrac12q(|\\nabla u|_A^2-u_t^2)-\\dnu^Au\\,H(u)-(\\tfrac12p-\\mu)u\\dnu^Au+\\tfrac14(\\dnu^Ap)u^2$.",
-      "Sur $\\Om\\setminus T_\\varepsilon$, le bord contient $\\Sigma_\\varepsilon$ ; les volumes et les faces convergent par domination (les faces parce que chaque densité est intégrable jusqu'à l'arête, Lemme 7.2(1) pour le croisé) ; le terme $\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu$ tend vers $-\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\ge0$ et entre avec le signe $-$ : favorable, jeté."
+      "Sur $\\Om\\setminus T_\\varepsilon$, le bord contient $\\Sigma_\\varepsilon$ ; les volumes et les faces convergent par domination (les faces parce que chaque densité est intégrable jusqu'à l'arête, Lemme 7.4(1) pour le croisé) ; le terme $\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu$ tend vers $-\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\ge0$ et entre avec le signe $-$ : favorable, jeté."
      ],
      "retenir": [
       "Le terme $-\\mu\\int u_t^2$ est l'équipartition manquante.",
@@ -1583,7 +1738,7 @@
    ],
    "enonces": [
     {
-     "type": "(29)",
+     "type": "(33)",
      "nom": "Identité de $\\Phi'$",
      "enonce": "$\\Phi'(t)=-\\int_\\Om\\sym\\gradg H(\\gradg u,\\gradg u)+\\mu\\int_\\Om(|\\gradg u|^2-u_t^2)+\\tfrac14\\int_\\Om(Lp)u^2-\\oint_{\\partial\\Om}\\mathcal B_\\mu(u)$ pour les solutions fortes (après excision).",
      "depend": [
@@ -1591,7 +1746,7 @@
      ]
     },
     {
-     "type": "(21)",
+     "type": "(24)",
      "nom": "Identité maîtresse",
      "enonce": "$\\int_Q\\sym\\gradg H(\\gradg u,\\gradg u)+\\oint_{\\partial\\Om\\times(0,T)}\\mathcal B(u)=-[\\int_\\Om u_t\\mathcal Mu]_0^T+\\tfrac14\\int_Q(Lp)u^2$.",
      "depend": []
@@ -1602,7 +1757,7 @@
      "enonce": "$\\lim_{\\varepsilon\\to0}\\int_0^T\\!\\int_{\\Sigma_\\varepsilon}\\mathcal B=-\\tfrac\\pi8\\int_0^T\\!\\int_\\Gamma\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2$, $\\ge0$ sous Hyp. 2 ; reporté avec le signe $-$, favorable.",
      "depend": [
       "Théorème A",
-      "Lemme 7.2(1)"
+      "Lemme 7.4(1)"
      ]
     },
     {
@@ -1618,29 +1773,29 @@
      "strategie": "Esquisse détaillée (à porter au niveau complet). Trois intégrations par parties euclidiennes et Bochner.",
      "etapes": [
       "Notations : $\\xi=\\tfrac12p-\\mu$, $\\mathcal M_\\mu u=H(u)+\\xi u$, $\\Phi=\\int_\\Om u_t\\mathcal M_\\mu u$. $\\Phi'=\\int u_{tt}\\mathcal M_\\mu u+\\int u_t\\mathcal M_\\mu u_t$.",
-      "D.1(a) : $\\int u_tH(u_t)=\\tfrac12\\int H\\cdot\\nabla(u_t^2)=-\\tfrac12\\int p\\,u_t^2+\\tfrac12\\oint(H\\cdot\\nu)u_t^2$. D.1(b) : $\\int\\xi u_t^2=\\int(\\tfrac12p-\\mu)u_t^2$. Somme $(43)$ : $\\int u_t\\mathcal M_\\mu u_t=-\\mu\\int u_t^2+\\tfrac12\\oint(H\\cdot\\nu)u_t^2$.",
-      "D.2(a) : $u_{tt}=Lu$ ; $\\int Lu\\,H(u)=\\oint\\dnu^Au\\,H(u)-\\int A\\nabla u\\cdot\\nabla(H(u))$. D.2(b) Bochner : $A\\nabla u\\cdot\\nabla(H(u))=\\sym\\gradg H(\\gradg u,\\gradg u)+\\tfrac12H(|\\nabla u|^2_A)$. D.2(c) : $\\int\\tfrac12H\\cdot\\nabla(|\\nabla u|^2_A)=-\\tfrac12\\int p|\\nabla u|^2_A+\\tfrac12\\oint(H\\cdot\\nu)|\\nabla u|^2_A$. Bilan $(44)$ : $\\int Lu\\,H(u)=\\oint[\\dnu^Au\\,H(u)-\\tfrac12(H\\cdot\\nu)|\\nabla u|^2_A]-\\int\\sym\\gradg H(\\gradg u,\\gradg u)+\\tfrac12\\int p|\\nabla u|^2_A$.",
-      "D.3(a) : $\\int Lu\\,\\xi u=\\oint\\xi u\\,\\dnu^Au-\\int\\xi|\\nabla u|^2_A-\\int uA\\nabla u\\cdot\\nabla\\xi$. D.3(b) : $\\int uA\\nabla u\\cdot\\nabla\\xi=\\tfrac12\\int A\\nabla(u^2)\\cdot\\nabla\\xi=\\tfrac12\\oint(\\dnu^A\\xi)u^2-\\tfrac12\\int(L\\xi)u^2$. Avec $\\nabla\\xi=\\tfrac12\\nabla p$, $L\\xi=\\tfrac12Lp$, $\\dnu^A\\xi=\\tfrac12\\dnu^Ap$ : $(45)$ $\\int Lu\\,\\xi u=\\oint[(\\tfrac12p-\\mu)u\\dnu^Au-\\tfrac14(\\dnu^Ap)u^2]-\\int(\\tfrac12p-\\mu)|\\nabla u|^2_A+\\tfrac14\\int(Lp)u^2$.",
-      "D.4 : sommer $(43)+(44)+(45)$. Intérieur en $|\\nabla u|_A^2$ : $\\tfrac12p-(\\tfrac12p-\\mu)=\\mu$ ; intérieur en $u_t^2$ : $-\\mu$ ; $\\tfrac14\\int(Lp)u^2$ ; $-\\int\\sym\\gradg H$. Bords : $\\tfrac12(H\\cdot\\nu)u_t^2+\\dnu^Au\\,H(u)-\\tfrac12(H\\cdot\\nu)|\\nabla u|^2_A+(\\tfrac12p-\\mu)u\\dnu^Au-\\tfrac14(\\dnu^Ap)u^2=-\\mathcal B_\\mu$ avec $\\mathcal B_\\mu=\\tfrac12q(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)-(\\tfrac12p-\\mu)u\\dnu^Au+\\tfrac14(\\dnu^Ap)u^2$, $q=H\\cdot\\nu$. C'est $(29)$ avec $(22)$.",
+      "D.1(a) : $\\int u_tH(u_t)=\\tfrac12\\int H\\cdot\\nabla(u_t^2)=-\\tfrac12\\int p\\,u_t^2+\\tfrac12\\oint(H\\cdot\\nu)u_t^2$. D.1(b) : $\\int\\xi u_t^2=\\int(\\tfrac12p-\\mu)u_t^2$. Somme $(D.1)$ : $\\int u_t\\mathcal M_\\mu u_t=-\\mu\\int u_t^2+\\tfrac12\\oint(H\\cdot\\nu)u_t^2$.",
+      "D.2(a) : $u_{tt}=Lu$ ; $\\int Lu\\,H(u)=\\oint\\dnu^Au\\,H(u)-\\int A\\nabla u\\cdot\\nabla(H(u))$. D.2(b) Bochner : $A\\nabla u\\cdot\\nabla(H(u))=\\sym\\gradg H(\\gradg u,\\gradg u)+\\tfrac12H(|\\nabla u|^2_A)$. D.2(c) : $\\int\\tfrac12H\\cdot\\nabla(|\\nabla u|^2_A)=-\\tfrac12\\int p|\\nabla u|^2_A+\\tfrac12\\oint(H\\cdot\\nu)|\\nabla u|^2_A$. Bilan $(D.2)$ : $\\int Lu\\,H(u)=\\oint[\\dnu^Au\\,H(u)-\\tfrac12(H\\cdot\\nu)|\\nabla u|^2_A]-\\int\\sym\\gradg H(\\gradg u,\\gradg u)+\\tfrac12\\int p|\\nabla u|^2_A$.",
+      "D.3(a) : $\\int Lu\\,\\xi u=\\oint\\xi u\\,\\dnu^Au-\\int\\xi|\\nabla u|^2_A-\\int uA\\nabla u\\cdot\\nabla\\xi$. D.3(b) : $\\int uA\\nabla u\\cdot\\nabla\\xi=\\tfrac12\\int A\\nabla(u^2)\\cdot\\nabla\\xi=\\tfrac12\\oint(\\dnu^A\\xi)u^2-\\tfrac12\\int(L\\xi)u^2$. Avec $\\nabla\\xi=\\tfrac12\\nabla p$, $L\\xi=\\tfrac12Lp$, $\\dnu^A\\xi=\\tfrac12\\dnu^Ap$ : $(D.3)$ $\\int Lu\\,\\xi u=\\oint[(\\tfrac12p-\\mu)u\\dnu^Au-\\tfrac14(\\dnu^Ap)u^2]-\\int(\\tfrac12p-\\mu)|\\nabla u|^2_A+\\tfrac14\\int(Lp)u^2$.",
+      "D.4 : sommer $(D.1)+(D.2)+(D.3)$. Intérieur en $|\\nabla u|_A^2$ : $\\tfrac12p-(\\tfrac12p-\\mu)=\\mu$ ; intérieur en $u_t^2$ : $-\\mu$ ; $\\tfrac14\\int(Lp)u^2$ ; $-\\int\\sym\\gradg H$. Bords : $\\tfrac12(H\\cdot\\nu)u_t^2+\\dnu^Au\\,H(u)-\\tfrac12(H\\cdot\\nu)|\\nabla u|^2_A+(\\tfrac12p-\\mu)u\\dnu^Au-\\tfrac14(\\dnu^Ap)u^2=-\\mathcal B_\\mu$ avec $\\mathcal B_\\mu=\\tfrac12q(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)-(\\tfrac12p-\\mu)u\\dnu^Au+\\tfrac14(\\dnu^Ap)u^2$, $q=H\\cdot\\nu$. C'est $(33)$ avec $(25)$.",
       "Vérification : $\\mu=0$, $H$ gradient : structure de Yao, Thm. 2.1. Version excisée : mêmes calculs sur $\\Om\\setminus T_\\varepsilon$, bord augmenté de $\\Sigma_\\varepsilon$."
      ]
     },
     {
      "cible": "Excision et branchement",
-     "strategie": "Preuve complète. Hypothèses : $u$ solution forte ; $(29)$ appliquée sur $\\Om_\\varepsilon=\\Om\\setminus T_\\varepsilon$ où $u\\in H^2(\\Om_\\varepsilon)$ (régularité elliptique loin de $\\Gamma$) ; bord $\\partial\\Om_\\varepsilon=(\\GD\\cap\\{r>\\varepsilon\\})\\cup(\\GN\\cap\\{r>\\varepsilon\\})\\cup\\Sigma_\\varepsilon$.",
+     "strategie": "Preuve complète. Hypothèses : $u$ solution forte ; $(33)$ appliquée sur $\\Om_\\varepsilon=\\Om\\setminus T_\\varepsilon$ où $u\\in H^2(\\Om_\\varepsilon)$ (régularité elliptique loin de $\\Gamma$) ; bord $\\partial\\Om_\\varepsilon=(\\GD\\cap\\{r>\\varepsilon\\})\\cup(\\GN\\cap\\{r>\\varepsilon\\})\\cup\\Sigma_\\varepsilon$.",
      "etapes": [
       "Volumes : les intégrandes $\\sym\\gradg H(\\gradg u,\\gradg u)$, $|\\gradg u|^2$, $u_t^2$, $(Lp)u^2$ sont dans $L^1(\\Om)$ ; $\\mathbf 1_{\\Om_\\varepsilon}\\to\\mathbf 1_\\Om$ p.p. ; convergence dominée.",
       "Crochet : $\\int_{\\Om_\\varepsilon}u_t\\mathcal M_\\mu u\\to\\int_\\Om u_t\\mathcal M_\\mu u$, même argument ($u_t\\mathcal M_\\mu u\\in L^1$).",
-      "Faces tronquées : il faut $\\mathcal B_\\mu|_{\\GD}$, $\\mathcal B_\\mu|_{\\GN}\\in L^1$ jusqu'à l'arête. Sur $\\GD$ : $-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2$ avec $q\\to0$ en $\\Gamma$ (tangence forcée, $q=O(r)$ si $H\\in C^1$) et $(\\partial_\\nu u)^2\\sim\\eta^2/(4r)$ : produit $O(1)$, intégrable. Sur $\\GN$ : termes en $q|\\nabla_Tu|^2$ ($q=O(r)$, $|\\nabla_Tu|^2=O(1/r)$ : borné), en $qu_t^2$, $auu_t$, $(\\dnu^Ap)u^2$ (traces $L^2$), et le croisé $au_t\\innerg{H_T}{\\nabla_Tu}$ : Lemme 7.2(1). Convergence dominée sur les faces.",
+      "Faces tronquées : il faut $\\mathcal B_\\mu|_{\\GD}$, $\\mathcal B_\\mu|_{\\GN}\\in L^1$ jusqu'à l'arête. Sur $\\GD$ : $-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2$ avec $q\\to0$ en $\\Gamma$ (tangence forcée, $q=O(r)$ si $H\\in C^1$) et $(\\partial_\\nu u)^2\\sim\\eta^2/(4r)$ : produit $O(1)$, intégrable. Sur $\\GN$ : termes en $q|\\nabla_Tu|^2$ ($q=O(r)$, $|\\nabla_Tu|^2=O(1/r)$ : borné), en $qu_t^2$, $auu_t$, $(\\dnu^Ap)u^2$ (traces $L^2$), et le croisé $au_t\\innerg{H_T}{\\nabla_Tu}$ : Lemme 7.4(1). Convergence dominée sur les faces.",
       "Interface : $\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu$, avec la normale $\\nu=-e_r$ sortante de $\\Om_\\varepsilon$ ; le Théorème A (dont la conclusion vaut pour $\\mathcal B_\\mu$, Remarque 7.1) donne, après intégration en $t$ (convergence dominée en $t$, $\\eta\\in C^0([0,T];L^2(\\Gamma))$), $\\lim\\int_0^T\\!\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu=-\\tfrac\\pi8\\int_0^T\\!\\int_\\Gamma\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2$.",
-      "Signe : ce terme entre dans $(29)$ avec le signe $-$ ; sous Hyp. 2, $-\\lim\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu=+\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\le0$ : favorable, jeté dans la majoration de $\\Phi'$."
+      "Signe : ce terme entre dans $(33)$ avec le signe $-$ ; sous Hyp. 2, $-\\lim\\int_{\\Sigma_\\varepsilon}\\mathcal B_\\mu=+\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\le0$ : favorable, jeté dans la majoration de $\\Phi'$."
      ]
     }
    ],
    "glossaire": [
     {
      "terme": "$\\mathcal B_\\mu$",
-     "definition": "Flux du multiplicateur modifié, formule $(22)$ ; ses cinq blocs sur $\\GN$ sont détaillés au chapitre suivant."
+     "definition": "Flux du multiplicateur modifié, formule $(25)$ ; ses cinq blocs sur $\\GN$ sont détaillés au chapitre suivant."
     },
     {
      "terme": "Équipartition",
@@ -1649,7 +1804,7 @@
    ],
    "quiz": [
     {
-     "question": "D'où vient le terme $-\\mu\\int u_t^2$ dans $(29)$ ?",
+     "question": "D'où vient le terme $-\\mu\\int u_t^2$ dans $(33)$ ?",
      "options": [
       "De Bochner",
       "De $\\int u_t\\,\\xi u_t$ avec $\\xi=\\tfrac12p-\\mu$ en D.1",
@@ -1660,7 +1815,7 @@
      "explication": "Les $\\tfrac12pu_t^2$ se compensent entre $\\tfrac12\\int H\\cdot\\nabla(u_t^2)$ et $\\int\\xi u_t^2$ ; reste $-\\mu\\int u_t^2$."
     },
     {
-     "question": "Le terme d'interface reporté dans $(29)$ vaut :",
+     "question": "Le terme d'interface reporté dans $(33)$ vaut :",
      "options": [
       "$-\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\ge0$",
       "$+\\tfrac\\pi8\\int\\sqrt{\\det A}\\innerg{H}{\\tau}\\eta^2\\le0$",
@@ -1676,24 +1831,25 @@
    "numero": 12,
    "titre": "Les faces, le terme croisé tangentiel et la compensation à l'arête",
    "objectifs": [
-    "Savoir réduire $\\mathcal B_\\mu$ sur $\\GD$ et sur $\\GN$ (les cinq blocs de $(23)$) et démontrer $(24)$ avec $C_\\theta$ explicite.",
-    "Savoir démontrer le Lemme 7.2 (neuf blocs, compensation exacte, Hardy) et la Proposition 7.4 (plancher $\\sqrt\\delta$)."
+    "Savoir démontrer le Lemme 7.2 (intégrabilité des flux de Neumann jusqu'à l'arête sous (H5), en toute dimension) : il est le seul ingrédient consommé par le Théorème B sur $\\GN$ ; le Lemme 7.4 (compensation) n'intervient que pour le feedback libre (Proposition 7.6).",
+    "Savoir réduire $\\mathcal B_\\mu$ sur $\\GD$ et sur $\\GN$ (les cinq blocs de $(26)$) et démontrer $(28)$ avec $C_\\theta$ explicite.",
+    "Savoir démontrer le Lemme 7.4 (neuf blocs, compensation exacte, Hardy) et la Proposition 7.6 (plancher $\\sqrt\\delta$)."
    ],
    "sections": [
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Pas 1 : face Dirichlet en trois lignes ($u=0\\Rightarrow\\nabla u=(\\partial_\\nu u)\\nu$, $A\\nabla u=(\\partial_\\nu u)A\\nu$, $\\dnu^Au=\\alpha_A\\partial_\\nu u$, $|\\nabla u|^2_A=\\alpha_A(\\partial_\\nu u)^2$, $H(u)=q\\partial_\\nu u$ ; $\\mathcal B_\\mu=\\tfrac12q\\alpha_A(\\partial_\\nu u)^2-q\\alpha_A(\\partial_\\nu u)^2=-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2$). Pas 2 : face Neumann, cinq blocs. Pas 3 : les trois régimes de Hyp. 5, une inégalité de Young chacun. Pas 4 : $(24)$. Pas 5 : Lemme 7.2, neuf blocs. Pas 6 : Prop. 7.4 en quatre étapes. Pas 7 : lire l'Annexe E ligne à ligne et attribuer chaque constante à son budget."
+      "Pas 1 : face Dirichlet en trois lignes ($u=0\\Rightarrow\\nabla u=(\\partial_\\nu u)\\nu$, $A\\nabla u=(\\partial_\\nu u)A\\nu$, $\\dnu^Au=\\alpha_A\\partial_\\nu u$, $|\\nabla u|^2_A=\\alpha_A(\\partial_\\nu u)^2$, $H(u)=q\\partial_\\nu u$ ; $\\mathcal B_\\mu=\\tfrac12q\\alpha_A(\\partial_\\nu u)^2-q\\alpha_A(\\partial_\\nu u)^2=-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2$). Pas 2 : face Neumann, cinq blocs. Pas 3 : les trois régimes de Hyp. 5, une inégalité de Young chacun. Pas 4 : $(28)$. Pas 5 : Lemme 7.2 (poids $q=O(r)$ par tangence forcée, $\\|\\nabla_Tu(r,\\cdot)\\|^2\\lesssim r^{-1}\\|\\eta\\|^2$, intégration en $r$ ; croisé régime par régime). Pas 5$'$ : Lemme 7.4, neuf blocs ($n=2$). Pas 6 : Prop. 7.6 en quatre étapes. Pas 7 : lire l'Annexe E ligne à ligne et attribuer chaque constante à son budget."
      ],
      "retenir": [
-      "Avant de passer au chapitre suivant : reconstituer $(23)$ et $(24)$ de mémoire."
+      "Avant de passer au chapitre suivant : reconstituer $(26)$ et $(28)$ de mémoire."
      ]
     },
     {
      "titre": "Où l'absorption se joue",
      "paragraphes": [
       "Sur $\\GD$ : $u=0$ donc $\\nabla u=(\\partial_\\nu u)\\nu$ et $\\mathcal B_\\mu=-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2\\ge0$ sous Hyp. 3 : favorable. Sur $\\GN$ : décomposition $g$-orthogonale $\\gradg u=(\\partial_{\\nu_g}u)\\nu_g+\\nabla_Tu$ avec $\\partial_{\\nu_g}u=-au_t/\\sqrt{\\alpha_A}$ ; $-\\mathcal B_\\mu$ se scinde en absorbant $-\\tfrac12q|\\nabla_Tu|^2$ (F), dissipatif $\\tfrac12q(1+a^2/\\alpha_A)u_t^2$ (D), croisé $-au_t\\innerg{H_T}{\\nabla_Tu}$, terme $(\\tfrac12p-\\mu)auu_t$ (D+T) et trace $\\tfrac14(\\dnu^Ap)u^2$ (T).",
-      "Le croisé exige $|H_T|^2\\lesssim q$ pondéré par le feedback ; or la tangence forcée annule $q$ sur $\\Gamma$ là où $H_T$ ne s'annule pas. Hyp. 5 résout la tension : régime (i) $a=bq$, le croisé hérite du facteur $q$ ; (ii) $a|H_T|^2\\le C_Nq$ ; (iii) adaptation dans un collier seulement. Le Lemme 7.2 montre que le bloc singulier×singulier du croisé se compense exactement à l'arête : la singularité de Zaremba n'oppose aucune obstruction nouvelle."
+      "Le croisé exige $|H_T|^2\\lesssim q$ pondéré par le feedback ; or la tangence forcée annule $q$ sur $\\Gamma$ là où $H_T$ ne s'annule pas. Hyp. 5 résout la tension : régime (i) $a=bq$, le croisé hérite du facteur $q$ ; (ii) $a|H_T|^2\\le C_Nq$ ; (iii) adaptation dans un collier seulement. Le Lemme 7.4 montre que le bloc singulier×singulier du croisé se compense exactement à l'arête : la singularité de Zaremba n'oppose aucune obstruction nouvelle."
      ],
      "retenir": [
       "Favorable = $\\mathcal B\\ge0$ ; dissipatif = payé par $\\int au_t^2$ ; trace = payé par la marge $\\rho'$.",
@@ -1704,34 +1860,50 @@
    ],
    "enonces": [
     {
-     "type": "(23)–(24)",
+     "type": "(26)–(28)",
      "nom": "Face Neumann amortie",
      "enonce": "$-\\mathcal B_\\mu|_{\\GN}=-\\tfrac12q|\\nabla_Tu|^2+\\tfrac12q(1+\\tfrac{a^2}{\\alpha_A})u_t^2-au_t\\innerg{H_T}{\\nabla_Tu}-(\\tfrac12p-\\mu)auu_t-\\tfrac14(\\dnu^Ap)u^2$ ; sous Hyp. 4–5 : $-\\int_{\\GN}\\mathcal B_\\mu\\le-\\tfrac14\\int q|\\nabla_Tu|^2+C_N'\\int au_t^2+(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int_\\Om|\\gradg u|^2$.",
      "depend": []
     },
     {
+     "type": "(27)",
+     "nom": "La constante $C_\\theta$ explicite",
+     "enonce": "Pour tout $\\theta>0$, $c:=\\|\\tfrac12p-\\mu\\|_{C^0(\\GN)}$ : $|(\\tfrac12p-\\mu)auu_t|\\le\\theta u^2+C_\\theta au_t^2$ avec $C_\\theta=\\dfrac{c^2\\|a\\|_{C^0(\\GN)}}{4\\theta}$ (Young $|cauu_t|\\le\\theta u^2+\\tfrac{c^2a^2}{4\\theta}u_t^2$ puis $a^2\\le\\|a\\|_{C^0}a$) ; au §7.4, $\\theta=\\rho'/(8C_{\\mathrm{tr}})$, soit $C_\\theta=2c^2\\|a\\|_{C^0}C_{\\mathrm{tr}}/\\rho'$.",
+     "depend": []
+    },
+    {
      "type": "Lemme 7.2",
+     "nom": "Intégrabilité jusqu'à l'arête sous compatibilité",
+     "enonce": "$u$ solution forte, $H\\in C^1(\\overline\\Om;T\\Om)$ vérifiant les signes (H3)–(H4), et (H5) (un des trois régimes). Alors, en toute dimension $n\\ge2$, $\\mathcal B_\\mu|_{\\GD}$ et $\\mathcal B_\\mu|_{\\GN}$ sont dans $L^1$ des faces entières, et sur $\\GN\\cap\\{r<\\delta\\}$ : $\\iint q|\\nabla_Tu|^2\\le C\\|H\\|_{C^1}\\delta(\\|\\eta\\|^2_{L^2(\\Gamma)}+\\|\\nabla u_R\\|^2_{L^2(\\GN\\cap\\{r<\\delta\\})})$ et $\\iint|au_t\\innerg{H_T}{\\nabla_Tu}|\\le\\tfrac14\\iint q|\\nabla_Tu|^2+C_{\\mathrm{cross}}\\iint au_t^2$ ($u_R$ lu comme $w$ si $n\\ge3$). En particulier (28) vaut sur tout $\\GN$.",
+     "depend": [
+      "Lemme 5.2",
+      "Lemme 3.7",
+      "Lemme B.13"
+     ]
+    },
+    {
+     "type": "Lemme 7.4",
      "nom": "Compensation asymptotique du terme croisé à l'arête",
      "enonce": "Pour $u$ régulière ($D(\\A^2)$), $D=au_t\\innerg{H_T}{\\nabla_Tu}$ sur $\\GN\\cap\\{r<\\delta\\}$ : (1) $D\\in L^1$ bien que $|\\nabla_Tu|\\notin L^2$ ; (2) $D=\\tfrac14aH_r\\partial_t(\\eta^2)+R$, $\\|R\\|_{L^1}\\le C\\delta^{1/2}M(t)$ ; (3) $H_r(0,s)=-\\innerg{H}{\\tau}(s)\\ge0$ sous Hyp. 2.",
      "depend": [
-      "Proposition 3.3(iii)",
+      "Proposition 3.4(iii)",
       "Hardy",
       "Annexe B (second niveau)"
      ]
     },
     {
-     "type": "Proposition 7.4",
+     "type": "Proposition 7.6",
      "nom": "Feedback libre sous étoilement strict hors interface",
      "enonce": "Sous $q>0$ sur $\\GN\\setminus\\Gamma$, $a\\ge a_0>0$, Hyp. 1–4 et 6, pour $u$ régulière : $E(t)\\le C(\\delta)e^{-\\omega(\\delta)t}E(0)+C_0\\sqrt\\delta E^\\sharp(0)$.",
      "depend": [
-      "Lemme 7.2",
+      "Lemme 7.4",
       "Proposition 10.1(ii)"
      ]
     },
     {
-     "type": "Lemme 7.2 (cas $n\\ge3$)",
+     "type": "Problème ouvert",
      "nom": "Compensation à l'arête avec le potentiel d'arête",
-     "enonce": "Pour $u=\\mathcal K_{\\mathrm{edge}}\\eta+w$, $u_t=\\mathcal K_{\\mathrm{edge}}\\eta_t+w_t$ : mêmes conclusions (1)–(3), la densité principale étant $\\tfrac14aH_r\\partial_t(\\eta_\\omega^2)$ avec $\\int_\\Gamma\\eta_\\omega^2\\,\\mathrm ds=\\int|\\widehat\\eta|^2\\omega(r[\\zeta])^2\\mathrm d\\zeta\\le\\|\\eta\\|^2$ ; $K_\\delta$ est lu avec $\\eta_\\omega^2$.",
+     "enonce": "Retiré des résultats après le pré-rapport du 21 septembre : avec $\\mathcal K_{\\mathrm{edge}}\\eta$, la densité du bloc singulier contient le multiplicateur variable $a(r,s)H_r(r,s)$, qui ne commute pas avec la troncature $\\omega(r[D_s])$ ; la multiplication en $s$ devient une convolution en fréquence, et « $\\eta_\\omega^2(r,s)$ » n'est pas une densité locale bien définie. Ce qu'il faudrait : $K_\\delta=\\tfrac12\\langle B_\\delta\\eta,\\eta\\rangle$ forme quadratique symétrisée issue de $\\int_0^\\delta$ de la partie symétrique de $T_r^*M_{aH_r}\\partial_rT_r$, et un contrôle des commutateurs $[M_{aH_r},T_r]$ par calcul pseudo-différentiel, en cartes sur $\\Gamma$. Le Lemme 7.4, $K_\\delta$ et la Proposition 7.6 sont donc énoncés pour $n=2$ ; le Théorème B aussi.",
      "depend": [
       "Plancherel tangentiel",
       "Hardy",
@@ -1742,15 +1914,26 @@
    "preuves": [
     {
      "cible": "Face Neumann amortie — les cinq blocs, formule par formule",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Décomposition $g$-orthogonale puis substitution dans $(22)$.",
+     "strategie": "Esquisse détaillée (à porter au niveau complet). Décomposition $g$-orthogonale puis substitution dans $(25)$.",
      "etapes": [
       "Sur $\\GN$ : $q=H\\cdot\\nu\\ge0$, $\\alpha_A=\\nu\\cdot A\\nu\\ge\\alpha_0$, $H_T=H-\\innerg{H}{\\nu_g}\\nu_g$. Par le Lemme 2.1 et $\\dnu^Au=-au_t$ : $\\partial_{\\nu_g}u=\\dnu^Au/\\sqrt{\\alpha_A}=-au_t/\\sqrt{\\alpha_A}$ ; $\\innerg{H}{\\nu_g}=q/\\sqrt{\\alpha_A}$.",
       "$|\\gradg u|^2=(\\partial_{\\nu_g}u)^2+|\\nabla_Tu|^2=\\tfrac{a^2}{\\alpha_A}u_t^2+|\\nabla_Tu|^2$ ; $H(u)=\\innerg{H}{\\nu_g}\\partial_{\\nu_g}u+\\innerg{H_T}{\\nabla_Tu}=-\\tfrac{aq}{\\alpha_A}u_t+\\innerg{H_T}{\\nabla_Tu}$.",
-      "Substituer dans $\\mathcal B_\\mu=\\tfrac12q(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)-(\\tfrac12p-\\mu)u\\dnu^Au+\\tfrac14(\\dnu^Ap)u^2$ : $\\tfrac12q(\\tfrac{a^2}{\\alpha_A}u_t^2+|\\nabla_Tu|^2-u_t^2)+au_t(-\\tfrac{aq}{\\alpha_A}u_t+\\innerg{H_T}{\\nabla_Tu})+(\\tfrac12p-\\mu)auu_t+\\tfrac14(\\dnu^Ap)u^2$ ; les termes en $\\tfrac{a^2q}{\\alpha_A}u_t^2$ : $\\tfrac12-1=-\\tfrac12$. Donc $-\\mathcal B_\\mu=-\\tfrac12q|\\nabla_Tu|^2+\\tfrac12q(1+\\tfrac{a^2}{\\alpha_A})u_t^2-au_t\\innerg{H_T}{\\nabla_Tu}-(\\tfrac12p-\\mu)auu_t-\\tfrac14(\\dnu^Ap)u^2$ : c'est $(23)$.",
+      "Substituer dans $\\mathcal B_\\mu=\\tfrac12q(|\\nabla u|^2_A-u_t^2)-\\dnu^Au\\,H(u)-(\\tfrac12p-\\mu)u\\dnu^Au+\\tfrac14(\\dnu^Ap)u^2$ : $\\tfrac12q(\\tfrac{a^2}{\\alpha_A}u_t^2+|\\nabla_Tu|^2-u_t^2)+au_t(-\\tfrac{aq}{\\alpha_A}u_t+\\innerg{H_T}{\\nabla_Tu})+(\\tfrac12p-\\mu)auu_t+\\tfrac14(\\dnu^Ap)u^2$ ; les termes en $\\tfrac{a^2q}{\\alpha_A}u_t^2$ : $\\tfrac12-1=-\\tfrac12$. Donc $-\\mathcal B_\\mu=-\\tfrac12q|\\nabla_Tu|^2+\\tfrac12q(1+\\tfrac{a^2}{\\alpha_A})u_t^2-au_t\\innerg{H_T}{\\nabla_Tu}-(\\tfrac12p-\\mu)auu_t-\\tfrac14(\\dnu^Ap)u^2$ : c'est $(26)$.",
       "Bloc (F) $-\\tfrac12q|\\nabla_Tu|^2\\le0$ sous Hyp. 4 : absorbant. Bloc (D) $\\tfrac12q(1+a^2/\\alpha_A)u_t^2\\le C_qau_t^2$ avec $C_q=(1+b_1^2\\|H\\|^2/\\alpha_0)/(2b_0)$ en régime (i), $\\|H\\|(1+\\|a\\|^2/\\alpha_0)/(2a_0)$ en (ii).",
       "Croisé, régime (i) $a=bq$ : $|au_t\\innerg{H_T}{\\nabla_Tu}|=bq|u_t||\\innerg{H_T}{\\nabla_Tu}|\\le\\tfrac14q|\\nabla_Tu|^2+b^2\\|H_T\\|^2qu_t^2\\le\\tfrac14q|\\nabla_Tu|^2+\\tfrac{b_1^2\\|H_T\\|^2}{b_0}au_t^2$ (Young avec $\\theta=q/2$, puis $q=a/b\\le a/b_0$). Régime (ii) : là où $q>0$, $\\le\\tfrac14q|\\nabla_Tu|^2+\\tfrac{a^2|H_T|^2}{q}u_t^2\\le\\tfrac14q|\\nabla_Tu|^2+C_Nau_t^2$ ; là où $q=0$, $H_T=0$. Régime (iii) : (i) sur $V_\\delta$, et hors collier $\\tfrac{a^2|H_T|^2}{q}\\le\\tfrac{\\|a\\|\\|H_T\\|^2}{c_\\delta}a$.",
       "Bloc (D)+(T) : $|(\\tfrac12p-\\mu)auu_t|\\le\\theta u^2+C_\\theta au_t^2$, $C_\\theta=c^2\\|a\\|/(4\\theta)$, puis $\\int_{\\GN}u^2\\le C_{tr}\\int|\\gradg u|^2$. Bloc (T) : $\\tfrac14|\\dnu^Ap|u^2\\le\\tfrac14\\|\\dnu^Ap\\|u^2$, par trace.",
-      "Total $(24)$ : $-\\int_{\\GN}\\mathcal B_\\mu\\le-\\tfrac14\\int q|\\nabla_Tu|^2+C_N'\\int au_t^2+(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int_\\Om|\\gradg u|^2$, $C_N'=\\tfrac{b_1^2\\|H_T\\|^2}{b_0}$ (ou $C_N$) $+C_q+C_\\theta$."
+      "Total $(28)$ : $-\\int_{\\GN}\\mathcal B_\\mu\\le-\\tfrac14\\int q|\\nabla_Tu|^2+C_N'\\int au_t^2+(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int_\\Om|\\gradg u|^2$, $C_N'=\\tfrac{b_1^2\\|H_T\\|^2}{b_0}$ (ou $C_N$) $+C_q+C_\\theta$."
+     ]
+    },
+    {
+     "cible": "Intégrabilité jusqu'à l'arête sous compatibilité (Lemme 7.2)",
+     "strategie": "Preuve complète. Trois faits : le poids $q$ s'annule linéairement sur $\\Gamma$ ; le gradient tangentiel explose au plus comme $r^{-1/2}$ en moyenne sur $\\Gamma$ ; le croisé se majore régime par régime par une inégalité ponctuelle de Young.",
+     "etapes": [
+      "Poids. Tangence forcée (Lemme 5.2) : $q=H\\cdot\\nu=0$ sur $\\Gamma$ ; $H\\in C^1$, $\\nu\\in C^1$ ($\\partial\\Om\\in C^2$), donc $|q(x)|\\le\\|H\\|_{C^1}\\,\\mathrm{dist}(x,\\Gamma)=\\|H\\|_{C^1}r$ sur les deux faces.",
+      "Gradient tangentiel. Face $\\theta=\\pi$, $n=2$ : $\\partial_r(\\eta S)=\\tfrac12\\eta r^{-1/2}$. $n\\ge3$ : $\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta(\\tfrac12r^{-1/2}\\omega+r^{1/2}[\\zeta]\\omega')(r[\\zeta])\\}$, $\\nabla_\\Gamma\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{i\\zeta\\widehat\\eta r^{1/2}\\omega(r[\\zeta])\\}$ ; $\\omega$, $t\\omega'$ bornés et $|\\zeta|\\omega(r[\\zeta])\\le C/r$ sur le support : Plancherel donne $\\|\\nabla_T(\\mathcal K_{\\mathrm{edge}}\\eta)(r,\\cdot)\\|^2_{L^2(\\Gamma)}\\le Cr^{-1}\\|\\eta\\|^2$ (Lemme B.14(i)). La partie régulière $u_R$ (resp. $w$) a un gradient à trace $L^2$ sur la face ($u_R\\in H^2$ ; $w\\in\\mathcal W^{2,2}_{\\mathrm{loc}}$, Lemme B.13(ii)).",
+      "Intégration. $\\int_0^\\delta\\!\\int_\\Gamma q|\\nabla_Tu|^2\\le\\|H\\|_{C^1}\\int_0^\\delta r\\,(Cr^{-1}\\|\\eta\\|^2+\\|\\nabla u_R(r,\\cdot)\\|^2)\\,\\mathrm dr\\le C\\|H\\|_{C^1}\\delta(\\|\\eta\\|^2+\\|\\nabla u_R\\|^2_{L^2(\\text{bande})})$ : première inégalité. Même calcul sur $\\GD$ avec $(\\partial_\\nu u)^2\\sim\\eta^2/(4r)$ : $\\mathcal B_\\mu|_{\\GD}=-\\tfrac12q\\alpha_A(\\partial_\\nu u)^2\\in L^1(\\GD)$.",
+      "Croisé. Régime (i) $a=bq$ : $|au_t\\innerg{H_T}{\\nabla_Tu}|\\le\\tfrac14q|\\nabla_Tu|^2+b^2\\|H_T\\|^2qu_t^2$ ponctuellement, y compris là où $q=0$ (les deux membres y sont nuls) ; premier terme intégrable (ci-dessus), second car $u_t\\in H^1$ a une trace $L^2$. Régime (ii) : là où $q>0$, $\\le\\tfrac14q|\\nabla_Tu|^2+\\tfrac{a^2|H_T|^2}{q}u_t^2\\le\\tfrac14q|\\nabla_Tu|^2+C_Nau_t^2$ ; là où $q=0$, la compatibilité force $H_T=0$. Régime (iii) : (i) dans le collier, et hors du collier $q\\ge c_\\delta>0$ où tout est borné.",
+      "Conclusion. Les autres termes de $\\mathcal B_\\mu$ ($\\tfrac12q(1+a^2/\\alpha_A)u_t^2$, $(\\tfrac12p-\\mu)auu_t$, $\\tfrac14(\\dnu p)u^2$) ne portent que des traces $L^2$ de $u$, $u_t$. Donc $\\mathcal B_\\mu|_{\\GN}\\in L^1(\\GN)$, les intégrales de (28) sont finies, et la convergence dominée des faces tronquées de l'excision (§7.2) est légitime. C'est tout ce que le Théorème B consomme sur $\\GN$ : d'où sa validité en toute dimension sous (H5)."
      ]
     },
     {
@@ -1778,7 +1961,7 @@
     },
     {
      "cible": "Compensation à l'arête avec le potentiel d'arête",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Refaire les blocs par Plancherel sur $\\Gamma$ à $r$ fixé ; le reste issu de $\\omega'$ vit en $[\\zeta]\\ge c/\\delta$ ; les blocs mixtes par Hardy avec une borne uniforme en $r$ ; le bloc tangentiel par la troncature.",
+     "strategie": "Tentative retirée (pré-rapport 5.2) : l'application de Plancherel suppose un coefficient $aH_r$ constant le long de $\\Gamma$. Les étapes ci-dessous restent valables comme calcul modèle à coefficients gelés et montrent ce qu'il faudrait symétriser.",
      "etapes": [
       "Sur la face $\\theta=\\pi$ : $\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta\\,r^{1/2}\\omega(r[\\zeta])\\}$, $\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta=\\mathcal F^{-1}\\{\\widehat\\eta(\\tfrac12r^{-1/2}\\omega+r^{1/2}[\\zeta]\\omega')(r[\\zeta])\\}$, avec $\\widehat\\eta=[\\zeta]^{3/2}\\tilde c_0$.",
       "Bloc singulier×singulier, Plancherel : $\\int_\\Gamma\\mathcal K_{\\mathrm{edge}}\\eta_t\\,\\partial_r\\mathcal K_{\\mathrm{edge}}\\eta\\,\\mathrm ds=\\tfrac12\\int\\widehat{\\eta_t}\\overline{\\widehat\\eta}\\,\\omega^2+r\\int\\widehat{\\eta_t}\\overline{\\widehat\\eta}[\\zeta]\\omega\\omega'$. Premier terme $=\\tfrac14\\partial_t\\int|\\widehat\\eta|^2\\omega(r[\\zeta])^2$ : dérivée totale, contribution $O(\\delta)\\|\\eta\\|\\|\\eta_t\\|$.",
@@ -1846,14 +2029,36 @@
      ],
      "bonne": 1,
      "explication": "La troncature $\\omega(r[\\zeta])$ lisse le carré du coefficient en fréquence ; $K_\\delta$ est lu avec cette quantité."
+    },
+    {
+     "question": "Pourquoi la preuve du Lemme 7.4 par Plancherel échoue-t-elle en $n\\ge3$ à coefficients variables ?",
+     "options": [
+      "Parce que $\\eta\\notin L^2$",
+      "Parce que la multiplication par $a(r,s)H_r(r,s)$ en $s$ devient une convolution en fréquence et ne sort pas de Plancherel ; l'objet $\\eta_\\omega^2(r,s)$ n'est pas défini",
+      "Parce que $\\omega$ n'est pas lisse",
+      "Parce que $\\Gamma$ n'est pas compacte"
+     ],
+     "bonne": 1,
+     "explication": "Il faut une forme quadratique opératorielle symétrisée et un calcul de commutateurs : problème ouvert dans les manuscrits v3."
+    },
+    {
+     "question": "Sous (H5), quel lemme rend les inégalités de Young du §7.3 intégrables jusqu'à l'arête, en toute dimension ?",
+     "options": [
+      "Le Lemme 7.4 (compensation des neuf blocs)",
+      "Le Lemme 7.2 (intégrabilité sous compatibilité)",
+      "Le Lemme 4.2 (trace évanescente)",
+      "La Proposition 7.6"
+     ],
+     "bonne": 1,
+     "explication": "Le Lemme 7.4 n'est établi qu'en $n=2$ et ne sert qu'au feedback libre près de $\\Gamma$ ; sous (H5), le Lemme 7.2 suffit et vaut pour $n\\ge2$."
     }
    ]
   },
   {
    "numero": 13,
-   "titre": "Théorème C : la fermeture de Lyapunov et le annexe des constantes de fermeture (Annexe E)",
+   "titre": "Théorème B : la fermeture de Lyapunov et le registre des constantes (Annexe E)",
    "objectifs": [
-    "Savoir démontrer le bilan de volume $(30)$, l'inégalité $(31)$, l'équivalence $(33)$ et conclure par Gronwall.",
+    "Savoir démontrer le bilan de volume $(34)$, l'inégalité $(35)$, l'équivalence $(37)$ et conclure par Gronwall.",
     "Savoir expliquer le cadre de preuve en quatre temps et pourquoi $\\omega=3\\rho'/(8c_2)$ est un demi-taux.",
     "Savoir reconstituer le annexe des constantes de fermeture (Annexe E) (Annexe E) et situer la variante par compacité–unicité."
    ],
@@ -1861,7 +2066,7 @@
     {
      "titre": "Parcours pas à pas : la chaîne de constantes",
      "paragraphes": [
-      "$(28)$ $\\Phi=\\int u_t\\mathcal M_\\mu u$, $\\mu=\\rho/2$. $(29)$ par l'Annexe D. $(30)$ : $-\\rho E+\\tfrac14\\|(Lp)_+\\|C_P\\int|\\gradg u|^2+(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2\\le-\\rho E+(C_\\star+2\\theta C_{tr})E$, avec $\\theta=\\rho'/(8C_{tr})$ : $-\\tfrac34\\rho'E$. $(31)$ $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int au_t^2$. $(32)$ $L=NE+\\Phi$. $(33)$ $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$, $C_\\Phi=\\|H\\|_{C^0}+(\\tfrac12\\|p\\|_{C^0}+\\tfrac\\rho2)\\sqrt{C_P}$ (Cauchy–Schwarz : $|\\int u_tH(u)|\\le\\|H\\|\\|u_t\\|\\|\\gradg u\\|\\le\\|H\\|E$, $|\\int u_t\\xi u|\\le\\|\\xi\\|\\|u_t\\|\\sqrt{C_P}\\|\\gradg u\\|$). $L'=NE'+\\Phi'\\le-(N-C_N')\\int au_t^2-\\tfrac34\\rho'E\\le-\\tfrac{3\\rho'}{4c_2}L$. Gronwall : $L(t)\\le L(0)e^{-2\\omega t}$, $\\omega=\\tfrac{3\\rho'}{8c_2}$ ; $E(t)\\le\\tfrac{L(t)}{c_1}\\le\\tfrac{c_2}{c_1}e^{-2\\omega t}E(0)\\le Ce^{-\\omega t}E(0)$."
+      "$(32)$ $\\Phi=\\int u_t\\mathcal M_\\mu u$, $\\mu=\\rho/2$. $(33)$ par l'Annexe D. $(34)$ : $-\\rho E+\\tfrac14\\|(Lp)_+\\|C_P\\int|\\gradg u|^2+(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2\\le-\\rho E+(C_\\star+2\\theta C_{tr})E$, avec $\\theta=\\rho'/(8C_{tr})$ : $-\\tfrac34\\rho'E$. $(35)$ $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int au_t^2$. $(36)$ $L=NE+\\Phi$. $(37)$ $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$, $C_\\Phi=\\|H\\|_{C^0}+(\\tfrac12\\|p\\|_{C^0}+\\tfrac\\rho2)\\sqrt{C_P}$ (Cauchy–Schwarz : $|\\int u_tH(u)|\\le\\|H\\|\\|u_t\\|\\|\\gradg u\\|\\le\\|H\\|E$, $|\\int u_t\\xi u|\\le\\|\\xi\\|\\|u_t\\|\\sqrt{C_P}\\|\\gradg u\\|$). $L'=NE'+\\Phi'\\le-(N-C_N')\\int au_t^2-\\tfrac34\\rho'E\\le-\\tfrac{3\\rho'}{4c_2}L$. Gronwall : $L(t)\\le L(0)e^{-2\\omega t}$, $\\omega=\\tfrac{3\\rho'}{8c_2}$ ; $E(t)\\le\\tfrac{L(t)}{c_1}\\le\\tfrac{c_2}{c_1}e^{-2\\omega t}E(0)\\le Ce^{-\\omega t}E(0)$."
      ],
      "retenir": [
       "Chaque constante a un nom et un budget : $C_N'$ (bord, dissipation), $C_\\star$ (volume/trace, coercivité), $C_\\Phi$ (équivalence)."
@@ -1870,7 +2075,7 @@
     {
      "titre": "Le bilan, ligne à ligne",
      "paragraphes": [
-      "Volume : sous Hyp. 1 et $\\mu=\\rho/2$, $-\\int\\sym\\gradg H+\\mu\\int|\\gradg u|^2-\\mu\\int u_t^2\\le-\\rho E$ ; Poincaré paie $\\tfrac14\\int(Lp)u^2$ ; la trace de $(24)$ ajoute $(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2$ ; au total $\\le-(\\rho-C_\\star-2\\theta C_{tr})E$ et le choix $\\theta=\\rho'/(8C_{tr})$ donne $-\\tfrac34\\rho'E$. Bords : Dirichlet favorable, interface favorable (Théorème A avec le signe $-$), Neumann par $(24)$. D'où $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int au_t^2$.",
+      "Volume : sous Hyp. 1 et $\\mu=\\rho/2$, $-\\int\\sym\\gradg H+\\mu\\int|\\gradg u|^2-\\mu\\int u_t^2\\le-\\rho E$ ; Poincaré paie $\\tfrac14\\int(Lp)u^2$ ; la trace de $(28)$ ajoute $(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2$ ; au total $\\le-(\\rho-C_\\star-2\\theta C_{tr})E$ et le choix $\\theta=\\rho'/(8C_{tr})$ donne $-\\tfrac34\\rho'E$. Bords : Dirichlet favorable, interface favorable (Théorème A avec le signe $-$), Neumann par $(28)$. D'où $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int au_t^2$.",
       "$L=NE+\\Phi$, $|\\Phi|\\le C_\\Phi E$, $N=1+\\max(C_\\Phi,C_N')$ : $c_1E\\le L\\le c_2E$ et $L'\\le-\\tfrac{3\\rho'}{4c_2}L$. Gronwall donne $L(t)\\le L(0)e^{-2\\omega t}$, $\\omega=\\tfrac{3\\rho'}{8c_2}$ (demi-taux conservé par prudence sur la chaîne), puis $E(t)\\le\\tfrac{c_2}{c_1}e^{-\\omega t}E(0)$. Tout est établi sur $D(\\A^2)$, passé à $D(\\A)$ en norme de graphe, puis à $\\HH$ par densité sur la seule inégalité en $E$."
      ],
      "retenir": [
@@ -1882,37 +2087,37 @@
    ],
    "enonces": [
     {
-     "type": "(30)",
+     "type": "(34)",
      "nom": "Bilan de volume",
-     "enonce": "$-\\int\\sym\\gradg H(\\gradg u,\\gradg u)+\\mu\\int(|\\gradg u|^2-u_t^2)+\\tfrac14\\int(Lp)u^2+(\\text{traces de }(24))\\le-\\tfrac34\\rho'E$ sous Hyp. 1, 6 et $\\theta=\\rho'/(8C_{tr})$.",
+     "enonce": "$-\\int\\sym\\gradg H(\\gradg u,\\gradg u)+\\mu\\int(|\\gradg u|^2-u_t^2)+\\tfrac14\\int(Lp)u^2+(\\text{traces de }(28))\\le-\\tfrac34\\rho'E$ sous Hyp. 1, 6 et $\\theta=\\rho'/(8C_{tr})$.",
      "depend": []
     },
     {
-     "type": "(31)–(33)",
+     "type": "(35)–(37)",
      "nom": "Inégalité de $\\Phi'$ et équivalence",
      "enonce": "$\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int_{\\GN}au_t^2$ ; $c_1E\\le L\\le c_2E$ avec $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$, $C_\\Phi=\\|H\\|_{C^0}+(\\tfrac12\\|p\\|_{C^0}+\\tfrac\\rho2)\\sqrt{C_P}$. ; $C_N'=C_{\\mathrm{cross}}+C_q+C_\\theta$ (Annexe E, corrigée).",
      "depend": []
     },
     {
-     "type": "Théorème C",
+     "type": "Théorème B",
      "nom": "Décroissance exponentielle, voie directe",
-     "enonce": "Sous Hyp. 1–6, $\\partial\\Om,A\\in C^3$ ($C^\\infty$ pour l'entrée elliptique si $n\\ge3$), $f\\in C^4$ : $E(t)\\le Ce^{-\\omega t}E(0)$ pour toute donnée d'énergie finie, $\\omega=\\tfrac{3\\rho'}{8c_2}$, $C=c_2/c_1$, $\\rho'=\\rho-C_\\star$ ; aucune continuation unique.",
+     "enonce": "$(\\Om,g)$ avec $\\Gamma=\\GD\\cap\\GN\\ne\\varnothing$, feedback $a\\ge0$, $\\partial\\Om\\in C^3$ et $A\\in C^3(\\overline\\Om)$ pour la partie multiplicateur ; pour l'entrée elliptique, $A\\in C^\\infty$ si $n=2$ (Théorème B.3), $\\partial\\Om,\\Gamma,A\\in C^\\infty$ si $n\\ge3$ (Annexe B.7). Soit $f\\in C^4(\\overline\\Om)$ (ou $H=\\gradg f+\\mathsf K$, $\\mathsf K$ Killing, $H\\in C^3$, de sorte que $p=\\operatorname{div}H\\in C^2$) vérifiant (H1), (H2), (H3), (H4), la compatibilité (H5) et la domination (H6). Alors pour toute donnée $(u_0,u_1)\\in\\HH$ (inégalité établie sur les solutions fortes, denses, puis étendue par densité, l'énergie seule étant continue en la donnée) : $E(t)\\le Ce^{-\\omega t}E(0)$ avec $\\omega=\\dfrac{3\\rho'}{8c_2}$, $C=\\dfrac{c_2}{c_1}$, $\\rho'=\\rho-C_\\star$, $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$ (37). Le taux $\\omega$ est délibérément la moitié du taux $3\\rho'/(4c_2)$ fourni par $L'\\le-\\tfrac34\\rho'E$ : taux garanti avec marge. En $n=2$ toute la chaîne est démontrée dans le texte ; en $n\\ge3$ l'énoncé repose sur (H$_{\\mathrm{edge}}$), établie par la Proposition B.6 depuis [44], et sur (H5) via le Lemme 7.2. Ni continuation unique ni analyse microlocale.",
      "depend": [
-      "(30)",
-      "(24)",
+      "(34)",
+      "(28)",
       "Théorème A",
       "Gronwall",
       "Densité"
      ]
     },
     {
-     "type": "Corollaire 7.7",
+     "type": "Corollaire 7.9",
      "nom": "Cas particuliers",
-     "enonce": "Le Théorème C contient BLM1999 ($g=\\mathrm{Id}$, $f=\\tfrac12|x-x_0|^2$, $a=m\\cdot\\nu$, $C_\\star=0$), Komornik–Zuazua (interface vide) et les multiplicateurs tournés.",
+     "enonce": "Le Théorème B contient BLM1999 ($g=\\mathrm{Id}$, $f=\\tfrac12|x-x_0|^2$, $a=m\\cdot\\nu$, $C_\\star=0$), Komornik–Zuazua (interface vide) et les multiplicateurs tournés.",
      "depend": []
     },
     {
-     "type": "Remarque 7.6",
+     "type": "Remarque 7.8",
      "nom": "Variante par compacité–unicité",
      "enonce": "Sans Hyp. 4–6, le tangentiel de Neumann est compact relativement à l'énergie et s'absorbe par l'absurde sous continuation unique (Tataru), avec un feedback $a\\ge a_0>0$ arbitraire, mais sans constante explicite.",
      "depend": []
@@ -1926,7 +2131,7 @@
       "Coercivité : $-\\int\\sym\\gradg H(\\gradg u,\\gradg u)\\le-\\rho\\int|\\gradg u|^2$.",
       "Équipartition : $-\\rho\\int|\\gradg u|^2+\\mu\\int|\\gradg u|^2-\\mu\\int u_t^2=-\\tfrac\\rho2\\int|\\gradg u|^2-\\tfrac\\rho2\\int u_t^2=-\\rho E$.",
       "Ordre inférieur : $\\tfrac14\\int(Lp)u^2\\le\\tfrac14\\|(Lp)_+\\|_{C^0}\\int u^2\\le\\tfrac14\\|(Lp)_+\\|C_P\\int|\\gradg u|^2\\le\\tfrac12\\|(Lp)_+\\|C_PE$.",
-      "Traces de $(24)$ : $(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2\\le(2\\theta C_{tr}+\\tfrac12\\|\\dnu^Ap\\|C_{tr})E$.",
+      "Traces de $(28)$ : $(\\theta+\\tfrac14\\|\\dnu^Ap\\|)C_{tr}\\int|\\gradg u|^2\\le(2\\theta C_{tr}+\\tfrac12\\|\\dnu^Ap\\|C_{tr})E$.",
       "Somme : $-\\rho E+(\\tfrac12C_P\\|(Lp)_+\\|+\\tfrac12C_{tr}\\|\\dnu^Ap\\|)E+2\\theta C_{tr}E=-(\\rho-C_\\star)E+2\\theta C_{tr}E=-\\rho'E+\\tfrac{\\rho'}4E=-\\tfrac34\\rho'E$ avec $\\theta=\\rho'/(8C_{tr})$."
      ]
     },
@@ -1934,11 +2139,12 @@
      "cible": "Décroissance exponentielle, voie directe",
      "strategie": "Preuve complète. Hypothèses : Hyp. 1–6, $\\partial\\Om\\in C^3$, $A\\in C^3$ ($C^\\infty$ pour l'entrée elliptique si $n\\ge3$), $f\\in C^4$ ou $H\\in C^3$ ; données dans $D(\\A^2)$ puis densité.",
      "etapes": [
-      "$(29)$ + $(30)$ : $\\Phi'\\le-\\tfrac34\\rho'E-\\oint\\mathcal B_\\mu+(\\text{traces déjà comptées})$. Bords : $-\\int_{\\GD}\\mathcal B_\\mu=\\tfrac12\\int_{\\GD}q\\alpha_A(\\partial_\\nu u)^2\\le0$ (Hyp. 3) ; interface $\\le0$ (Théorème A, Hyp. 2) ; $-\\int_{\\GN}\\mathcal B_\\mu\\le-\\tfrac14\\int q|\\nabla_Tu|^2+C_N'\\int au_t^2+(\\text{traces})$ (24, Hyp. 4–5), le premier terme $\\le0$ (Hyp. 4). D'où $(31)$ : $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int_{\\GN}au_t^2$.",
-      "Équivalence $(33)$ : $|\\int u_tH(u)|\\le\\|H\\|_{C^0}\\|u_t\\|\\|\\gradg u\\|\\le\\|H\\|E$ ; $|\\int u_t(\\tfrac12p-\\mu)u|\\le\\|\\tfrac12p-\\mu\\|\\|u_t\\|\\|u\\|\\le\\|\\tfrac12p-\\mu\\|\\sqrt{C_P}\\|u_t\\|\\|\\gradg u\\|\\le(\\tfrac12\\|p\\|+\\tfrac\\rho2)\\sqrt{C_P}E$ ; donc $|\\Phi|\\le C_\\Phi E$. Avec $N=1+\\max(C_\\Phi,C_N')$ : $c_1E\\le L\\le c_2E$, $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$.",
+      "$(33)$ + $(34)$ : $\\Phi'\\le-\\tfrac34\\rho'E-\\oint\\mathcal B_\\mu+(\\text{traces déjà comptées})$. Bords : $-\\int_{\\GD}\\mathcal B_\\mu=\\tfrac12\\int_{\\GD}q\\alpha_A(\\partial_\\nu u)^2\\le0$ (Hyp. 3) ; interface $\\le0$ (Théorème A, Hyp. 2) ; $-\\int_{\\GN}\\mathcal B_\\mu\\le-\\tfrac14\\int q|\\nabla_Tu|^2+C_N'\\int au_t^2+(\\text{traces})$ (24, Hyp. 4–5), le premier terme $\\le0$ (Hyp. 4). D'où $(35)$ : $\\Phi'\\le-\\tfrac34\\rho'E+C_N'\\int_{\\GN}au_t^2$.",
+      "Équivalence $(37)$ : $|\\int u_tH(u)|\\le\\|H\\|_{C^0}\\|u_t\\|\\|\\gradg u\\|\\le\\|H\\|E$ ; $|\\int u_t(\\tfrac12p-\\mu)u|\\le\\|\\tfrac12p-\\mu\\|\\|u_t\\|\\|u\\|\\le\\|\\tfrac12p-\\mu\\|\\sqrt{C_P}\\|u_t\\|\\|\\gradg u\\|\\le(\\tfrac12\\|p\\|+\\tfrac\\rho2)\\sqrt{C_P}E$ ; donc $|\\Phi|\\le C_\\Phi E$. Avec $N=1+\\max(C_\\Phi,C_N')$ : $c_1E\\le L\\le c_2E$, $c_1=N-C_\\Phi\\ge1$, $c_2=N+C_\\Phi$.",
       "Inégalité différentielle : $L'=NE'+\\Phi'\\le-N\\int au_t^2+C_N'\\int au_t^2-\\tfrac34\\rho'E\\le-\\tfrac34\\rho'E\\le-\\tfrac{3\\rho'}{4c_2}L$ (car $N\\ge C_N'$ et $E\\ge L/c_2$).",
       "Gronwall : $L(t)\\le L(0)e^{-2\\omega t}$, $\\omega=\\tfrac{3\\rho'}{8c_2}$ ; $E(t)\\le L(t)/c_1\\le\\tfrac{c_2}{c_1}e^{-2\\omega t}E(0)\\le Ce^{-\\omega t}E(0)$ : taux garanti avec marge, $C=c_2/c_1$.",
-      "Classes : (1) identités sur $D(\\A^2)$ ; (2) passage à $D(\\A)$ : les deux membres de $E(t)\\le Ce^{-\\omega t}E(0)$ sont continus pour la norme du graphe, et $D(\\A^2)$ est dense dans $D(\\A)$ (Outil 3) ; (3) passage à $\\HH$ : $E$ est continue sur $\\HH$ et le semi-groupe est contractant, donc l'inégalité, qui ne porte que sur $E$, passe à la limite par densité de $D(\\A)$ dans $\\HH$. À aucun moment on n'a besoin de la continuité de $\\eta$ en énergie."
+      "Classes : (1) identités sur $D(\\A^2)$ ; (2) passage à $D(\\A)$ : les deux membres de $E(t)\\le Ce^{-\\omega t}E(0)$ sont continus pour la norme du graphe, et $D(\\A^2)$ est dense dans $D(\\A)$ (Outil 3) ; (3) passage à $\\HH$ : $E$ est continue sur $\\HH$ et le semi-groupe est contractant, donc l'inégalité, qui ne porte que sur $E$, passe à la limite par densité de $D(\\A)$ dans $\\HH$. À aucun moment on n'a besoin de la continuité de $\\eta$ en énergie.",
+      "Lecture du taux : Gronwall donne $L(t)\\le L(0)e^{-2\\omega t}$ avec $2\\omega=3\\rho'/(4c_2)$ ; le passage de $L$ à $E$ par (37) ne coûte que $C=c_2/c_1$, sans division du taux ; l'énoncé retient $\\omega$ (la moitié) comme borne sûre. Ne pas confondre avec une perte."
      ]
     },
     {
@@ -1946,14 +2152,14 @@
      "strategie": "Esquisse détaillée (à porter au niveau complet). Spécialiser.",
      "etapes": [
       "Plat, $H=m$ : Hyp. 1 ($\\operatorname{Hess}f=\\mathrm{Id}$), Hyp. 2 $=m\\cdot\\tau\\le0$, Hyp. 3 $=m\\cdot\\nu\\le0$ sur $\\GD$ ; $a=m\\cdot\\nu$ donne Hyp. 5(i) avec $b\\equiv1$ ; $p=n$ constant donc $C_\\star=0$ : Hyp. 6 automatique.",
-      "Interface vide : le Théorème A est vide, on retrouve Komornik–Zuazua ; $K\\ne0$ : multiplicateurs tournés de [18]."
+      "Interface vide : le Théorème A est vide, on retrouve Komornik–Zuazua ; $K\\ne0$ : multiplicateurs tournés de [17]."
      ]
     }
    ],
    "glossaire": [
     {
      "terme": "$C_N'$",
-     "definition": "$C_N'=C_{\\mathrm{cross}}+C_q+C_\\theta$ : $C_{\\mathrm{cross}}=b_1^2\\|H_T\\|^2/b_0$ (i) ou $C_N$ (ii) ou le max (iii) ; $C_q$ par régime ; $C_\\theta=c^2\\|a\\|/(4\\theta)=2c^2\\|a\\|C_{tr}/\\rho'$ avec $\\theta=\\rho'/(8C_{tr})$. Constante de bord, payée par la dissipation ; c'est exactement celle de $(24)$, sans agrégation."
+     "definition": "$C_N'=C_{\\mathrm{cross}}+C_q+C_\\theta$ : $C_{\\mathrm{cross}}=b_1^2\\|H_T\\|^2/b_0$ (i) ou $C_N$ (ii) ou le max (iii) ; $C_q$ par régime ; $C_\\theta=c^2\\|a\\|/(4\\theta)=2c^2\\|a\\|C_{tr}/\\rho'$ avec $\\theta=\\rho'/(8C_{tr})$. Constante de bord, payée par la dissipation ; c'est exactement celle de $(28)$, sans agrégation."
     },
     {
      "terme": "$\\rho'$",
@@ -1969,7 +2175,7 @@
      "question": "Où, et seulement où, l'Hypothèse 6 est-elle utilisée ?",
      "options": [
       "Au Théorème A",
-      "Au bilan de volume $(30)$",
+      "Au bilan de volume $(34)$",
       "À l'absorption du croisé",
       "À la densité"
      ],
@@ -2016,18 +2222,18 @@
    "titre": "Le coefficient singulier $\\eta$ et le taux",
    "objectifs": [
     "Savoir démontrer la Proposition 10.1 (extraction $\\bar\\eta_{R_c}$, contrôle de $\\eta$ par $E+E_1$, système dérivé).",
-    "Savoir construire le contre-exemple de la Remarque 10.2 et démontrer l'estimation $(41)$ sous marge stricte."
+    "Savoir construire le contre-exemple de la Remarque 10.2 et démontrer l'estimation $(46)$ sous marge stricte."
    ],
    "sections": [
     {
      "titre": "Mesurer l'intensité singulière",
      "paragraphes": [
-      "La fonction duale $S^*=\\tfrac1\\pi(r^{-1/2}-r^{1/2})\\sin(\\theta/2)$ donne l'extraction $\\bar\\eta_{R_c}=\\tfrac{2}{\\pi\\sqrt{R_c}}\\int_0^\\pi u(R_c,\\theta)\\sin(\\theta/2)\\mathrm d\\theta$, trace de $u$ sur un cylindre fixe : bornée par $E$. Le coefficient $\\eta$ lui-même n'est contrôlé que par $E+E_1$ et n'est pas une fonctionnelle $H^1$-bornée. Sous le Théorème C appliqué au système dérivé, $\\|\\eta(t)\\|^2\\le C'e^{-\\omega t}(E(0)+E_1(0))$.",
-      "Sous transversalité stricte $c_0=\\inf_\\Gamma(-\\sqrt{\\det A}\\innerg{H}{\\tau})>0$, on garde le terme d'interface au lieu de le jeter et $(21)$ donne $\\int_0^T\\|\\eta\\|^2\\le\\tfrac8{c_0\\pi}[C(E(0)+E(T))+\\int_0^T\\!\\int_{\\GN}au_t^2]$ : le membre de droite est maintenant fait de blocs tous de bon signe ou contrôlés."
+      "La fonction duale $S^*=\\tfrac1\\pi(r^{-1/2}-r^{1/2})\\sin(\\theta/2)$ donne l'extraction $\\bar\\eta_{R_c}=\\tfrac{2}{\\pi\\sqrt{R_c}}\\int_0^\\pi u(R_c,\\theta)\\sin(\\theta/2)\\mathrm d\\theta$, trace de $u$ sur un cylindre fixe : bornée par $E$. Le coefficient $\\eta$ lui-même n'est contrôlé que par $E+E_1$ et n'est pas une fonctionnelle $H^1$-bornée. Sous le Théorème B appliqué au système dérivé, $\\|\\eta(t)\\|^2\\le C'e^{-\\omega t}(E(0)+E_1(0))$.",
+      "Sous transversalité stricte $c_0=\\inf_\\Gamma(-\\sqrt{\\det A}\\innerg{H}{\\tau})>0$, on garde le terme d'interface au lieu de le jeter et $(24)$ donne $\\int_0^T\\|\\eta\\|^2\\le\\tfrac8{c_0\\pi}[C(E(0)+E(T))+\\int_0^T\\!\\int_{\\GN}au_t^2]$ : le membre de droite est maintenant fait de blocs tous de bon signe ou contrôlés."
      ],
      "retenir": [
-      "$\\eta$ subit le taux ; il ne le pilote pas (Conjecture 10.3 ouverte).",
-      "$(41)$ vaut pour les solutions fortes ; à énergie finie seule $\\bar\\eta_{R_c}$ subsiste."
+      "$\\eta$ subit le taux ; il ne le pilote pas (Question 10.3 ouverte).",
+      "$(46)$ vaut pour les solutions fortes ; à énergie finie seule $\\bar\\eta_{R_c}$ subsiste."
      ]
     }
    ],
@@ -2035,7 +2241,7 @@
     {
      "type": "Proposition 10.1",
      "nom": "Décroissance de l'intensité singulière",
-     "enonce": "(i) $\\|\\bar\\eta_{R_c}(t)\\|^2_{L^2(\\Gamma)}\\le C(R_c)E(t)$ pour toute donnée d'énergie finie ; (ii) sous $D(\\A)$, $\\|\\eta(t)\\|^2\\le C(E(t)+E_1(t))$, $\\bar\\eta_{R_c}\\to\\eta$ quand $R_c\\to0$, et $E_1(t)\\le Ce^{-\\omega t}E_1(0)$.",
+     "enonce": "(i) $\\bar\\eta_{R_c}(s,t):=\\tfrac{2}{\\pi\\sqrt{R_c}}\\int_0^\\pi u(R_c,\\theta,s,t)\\sin(\\theta/2)\\,d\\theta$ (fonctionnel extrait, membre de gauche de la définition) vérifie $\\|\\bar\\eta_{R_c}(t)\\|^2\\le C(R_c)E(t)$ pour toute donnée d'énergie finie ; (ii) en $n=2$ et sous $D(\\A)$, $\\bar\\eta_{R_c}=\\eta+$contamination régulière, $\\|\\eta(t)\\|^2\\le C(E+E_1)$, $\\bar\\eta_{R_c}\\to\\eta$ quand $R_c\\to0$. En $n\\ge3$, $\\bar\\eta_{R_c}=\\mathrm{Op}(\\omega(R_c[D_s]))\\eta+\\mathcal R_{R_c}$ : non traité.",
      "depend": []
     },
     {
@@ -2045,11 +2251,11 @@
      "depend": []
     },
     {
-     "type": "(41)",
+     "type": "(46)",
      "nom": "La marge stricte contrôle $\\eta$",
-     "enonce": "Sous $c_0>0$ et le Théorème C, $\\int_0^T\\|\\eta\\|^2\\le\\tfrac8{c_0\\pi}[C(E(0)+E(T))+\\int_0^T\\!\\int_{\\GN}au_t^2]$ pour les solutions fortes.",
+     "enonce": "Sous $c_0>0$ et le Théorème B, $\\int_0^T\\|\\eta\\|^2\\le\\tfrac8{c_0\\pi}[C(E(0)+E(T))+\\int_0^T\\!\\int_{\\GN}au_t^2]$ pour les solutions fortes.",
      "depend": [
-      "(21)",
+      "(24)",
       "Théorème A",
       "(24)"
      ]
@@ -2062,7 +2268,7 @@
      "etapes": [
       "(i) $\\bar\\eta_{R_c}^2\\le\\tfrac2{\\pi R_c}\\int_0^\\pi u^2$ ($\\int\\sin^2=\\pi/2$) ; $\\{r=R_c\\}$ hypersurface fixe : trace et Poincaré donnent $\\le2C_{tr}(R_c)E$.",
       "(ii) $Lu(t)=u_{tt}\\in L^2$, $\\Pi$ continu en norme de graphe : $\\|\\eta\\|\\le C\\sqrt{E+E_1}$. Contamination $\\bar\\eta_{R_c}-\\eta=\\tfrac2{\\pi\\sqrt{R_c}}\\int(u_R+u_\\flat)\\sin(\\theta/2)$ ; $u_R|_\\Gamma=0$ et Hardy : $|u_R(R_c)|\\le R_c^{1/2}\\|\\partial_ru_R\\|_{L^2(r<R_c)}\\to0$ ; $u_\\flat=O(r^{3/2}|\\log r|)$.",
-      "$u_t$ résout $(6)$ avec données $(u_1,Lu_0)\\in\\HH$ précisément parce que $(u_0,u_1)\\in D(\\A)$ ; le Théorème C ne porte que sur la géométrie et le feedback : $E_1$ décroît au même taux."
+      "$u_t$ résout $(6)$ avec données $(u_1,Lu_0)\\in\\HH$ précisément parce que $(u_0,u_1)\\in D(\\A)$ ; le Théorème B ne porte que sur la géométrie et le feedback : $E_1$ décroît au même taux."
      ]
     },
     {
@@ -2075,11 +2281,11 @@
     },
     {
      "cible": "La marge stricte contrôle $\\eta$",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Garder le terme d'interface dans $(21)$ excisée, borner chaque bloc du membre de droite.",
+     "strategie": "Esquisse détaillée (à porter au niveau complet). Garder le terme d'interface dans $(24)$ excisée, borner chaque bloc du membre de droite.",
      "etapes": [
       "$\\tfrac\\pi8\\int\\!\\!\\int(-\\sqrt{\\det A}\\innerg{H}{\\tau})\\eta^2=\\int\\!\\!\\int(-\\sym\\gradg H(\\gradg u,\\gradg u)+\\mu(|\\gradg u|^2-u_t^2)+\\tfrac14(Lp)u^2)-[\\int u_t\\mathcal M_\\mu u]_0^T-\\int\\!\\!\\int_{\\GD}\\mathcal B_\\mu-\\int\\!\\!\\int_{\\GN}\\mathcal B_\\mu$.",
       "Membre de gauche $\\ge\\tfrac{c_0\\pi}8\\int_0^T\\|\\eta\\|^2$ ; volume $\\le C_1\\int E$ avec $C_1=\\mu+\\tfrac12C_P\\|(Lp)_+\\|$ ($-\\int\\sym\\gradg H\\le0$) ; crochet $\\le C_\\Phi(E(0)+E(T))$ ; Dirichlet $\\le0$ ; Neumann par $(24)$ : $C\\int\\!\\!\\int au_t^2+\\theta C_{tr}\\int\\!\\!\\int|\\gradg u|^2$.",
-      "Sous le Théorème C, $\\int_0^TE\\le(C/\\omega)E(0)$ uniformément en $T$ ; regrouper. Pas d'extension à l'énergie finie : $\\eta$ n'y est pas défini continûment."
+      "Sous le Théorème B, $\\int_0^TE\\le(C/\\omega)E(0)$ uniformément en $T$ ; regrouper. Pas d'extension à l'énergie finie : $\\eta$ n'y est pas défini continûment."
      ]
     }
    ],
@@ -2124,170 +2330,252 @@
   },
   {
    "numero": 15,
-   "titre": "L'exemple conforme, calculé à la main",
+   "titre": "L'exemple du §8 : le disque à arc de Dirichlet, plat puis conforme",
    "objectifs": [
-    "Savoir vérifier les six hypothèses sur $A=e^{-\\beta|x|^2}I$ et démontrer $C_\\star\\le42\\beta$, donc $\\beta_0=1/43$.",
-    "Savoir recouper la série de $Lp$ et le seuil numérique."
+    "Savoir pourquoi le demi-disque a été abandonné (bord non $C^3$, seconde jonction d'ouverture $\\pi/2$ en $(1,0)$, hors du cadre $\\alpha\\equiv\\pi$) et construire la géométrie de (38)–(39) : disque unité, $\\GD=\\{|\\theta|<\\alpha_0\\}$, $\\Gamma=\\{p_\\pm\\}$, pôle $x_0=(1/\\cos\\alpha_0,0)\\notin\\overline\\Om$, seul pôle admissible ($\\dim V=2$, $\\mathcal T=\\{x_0\\}$).",
+    "Savoir démontrer la Proposition 8.1 (cas plat : $\\rho=1$, $C_\\star=0$, $\\innerg{m}{\\tau}(p_\\pm)=-\\tan\\alpha_0$) en calculant $\\tau(p_+)=(\\sin\\alpha_0,-\\cos\\alpha_0)$.",
+    "Savoir démontrer les Propositions 8.2 (courbure $\\kappa=-2\\beta e^{-2\\varphi}$, exposant $\\tfrac12$, $\\rho=1$ par polaires géodésiques autour de $x_0$), 8.3 (signes, $c_0=\\Theta(\\rho_\\Gamma)e^{-2\\varphi_\\Gamma}$) et 8.4 (constantes $C_P^{(0)}$, $C_{\\mathrm{tr}}^{(0)}$, $(Lp)_+\\equiv0$ pour $\\beta\\rho_+^2\\le0.35$, seuil $\\beta_0(\\alpha_0)$).",
+    "Savoir refaire le calcul de $Lp$ en variable radiale (identité $e^{2\\varphi}Lp=(1-t^2)D/\\varrho^2+2\\beta(3-t)D-6\\beta(1-t)w$) et la série près de $\\varrho=0$ (coefficient $\\tfrac{176}{15}$)."
    ],
    "sections": [
     {
      "titre": "Parcours pas à pas",
      "paragraphes": [
-      "Pas 1 : $\\kappa$. Pas 2 : $L$ factorisé et $LS=-\\beta e^{-2\\varphi}S$ (calculer $x\\cdot\\nabla S=r\\partial_rS=\\tfrac12S$, donc $\\Delta S-2\\beta x\\cdot\\nabla S=-\\beta S$). Pas 3 : $\\varrho$, $H$, $p$, $(37)$–$(38)$. Pas 4 : hessien en polaires géodésiques. Pas 5 : signes au bord. Pas 6 : les quatre facteurs de Hyp. 6 : $C_P$, $C_{tr}$, $\\dnu^Ap$, $Lp$. Pas 7 : recoupement numérique (série $p=2-\\tfrac43\\beta r^2+\\tfrac25\\beta^2r^4$, $Lp=-\\tfrac{16}3\\beta+\\tfrac{256}{15}\\beta^2r^2$, seuil $14|p'(1)|=1$ en $\\beta\\approx0{,}0272$)."
+      "Pas 1 : la géométrie. $\\Om$ disque unité, $\\alpha_0\\in(0,\\pi/2)$, $\\GD=\\{e^{i\\theta}:|\\theta|<\\alpha_0\\}$, $\\GN=\\{\\alpha_0<|\\theta|<\\pi\\}$, $\\Gamma=\\{p_\\pm\\}$, $p_\\pm=(\\cos\\alpha_0,\\pm\\sin\\alpha_0)$ ; bord $C^\\infty$, ouverture $\\pi$ aux deux points, $\\eta=(\\eta_+,\\eta_-)$ deux scalaires. Pôle $x_0=(1/\\cos\\alpha_0,0)$ : intersection des tangentes au cercle en $p_\\pm$ ; $\\varrho=|x-x_0|\\in[\\rho_-,\\rho_+]$, $\\rho_\\pm=1/\\cos\\alpha_0\\pm1$. Pas 2 : cas plat, Proposition 8.1, en vérifiant $m\\cdot\\nu=1-\\cos\\theta/\\cos\\alpha_0$ sur le cercle (signe $\\le0$ sur $\\GD$, $\\ge0$ sur $\\GN$, nul en $p_\\pm$). Pas 3 : métrique conforme (40), $A=e^{-2\\varphi}I$, $\\varphi=\\tfrac\\beta2\\varrho^2$, équation (41) factorisée $u_{tt}=e^{-2\\varphi}(\\Delta u-2\\beta(x-x_0)\\cdot\\nabla u)$. Pas 4 : Proposition 8.2 (polaires géodésiques $(\\Theta,\\psi)$ centrées en $x_0$, $\\psi_1=\\varrho e^\\varphi$ convexe). Pas 5 : (42)–(43) : $H=h(\\varrho)e_\\varrho$, $h=\\Theta e^{-\\varphi}$, $w=\\Theta e^{-\\varphi}/\\varrho$, $p=1+w(1-t)$, $t=\\beta\\varrho^2$, encadrement de $w$ et $\\varrho w'=1-w-tw$. Pas 6 : Proposition 8.3, $\\tau=e^{-\\varphi}\\tau_E$ ($g$-unitaire), $\\innerg{H}{\\tau}=e^\\varphi h(e_\\varrho\\cdot\\tau_E)$, $e_\\varrho\\cdot\\tau_E=-1$ en $p_\\pm$. Pas 7 : Proposition 8.4, Poincaré par rayons issus de $x_0$, trace par $\\operatorname{div}(xu^2)$, passage à la norme $A$, terme de trace $|p'|\\le3\\beta\\rho_+$, terme de volume $F(t)=1+6t-6(1-t)e^{-t/2}<0$ sur $[0,0.35]$. Pas 8 : valeurs pour $\\alpha_0=\\pi/3$ : $\\rho_+=3$, $C_P^{(0)}\\le12$, $C_{\\mathrm{tr}}^{(0)}\\le31$, $\\beta_0\\ge1/198$, et $C_\\star\\le0.79$ pour $\\beta=1/186$.",
+      "Contrôle final : pour $\\beta\\to0$, retrouver $c_0=\\rho_\\Gamma=\\tan\\alpha_0$ et $C_\\star=0$ ; expliquer pourquoi $H(p_\\pm)\\ne0$ (l'interface n'est plus au pôle) et pourquoi cela rend disponible l'estimation (46)."
      ],
      "retenir": [
-      "Tout se calcule à la main en une demi-journée ; c'est le meilleur test de maîtrise des constantes."
+      "Le pôle est hors du domaine : c'est ce qui permet une seule classe de jonctions, toutes d'ouverture $\\pi$.",
+      "Les constantes ne sont pas optimales (Poincaré par rayons, trace par divergence) ; $\\beta_0(\\pi/3)\\ge1/186$ est un certificat, pas le seuil réel (Remarque 8.6)."
      ]
     },
     {
-     "titre": "Une courbure négative authentique",
+     "titre": "Ce que l'exemple montre",
      "paragraphes": [
-      "Demi-disque, $A=e^{-2\\varphi}I$, $\\varphi=\\tfrac\\beta2|x|^2$, $g=e^{2\\varphi}\\delta$, $\\kappa=-e^{-2\\varphi}\\Delta\\varphi=-2\\beta e^{-2\\varphi}<0$. Opérateur factorisé $L=e^{-2\\varphi}(\\Delta-2\\beta x\\cdot\\nabla)$, forme utilisée pour $LS=-\\beta e^{-2\\varphi}S$ et pour $Lp$. $x_0=0$, $f=\\tfrac12\\dg(\\cdot,0)^2$, $\\varrho(r)=\\int_0^re^{\\beta s^2/2}\\mathrm ds$, $H=h(r)e_r$, $h=\\varrho e^{-\\varphi}$, $p=1+w(1-\\beta r^2)$, $w=\\varrho e^{-\\varphi}/r$.",
-      "Hyp. 1 : $\\rho=1$ par convexité de $\\psi$ ($\\kappa\\le0$). Hyp. 2–5 : $H$ radial, tangent aux axes ($q=0$), $q=h(1)>0$ sur l'arc, $H(0)=0$ donc terme d'interface nul, feedback adapté $a=q$, $H_T=0$ sur l'arc. Hyp. 6 : $C_P\\le4e^\\beta$, $C_{tr}\\le28e^\\beta$, $\\dnu^Ap=e^{-\\beta}p'(1)$ avec $|p'(1)|\\le3\\beta$, $Lp\\le0$ : $C_\\star\\le42\\beta<1$ pour $\\beta<1/42$."
+      "Il exhibe une géométrie $C^\\infty$ à interface critique en chacun de ses points où les six hypothèses sont vérifiées : en plat avec constantes exactes ($C_\\star=0$), puis en courbure strictement négative avec constantes explicites en fonction de $\\alpha_0$. Le cas plat est, au pôle près, l'exemple de Lions et de Komornik–Zuazua ; ce que la lecture ajoute est le contrôle de l'interface, $c_0=\\tan\\alpha_0>0$.",
+      "Contrairement au demi-disque, l'interface n'est pas au pôle : $H(p_\\pm)\\ne0$, l'orientation est stricte et le raffinement du §10 (estimation (46)) s'applique."
      ],
      "retenir": [
-      "Recoupement numérique : $p'(1)\\approx-2{,}63\\beta$, $Lp=-\\tfrac{16}3\\beta+O(\\beta^2r^2)$, seuil exact $\\beta\\approx1/36{,}7$.",
-      "$H(\\Gamma)=0$ : l'exemple illustre la stabilisation, pas la marge stricte $c_0$."
+      "(H4) est obtenue par la radialité de $H$ autour du pôle et la géométrie précise du disque (Proposition 8.3), non déduite de $\\kappa_g<0$ (Remarque 9.1)."
      ]
     }
    ],
    "enonces": [
     {
+     "type": "(38)–(39)",
+     "nom": "Le domaine, la partition et le pôle",
+     "enonce": "$\\Om=\\{|x|<1\\}$, $\\alpha_0\\in(0,\\pi/2)$, $\\GD=\\{e^{i\\theta}:|\\theta|<\\alpha_0\\}$, $\\GN=\\{e^{i\\theta}:\\alpha_0<|\\theta|<\\pi\\}$, $\\Gamma=\\{p_\\pm\\}$, $p_\\pm=(\\cos\\alpha_0,\\pm\\sin\\alpha_0)$ ; $x_0:=(1/\\cos\\alpha_0,0)\\notin\\overline\\Om$, $\\varrho(x):=|x-x_0|\\in[\\rho_-,\\rho_+]$, $\\rho_\\pm:=1/\\cos\\alpha_0\\pm1$. $x_0$ est le seul pôle admissible d'un multiplicateur radial ($\\dim V=2$, $\\mathcal T=\\{x_0\\}$, Théorème 5.3(3)).",
+     "depend": [
+      "Théorème 5.3"
+     ]
+    },
+    {
      "type": "Proposition 8.1",
-     "nom": "Courbure strictement négative",
-     "enonce": "$\\kappa=-2\\beta e^{-2\\varphi}<0$ sur $\\Om$.",
+     "nom": "Disque à arc de Dirichlet, $A=I$",
+     "enonce": "Avec $A=I$, $H=m:=x-x_0$ et le feedback adapté $a=m\\cdot\\nu$ sur $\\GN$, (H1)–(H6) sont vérifiées avec $\\rho=1$, $C_\\star=0$, $\\innerg{m}{\\tau}(p_\\pm)=-\\tan\\alpha_0<0$ (transversalité stricte $c_0=\\tan\\alpha_0$), et le Théorème B s'applique.",
+     "depend": [
+      "(38)–(39)",
+      "Lemme 5.2"
+     ]
+    },
+    {
+     "type": "(40)–(41)",
+     "nom": "La métrique conforme centrée au pôle",
+     "enonce": "$A=e^{-2\\varphi}I$, $g=A^{-1}=e^{2\\varphi}\\delta$, $\\varphi(x)=\\tfrac\\beta2\\varrho(x)^2$, $\\beta>0$ ; $u_{tt}=\\operatorname{div}(e^{-2\\varphi}\\nabla u)=e^{-2\\varphi}(\\Delta u-2\\beta(x-x_0)\\cdot\\nabla u)$, $\\dnu u=e^{-2\\varphi}\\partial_\\nu u$.",
      "depend": []
     },
     {
      "type": "Proposition 8.2",
-     "nom": "Persistance de l'exposant $\\tfrac12$",
-     "enonce": "La fonction singulière de $L$ en $0$ est $S$ modulo $K^2_{3/2-\\delta}$.",
+     "nom": "Courbure, exposant, coercivité",
+     "enonce": "(i) $\\kappa=-e^{-2\\varphi}\\Delta\\varphi=-2\\beta e^{-2\\varphi}<0$. (ii) En chaque $p_\\pm$, la fonction singulière de $L$ est $S$ modulo $K^2_{3/2-\\delta}$ : exposant $\\tfrac12$ (Lemme B.18, Théorème B.3 ; $-2\\beta(x-x_0)\\cdot\\nabla$ est un $P_1$ non nul en $p_\\pm$, qui gagne un poids et entre dans $R$). (iii) Avec $f=\\tfrac12\\dg(\\cdot,x_0)^2$ : $\\Hessg f\\ge g$, $\\rho=1$.",
      "depend": [
-      "Théorème B.2",
-      "Lemme B.10"
+      "Lemme B.18",
+      "Théorème B.3"
      ]
     },
     {
-     "type": "Proposition 8.3",
-     "nom": "Coercivité",
-     "enonce": "$\\Hessg f\\ge g$, $\\rho=1$.",
+     "type": "(42)–(43)",
+     "nom": "Le champ, $p=\\operatorname{div}H$ et l'encadrement de $w$",
+     "enonce": "$H=\\gradg f=A\\nabla f=\\Theta(\\varrho)e^{-\\varphi}e_\\varrho=:h(\\varrho)e_\\varrho$ avec $\\Theta(\\varrho)=\\int_0^\\varrho e^{\\beta s^2/2}\\mathrm ds=\\dg(x,x_0)$, $e_\\varrho=(x-x_0)/\\varrho$ ; $w:=\\Theta e^{-\\varphi}/\\varrho$, $t:=\\beta\\varrho^2$, $p=h'+h/\\varrho=1+w(1-t)$ ; $e^{-t/2}(1+\\tfrac t6)\\le w\\le1$, $\\varrho w'=1-w-tw\\le0$, $|\\varrho w'|\\le t$.",
      "depend": []
+    },
+    {
+     "type": "Proposition 8.3",
+     "nom": "Signes au bord et feedback adapté",
+     "enonce": "Avec $x_0$ de (39) et $a:=q=H\\cdot\\nu$ sur $\\GN$ ((H5)(i), $b\\equiv1$) : (H2), (H3), (H4), (H5) sont vérifiées, $\\innerg{H}{\\tau}(p_\\pm)=-e^{\\varphi_\\Gamma}h(\\rho_\\Gamma)<0$ avec $\\rho_\\Gamma=|p_\\pm-x_0|=\\tan\\alpha_0$, $\\varphi_\\Gamma=\\tfrac\\beta2\\rho_\\Gamma^2$, $\\tau$ $g$-unitaire ; $c_0=\\inf_\\Gamma(-\\sqrt{\\det A}\\innerg{H}{\\tau})=e^{-\\varphi_\\Gamma}h(\\rho_\\Gamma)=\\Theta(\\rho_\\Gamma)e^{-2\\varphi_\\Gamma}>0$ ; pour $\\beta=0$, $c_0=\\tan\\alpha_0$.",
+     "depend": [
+      "Proposition 8.1",
+      "(42)–(43)",
+      "Lemme 2.1"
+     ]
     },
     {
      "type": "Proposition 8.4",
-     "nom": "Signes au bord et feedback adapté",
-     "enonce": "Avec $x_0=0$ et $a=q$ sur $\\GN$, Hyp. 2–5 sont satisfaites et le terme d'interface est nul.",
-     "depend": []
+     "nom": "Domination quantitative, constantes explicites",
+     "enonce": "$C_P^{(0)}\\le\\dfrac{4(1+\\cos\\alpha_0)}{1-\\cos\\alpha_0}$, $C_{\\mathrm{tr}}^{(0)}\\le2C_P^{(0)}+2\\sqrt{C_P^{(0)}}$ (constantes euclidiennes) ; pour $\\beta\\rho_+^2\\le0.35$, $(Lp)_+\\equiv0$ et $C_\\star\\le\\tfrac32e^{\\beta\\rho_+^2}C_{\\mathrm{tr}}^{(0)}\\rho_+\\beta$. (H6) ($C_\\star<1$) dès que $\\beta<\\beta_0(\\alpha_0):=\\min\\{0.35/\\rho_+^2,\\ 2e^{-0.35}/(3C_{\\mathrm{tr}}^{(0)}\\rho_+)\\}$. Pour $\\alpha_0=\\pi/3$ : $\\rho_+=3$, $C_P^{(0)}\\le12$, $C_{\\mathrm{tr}}^{(0)}\\le31$, $\\beta_0\\ge1/198$ ; $C_\\star\\le0.79<1$ pour $\\beta=1/186$.",
+     "depend": [
+      "(42)–(43)",
+      "Outil 5"
+     ]
     },
     {
-     "type": "Proposition 8.5",
-     "nom": "Domination quantitative avec constante explicite",
-     "enonce": "Pour $\\beta\\in(0,\\tfrac1{42})$, $C_\\star\\le42\\beta<1$ ; $\\beta_0=\\tfrac1{43}$ convient avec $\\rho'\\ge\\tfrac1{43}$.",
+     "type": "Corollaire 8.5",
+     "nom": "Stabilisation exponentielle dans la métrique courbe",
+     "enonce": "Pour $\\alpha_0\\in(0,\\pi/2)$ et $0<\\beta<\\beta_0(\\alpha_0)$, le disque à arc de Dirichlet muni de (40) et du feedback $a=H\\cdot\\nu$ vérifie (H1)–(H6) ; le Théorème B s'applique à (41) avec $\\rho=1$, $\\rho'\\ge1-C_\\star>0$, $\\omega=3\\rho'/(8c_2)$, $C=c_2/c_1$, et la transversalité stricte $c_0=\\Theta(\\tan\\alpha_0)e^{-\\beta\\tan^2\\alpha_0}>0$ rend l'estimation (46) disponible. $\\kappa=-2\\beta e^{-2\\varphi}<0$.",
      "depend": [
-      "Wirtinger",
-      "Identité $\\int_{r=1}u^2=\\int\\operatorname{div}(xu^2)$",
-      "(38)"
+      "Proposition 8.2",
+      "Proposition 8.3",
+      "Proposition 8.4",
+      "Théorème B"
      ]
     }
    ],
    "preuves": [
     {
-     "cible": "Courbure strictement négative",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Formule conforme en dimension $2$.",
+     "cible": "Cas plat (Proposition 8.1)",
+     "strategie": "Preuve complète. Six vérifications, une par hypothèse ; le seul calcul est celui de $\\tau(p_+)$.",
      "etapes": [
-      "$g=e^{2\\varphi}\\delta\\Rightarrow\\kappa=-e^{-2\\varphi}\\Delta\\varphi$ ; $\\Delta\\varphi=2\\beta$."
+      "(H1) : $\\nabla m=I$, $\\rho=1$.",
+      "Signes des faces : sur le cercle $\\nu=x$ et $m\\cdot\\nu=(x-x_0)\\cdot x=1-\\cos\\theta/\\cos\\alpha_0$ ; $\\le0$ pour $|\\theta|\\le\\alpha_0$ ((H3)), $\\ge0$ pour $|\\theta|\\ge\\alpha_0$ ((H4)), nul exactement en $p_\\pm$ (tangence forcée, Lemme 5.2).",
+      "Interface : en $p_+$, la tangente au cercle orientée dans le sens direct est $(-\\sin\\alpha_0,\\cos\\alpha_0)$ et pointe vers $\\GN$ ; $\\tau$ orienté N$\\to$D est donc $\\tau(p_+)=(\\sin\\alpha_0,-\\cos\\alpha_0)$. $m(p_+)=(\\cos\\alpha_0-1/\\cos\\alpha_0,\\ \\sin\\alpha_0)$, d'où $\\innerg{m}{\\tau}(p_+)=\\sin\\alpha_0\\cos\\alpha_0-\\sin\\alpha_0/\\cos\\alpha_0-\\sin\\alpha_0\\cos\\alpha_0=-\\tan\\alpha_0<0$ ; symétrie $y\\mapsto-y$ en $p_-$ ((H2) stricte).",
+      "(H5)(i) avec $b\\equiv1$ : $a=m\\cdot\\nu\\in C^\\infty(\\GN)$, nul en $p_\\pm$. (H6) : $p=\\operatorname{div}m=2$, $Lp=0$, $\\dnu p=0$, $C_\\star=0$.",
+      "Conclusion : Théorème B ; $c_0=\\tan\\alpha_0>0$ donne aussi (46)."
      ]
     },
     {
-     "cible": "Persistance de l'exposant $\\tfrac12$",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). $-2\\beta r\\partial_r$ est de la forme $rP_1$.",
+     "cible": "Courbure, exposant, coercivité (Proposition 8.2)",
+     "strategie": "Preuve complète. (i) formule de courbure conforme ; (ii) Lemme B.18 ; (iii) polaires géodésiques centrées en $x_0$, convexité de $\\psi_1$.",
      "etapes": [
-      "$L=e^{-2\\varphi}(\\Delta_0-2\\beta r\\partial_r)$ : facteur lisse non nul, perturbation dans $R$ ; faisceau du modèle (Lemme B.10), Théorème B.2. $S$ n'est plus solution exacte : $LS=-\\beta e^{-2\\varphi}S$, correction dans $K^2_{3/2-\\delta}$."
+      "(i) Pour $g=e^{2\\varphi}\\delta$ dans le plan, $\\kappa=-e^{-2\\varphi}\\Delta\\varphi$ ; $\\Delta(\\tfrac\\beta2\\varrho^2)=2\\beta$, d'où $\\kappa=-2\\beta e^{-2\\varphi}<0$.",
+      "(ii) $L=e^{-2\\varphi}(\\Delta-2\\beta(x-x_0)\\cdot\\nabla)$ ; en polaires $(r,\\theta)$ centrées en $p_\\pm$, le facteur $e^{-2\\varphi}$ est lisse strictement positif et le terme d'ordre un est un $P_1$ à coefficients lisses, non nul en $p_\\pm$ puisque $x-x_0\\ne0$ ; $P_1:K^2_\\beta\\to K^1_{\\beta-1}\\subset K^0_{\\beta-1}$ (B.0(e)) gagne un poids et entre dans $R$ (Théorème B.3) sans modifier les exposants : Lemme B.18.",
+      "(iii) La métrique est de révolution autour de $x_0$ : les rayons issus de $x_0$ sont des $g$-géodésiques et $\\dg(x,x_0)=\\int_0^\\varrho e^{\\beta s^2/2}\\mathrm ds=\\Theta(\\varrho)$. En polaires géodésiques $(\\Theta,\\psi)$ : $g=\\mathrm d\\Theta^2+\\psi_1(\\Theta)^2\\mathrm d\\psi^2$ avec $\\psi_1(\\Theta(\\varrho))=\\varrho e^\\varphi$, $\\psi_1(0)=0$, $\\psi_1'(0)=1$, $\\kappa=-\\psi_1''/\\psi_1\\le0$ : $\\psi_1$ convexe, donc $\\psi_1\\le\\Theta\\psi_1'$ (convexité et $\\psi_1(0)=0$). $\\Hessg(\\tfrac12\\Theta^2)=\\mathrm d\\Theta\\otimes\\mathrm d\\Theta+\\tfrac{\\Theta\\psi_1'}{\\psi_1}(g-\\mathrm d\\Theta\\otimes\\mathrm d\\Theta)\\ge g$. $\\overline\\Om\\subset\\{\\varrho\\le\\rho_+\\}$ où $\\Theta$ est lisse ; pas de lieu de coupure (métrique de révolution complète sur $\\R^2$)."
      ]
     },
     {
-     "cible": "Coercivité",
-     "strategie": "Preuve complète. Hypothèses : $g=e^{2\\varphi}\\delta$ sur le demi-disque, $\\varphi=\\tfrac\\beta2|x|^2$, $x_0=0$, $\\kappa=-2\\beta e^{-2\\varphi}\\le0$.",
+     "cible": "Les identités (42)–(43) : $H$, $p$, encadrement de $w$",
+     "strategie": "Preuve complète (calcul). Variable $\\varrho=|x-x_0|$, $t=\\beta\\varrho^2$.",
      "etapes": [
-      "Coordonnées polaires géodésiques centrées en $0$ : par symétrie de révolution, les rayons sont des géodésiques ; $g=d\\varrho^2+\\psi(\\varrho)^2d\\theta^2$ avec $\\varrho(r)=\\int_0^re^{\\varphi}$ et $\\psi(\\varrho(r))=re^{\\varphi(r)}$ (longueur riemannienne du cercle $/2\\pi$) ; $\\psi(0)=0$, $\\psi'(0)=1$.",
-      "Courbure de Gauss d'une métrique $d\\varrho^2+\\psi^2d\\theta^2$ : $\\kappa=-\\psi''/\\psi$ ; $\\kappa\\le0$ donne $\\psi''\\ge0$ : $\\psi$ convexe sur $[0,\\varrho_{\\max}]$ avec $\\psi(0)=0$, donc $\\psi(\\varrho)\\le\\varrho\\psi'(\\varrho)$ (convexité : $\\psi(0)\\ge\\psi(\\varrho)-\\varrho\\psi'(\\varrho)$).",
-      "Hessien de $f=\\tfrac12\\varrho^2$ : $\\Hessg f=d\\varrho\\otimes d\\varrho+\\varrho\\Hessg\\varrho$, et $\\Hessg\\varrho=\\tfrac{\\psi'}\\psi(g-d\\varrho\\otimes d\\varrho)$ (calcul direct : le seul symbole de Christoffel non nul pertinent est $\\Gamma^\\varrho_{\\theta\\theta}=-\\psi\\psi'$). Donc $\\Hessg f=d\\varrho\\otimes d\\varrho+\\tfrac{\\varrho\\psi'}\\psi(g-d\\varrho\\otimes d\\varrho)\\ge d\\varrho\\otimes d\\varrho+(g-d\\varrho\\otimes d\\varrho)=g$ car $\\varrho\\psi'/\\psi\\ge1$. Ainsi $\\rho=1$."
+      "$f=\\tfrac12\\Theta(\\varrho)^2$, $\\nabla f=\\Theta\\,\\Theta'(\\varrho)e_\\varrho=\\Theta e^{\\varphi}e_\\varrho$ ; $H=A\\nabla f=e^{-2\\varphi}\\Theta e^\\varphi e_\\varrho=\\Theta e^{-\\varphi}e_\\varrho=h(\\varrho)e_\\varrho$.",
+      "$h'=\\Theta'e^{-\\varphi}-\\Theta\\varphi'e^{-\\varphi}=1-\\beta\\varrho\\Theta e^{-\\varphi}$ ; $p=\\operatorname{div}H=h'+h/\\varrho=1-\\beta\\varrho^2w+w=1+w(1-t)$ avec $w=\\Theta e^{-\\varphi}/\\varrho$ : c'est (42).",
+      "Encadrement de $\\Theta$ : $1\\le e^{\\beta s^2/2}\\le e^{t/2}$ sur $[0,\\varrho]$ donne $\\varrho\\le\\Theta\\le\\varrho e^{t/2}$ ; $e^{\\beta s^2/2}\\ge1+\\beta s^2/2$ donne $\\Theta\\ge\\varrho+\\beta\\varrho^3/6=\\varrho(1+t/6)$. D'où $e^{-t/2}(1+t/6)\\le w\\le1$.",
+      "$w'=\\tfrac{\\Theta'e^{-\\varphi}-\\Theta\\varphi'e^{-\\varphi}}{\\varrho}-\\tfrac{\\Theta e^{-\\varphi}}{\\varrho^2}=\\tfrac{1-tw}{\\varrho}-\\tfrac w\\varrho$, soit $\\varrho w'=1-w-tw$. Signe : $\\varrho w'\\le0\\iff w(1+t)\\ge1$, vrai par $w\\ge e^{-t/2}(1+t/6)$ et $(1+t/6)(1+t)\\ge e^{t/2}$ sur $[0,1]$ ($\\ln(1+t)\\ge t/2$). Borne : $-t\\le1-w(1+t)\\le1-w\\le t/3$ pour $t\\le1$, donc $|\\varrho w'|\\le t$ : c'est (43)."
      ]
     },
     {
-     "cible": "Les identités $(37)$–$(38)$ : $H$, $p$, encadrement de $w$",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). Dériver $\\varrho$, $h$, puis $p=\\operatorname{div}H$ en polaires.",
+     "cible": "Signes au bord et feedback adapté (Proposition 8.3)",
+     "strategie": "Preuve complète. $H$ est un multiple positif de $m=x-x_0$ : les signes des faces sont ceux du cas plat ; seul le calcul de $\\innerg{H}{\\tau}$ avec le $\\tau$ $g$-unitaire est nouveau.",
      "etapes": [
-      "$\\varrho'(r)=e^{\\beta r^2/2}=e^{\\varphi}$ ; $\\nabla f=\\varrho\\nabla\\varrho=\\varrho e^\\varphi e_r$ ; $H=A\\nabla f=e^{-2\\varphi}\\varrho e^\\varphi e_r=\\varrho e^{-\\varphi}e_r=:h(r)e_r$.",
-      "$h'=\\varrho'e^{-\\varphi}-\\varrho\\varphi'e^{-\\varphi}=1-\\beta r\\varrho e^{-\\varphi}$ ; $p=\\operatorname{div}H=h'+h/r=1-\\beta r\\varrho e^{-\\varphi}+\\varrho e^{-\\varphi}/r=1+w(1-\\beta r^2)$ avec $w=\\varrho e^{-\\varphi}/r$ : c'est $(37)$.",
-      "Encadrement de $\\varrho$ : $1\\le e^{\\beta s^2/2}\\le e^{\\beta r^2/2}$ sur $[0,r]$ donne $r\\le\\varrho\\le re^{t/2}$, $t=\\beta r^2$ ; plus finement $e^{\\beta s^2/2}\\ge1+\\beta s^2/2$ donne $\\varrho\\ge r+\\beta r^3/6=r(1+t/6)$. Donc $e^{-t/2}(1+t/6)\\le w\\le1$.",
-      "$rw'$ : $w=\\varrho e^{-\\varphi}/r$, $w'=\\tfrac{\\varrho'e^{-\\varphi}-\\varrho\\varphi'e^{-\\varphi}}{r}-\\tfrac{\\varrho e^{-\\varphi}}{r^2}=\\tfrac{1-\\beta r^2w}{r}-\\tfrac wr$, soit $rw'=1-w-tw$. Signe : $rw'\\le0\\iff w(1+t)\\ge1$, vrai par $w\\ge e^{-t/2}(1+t/6)$ et $(1+t/6)(1+t)\\ge e^{t/2}$ sur $[0,1]$ (car $\\ln(1+t)\\ge t/2$ et $\\ln(1+t/6)\\ge0$). C'est $(38)$.",
-      "$p'(1)$ : $p'=w'(1-t)-2\\beta rw$ ; en $r=1$, $w'(1)=1-w-\\beta w$ : $p'(1)=(1-w)(1-\\beta)-\\beta w(3-\\beta)$ ; $-3\\beta\\le p'(1)\\le(1-w)(1-\\beta)\\le\\beta/3+\\beta^2/12$ par $1-w\\le1-(1+\\beta/6)(1-\\beta/2)$ ; d'où $|p'(1)|\\le3\\beta$."
+      "$H=h(\\varrho)e_\\varrho$, $h>0$ : en tout point $H=\\tfrac{h}{\\varrho}m$. Donc $H\\cdot\\nu$ a le signe de $m\\cdot\\nu$ : $\\le0$ sur $\\GD$, $\\ge0$ sur $\\GN$, nul en $p_\\pm$ (Proposition 8.1).",
+      "Soit $\\tau_E$ la tangente euclidienne unitaire orientée N$\\to$D ; $|\\tau_E|_g=e^\\varphi$, donc $\\tau=e^{-\\varphi}\\tau_E$. $\\innerg{H}{\\tau}=g(H,\\tau)=e^{2\\varphi}(H\\cdot\\tau_E)e^{-\\varphi}=e^\\varphi h\\,(e_\\varrho\\cdot\\tau_E)$.",
+      "En $p_\\pm$ : $e_\\varrho=m/|m|$ et $m\\cdot\\tau_E=-\\tan\\alpha_0=-\\rho_\\Gamma$ (Proposition 8.1) avec $|m|=\\rho_\\Gamma$, donc $e_\\varrho\\cdot\\tau_E=-1$ et $\\innerg{H}{\\tau}(p_\\pm)=-e^{\\varphi_\\Gamma}h(\\rho_\\Gamma)$.",
+      "$\\sqrt{\\det A}=e^{-2\\varphi}$ et (45) : $c_0=e^{-2\\varphi_\\Gamma}e^{\\varphi_\\Gamma}h(\\rho_\\Gamma)=e^{-\\varphi_\\Gamma}h(\\rho_\\Gamma)=\\Theta(\\rho_\\Gamma)e^{-2\\varphi_\\Gamma}$. Le feedback $a=q=h(\\varrho)e_\\varrho\\cdot\\nu\\ge0$ est $C^\\infty$ sur $\\GN$ et nul en $p_\\pm$ : (H5)(i), $b\\equiv1$."
      ]
     },
     {
-     "cible": "Signes au bord et feedback adapté",
-     "strategie": "Esquisse détaillée (à porter au niveau complet). $H$ radial.",
+     "cible": "Domination quantitative, constantes explicites (Proposition 8.4)",
+     "strategie": "Preuve complète. Cinq blocs : Poincaré par rayons, trace par divergence, passage à la norme $A$, terme de trace, terme de volume ; puis les valeurs numériques.",
      "etapes": [
-      "Axes : $H$ tangent, $q=0$ : Hyp. 3 sur $\\GD$, Hyp. 4 sur l'axe de Neumann, $a=0$ (mur neutre), croisé nul.",
-      "Arc $r=1$ : $\\nu=e_r$, $q=h(1)=\\varrho(1)e^{-\\beta/2}>0$, $a=q>0$, $H_T=0$ : croisé nul, Hyp. 5(i) avec $b\\equiv1$. $H(0)=0$ : $\\innerg{H}{\\tau}=0$ en $\\Gamma$."
+      "Poincaré. Tout rayon issu de $x_0$ qui rencontre $\\Om$ y entre par $\\GD$ ($m\\cdot\\nu\\le0$) et en sort par $\\GN$ ; en polaires $(\\varrho,\\psi)$ centrées en $x_0$, la trace de $\\Om$ sur le rayon $\\psi$ est $\\{\\varrho_0(\\psi)<\\varrho<\\varrho_1(\\psi)\\}$ avec $u(\\varrho_0,\\psi)=0$, $\\rho_-\\le\\varrho_0<\\varrho_1\\le\\rho_+$, longueur $\\ell\\le2$. $u(\\varrho,\\psi)^2\\le\\ell\\int|\\partial_\\varrho u|^2$, puis $\\int u^2\\varrho\\,\\mathrm d\\varrho\\le\\ell^2\\rho_+\\int|\\partial_\\varrho u|^2\\le\\ell^2\\tfrac{\\rho_+}{\\rho_-}\\int|\\partial_\\varrho u|^2\\varrho'\\mathrm d\\varrho'$ ; intégrer en $\\psi$ : $\\|u\\|^2\\le4\\tfrac{\\rho_+}{\\rho_-}\\|\\nabla u\\|^2=\\tfrac{4(1+\\cos\\alpha_0)}{1-\\cos\\alpha_0}\\|\\nabla u\\|^2$.",
+      "Trace. $\\int_{\\partial\\Om}u^2=\\int_\\Om\\operatorname{div}(xu^2)=2\\int u^2+2\\int u\\,x\\cdot\\nabla u\\le2\\|u\\|^2+2\\|u\\|\\|\\nabla u\\|\\le(2C_P^{(0)}+2\\sqrt{C_P^{(0)}})\\|\\nabla u\\|^2$.",
+      "Norme $A$. $e^{-2\\varphi}\\ge e^{-\\beta\\rho_+^2}$ sur $\\Om$ : $\\|\\nabla u\\|^2\\le e^{\\beta\\rho_+^2}\\|\\nabla u\\|_A^2$ ; $C_P\\le e^{\\beta\\rho_+^2}C_P^{(0)}$, $C_{\\mathrm{tr}}\\le e^{\\beta\\rho_+^2}C_{\\mathrm{tr}}^{(0)}$.",
+      "Terme de trace. $\\dnu p=e^{-2\\varphi}p'(\\varrho)\\partial_\\nu\\varrho$, $|\\partial_\\nu\\varrho|\\le1$, $p'=w'(1-t)-2\\beta\\varrho w$ ; par (43) $|\\varrho w'|\\le t$ donc $|p'|\\le t/\\varrho+2\\beta\\varrho=3\\beta\\varrho\\le3\\beta\\rho_+$, et $e^{-2\\varphi}\\le1$ : $\\tfrac12C_{\\mathrm{tr}}\\|\\dnu p\\|_{C^0}\\le\\tfrac32e^{\\beta\\rho_+^2}C_{\\mathrm{tr}}^{(0)}\\rho_+\\beta$.",
+      "Terme de volume. Calcul radial (preuve suivante) : $e^{2\\varphi}Lp=(1-t^2)D/\\varrho^2+2\\beta(3-t)D-6\\beta(1-t)w$, $D=w(1+t)-1\\in[0,t]$ ; donc $e^{2\\varphi}Lp\\le\\beta(1+6t)-6\\beta(1-t)e^{-t/2}=\\beta F(t)$ avec $F(t)=1+6t-6(1-t)e^{-t/2}$, $F'(t)=6+3(3-t)e^{-t/2}>0$, $F(0.35)\\approx-0.174<0$ : $F<0$ sur $[0,0.35]$ ; comme $t\\le\\beta\\rho_+^2\\le0.35$, $(Lp)_+\\equiv0$.",
+      "Valeurs. $\\alpha_0=\\pi/3$ : $\\cos\\alpha_0=\\tfrac12$, $\\rho_\\pm=2\\pm1$, $C_P^{(0)}\\le12$, $C_{\\mathrm{tr}}^{(0)}\\le24+2\\sqrt{12}<31$, $0.35/9\\approx1/25.7$, $2e^{-0.35}/(3\\cdot31\\cdot3)\\approx1/198$. Pour $\\beta=1/186$ : $e^{9/186}<1.05$ et $C_\\star\\le\\tfrac32\\cdot1.05\\cdot31\\cdot3/186\\approx0.79<1$."
      ]
     },
     {
-     "cible": "Domination quantitative avec constante explicite",
-     "strategie": "Preuve complète. Hypothèses : $\\beta\\in(0,1/42)$, $A=e^{-2\\varphi}I$, $H=h(r)e_r$, $p=1+w(1-t)$ avec $t=\\beta r^2$, encadrement (38).",
+     "cible": "Le calcul de $Lp$ en variable radiale",
+     "strategie": "Preuve complète (calcul). $L=e^{-2\\varphi}(\\Delta-2\\beta(x-x_0)\\cdot\\nabla)$ sur une fonction radiale $p(\\varrho)$ : $e^{2\\varphi}Lp=p''+p'/\\varrho-2\\beta\\varrho p'$.",
      "etapes": [
-      "(a) Poincaré : $e^{-2\\varphi}\\ge e^{-\\beta}$ sur $\\Om$ donc $\\|\\nabla u\\|^2_{L^2}\\le e^\\beta\\|\\nabla u\\|^2_A$ ; Wirtinger (Outil 7) et $(\\partial_\\theta u)^2\\le r^2|\\nabla u|^2$ donnent $\\|u\\|^2\\le4\\|\\nabla u\\|^2\\le4e^\\beta\\|\\nabla u\\|^2_A$ : $C_P\\le4e^\\beta$. Trace : arc $\\le12\\|\\nabla u\\|^2$ (Outil 5, étape 4) ; axe $x<0$ : $u(x,0)^2\\le u(x,\\sqrt{1-x^2})^2+2\\int_0^{\\sqrt{1-x^2}}|u\\partial_yu|dy$, intégrer en $x$ : $\\int_{\\text{axe}}u^2\\le\\int_{\\text{arc}}u^2+2\\|u\\|\\|\\nabla u\\|\\le16\\|\\nabla u\\|^2$ ; total $C_{tr}\\le28e^\\beta$.",
-      "(b) Terme de trace : sur les axes $p$ est radial donc $\\dnu^Ap=0$ ; sur l'arc $\\dnu^Ap=e^{-2\\varphi(1)}p'(1)=e^{-\\beta}p'(1)$. De $p=1+w(1-t)$ : $p'=w'(1-t)-2\\beta rw$ ; en $r=1$, $t=\\beta$, $w'(1)=1-w-\\beta w$ (car $rw'=1-w-tw$) : $p'(1)=(1-w)(1-\\beta)-\\beta w(3-\\beta)$. Bornes : $w\\le1\\Rightarrow(1-w)\\ge0$ et $\\beta w(3-\\beta)\\le3\\beta$, donc $p'(1)\\ge-3\\beta$ ; $1-w\\le1-e^{-\\beta/2}(1+\\beta/6)\\le\\beta/2-\\beta/6+O(\\beta^2)=\\beta/3+O(\\beta^2)$ donc $p'(1)\\le\\beta/3+\\beta^2/12$. D'où $|p'(1)|\\le3\\beta$ et $\\tfrac12C_{tr}\\|\\dnu^Ap\\|\\le\\tfrac12\\cdot28e^\\beta\\cdot e^{-\\beta}\\cdot3\\beta=42\\beta$.",
-      "(c) Terme de volume : $Lp=e^{-2\\varphi}(p''+p'/r-2\\beta rp')$. De $rw'=1-w-tw$ on tire, en dérivant, $rw''+w'=-w'-2\\beta rw-tw'$, soit $w''=-(2+t)w'/r-2\\beta w$. Avec $p'=w'(1-t)-2\\beta rw$ et $p''=w''(1-t)-2\\beta rw'-2\\beta w-2\\beta rw'$, on obtient $p''+p'/r-2\\beta rp'=-(1-t^2)w'/r-2\\beta r(3-t)w'-6\\beta(1-t)w$.",
-      "(c) suite : poser $D:=w(1+t)-1=-rw'\\ge0$ (38). Alors $-w'/r=D/r^2$ et $-2\\beta rw'=2\\beta D$ : le crochet vaut $(1-t^2)D/r^2+2\\beta(3-t)D-6\\beta(1-t)w$. De $w\\le1$ : $D\\le t=\\beta r^2$, donc $D/r^2\\le\\beta$ et $2\\beta(3-t)D\\le6\\beta t$ ; les deux premiers termes sont $\\le\\beta(1-t^2)+6\\beta t\\le\\beta(1+6t)$. Le troisième : $w\\ge e^{-t/2}$ donne $6\\beta(1-t)w\\ge6\\beta(1-t)e^{-t/2}$. Pour $t\\le\\beta\\le1/42$ : $1+6t\\le1{,}143$ et $6(1-t)e^{-t/2}\\ge5{,}79$ ; le crochet est $<0$, donc $(Lp)_+\\equiv0$.",
-      "(d) $C_\\star\\le0+42\\beta<1=\\rho$ ssi $\\beta<1/42$ ; $\\beta_0=1/43$ donne $\\rho'=1-C_\\star\\ge1/43$."
+      "$p=1+w(1-t)$, $t'=2\\beta\\varrho$, $\\varrho w'=1-w-tw$ : $p'=w'(1-t)-2\\beta\\varrho w$.",
+      "$w''=\\tfrac{\\mathrm d}{\\mathrm d\\varrho}\\bigl(\\tfrac{1-w-tw}{\\varrho}\\bigr)=\\tfrac{-w'-2\\beta\\varrho w-tw'}{\\varrho}-\\tfrac{1-w-tw}{\\varrho^2}=-\\tfrac{(2+t)w'}{\\varrho}-2\\beta w$.",
+      "$p''=w''(1-t)-2\\beta\\varrho w'-2\\beta w-2\\beta\\varrho w'=-\\tfrac{(2+t)(1-t)w'}{\\varrho}-2\\beta(1-t)w-4\\beta\\varrho w'-2\\beta w$ ; $p'/\\varrho=\\tfrac{(1-t)w'}{\\varrho}-2\\beta w$ ; $-2\\beta\\varrho p'=-2\\beta\\varrho(1-t)w'+4\\beta tw$.",
+      "Somme. Termes en $w'/\\varrho$ : $(-(2+t)(1-t)+(1-t))w'/\\varrho=-(1-t^2)w'/\\varrho$ ; en $\\beta\\varrho w'$ : $-2\\beta\\varrho(3-t)w'$ ; en $\\beta w$ : $-2\\beta(1-t)w-4\\beta w+4\\beta tw=-6\\beta(1-t)w$. Avec $D:=w(1+t)-1=-\\varrho w'\\ge0$ : $e^{2\\varphi}Lp=(1-t^2)D/\\varrho^2+2\\beta(3-t)D-6\\beta(1-t)w$ ; $w\\le1$ donne $D\\le t$ et $D/\\varrho^2\\le\\beta$.",
+      "Vérification en série près de $\\varrho=0$ : $p=2-\\tfrac43\\beta\\varrho^2+\\tfrac25\\beta^2\\varrho^4+O(\\varrho^6)$, $w=1-\\tfrac t3+\\tfrac{t^2}{15}+O(t^3)$, $e^{2\\varphi}Lp=-\\tfrac{16}3\\beta+\\tfrac{176}{15}\\beta^2\\varrho^2+O(\\beta^3\\varrho^4)$ (coefficient $\\tfrac{24}5+\\tfrac85+\\tfrac{16}3=\\tfrac{176}{15}$)."
      ]
     }
    ],
    "glossaire": [
     {
-     "terme": "$w(r)$",
-     "definition": "$\\varrho(r)e^{-\\varphi(r)}/r$, avec $e^{-t/2}(1+t/6)\\le w\\le1$ et $rw'=1-w-tw\\le0$, $t=\\beta r^2$."
+     "terme": "$x_0=(1/\\cos\\alpha_0,0)$",
+     "definition": "Pôle du multiplicateur, intersection des tangentes au cercle en $p_\\pm$, hors de $\\overline\\Om$ ; seul pôle admissible."
     },
     {
-     "terme": "$\\beta_0=1/43$",
-     "definition": "Valeur sûre pour la chaîne $C_\\star\\le42\\beta<1$ ; seuil exact numérique $\\approx1/36{,}7$."
+     "terme": "$\\rho_\\pm$, $\\rho_\\Gamma$",
+     "definition": "$\\rho_\\pm=1/\\cos\\alpha_0\\pm1$ bornes de $\\varrho=|x-x_0|$ sur $\\overline\\Om$ ; $\\rho_\\Gamma=|p_\\pm-x_0|=\\tan\\alpha_0$."
+    },
+    {
+     "terme": "$\\Theta(\\varrho)$",
+     "definition": "$\\int_0^\\varrho e^{\\beta s^2/2}\\mathrm ds=\\dg(x,x_0)$ : distance géodésique au pôle, les rayons étant des géodésiques."
+    },
+    {
+     "terme": "$c_0$",
+     "definition": "Marge de transversalité stricte $\\inf_\\Gamma(-\\sqrt{\\det A}\\innerg{H}{\\tau})=\\Theta(\\rho_\\Gamma)e^{-2\\varphi_\\Gamma}$ ; $\\tan\\alpha_0$ en plat."
+    },
+    {
+     "terme": "$\\beta_0(\\alpha_0)$",
+     "definition": "$\\min\\{0.35/\\rho_+^2,\\ 2e^{-0.35}/(3C_{\\mathrm{tr}}^{(0)}\\rho_+)\\}$ : seuil certifié de (H6) ; $\\ge1/198$ pour $\\alpha_0=\\pi/3$."
+    },
+    {
+     "terme": "$F(t)$",
+     "definition": "$1+6t-6(1-t)e^{-t/2}$, strictement croissante, négative sur $[0,0.35]$ : donne $(Lp)_+\\equiv0$."
     }
    ],
    "quiz": [
     {
-     "question": "Pourquoi le terme d'interface est-il nul dans l'exemple ?",
+     "question": "Pourquoi le demi-disque a-t-il été abandonné comme exemple ?",
      "options": [
-      "Parce que $\\eta=0$",
-      "Parce que $x_0=0=\\Gamma$ et $H(0)=0$",
-      "Parce que $\\beta$ est petit",
-      "Parce que $\\tau$ est mal défini"
+      "Parce que sa courbure est positive",
+      "Parce que son bord n'est pas $C^3$ et qu'il a une seconde jonction d'ouverture $\\pi/2$ en $(1,0)$, hors du cadre $\\alpha\\equiv\\pi$",
+      "Parce que (H1) y est fausse",
+      "Parce que $C_\\star>1$"
      ],
      "bonne": 1,
-     "explication": "$H=h(r)e_r$ avec $h(0)=0$ : $\\innerg{H}{\\tau}=0$ en $\\Gamma$ ; c'est aussi pourquoi $c_0=0$."
+     "explication": "Il ne relevait pas du Théorème B (régularité $C^3$ du bord et interface critique en chaque point)."
     },
     {
-     "question": "Quel facteur rend $Lp\\le0$ pour $\\beta\\le1/42$ ?",
+     "question": "Quel est le seul pôle admissible pour un multiplicateur radial sur le disque à arc de Dirichlet ?",
      "options": [
-      "$D\\le t$ et $6(1-t)e^{-t/2}>1+6t$ pour $t\\le\\beta$",
-      "$w=1$",
-      "$p'=0$",
-      "$e^{-2\\varphi}<0$"
-     ],
-     "bonne": 0,
-     "explication": "Le troisième terme domine les deux premiers ; $(Lp)_+\\equiv0$ et le terme de volume de $C_\\star$ est nul."
-    },
-    {
-     "question": "La forme factorisée $L=e^{-2\\varphi}(\\Delta-2\\beta x\\cdot\\nabla)$ importe car :",
-     "options": [
-      "Elle change le signe de $Lp$",
-      "Le facteur global $e^{-2\\varphi}>0$ ne change pas le signe de $Lp$, mais $LS$ et $Lp$ doivent être calculés avec le même opérateur",
-      "Elle rend $S$ harmonique",
-      "Elle annule $p'$"
+      "Le centre $(0,0)$",
+      "$x_0=(1/\\cos\\alpha_0,0)$, intersection des tangentes en $p_\\pm$",
+      "N'importe quel point de $\\GD$",
+      "$p_+$"
      ],
      "bonne": 1,
-     "explication": "Le troisième rapport a signalé une lecture non factorisée ; la source était déjà cohérente."
+     "explication": "Théorème 5.3(3) : $\\dim V=2$ et $\\mathcal T=\\{x_0\\}$ ; c'est le point où les deux tangences forcées sont réalisées."
+    },
+    {
+     "question": "Que vaut $\\innerg{m}{\\tau}(p_\\pm)$ dans le cas plat ?",
+     "options": [
+      "$0$",
+      "$-\\tan\\alpha_0$",
+      "$+\\tan\\alpha_0$",
+      "$-\\sin\\alpha_0$"
+     ],
+     "bonne": 1,
+     "explication": "$\\tau(p_+)=(\\sin\\alpha_0,-\\cos\\alpha_0)$ orienté N$\\to$D et $m(p_+)=(\\cos\\alpha_0-1/\\cos\\alpha_0,\\sin\\alpha_0)$ ; les termes $\\sin\\alpha_0\\cos\\alpha_0$ se compensent."
+    },
+    {
+     "question": "Pourquoi $(Lp)_+\\equiv0$ pour $\\beta\\rho_+^2\\le0.35$ ?",
+     "options": [
+      "Parce que $p$ est constant",
+      "Parce que $e^{2\\varphi}Lp\\le\\beta F(t)$ avec $F$ croissante et $F(0.35)<0$",
+      "Parce que $w\\ge1$",
+      "Parce que $D<0$"
+     ],
+     "bonne": 1,
+     "explication": "$F(t)=1+6t-6(1-t)e^{-t/2}$, $F'>0$, $F(0.35)\\approx-0.174$ ; seul le terme de trace contribue alors à $C_\\star$."
+    },
+    {
+     "question": "Que vaut $c_0$ dans la métrique conforme ?",
+     "options": [
+      "$\\tan\\alpha_0$",
+      "$\\Theta(\\rho_\\Gamma)e^{-2\\varphi_\\Gamma}$",
+      "$e^{\\varphi_\\Gamma}h(\\rho_\\Gamma)$",
+      "$1$"
+     ],
+     "bonne": 1,
+     "explication": "$c_0=-\\sqrt{\\det A}\\innerg{H}{\\tau}=e^{-2\\varphi_\\Gamma}\\cdot e^{\\varphi_\\Gamma}h(\\rho_\\Gamma)$ avec $h=\\Theta e^{-\\varphi}$ ; pour $\\beta=0$ on retrouve $\\tan\\alpha_0$."
     }
    ]
   },
@@ -2303,7 +2591,8 @@
      "titre": "Parcours pas à pas",
      "paragraphes": [
       "Pas 1 — Résumé : 120–200 mots, autoportant, aucun renvoi interne (pas de « Annexe E », pas de « galeries »), les objets nommés une fois, le résultat principal en une phrase, l'hypothèse-clé en une autre. Pas 2 — Introduction : cadre, résultat principal, travaux antérieurs, plan ; pas de paragraphe « périmètre » défensif, une phrase sobre sur la portée suffit. Pas 3 — Énoncés : hypothèses numérotées citées par leur numéro, aucun commentaire méta (« cette restriction est constitutive de l'énoncé »), aucune phrase en gras ; ce qui commente l'énoncé va après lui, en prose. Pas 4 — Preuves : étapes numérotées admises ; ni « honnêtement », ni « sans détour », ni « remarquable », ni « illusoire » ; un lemme importé est cité avec son numéro exact. Pas 5 — Titres : descriptifs (« Comptage de puissances »), jamais métaphoriques (« le verrou »). Pas 6 — Fin : déclarations (financement, conflits, données), remerciements aux rapporteurs, bibliographie avec DOI.",
-      "Ce que la mise aux normes ne fait pas : elle ne traduit pas (JMPA et ESAIM:COCV acceptent le français ; SICON, Comm. PDE, JDE non), elle ne choisit pas la classe (amsart/elsarticle) ni le style BibTeX, et elle ne réorganise pas les preuves du §7 — ces trois décisions dépendent de la revue."
+      "Ce que la mise aux normes ne fait pas : elle ne traduit pas (JMPA et ESAIM:COCV acceptent le français ; SICON, Comm. PDE, JDE non), elle ne choisit pas la classe (amsart/elsarticle) ni le style BibTeX, et elle ne réorganise pas les preuves du §7 — ces trois décisions dépendent de la revue.",
+      "État au 24 septembre 2026 (v18, JMPA) : résumé FR 236 mots / EN 201 mots, mots-clefs en anglais, déclarations (financement, intérêts, données, IA générative) présentes, bibliographie numérotée avec DOI ; reste à compléter la page de titre (affiliation, adresse) et à déposer la v18 comme v2 de hal-05689295 avant l'envoi. Coquilles relevées pendant la traduction, à corriger dans les deux versions : Remarque 9.2 ($\\mathsf K$ écrit pour la courbure $\\kappa$) ; preuve du Lemme B.12 (« Hardy (Outil 6) » renvoie à la numérotation de cette tuile : lire B.0(f)) ; §8, « comme en (43) » précède l'équation (43) ; Remarque 7.5(c) et §10 renvoient à « la version longue » alors que le fichier est la version longue ; §12, « Question 10.3 » (environnement question) contre « Conjecture » dans le texte français."
      ],
      "retenir": [
       "Un encadré « Mise en garde » devient une remarque numérotée.",
