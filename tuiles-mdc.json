@@ -1,0 +1,1955 @@
+{
+ "mdc-office": {
+  "id": "mdc-office",
+  "emoji": "🕯️",
+  "titre": "Maître des Cérémonies — rôle et obligations",
+  "sousTitre": "D'après le Mémento des Officiers, Grande Loge de France, édition 2019",
+  "tagline": "mission, attitudes, déplacements, protocole",
+  "intro": "Tout ce que le Mémento des Officiers de la GLDF (édition 2019) prescrit au Maître des Cérémonies : sa mission et son serment, l'inventaire dont il répond, ses attitudes et sa canne, ses trajets en Loge, l'entrée réglée et la fermeture des travaux, les usages courants et les Honneurs maçonniques. Chaque chapitre suit le texte du Mémento, sans ajout ; les quiz vérifient les points que l'on oublie le plus souvent.",
+  "accent": "#2b4c7e",
+  "accentDark": "#1c3357",
+  "accentSoft": "#e6ecf5",
+  "math": false,
+  "groupes": [
+   {
+    "label": "I · L'office",
+    "chapters": [
+     1,
+     2
+    ]
+   },
+   {
+    "label": "II · Le corps et la canne",
+    "chapters": [
+     3,
+     4
+    ]
+   },
+   {
+    "label": "III · Ouverture et fermeture",
+    "chapters": [
+     5,
+     6
+    ]
+   },
+   {
+    "label": "IV · Usages et protocole",
+    "chapters": [
+     7,
+     8,
+     9
+    ]
+   }
+  ],
+  "chapitres": [
+   {
+    "numero": 1,
+    "titre": "La mission du Maître des Cérémonies",
+    "objectifs": [
+     "Énoncer les six responsabilités que le Mémento confie au Maître des Cérémonies.",
+     "Distinguer ce qu'il fait sur ordre du Vénérable Maître et ce qu'il fait de son propre chef.",
+     "Situer l'office par rapport à l'Expert : assistance, jamais direction des cérémonies."
+    ],
+    "sections": [
+     {
+      "titre": "Ce dont le Maître des Cérémonies répond",
+      "paragraphes": [
+       "Le Mémento ouvre le chapitre par une liste de charges. Le Maître des Cérémonies est chargé de la réception des visiteurs et annonce les délégations qu'il introduit dans le Temple. Il a en charge le Volume de la Loi Sacrée, les outils symboliques, les cordons, sautoirs et accessoires divers, dont il tient inventaire.",
+       "Avant l'ouverture des Travaux, il prépare le Temple et prend toutes les mesures utiles pour le déroulement des Tenues. Il veille à ce que les Frères soient rituellement décorés. Il est chargé de la distribution des boules et bulletins de vote pour les scrutins et fait circuler le sac aux propositions.",
+       "Il conduit les Frères dans la Loge à la demande du Vénérable Maître, mais peut se déplacer de son propre chef pour les besoins de son office. Un Frère autorisé à couvrir la Loge avant la fermeture des Travaux est conduit par lui auprès du Frère Hospitalier pour verser son obole avant de sortir."
+      ],
+      "exemple": "Un Frère demande à couvrir le Temple avant la fermeture. Le V∴M∴ l'y autorise ; le MdC quitte son plateau, le conduit au plateau de l'Hospitalier où il verse son obole, puis à la porte. Le Frère salue le V∴M∴ seul, ne se remet pas à l'Ordre, pivote à droite et sort.",
+      "retenir": [
+       "Six charges : visiteurs et délégations ; inventaire (V∴L∴S∴, outils, décors) ; préparation du Temple ; décors des Frères ; boules, bulletins et sac aux propositions ; conduite des Frères.",
+       "Deux régimes de déplacement : sur ordre du V∴M∴ pour conduire un Frère, de son propre chef pour les besoins matériels de l'office.",
+       "Le Frère qui couvre avant la fermeture passe par l'Hospitalier, conduit par le MdC."
+      ]
+     },
+     {
+      "titre": "Le serment d'installation : la mission telle qu'elle est dite",
+      "paragraphes": [
+       "Lors de l'installation du Collège, le Vénérable Maître dit au futur Maître des Cérémonies que l'ordre matériel de la Loge est de son ressort : avant l'ouverture des travaux, il doit s'assurer que rien ne manque de ce qui est nécessaire à l'accomplissement des Rites.",
+       "Il lui appartient en outre d'accueillir les Frères visiteurs à leur entrée en Loge, après qu'ils ont été tuilés ou reconnus, d'annoncer leur nom et leur qualité maçonnique et de les conduire à leur place respective.",
+       "Il est à la disposition du Vénérable Maître pendant les travaux et assiste l'Expert au cours des cérémonies qui se déroulent en Loge. Le Vénérable conclut : « Nous vous faisons confiance pour remplir votre rôle avec diligence », puis demande l'engagement par serment."
+      ],
+      "retenir": [
+       "Le serment résume l'office en trois verbes : préparer (ordre matériel), accueillir (visiteurs tuilés, annoncés, placés), assister (le V∴M∴ et l'Expert).",
+       "Le tuilage des visiteurs n'est pas du MdC : c'est l'Expert qui tuile ; le MdC accueille après reconnaissance.",
+       "Pendant les cérémonies, le MdC assiste l'Expert : l'Expert conduit, le MdC accompagne."
+      ]
+     },
+     {
+      "titre": "MdC et Expert : deux offices complémentaires",
+      "paragraphes": [
+       "Le Mémento range l'Expert parmi les sept officiers indispensables à l'ouverture d'une Loge (V∴M∴, deux Surveillants, Orateur, Secrétaire, Expert, Couvreur). Le Maître des Cérémonies n'en fait pas partie : si la tenue ne réunit que ces sept Frères, l'Expert assume en même temps l'office de MdC et se charge seul, au besoin, de faire circuler les troncs.",
+       "Quand les sept offices principaux sont pourvus dans une tenue à effectif réduit, on assure dans l'ordre ceux de Maître des Cérémonies, d'Hospitalier et de Trésorier. À défaut de Maîtres, on recourt à des Compagnons ou des Apprentis en respectant autant que possible leur affectation symbolique au Midi et au Septentrion.",
+       "L'Expert se déplace seul en Loge, toujours avec son épée et à l'Ordre ; il n'a pas besoin d'être précédé du MdC. Il peut toutefois, à l'ouverture et à la fermeture, être précédé par le MdC, à qui il remet alors son épée plutôt que de la poser à terre. Un officier retardataire est conduit rituellement par le MdC à son plateau."
+      ],
+      "retenir": [
+       "Sept officiers indispensables ; le MdC est le huitième, le premier à pourvoir ensuite.",
+       "L'Expert cumule l'office de MdC quand la Loge est au minimum.",
+       "Le MdC conduit tous les Frères dans leurs déplacements, hormis l'Expert.",
+       "À l'ouverture et à la fermeture, l'Expert peut être précédé du MdC et lui remettre son épée."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Inventaire à jour",
+      "texte": "Dresser sur une page l'inventaire dont vous répondez : V∴L∴S∴, Équerre, Compas, outils des trois degrés, cordons et sautoirs, Étoile, Flambeau à trois étoiles, bougies, sac aux propositions, boules et bulletins. Le relire avant chaque tenue.",
+      "cadence": "avant chaque tenue"
+     },
+     {
+      "titre": "Formule d'annonce d'un visiteur",
+      "texte": "Répéter à voix haute l'annonce d'un visiteur : nom, grade, Loge, Orient, Obédience. Chronométrer : moins de dix secondes, sans hésitation.",
+      "cadence": "hebdomadaire"
+     }
+    ],
+    "reflexion": [
+     "Quelle charge de l'inventaire ai-je tendance à négliger ?",
+     "Dans ma dernière tenue, qu'est-ce que j'ai fait de mon propre chef, et qu'est-ce qui aurait dû attendre un ordre du V∴M∴ ?"
+    ],
+    "quiz": [
+     {
+      "question": "Qui tuile les Frères visiteurs non connus ?",
+      "options": [
+       "Le Maître des Cérémonies, avant de les annoncer",
+       "L'Expert, à la demande du V∴M∴ ou du Couvreur",
+       "Le Couvreur, à la porte",
+       "Le Premier Surveillant"
+      ],
+      "bonne": 1,
+      "explication": "L'Expert procède au tuilage rituel des visiteurs non connus à l'extérieur de la Loge ; le MdC les accueille ensuite, annonce leur nom et qualité, et les conduit à leur place."
+     },
+     {
+      "question": "Un Frère est autorisé à couvrir le Temple avant la fermeture. Que fait le MdC ?",
+      "options": [
+       "Rien : le Frère sort seul après avoir salué",
+       "Il le conduit auprès de l'Hospitalier pour l'obole, puis à la porte",
+       "Il le conduit à l'Orient pour saluer le V∴M∴",
+       "Il le fait attendre la fermeture"
+      ],
+      "bonne": 1,
+      "explication": "Le Mémento le prescrit deux fois : un Frère autorisé à couvrir avant la fermeture est conduit par le MdC auprès du Frère Hospitalier pour verser son obole avant de sortir."
+     },
+     {
+      "question": "Si la tenue ne réunit que les sept officiers indispensables, qui remplit l'office de Maître des Cérémonies ?",
+      "options": [
+       "Le Couvreur",
+       "Le Second Surveillant",
+       "L'Expert",
+       "Le Secrétaire"
+      ],
+      "bonne": 2,
+      "explication": "Les sept officiers indispensables sont le V∴M∴, les Surveillants, l'Orateur, le Secrétaire, l'Expert et le Couvreur ; dans ce cas l'Expert assume en même temps l'office de MdC."
+     },
+     {
+      "question": "Lequel de ces objets n'est PAS dans l'inventaire tenu par le MdC selon le Mémento ?",
+      "options": [
+       "Le Volume de la Loi Sacrée",
+       "Les cordons et sautoirs",
+       "Les outils symboliques",
+       "Le Registre d'Architecture"
+      ],
+      "bonne": 3,
+      "explication": "Le Registre d'Architecture relève du Secrétaire. Le MdC tient l'inventaire du V∴L∴S∴, des outils symboliques, des cordons, sautoirs et accessoires divers."
+     },
+     {
+      "question": "Le MdC peut-il se déplacer sans ordre du V∴M∴ ?",
+      "options": [
+       "Jamais pendant les travaux",
+       "Oui, pour les besoins de son office (bougies, matériel, accessoires)",
+       "Seulement pour conduire l'Expert",
+       "Seulement après la fermeture"
+      ],
+      "bonne": 1,
+      "explication": "Le Mémento distingue la conduite des Frères, à la demande du V∴M∴, et les déplacements de son propre chef pour les besoins de son office."
+     },
+     {
+      "question": "Qui conduit un officier retardataire à son plateau ?",
+      "options": [
+       "Il rejoint seul son plateau",
+       "Le Couvreur",
+       "Le Maître des Cérémonies, rituellement",
+       "L'Expert"
+      ],
+      "bonne": 2,
+      "explication": "Un Officier retardataire est conduit rituellement par le MdC pour reprendre son plateau."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Maître des Cérémonies",
+      "definition": "Officier chargé de l'ordre matériel de la Loge, de la réception des visiteurs, de l'inventaire des décors et outils, et de la conduite des Frères dans leurs déplacements."
+     },
+     {
+      "terme": "Expert",
+      "definition": "Officier porteur de l'épée, chargé de la sûreté des travaux, du tuilage et de la mise en œuvre des cérémonies d'initiation et d'augmentation de salaire ; il se déplace seul."
+     },
+     {
+      "terme": "Tuilage",
+      "definition": "Vérification, par l'Expert, de la qualité maçonnique d'un visiteur non connu (mots, signes, attouchements, titre, mot de semestre, régularité)."
+     },
+     {
+      "terme": "Sac aux propositions",
+      "definition": "Sac que le MdC présente à tous les Frères ; il revient à l'Orient, vide ou chargé d'une communication dont l'énoncé est à la discrétion du V∴M∴, le Secrétaire et l'Orateur en ayant connaissance."
+     },
+     {
+      "terme": "Obole",
+      "definition": "Don versé au Tronc de la Veuve, recueilli par l'Hospitalier ; un Frère qui couvre avant la fermeture la verse avant de sortir."
+     }
+    ]
+   },
+   {
+    "numero": 2,
+    "titre": "Décors, tenue et matériel : ce que le MdC vérifie",
+    "objectifs": [
+     "Connaître les décors de chaque grade tels que le Mémento les décrit.",
+     "Savoir ce que le MdC doit fournir ou contrôler avant une tenue et avant des travaux de table.",
+     "Reconnaître les erreurs de décor que le Mémento signale explicitement."
+    ],
+    "sections": [
+     {
+      "titre": "Tenue vestimentaire et décors des grades",
+      "paragraphes": [
+       "En Loge, les Frères doivent avoir une tenue correcte : costume sombre, cravate ou nœud papillon sombres. Tous portent des gants blancs et les décors de leur grade : tablier blanc à bavette relevée pour les Apprentis, tablier blanc à bavette rabaissée pour les Compagnons.",
+       "Les Maîtres portent le cordon bleu moiré avec un liseré rouge, en écharpe de droite à gauche. Le chapeau de Maître doit avoir un large bord rabattable, en signe de deuil. Le tablier de Maître doit être blanc, bordé de rouge ponceau, avec un rabat bordé de rouge et doublé, au verso, de rouge ponceau ; il n'est jamais retourné au Rite Écossais Ancien et Accepté pratiqué par la GLDF.",
+       "Les officiers portent le sautoir de leur fonction. Le Mémento précise, en renvoyant à la circulaire n° 22 de mai 2015, que le tablier de Maître n'est pas orné d'une tête de mort sur fond noir."
+      ],
+      "retenir": [
+       "Apprenti : bavette relevée ; Compagnon : bavette rabaissée ; Maître : tablier blanc bordé de rouge ponceau, cordon bleu moiré liseré rouge, chapeau à large bord rabattable.",
+       "Le tablier de Maître n'est jamais retourné ; pas de tête de mort sur fond noir.",
+       "Gants blancs pour tous, costume et cravate sombres : c'est au MdC de le vérifier."
+      ]
+     },
+     {
+      "titre": "Ce que le MdC apporte et prépare",
+      "paragraphes": [
+       "Le MdC doit vérifier, outre les décors, que les Frères ont une tenue correcte. Il doit assurer l'approvisionnement en bougies (ou « cire ») et avoir du feu sur lui.",
+       "Avant les travaux de table, outre la mise en place du matériel, il s'assure que les serviettes seront suffisamment longues et résistantes pour la Chaîne d'Union de table ; au besoin, il prévoit des bandes de tissu de longueur appropriée.",
+       "Le Mémento recommande un support de canne, et rappelle que l'Autel des Serments, d'environ un mètre de hauteur, est placé le plus près possible, voire contre, le plateau du V∴M∴ ; on ne passe pas entre l'Autel et ce plateau, seul le V∴M∴ pourrait le faire."
+      ],
+      "exemple": "Chaîne d'Union : en tenue normale, elle est longue et mains nues, les visiteurs y sont conviés ; elle n'est courte que pour la communication des mots de semestre, sans les visiteurs. Longue ou courte, main droite vers la terre, main gauche vers le ciel.",
+      "retenir": [
+       "Bougies et feu sur soi : c'est le MdC.",
+       "Travaux de table : serviettes longues et solides pour la Chaîne d'Union.",
+       "On ne passe jamais entre l'Autel des Serments et le plateau du V∴M∴."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Contrôle visuel à la porte",
+      "texte": "Avant l'entrée des Frères, passer en revue en silence : gants, tablier du grade et bavette, sautoir des officiers, cordon des Maîtres en écharpe de droite à gauche. Corriger discrètement.",
+      "cadence": "avant chaque tenue"
+     }
+    ],
+    "reflexion": [
+     "Ai-je toujours du feu sur moi et une réserve de bougies ?"
+    ],
+    "quiz": [
+     {
+      "question": "Comment se porte la bavette du tablier de Compagnon ?",
+      "options": [
+       "Relevée",
+       "Rabaissée",
+       "Repliée sur elle-même",
+       "Retirée"
+      ],
+      "bonne": 1,
+      "explication": "Bavette relevée pour les Apprentis, rabaissée pour les Compagnons."
+     },
+     {
+      "question": "Que dit le Mémento du tablier de Maître ?",
+      "options": [
+       "Il peut être retourné en signe de deuil",
+       "Il est noir, orné d'une tête de mort",
+       "Il est blanc, bordé de rouge ponceau, jamais retourné",
+       "Il est identique à celui du Compagnon"
+      ],
+      "bonne": 2,
+      "explication": "Blanc, bordé de rouge ponceau, doublé de rouge au verso, et jamais retourné au R∴E∴A∴A∴ pratiqué par la GLDF ; la tête de mort sur fond noir est exclue (circulaire n° 22, mai 2015)."
+     },
+     {
+      "question": "Avant des travaux de table, quelle vérification particulière incombe au MdC ?",
+      "options": [
+       "La longueur et la résistance des serviettes pour la Chaîne d'Union",
+       "Le nombre de couverts",
+       "Le placement des visiteurs",
+       "La lecture du menu"
+      ],
+      "bonne": 0,
+      "explication": "Le Mémento demande des serviettes suffisamment longues et résistantes, ou des bandes de tissu, pour la Chaîne d'Union de table."
+     },
+     {
+      "question": "Qui peut passer entre l'Autel des Serments et le plateau du V∴M∴ ?",
+      "options": [
+       "Le MdC et l'Expert",
+       "Tous les officiers",
+       "Seul le V∴M∴",
+       "Personne, jamais"
+      ],
+      "bonne": 2,
+      "explication": "On ne passe pas entre l'Autel et le plateau du V∴M∴ ; seul le V∴M∴ pourrait le faire."
+     },
+     {
+      "question": "Dans quel sens se porte le cordon de Maître ?",
+      "options": [
+       "De gauche à droite",
+       "De droite à gauche",
+       "En sautoir",
+       "Autour de la taille"
+      ],
+      "bonne": 1,
+      "explication": "En écharpe de droite à gauche, bleu moiré avec un liseré rouge."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Bavette",
+      "definition": "Rabat supérieur du tablier : relevée à l'Apprenti, rabaissée au Compagnon."
+     },
+     {
+      "terme": "Rouge ponceau",
+      "definition": "Rouge vif, couleur de la bordure et de la doublure du tablier de Maître."
+     },
+     {
+      "terme": "Chaîne d'Union",
+      "definition": "Chaîne formée par les Frères mains nues, longue en tenue normale, courte pour les mots de semestre ; main droite vers la terre, main gauche vers le ciel."
+     },
+     {
+      "terme": "Autel des Serments",
+      "definition": "Autel d'environ un mètre, contre le plateau du V∴M∴, portant les trois Grandes Lumières."
+     }
+    ]
+   },
+   {
+    "numero": 3,
+    "titre": "Attitudes du Maître des Cérémonies",
+    "objectifs": [
+     "Décrire la position d'office avec la canne, telle que le Mémento la fixe.",
+     "Distinguer l'attitude en fonction, hors fonction, et en cérémonie blanche.",
+     "Exécuter le geste de la canne pour la batterie et l'acclamation."
+    ],
+    "sections": [
+     {
+      "titre": "Dans l'exercice de ses fonctions, quel que soit le degré",
+      "paragraphes": [
+       "Les pieds en équerre, la canne tenue de la main droite, bras tendu latéralement sans exagération, la pointe de la canne calée contre le creux du pied gauche ou à la pointe du pied droit.",
+       "Cette position vaut à tous les degrés. Elle se prend chaque fois que le V∴M∴ met la Loge à l'Ordre : lorsque l'ensemble des Frères se met à l'Ordre à sa demande, l'Expert et le MdC prennent leur position spécifique, le V∴M∴ et les Surveillants portent le maillet sur la poitrine, le Couvreur se met à l'Ordre sans son épée, les autres officiers comme tous les Frères."
+      ],
+      "retenir": [
+       "Pieds en équerre, canne main droite, bras tendu latéralement, pointe au creux du pied gauche ou à la pointe du pied droit.",
+       "Quand la Loge est à l'Ordre, le MdC n'est pas à l'Ordre du grade : il est en position d'office."
+      ]
+     },
+     {
+      "titre": "Hors de ses fonctions, en cérémonie blanche, en Banquet d'Ordre",
+      "paragraphes": [
+       "En dehors de ses fonctions, le MdC se met à l'Ordre du grade comme tous les autres Frères de la Loge lorsqu'il prend la parole à titre personnel.",
+       "En cérémonie blanche et en Banquet d'Ordre : attitude naturelle, sans marquer les angles, la canne presque verticale, ou sans canne selon les rituels."
+      ],
+      "retenir": [
+       "À titre personnel : à l'Ordre du grade, comme tout Frère.",
+       "Cérémonies blanches : canne presque verticale ou pas de canne, jamais d'angles."
+      ]
+     },
+     {
+      "titre": "Batterie et acclamation",
+      "paragraphes": [
+       "Étant à l'Ordre, et de sa place sauf indication du V∴M∴, le MdC ramène la canne vers lui, glisse sa main vers le bas pour assurer une prise à hauteur de sa taille, puis lève le bras en oblique vers le haut, la canne se plaçant le long du bras et sous l'aisselle, pommeau vers le haut.",
+       "Le Mémento précise la synchronisation avec l'Expert : lorsque le V∴M∴ dit « par le Signe Pénal », le MdC et l'Expert prennent leur position d'acclamation en formant ensemble l'équerre, jusqu'à la fin de l'acclamation. Tous les autres Frères s'associent en synchronisme aux gestes et paroles du V∴M∴. Le V∴M∴ et les Surveillants ont posé leur maillet à « À moi, mes FF∴ » : on ne fait pas le signe pénal avec le maillet."
+      ],
+      "exemple": "Le V∴M∴ dit « À moi, mes FF∴ » : maillets posés, tous à l'Ordre. « Par le Signe Pénal » : le MdC lève la canne en oblique, l'Expert tend le bras et l'épée devant lui à 45 degrés ; les deux figures se répondent en équerre jusqu'au dernier « Houzzé ».",
+      "retenir": [
+       "Canne ramenée, prise à hauteur de la taille, bras levé en oblique, canne le long du bras et sous l'aisselle, pommeau en haut.",
+       "Déclencheur : « par le Signe Pénal » ; MdC et Expert forment ensemble l'équerre jusqu'à la fin de l'acclamation.",
+       "On ne remercie pas après l'exécution d'un acte rituel."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Position d'office",
+      "texte": "Devant un miroir, prendre dix fois la position : pieds en équerre, canne main droite, bras tendu sans exagération, pointe au creux du pied gauche. Tenir trente secondes sans balancer.",
+      "cadence": "quotidien, une semaine"
+     },
+     {
+      "titre": "Geste d'acclamation",
+      "texte": "Enchaîner vingt fois : canne ramenée, glissement de la main, bras levé en oblique, pommeau en haut. Chercher un seul mouvement fluide.",
+      "cadence": "hebdomadaire"
+     }
+    ],
+    "reflexion": [
+     "Mon bras est-il tendu « sans exagération » ou raide ?",
+     "Suis-je synchronisé avec l'Expert ou en avance sur lui ?"
+    ],
+    "quiz": [
+     {
+      "question": "En position d'office, où se cale la pointe de la canne ?",
+      "options": [
+       "Au creux du pied droit",
+       "Contre le pied droit ou au creux du pied gauche",
+       "Devant les deux pieds",
+       "Contre la cuisse gauche"
+      ],
+      "bonne": 1,
+      "explication": "La pointe de la canne est calée contre le creux du pied gauche ou à la pointe du pied droit."
+     },
+     {
+      "question": "Quand le V∴M∴ met la Loge à l'Ordre, que fait le MdC ?",
+      "options": [
+       "Il se met à l'Ordre du grade",
+       "Il prend sa position spécifique d'office, avec la canne",
+       "Il pose sa canne et se met à l'Ordre",
+       "Il reste assis"
+      ],
+      "bonne": 1,
+      "explication": "L'Expert et le MdC prennent leur position spécifique lorsque l'ensemble des Frères se met à l'Ordre."
+     },
+     {
+      "question": "Lorsque le MdC prend la parole à titre personnel, quelle attitude adopte-t-il ?",
+      "options": [
+       "Sa position d'office",
+       "Debout, canne verticale",
+       "À l'Ordre du grade, comme tout Frère",
+       "Assis, sans signe"
+      ],
+      "bonne": 2,
+      "explication": "Hors de ses fonctions, le MdC se met à l'Ordre du grade comme tous les autres Frères."
+     },
+     {
+      "question": "À quel moment précis le MdC prend-il sa position d'acclamation ?",
+      "options": [
+       "À « À moi, mes FF∴ »",
+       "À « par le Signe Pénal »",
+       "À « par la Batterie »",
+       "À la fin de l'acclamation"
+      ],
+      "bonne": 1,
+      "explication": "Lorsque le V∴M∴ dit « par le Signe Pénal », le MdC et l'Expert prennent leur position d'acclamation en formant ensemble l'équerre."
+     },
+     {
+      "question": "En cérémonie blanche, comment le MdC tient-il sa canne ?",
+      "options": [
+       "Bras tendu latéralement",
+       "Presque verticale, sans marquer les angles (ou sans canne)",
+       "Sous l'aisselle",
+       "Posée sur son support"
+      ],
+      "bonne": 1,
+      "explication": "Attitude naturelle, sans angles, canne presque verticale ou sans canne selon les rituels."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Position d'office",
+      "definition": "Attitude propre au MdC en fonction : pieds en équerre, canne main droite, bras tendu latéralement."
+     },
+     {
+      "terme": "Signe pénal",
+      "definition": "Signe du grade exécuté par les Frères ; c'est à son annonce par le V∴M∴ que MdC et Expert prennent leur position d'acclamation."
+     },
+     {
+      "terme": "Batterie",
+      "definition": "Coups frappés dans les mains selon le grade ; le V∴M∴ et les Surveillants posent leur maillet avant."
+     },
+     {
+      "terme": "Cérémonie blanche",
+      "definition": "Tenue ouverte à des profanes (blanche ouverte) ou sans rituel complet (blanche fermée) ; pas d'angles, canne presque verticale."
+     }
+    ]
+   },
+   {
+    "numero": 4,
+    "titre": "Déplacements et trajets rituels",
+    "objectifs": [
+     "Tracer le carré long tel que le Mémento le décrit et marquer un angle correctement.",
+     "Savoir quand les angles se marquent et quand ils ne se marquent pas.",
+     "Régler le pas, la canne et le rythme ; sortir et rentrer en Loge."
+    ],
+    "sections": [
+     {
+      "titre": "Trois régimes : avant, pendant l'ouverture, pendant les travaux",
+      "paragraphes": [
+       "Avant l'ouverture des Travaux, le MdC se déplace avec sa canne dans la main droite, sans marquer les angles, pour conduire les Frères à leurs places respectives. À l'entrée du Collège des Officiers, il s'arrête devant les piliers.",
+       "Pendant l'ouverture des travaux, il reste à sa place, sauf s'il précède l'Expert lorsque celui-ci trace le Tableau.",
+       "Pendant les Travaux, il conduit tous les Frères, hormis l'Expert, dans leurs déplacements. Il circule dextrorsum, tenant en main sa canne qu'il pose au sol, sans frapper exagérément, en synchronisme avec le pied gauche, selon un rythme approprié, binaire ou quaternaire, sans accentuer le mouvement de balancier."
+      ],
+      "retenir": [
+       "Avant l'ouverture : pas d'angles. Pendant l'ouverture : à sa place (sauf pour précéder l'Expert au tracé du Tableau). Pendant les travaux : angles marqués, dextrorsum.",
+       "Canne posée au sol avec le pied gauche, rythme binaire ou quaternaire, sans balancier."
+      ]
+     },
+     {
+      "titre": "Le carré long",
+      "paragraphes": [
+       "Les trajets rituels s'inscrivent en carré long, utilisant au mieux la surface disponible de la Loge, et en partant toujours du pied gauche : de l'Occident à l'Orient en ligne droite longeant le Septentrion, de l'Orient à l'Occident en ligne droite longeant le Midi.",
+       "Si l'on doit simplement contourner le Tableau de Loge, on peut écourter le rectangle dans sa longueur en marquant l'angle vers le Midi ou vers le Septentrion dès que l'on a dépassé les piliers. Pour aller du côté nord de l'Orient à l'Autel, et de l'Autel au côté sud de l'Orient, par exemple lors de l'installation du Collège, il n'est pas utile de contourner le Tableau.",
+       "Nota : contourner le Pavé mosaïque est impropre. On contourne le Tableau de Loge et les trois piliers, mais on marche sur le Pavé mosaïque. En tenue au 1er degré, tous les accès à l'Orient, ou la descente, se font par le côté Septentrion (lecture des planches de Maîtres, remises de diplômes, consécrations)."
+      ],
+      "exemple": "Conduire un Frère de la colonne du Midi à l'Orient au 1er degré : partir vers l'Occident en longeant le Midi, marquer l'angle, traverser, angle, remonter par le Septentrion jusqu'aux marches. Ne pas couper par le Midi, même si c'est plus court.",
+      "retenir": [
+       "Montée à l'Orient par le Septentrion, retour par le Midi ; départ pied gauche.",
+       "On contourne le Tableau et les piliers, pas le Pavé mosaïque.",
+       "Au 1er degré, on accède à l'Orient par le Septentrion."
+      ]
+     },
+     {
+      "titre": "Marquer l'angle",
+      "paragraphes": [
+       "Pendant la période entre les invocations d'ouverture et de fermeture des travaux, chaque angle du carré long est nettement marqué : poser le talon gauche en pivotant d'un quart de tour à droite, puis ramener le pied droit en équerre ; repartir toujours du pied gauche, sans claquer les talons. Tous les Frères se déplaçant en Loge font de même.",
+       "En dehors de cette période, il n'y a pas d'angle. Par ailleurs, il n'y a jamais d'angle au 3e degré.",
+       "Si l'usage des deux mains s'avère indispensable pour un acte rituel, le MdC peut momentanément poser sa canne."
+      ],
+      "retenir": [
+       "Angle : talon gauche posé, quart de tour à droite, pied droit ramené en équerre, repartir du pied gauche, sans claquer.",
+       "Angles seulement entre les invocations d'ouverture et de fermeture ; jamais au 3e degré."
+      ]
+     },
+     {
+      "titre": "Sortir de la Loge et y rentrer",
+      "paragraphes": [
+       "Le MdC sort comme l'Expert : après avoir marqué un temps face à l'Orient en position d'Ordre, il pivote sur la droite pour quitter la Loge, sans saluer. En rentrant, il marque également un temps à l'Ordre, face à l'Orient, sans saluer.",
+       "Après la fermeture des travaux, le MdC précède le V∴M∴ et sort en longeant la colonne du Midi, sans marquer les angles.",
+       "Entrée d'un Frère pendant les travaux : le Frère étant entré rituellement, le MdC se rend auprès de lui et le conduit à sa place. Un Frère sortant de la Loge ne salue que le V∴M∴ et ne se remet pas à l'Ordre ; il pivote sur la droite et sort. Le V∴M∴ répond debout au salut d'un Frère admis après l'ouverture ; les Surveillants posent leur maillet, se mettent à l'Ordre et répondent par le signe pénal ; le retardataire ne justifie son retard que s'il y est invité."
+      ],
+      "retenir": [
+       "MdC et Expert : un temps à l'Ordre face à l'Orient, pivot à droite, sans saluer, à la sortie comme à l'entrée.",
+       "Un Frère qui sort ne salue que le V∴M∴ ; il ne se remet pas à l'Ordre.",
+       "Le MdC va chercher le Frère entré en retard et le conduit à sa place."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Carré long à vide",
+      "texte": "Dans le Temple ou une pièce, parcourir trois fois le carré long complet : départ pied gauche, canne au sol avec le pied gauche, quatre angles nets, retour entre les colonnes. Compter le rythme à voix basse.",
+      "cadence": "avant chaque tenue"
+     },
+     {
+      "titre": "Sortie et rentrée",
+      "texte": "Répéter le temps d'arrêt face à l'Orient, le pivot à droite, la sortie sans salut, puis la rentrée avec le même temps d'arrêt.",
+      "cadence": "hebdomadaire"
+     }
+    ],
+    "reflexion": [
+     "Est-ce que je claque les talons ?",
+     "Ai-je marqué un angle pendant l'entrée réglée, alors qu'il n'y en a pas avant l'ouverture ?"
+    ],
+    "quiz": [
+     {
+      "question": "Par quel côté monte-t-on à l'Orient en tenue au 1er degré ?",
+      "options": [
+       "Par le Midi",
+       "Par le Septentrion",
+       "Par le centre, en traversant le Tableau",
+       "Indifféremment"
+      ],
+      "bonne": 1,
+      "explication": "Après l'ouverture, tous les accès à l'Orient, ou la descente, se font par le côté Septentrion."
+     },
+     {
+      "question": "Comment marque-t-on un angle ?",
+      "options": [
+       "Talon droit posé, quart de tour à gauche",
+       "Talon gauche posé, quart de tour à droite, pied droit ramené en équerre, repartir du pied gauche",
+       "Demi-tour sur place, talons claqués",
+       "Pas chassé vers la droite"
+      ],
+      "bonne": 1,
+      "explication": "C'est la description du Mémento ; sans claquer les talons, et tous les Frères font de même."
+     },
+     {
+      "question": "À quel degré n'y a-t-il jamais d'angle ?",
+      "options": [
+       "Au 1er",
+       "Au 2e",
+       "Au 3e",
+       "À tous les degrés il y a des angles"
+      ],
+      "bonne": 2,
+      "explication": "Il n'y a jamais d'angle au 3e degré ; il n'y en a pas non plus hors de la période entre les invocations d'ouverture et de fermeture."
+     },
+     {
+      "question": "Que contourne-t-on dans la Loge ?",
+      "options": [
+       "Le Pavé mosaïque",
+       "Le Tableau de Loge et les trois piliers",
+       "L'Autel des Serments uniquement",
+       "Les colonnes J et B"
+      ],
+      "bonne": 1,
+      "explication": "Contourner le Pavé mosaïque est impropre ; on contourne le Tableau et les piliers, on marche sur le Pavé."
+     },
+     {
+      "question": "Comment le MdC sort-il de la Loge pendant les travaux ?",
+      "options": [
+       "Il salue le V∴M∴ et les Surveillants",
+       "Il marque un temps à l'Ordre face à l'Orient, pivote à droite et sort sans saluer",
+       "Il sort à reculons",
+       "Il attend d'être conduit par l'Expert"
+      ],
+      "bonne": 1,
+      "explication": "Le MdC sort comme l'Expert : temps d'arrêt à l'Ordre face à l'Orient, pivot à droite, sans saluer ; même chose en rentrant."
+     },
+     {
+      "question": "Pendant l'ouverture des travaux, où est le MdC ?",
+      "options": [
+       "Il circule pour vérifier les décors",
+       "À sa place, sauf pour précéder l'Expert qui trace le Tableau",
+       "À la porte avec le Couvreur",
+       "À l'Orient près du V∴M∴"
+      ],
+      "bonne": 1,
+      "explication": "Pendant l'ouverture, le MdC reste à sa place, sauf s'il précède le F∴ Expert lorsque ce dernier trace le Tableau."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Carré long",
+      "definition": "Rectangle rituel que suivent les déplacements : Occident → Orient par le Septentrion, Orient → Occident par le Midi."
+     },
+     {
+      "terme": "Dextrorsum",
+      "definition": "Dans le sens des aiguilles d'une montre, sens de circulation en Loge."
+     },
+     {
+      "terme": "Angle",
+      "definition": "Quart de tour marqué à chaque coin du carré long, seulement entre les invocations d'ouverture et de fermeture, jamais au 3e degré."
+     },
+     {
+      "terme": "Pavé mosaïque",
+      "definition": "Carrelage noir et blanc du sol de la Loge, hors Orient ; on marche dessus, on ne le contourne pas."
+     }
+    ]
+   },
+   {
+    "numero": 5,
+    "titre": "L'entrée réglée et l'ouverture des travaux",
+    "objectifs": [
+     "Dérouler l'entrée réglée dans l'ordre exact du Mémento.",
+     "Placer et allumer ce qui revient au MdC : Étoile, Flambeau à trois étoiles, Delta.",
+     "Connaître l'ordre d'entrée des Frères et des officiers et les annonces du MdC."
+    ],
+    "sections": [
+     {
+      "titre": "Préparer le Temple",
+      "paragraphes": [
+       "Le MdC prépare le Temple, qu'il laisse dans la pénombre. Il allume l'Étoile qui figure la Lumière éternelle : placée sur le plateau du V∴M∴, côté colonne du Nord, elle doit toujours être allumée. Il dispose, côté colonne du Midi, un Flambeau à trois étoiles, éteint.",
+       "En observant le silence, les Frères de la Loge s'assemblent entre-temps sur le Parvis, lieu de transition entre le profane et le sacré. Le Couvreur, muni de son épée en main droite, pointe en bas, se tient près de la porte."
+      ],
+      "retenir": [
+       "Temple en pénombre ; Étoile allumée côté Nord du plateau du V∴M∴, toujours allumée ; Flambeau à trois étoiles éteint côté Midi.",
+       "Les Frères attendent en silence sur le Parvis."
+      ]
+     },
+     {
+      "titre": "L'entrée des Frères",
+      "paragraphes": [
+       "À l'heure prévue, le MdC, porteur de sa canne, donne l'entrée de la Loge et accompagne à leurs places respectives, successivement, les Apprentis et Apprentis visiteurs, les Compagnons et Compagnons visiteurs, les Maîtres et Maîtres visiteurs. Après avoir communiqué les mots de semestre au Couvreur, ils vont occuper en silence les places qui leur sont réservées.",
+       "Il les conduit directement à leurs places respectives, sans marquer d'angle. Les Frères ne sont pas à l'Ordre et restent debout en gardant le silence. Le MdC doit veiller à une répartition équilibrée et harmonieuse des Frères sur les colonnes.",
+       "Si les abords de l'Atelier sont exigus, l'entrée rituelle sera limitée au Collège des Officiers. Le V∴M∴ et les Surveillants entrent les mains libres, sans maillet. Les visiteurs non connus seront tuilés après l'ouverture des travaux. La Colonne d'Harmonie ponctue par une musique appropriée les phases essentielles du rituel."
+      ],
+      "retenir": [
+       "Ordre d'entrée : Apprentis, Compagnons, Maîtres, visiteurs de chaque grade à la suite.",
+       "Mots de semestre donnés au Couvreur à l'entrée ; pas d'angles ; les Frères restent debout, silencieux, pas à l'Ordre.",
+       "Le MdC équilibre les colonnes."
+      ]
+     },
+     {
+      "titre": "Le Collège des Officiers et le Vénérable Maître",
+      "paragraphes": [
+       "Le MdC annonce ensuite : « Mes FF∴, le Collège des Officiers » (et le Frère député). La porte est ouverte à deux battants. Les officiers, sans donner les mots de semestre, entrent sur deux files de part et d'autre du MdC, dans l'ordre de leur office, au pied de l'Orient. Ils ne rejoignent leurs plateaux et l'Orient qu'à l'invitation du V∴M∴. Tous les assistants restent debout en gardant le silence.",
+       "Le Couvreur reste à la porte, à l'extérieur, épée main droite, lame vers le sol. Le V∴M∴ et l'Expert restent à l'extérieur. Le MdC, porteur de sa canne, se munit du Flambeau à trois étoiles éteintes pris préalablement sur le plateau du V∴M∴. Il se rend sur le Parvis et, après avoir allumé le Flambeau, annonce : « Le Vénérable Maître ».",
+       "Le V∴M∴ se couvre avant d'entrer dans la Loge. Le MdC le conduit dextrorsum à l'Orient. L'Expert, bras droit le long du corps, tenant la garde de l'épée en main droite, lame verticale contre l'épaule, ferme la marche. Le Couvreur referme les portes silencieusement ; plus aucun Frère ne doit pénétrer dans la Loge.",
+       "Le MdC dépose le Flambeau à trois étoiles allumées sur le plateau du V∴M∴, côté colonne du Midi. Arrivé à son plateau, le V∴M∴, ou le Frère en charge de l'éclairage, illumine le Delta rayonnant. Sur ordre du V∴M∴, les officiers regagnent leurs plateaux. Les délégations éventuelles sont reçues après l'ouverture des travaux."
+      ],
+      "exemple": "Séquence à mémoriser en sept temps : (1) Étoile allumée, Flambeau éteint ; (2) entrée des Frères par grade, mots de semestre au Couvreur ; (3) « Mes FF∴, le Collège des Officiers » ; (4) prendre le Flambeau, sortir, l'allumer ; (5) « Le Vénérable Maître » ; (6) conduire le V∴M∴ dextrorsum à l'Orient, Expert en queue ; (7) déposer le Flambeau côté Midi, Delta.",
+      "retenir": [
+       "Deux annonces du MdC : « Mes FF∴, le Collège des Officiers » puis, depuis le Parvis, Flambeau allumé, « Le Vénérable Maître ».",
+       "Le Collège entre sur deux files de part et d'autre du MdC, sans mots de semestre, et attend au pied de l'Orient.",
+       "Flambeau pris éteint côté Midi, allumé sur le Parvis, déposé allumé côté Midi ; Delta illuminé ensuite.",
+       "Le V∴M∴ se couvre avant d'entrer ; l'Expert ferme la marche."
+      ]
+     },
+     {
+      "titre": "Ce que dit le livret du rituel (p. 17, « Entrée en Loge au premier degré »)",
+      "paragraphes": [
+       "Le rituel officiel du grade de Compagnon (Convent 2016 – édition 2017) reprend l'entrée réglée en tête de livret, avec quelques formulations qui lui sont propres. Le MdC prépare la Loge dans la pénombre, allume « l'Ét∴ » qui figure la « Lumière éternelle » sur le plateau du V∴M∴ côté Nord, et dispose côté Midi un « chandelier à trois branches » éteint : c'est le Flambeau à trois étoiles du Mémento.",
+       "À l'heure prévue, « après avoir demandé et obtenu le silence », le MdC donne l'entrée et accompagne successivement les Apprentis, les Compagnons et les Maîtres, sans marquer les angles ; les visiteurs connus peuvent être invités à se joindre aux Frères. Tous debout et la porte ouverte à double battant, il conduit les officiers « suivis du Député » sur deux colonnes au pied de l'Orient.",
+       "Le livret ajoute un geste absent du Mémento : le MdC « allume les lumières de confort sur les plateaux des Surveillants », puis se saisit du chandelier éteint sur le plateau du V∴M∴ et se rend sur le Parvis. Le V∴M∴ se couvre (chapeau à large bord, initié au 3e degré). Après avoir allumé le chandelier, le MdC se présente devant la porte et déclare : « Le V∴M∴ de la L∴ » — là où le Mémento dit « Le Vénérable Maître ». L'Expert ferme la marche, lame verticale « dans la saignée du bras ». Le chandelier est déposé côté Midi, le Delta est allumé par le V∴M∴ ou le Frère chargé de l'éclairage."
+      ],
+      "retenir": [
+       "Livret : « chandelier à trois branches » ; Mémento : « Flambeau à trois étoiles » — même objet, même place.",
+       "Livret : « Le V∴M∴ de la L∴ » ; Mémento : « Le Vénérable Maître ».",
+       "Propres au livret : le silence demandé et obtenu avant l'entrée, les lumières de confort des Surveillants allumées par le MdC, le Député à la suite des officiers.",
+       "En Loge, le livret du rituel prime sur le Mémento."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Les sept temps",
+      "texte": "Réciter les sept temps de l'entrée réglée sans support, puis les mimer dans le Temple vide.",
+      "cadence": "avant chaque tenue"
+     }
+    ],
+    "reflexion": [
+     "Lequel des sept temps me fait hésiter ?"
+    ],
+    "quiz": [
+     {
+      "question": "Où le MdC place-t-il l'Étoile avant l'ouverture ?",
+      "options": [
+       "Sur l'Autel des Serments",
+       "Sur le plateau du V∴M∴, côté colonne du Nord",
+       "Sur le plateau du V∴M∴, côté colonne du Midi",
+       "Au pied de l'Orient"
+      ],
+      "bonne": 1,
+      "explication": "L'Étoile qui figure la Lumière éternelle est placée sur le plateau du V∴M∴, côté colonne du Nord, et doit toujours être allumée."
+     },
+     {
+      "question": "Dans quel ordre les Frères entrent-ils ?",
+      "options": [
+       "Maîtres, Compagnons, Apprentis",
+       "Apprentis, Compagnons, Maîtres, les visiteurs de chaque grade à la suite",
+       "Officiers d'abord, puis les autres",
+       "Par ordre d'ancienneté"
+      ],
+      "bonne": 1,
+      "explication": "Apprentis et Apprentis visiteurs, puis Compagnons et Compagnons visiteurs, puis Maîtres et Maîtres visiteurs."
+     },
+     {
+      "question": "Les officiers donnent-ils les mots de semestre au Couvreur en entrant ?",
+      "options": [
+       "Oui, comme tous les Frères",
+       "Non",
+       "Seulement les Surveillants",
+       "Seulement le V∴M∴"
+      ],
+      "bonne": 1,
+      "explication": "Les officiers entrent sans donner les mots de semestre, sur deux files de part et d'autre du MdC."
+     },
+     {
+      "question": "Où le MdC allume-t-il le Flambeau à trois étoiles ?",
+      "options": [
+       "Au plateau du V∴M∴",
+       "Au pied de l'Orient",
+       "Sur le Parvis, avant d'annoncer le V∴M∴",
+       "Il ne l'allume pas : c'est le V∴M∴"
+      ],
+      "bonne": 2,
+      "explication": "Le MdC prend le Flambeau éteint sur le plateau du V∴M∴, se rend sur le Parvis, l'allume, puis annonce « Le Vénérable Maître »."
+     },
+     {
+      "question": "Qui ferme la marche derrière le V∴M∴ ?",
+      "options": [
+       "Le Couvreur",
+       "Le Premier Surveillant",
+       "L'Expert, épée contre l'épaule",
+       "Le Secrétaire"
+      ],
+      "bonne": 2,
+      "explication": "L'Expert, bras droit le long du corps, garde de l'épée en main droite, lame verticale contre l'épaule, ferme la marche."
+     },
+     {
+      "question": "Que dit le livret du rituel que le Mémento ne dit pas, à l'entrée en Loge ?",
+      "options": [
+       "Le MdC frappe trois coups à la porte",
+       "Le MdC allume les lumières de confort sur les plateaux des Surveillants",
+       "Le Couvreur annonce le Collège",
+       "Les Apprentis entrent les derniers"
+      ],
+      "bonne": 1,
+      "explication": "Le rituel (p. 17) prescrit au MdC d'allumer les lumières de confort des Surveillants avant d'aller chercher le chandelier ; le Mémento ne mentionne pas ce geste."
+     },
+     {
+      "question": "Quelle est la formule d'annonce du V∴M∴ dans le livret du rituel ?",
+      "options": [
+       "« Le Vénérable Maître »",
+       "« Le V∴M∴ de la L∴ »",
+       "« Mes Frères, le Vénérable »",
+       "« À l'Ordre, mes Frères »"
+      ],
+      "bonne": 1,
+      "explication": "Le livret (p. 17) fait dire « Le V∴M∴ de la L∴ » ; le Mémento écrit « Le Vénérable Maître ». En Loge, le livret prime."
+     },
+     {
+      "question": "Les Frères, entrés et placés, sont-ils à l'Ordre ?",
+      "options": [
+       "Oui, jusqu'à l'ouverture",
+       "Non : debout, en silence, sans être à l'Ordre",
+       "Assis en silence",
+       "À l'Ordre du grade du plus haut visiteur"
+      ],
+      "bonne": 1,
+      "explication": "Les Frères ne sont pas à l'Ordre et restent debout en gardant le silence."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Entrée réglée",
+      "definition": "Cérémonial d'entrée des Frères, du Collège et du V∴M∴ avant l'ouverture des travaux, conduit par le MdC."
+     },
+     {
+      "terme": "Chandelier à trois branches",
+      "definition": "Nom que le livret du rituel donne au Flambeau à trois étoiles du Mémento : posé éteint côté Midi, allumé sur le Parvis par le MdC pour introduire le V∴M∴."
+     },
+     {
+      "terme": "Flambeau à trois étoiles",
+      "definition": "Flambeau à trois lumières, éteint côté Midi du plateau du V∴M∴ avant la tenue, allumé par le MdC sur le Parvis pour annoncer et conduire le V∴M∴ ; sert aussi aux Honneurs maçonniques."
+     },
+     {
+      "terme": "Mots de semestre",
+      "definition": "Mots communiqués deux fois l'an, donnés au Couvreur par chaque Frère à l'entrée ; les officiers en sont dispensés à l'entrée réglée."
+     },
+     {
+      "terme": "Delta rayonnant",
+      "definition": "Triangle lumineux à l'Orient, illuminé par le V∴M∴ ou le Frère en charge de l'éclairage une fois le V∴M∴ à son plateau."
+     },
+     {
+      "terme": "Parvis",
+      "definition": "Espace hors du Temple où les Frères s'assemblent en silence, lieu de transition entre le profane et le sacré."
+     }
+    ]
+   },
+   {
+    "numero": 6,
+    "titre": "La fermeture des travaux et la sortie",
+    "objectifs": [
+     "Connaître la réplique du MdC à la fermeture et son déclencheur.",
+     "Ordonner la sortie du V∴M∴, du Collège et des Frères.",
+     "Placer les dignitaires dans le cortège de sortie."
+    ],
+    "sections": [
+     {
+      "titre": "La réplique du MdC",
+      "paragraphes": [
+       "Lorsque les Frères ont juré de respecter la loi du silence, le MdC frappe le sol de sa canne et dit : « Mes FF∴, gardons le silence et restez en place. FF∴ Officiers, préparez-vous pour la sortie du V∴M∴, de son Collège » et du Frère député.",
+       "Les officiers sont près de leur plateau ; le Député, l'Orateur et le Secrétaire descendent au pied de l'Orient."
+      ],
+      "retenir": [
+       "Déclencheur : le serment de silence. Geste : un coup de canne au sol. Réplique : « Mes FF∴, gardons le silence et restez en place. FF∴ Officiers, préparez-vous pour la sortie du V∴M∴, de son Collège et du Frère député. »",
+       "Député, Orateur et Secrétaire descendent au pied de l'Orient."
+      ]
+     },
+     {
+      "titre": "Le cortège de sortie",
+      "paragraphes": [
+       "Le MdC précède le V∴M∴ et sort en longeant la colonne du Midi. L'Expert suit le V∴M∴, épée au côté. Au passage, le Second Surveillant emboîte le pas, puis laisse le Premier Surveillant s'intercaler avant de franchir le seuil. Les officiers suivent au fur et à mesure, puis les autres Frères dans l'ordre inverse de l'entrée, sans marquer les angles ni contourner les piliers.",
+       "Si un Conseiller Fédéral ou un Dignitaire est resté dans la Loge pour participer à la fermeture des travaux, il sort immédiatement après le V∴M∴, suivi de l'Expert."
+      ],
+      "exemple": "Le 2e Surveillant, au Midi, emboîte le pas du cortège quand il passe devant lui ; arrivé près de la porte, il s'efface pour que le 1er Surveillant, à l'Occident, s'intercale devant lui : le 1er Surveillant franchit le seuil avant le 2e.",
+      "retenir": [
+       "Ordre : MdC, V∴M∴, (Dignitaire), Expert, 2e Surveillant qui laisse passer le 1er avant le seuil, officiers, Frères dans l'ordre inverse de l'entrée.",
+       "Sortie par le Midi, sans angles, sans contourner les piliers."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Qu'est-ce qui déclenche la réplique du MdC à la fermeture ?",
+      "options": [
+       "Le dernier coup de maillet",
+       "Le serment de respecter la loi du silence",
+       "La sortie du Couvreur",
+       "L'extinction du Delta"
+      ],
+      "bonne": 1,
+      "explication": "Lorsque les Frères ont juré de respecter la loi du silence, le MdC frappe le sol de sa canne et parle."
+     },
+     {
+      "question": "Par quelle colonne le cortège sort-il ?",
+      "options": [
+       "Le Septentrion",
+       "Le Midi",
+       "Le centre du Temple",
+       "Par la colonne du 1er Surveillant"
+      ],
+      "bonne": 1,
+      "explication": "Le MdC précède le V∴M∴ et sort en longeant la colonne du Midi, sans marquer les angles."
+     },
+     {
+      "question": "Qui franchit le seuil en premier entre les deux Surveillants ?",
+      "options": [
+       "Le Second Surveillant",
+       "Le Premier Surveillant",
+       "Ils sortent côte à côte",
+       "L'Expert décide"
+      ],
+      "bonne": 1,
+      "explication": "Le 2e Surveillant emboîte le pas puis laisse le 1er Surveillant s'intercaler avant de franchir le seuil."
+     },
+     {
+      "question": "Où se place un Dignitaire resté pour la fermeture ?",
+      "options": [
+       "Devant le MdC",
+       "Immédiatement après le V∴M∴, suivi de l'Expert",
+       "Après les Surveillants",
+       "En dernier"
+      ],
+      "bonne": 1,
+      "explication": "Il sort immédiatement après le V∴M∴, suivi de l'Expert."
+     },
+     {
+      "question": "Marque-t-on les angles à la sortie ?",
+      "options": [
+       "Oui, comme pendant les travaux",
+       "Non, et l'on ne contourne pas les piliers",
+       "Seulement le MdC",
+       "Seulement au 3e degré"
+      ],
+      "bonne": 1,
+      "explication": "Les Frères sortent dans l'ordre inverse de l'entrée sans marquer les angles ni contourner les piliers : les angles ne se marquent qu'entre les invocations d'ouverture et de fermeture."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Loi du silence",
+      "definition": "Serment prêté à la fermeture des travaux ; c'est après lui que le MdC frappe de sa canne et organise la sortie."
+     },
+     {
+      "terme": "Député",
+      "definition": "Frère élu qui représente la Loge à la Grande Loge de France ; il descend au pied de l'Orient avec l'Orateur et le Secrétaire pour la sortie."
+     }
+    ]
+   },
+   {
+    "numero": 7,
+    "titre": "Usages en tenue : parole, planches, appel, deuil",
+    "objectifs": [
+     "Appliquer les usages de prise de parole propres aux officiers.",
+     "Placer un conférencier selon son grade.",
+     "Prendre l'Ordre de deuil et répondre à l'appel nominal."
+    ],
+    "sections": [
+     {
+      "titre": "Prise de parole",
+      "paragraphes": [
+       "Aux deux premiers degrés, le Frère lève franchement la main droite, pouce en équerre ; le Surveillant concerné dit « V∴M∴, un Frère de ma colonne demande la parole » et le V∴M∴ la donne directement. Le Frère autorisé se lève, se met à l'Ordre en se tournant vers le V∴M∴ et commence par « V∴M∴ et vous tous mes FF∴ ». L'Orateur, le Secrétaire et le Couvreur demandent la parole directement au V∴M∴ ; le Couvreur intervient debout, à l'Ordre, sans son épée. Au 3e degré, les Vénérables Maîtres demandent la parole directement au Très Vénérable Maître.",
+       "Pour les officiers, hors prescriptions du rituel : intervention à titre personnel dans un débat, à l'Ordre ; intervention au titre de leur office ou réponse à une question sur leur office, assis à leur plateau sans faire de signe, sauf le MdC, l'Expert et le Couvreur qui se mettent debout et se munissent de leur attribut, canne ou épée.",
+       "Pour présenter une planche ou une minute de symbolisme de leur place, les officiers prononcent à l'Ordre « V∴M∴ et vous tous mes FF∴ », font le signe pénal et se rasseyent pour parler ; après l'exposé, ils se lèvent, font le signe pénal en prononçant « J'ai dit » avant de se rasseoir. Le V∴M∴, pivot des débats, n'a pas à se lever pour intervenir.",
+       "On ne peut être à l'Ordre si l'on est assis. On peut remercier un Frère après une planche, sans en abuser ; on ne remercie pas après l'exécution d'un acte rituel."
+      ],
+      "retenir": [
+       "Le MdC qui répond au titre de son office se lève et prend sa canne ; les autres officiers restent assis.",
+       "Formule d'ouverture : « V∴M∴ et vous tous mes FF∴ » ; clôture : « J'ai dit » au signe pénal.",
+       "Jamais de remerciement après un acte rituel."
+      ]
+     },
+     {
+      "titre": "Présentation de planche et placement",
+      "paragraphes": [
+       "Les Apprentis et Compagnons n'ont jamais accès à l'Orient pour présenter un travail. Ils parlent de préférence debout à leur place, ou à l'Occident, debout entre les colonnes, avec un pupitre disposé au moment opportun ; en cas de problème de santé, le conférencier peut être assis. Les Maîtres présentent leur planche à l'Orient, si possible près du plateau du Secrétaire, devant un pupitre. Le plateau de l'Orateur n'est pas un plateau de conférencier.",
+       "Une planche « minute de symbolisme » ne dépasse pas cinq minutes ; toute autre planche ne dépasse pas 25 à 30 minutes. Avant une planche personnelle, le Frère prononce « V∴M∴ et vous tous mes FF∴ », fait le signe pénal, ne se remet pas à l'Ordre et peut se déganter ; les dignitaires présents sont cités par ordre de préséance, toujours après le V∴M∴. À la fin, il se gante et se met à l'Ordre pour prononcer « J'ai dit ».",
+       "« Être à l'Occident entre les colonnes » ne signifie pas le dos contre la porte, encore moins entre les piliers Force et Beauté : c'est l'endroit où les Frères saluent rituellement le V∴M∴ en entrant ou avant de couvrir la Loge. Le pupitre est une affaire du MdC : il le dispose au moment opportun."
+      ],
+      "retenir": [
+       "Apprentis et Compagnons : jamais à l'Orient ; à leur place ou entre les colonnes. Maîtres : à l'Orient près du Secrétaire.",
+       "Le MdC dispose le pupitre au bon moment et au bon endroit.",
+       "Minute de symbolisme : 5 minutes ; planche : 25 à 30 minutes."
+      ]
+     },
+     {
+      "titre": "Appel nominal, excuses, Ordre de deuil",
+      "paragraphes": [
+       "À l'appel de son nom, le Frère se lève, se met à l'Ordre, répond « présent » ou « En Loge », fait le signe pénal et se rassoit. Pendant l'appel, le Frère qui excuse un absent se lève, se met à l'Ordre, l'excuse, fait le signe pénal et se rassoit ; les excuses enregistrées, l'Hospitalier recueille les oboles.",
+       "Ordre de deuil : on ne retourne ni les sautoirs ni les tabliers, seuls les cordons sont retournés. Debout, pieds en équerre, tête inclinée sur la poitrine, on appuie l'index et le médius de chaque main sur les paupières closes, le pouce écarté en équerre. Tous les Frères se mettent à l'Ordre de deuil, y compris l'Expert et le MdC.",
+       "Le maillet sert à frapper et à marquer les articulations du travail ; on ne le prend pas pour saluer. Une Colonne d'Harmonie est fortement conseillée lors des initiations, des augmentations de salaire et de l'installation du Collège."
+      ],
+      "retenir": [
+       "Appel : debout, à l'Ordre, « présent », signe pénal, assis.",
+       "Deuil : cordons retournés seulement ; index et médius sur les paupières closes, pouce en équerre ; le MdC quitte sa position d'office pour l'Ordre de deuil.",
+       "Le maillet ne salue pas."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Le V∴M∴ pose une question au MdC sur son office. Comment répond-il ?",
+      "options": [
+       "Assis, sans signe, comme les autres officiers",
+       "Debout, muni de sa canne",
+       "À l'Ordre du grade, après « V∴M∴ et vous tous mes FF∴ »",
+       "Il ne répond pas en Loge"
+      ],
+      "bonne": 1,
+      "explication": "Les officiers répondent assis sans faire de signe, sauf le MdC, l'Expert et le Couvreur qui se lèvent et prennent leur attribut."
+     },
+     {
+      "question": "Un Compagnon présente une planche. Où se place-t-il ?",
+      "options": [
+       "À l'Orient près du Secrétaire",
+       "Au plateau de l'Orateur",
+       "Debout à sa place, ou à l'Occident entre les colonnes",
+       "À l'Autel des Serments"
+      ],
+      "bonne": 2,
+      "explication": "Apprentis et Compagnons n'ont jamais accès à l'Orient pour un travail ; ils parlent à leur place ou entre les colonnes."
+     },
+     {
+      "question": "Que retourne-t-on à l'Ordre de deuil ?",
+      "options": [
+       "Les tabliers",
+       "Les sautoirs",
+       "Les cordons seulement",
+       "Tabliers et cordons"
+      ],
+      "bonne": 2,
+      "explication": "On ne retourne ni les sautoirs ni les tabliers ; seuls les cordons sont retournés."
+     },
+     {
+      "question": "Combien de temps dure au maximum une minute de symbolisme ?",
+      "options": [
+       "1 minute",
+       "5 minutes",
+       "15 minutes",
+       "30 minutes"
+      ],
+      "bonne": 1,
+      "explication": "Une planche « minute de symbolisme » ne dépasse pas cinq minutes ; les autres planches, 25 à 30 minutes."
+     },
+     {
+      "question": "Au 3e degré, à qui les Vénérables Maîtres demandent-ils la parole ?",
+      "options": [
+       "Au Premier Surveillant",
+       "À l'Expert",
+       "Directement au Très Vénérable Maître",
+       "À l'Orateur"
+      ],
+      "bonne": 2,
+      "explication": "Au troisième degré, les Vénérables Maîtres demandent la parole directement au Très Vénérable Maître."
+     },
+     {
+      "question": "Le MdC prend-il l'Ordre de deuil ?",
+      "options": [
+       "Non, il garde sa position d'office",
+       "Oui, comme tous les Frères, y compris l'Expert",
+       "Seulement s'il n'a pas sa canne",
+       "Seulement au 3e degré"
+      ],
+      "bonne": 1,
+      "explication": "Tous les Frères se mettent à l'Ordre de deuil, y compris l'Expert et le MdC."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Minute de symbolisme",
+      "definition": "Très courte planche (cinq minutes au plus) n'appelant ni discussion ni commentaire ; tout officier peut la présenter de sa place."
+     },
+     {
+      "terme": "Ordre de deuil",
+      "definition": "Attitude de deuil : cordons retournés, debout pieds en équerre, tête inclinée, index et médius sur les paupières closes, pouce en équerre."
+     },
+     {
+      "terme": "Occident entre les colonnes",
+      "definition": "Emplacement où les Frères saluent le V∴M∴ en entrant ou avant de couvrir ; ni contre la porte, ni entre les piliers Force et Beauté."
+     },
+     {
+      "terme": "Colonne d'Harmonie",
+      "definition": "Accompagnement musical des travaux, fortement conseillé aux initiations, augmentations de salaire et installations."
+     }
+    ]
+   },
+   {
+    "numero": 8,
+    "titre": "Honneurs maçonniques : les délégations",
+    "objectifs": [
+     "Distinguer visiteur en simple visiteur et délégation officielle.",
+     "Dérouler l'introduction d'une délégation de Loge, puis d'une délégation du Conseil Fédéral.",
+     "Connaître les formules d'annonce du MdC et la place de la canne et du Flambeau."
+    ],
+    "sections": [
+     {
+      "titre": "Qui reçoit les Honneurs, et dans quel ordre",
+      "paragraphes": [
+       "Seules les délégations officielles, Frères revêtus de leurs sautoirs, font l'objet d'un protocole d'accueil particulier. Les visiteurs venus à titre personnel entrent selon les usages ordinaires. Tout membre du Conseil Fédéral est admis avec les Honneurs, car il est en délégation permanente du Conseil, sauf lorsque le Grand Maître ou son représentant est déjà présent ; le Grand Maître, son représentant et l'Inspecteur de la Loge reçoivent en outre le maillet du V∴M∴.",
+       "Préséance : l'entrée a lieu dans l'ordre inverse de la qualité ; le plus élevé pénètre le dernier. Les délégations sont reçues dans l'ordre : Loges de l'Obédience (la plus récente d'abord), Loges des Obédiences françaises agréées, Loges des Obédiences étrangères agréées, délégations conduites par un Grand Maître, puis délégation du Conseil Fédéral.",
+       "Avant l'entrée, le V∴M∴ demande à une simple délégation de Loge si elle souhaite entrer en visiteur ou en délégation. En délégation, elle entre après l'ouverture des travaux ; le V∴M∴ envoie à sa rencontre l'Expert, porteur de son épée, et le MdC, porteur de sa canne."
+      ],
+      "retenir": [
+       "Honneurs seulement pour les délégations officielles en sautoirs.",
+       "Le plus élevé entre le dernier.",
+       "Le V∴M∴ envoie l'Expert et le MdC à la rencontre de la délégation."
+      ]
+     },
+     {
+      "titre": "Délégation de Loge : la formule du MdC",
+      "paragraphes": [
+       "Le MdC frappe à la porte suivant le degré auquel la Loge travaille. Le Couvreur ouvre pour permettre d'entendre le MdC : « Je demande l'entrée de la Loge pour une délégation de la R∴L∴ … n° …, titre distinctif, à l'Orient de … et de telle Obédience. Cette délégation, conduite par le T∴C∴F∴ N…, est composée des TT∴CC∴FF∴ … ».",
+       "Le V∴M∴ : « À l'Ordre mes FF∴. F∴ Couvreur, ouvrez la porte à deux battants, donnez l'entrée. » La délégation, précédée du MdC et suivie de l'Expert, s'avance à l'Ordre, longe la colonne du Septentrion et s'arrête devant la marche de l'Orient. Le MdC se place devant le plateau du Trésorier, à l'Ordre de sa fonction ; l'Expert devant le plateau de l'Hospitalier. Les membres se placent au pied de l'Orient en laissant au centre un espace libre pour le Frère qui conduit la délégation.",
+       "Après les mots de bienvenue, le V∴M∴ invite le chef de délégation à l'Orient ; le MdC conduit les autres membres aux places réservées : tête de la colonne du Septentrion pour les Apprentis, tête de la colonne du Midi pour les Compagnons, les Maîtres sur l'une ou l'autre selon la décision du V∴M∴."
+      ],
+      "exemple": "« Je demande l'entrée de la Loge pour une délégation de la R∴L∴ Les Amis Réunis n° 123, à l'Orient de Versailles, de la Grande Loge de France. Cette délégation, conduite par le T∴C∴F∴ Dupont, Vénérable Maître, est composée des TT∴CC∴FF∴ Martin et Durand. »",
+      "retenir": [
+       "Frapper selon le degré ; annoncer Loge, numéro, titre, Orient, Obédience, chef, membres.",
+       "Cortège par le Septentrion ; MdC devant le Trésorier, Expert devant l'Hospitalier.",
+       "Apprentis en tête du Septentrion, Compagnons en tête du Midi."
+      ]
+     },
+     {
+      "titre": "Délégation du Conseil Fédéral : Flambeau, porte-épées, voûte d'acier",
+      "paragraphes": [
+       "Cette délégation peut être conduite par le Grand Maître, par son délégué nommément désigné ou par l'Inspecteur de la Loge. Le MdC annonce les membres dans l'ordre de préséance du Mémento : Grand Maître ou son délégué ou l'Inspecteur ; l'Inspecteur s'il ne conduit pas ; Grands Maîtres Adjoints ; Grand Orateur ; Grand Secrétaire ; Grand Chancelier ; Grand Expert ; Grand Couvreur ; Grand Trésorier ; Grand Hospitalier ; Grand Maître des Cérémonies ; Assistants Grands Maîtres ; Grands Officiers Adjoints ; Conseillers Fédéraux ; éventuellement Passés Grands Maîtres et Grands Maîtres honoris causa. Tout Conseiller Fédéral en exercice a préséance sur un Passé Conseiller Fédéral.",
+       "Dès qu'il est informé, le V∴M∴ envoie à la rencontre de la délégation : l'Expert, épée garde au col ; le MdC, tenant sa canne et portant le Flambeau à trois étoiles en main gauche ; trois Maîtres au signe d'Ordre, porteurs d'une épée en main gauche, lame verticale, garde à hauteur du visage. Le MdC frappe rituellement trois fois trois coups. Le Couvreur : « V∴M∴, on frappe en Grande Loge de France », puis ouvre pour entendre le MdC : « Mes FF∴, le T∴R∴F∴ N…, Grand Maître de la Grande Loge de France, accompagné des TT∴CC∴FF∴ … » ou « La délégation du Conseil Fédéral de la Grande Loge de France, conduite par le T∴R∴F∴ N… et composée des TT∴CC∴FF∴ … ».",
+       "Le V∴M∴ : « Mes FF∴, à l'Ordre, épée en main gauche, formez la voûte d'acier. FF∴ Surveillants, maillets battants. F∴ Couvreur, donnez l'entrée de la Loge. » Le Couvreur, épée en main droite pointe en bas, ouvre à deux battants ; le V∴M∴ commence la batterie de maillets quand le MdC pénètre dans la Loge. La délégation entre dans l'ordre inverse de l'annonce, le Grand Maître dernier, précédée du MdC (Flambeau main gauche, canne main droite) et des trois porte-épées, l'Expert fermant la marche. Le cortège longe le Septentrion après avoir marqué les angles et s'avance jusqu'à l'Orient ; ses membres se répartissent au pied de l'Orient, Midi et Septentrion, laissant le centre libre pour le Grand Maître.",
+       "Le MdC se place devant le plateau du Trésorier et l'Expert devant celui de l'Hospitalier ; ils croisent la canne et l'épée en équerre au-dessus de la tête du Grand Maître. Arrivé à l'Autel, le V∴M∴ interrompt les maillets battants, frappe un coup plus fort, souhaite la bienvenue et offre son maillet ; le maillet rendu, il invite le Grand Maître à sa droite et la délégation à l'Orient. « F∴ MdC, remplissez votre office et raccompagnez les FF∴ porte-épées sur leur colonne » : le MdC pose son Flambeau sur le plateau du V∴M∴ côté Midi et conduit les porte-épées à leur place. « Prenez place, mes Frères. » Le même cérémonial vaut pour une délégation étrangère conduite par son Grand Maître, toujours accompagnée d'une délégation du Conseil Fédéral."
+      ],
+      "retenir": [
+       "Composition du cortège : Expert (épée garde au col), MdC (canne à droite, Flambeau allumé à gauche), trois Maîtres porte-épées.",
+       "Frappe : trois fois trois coups ; le Couvreur annonce « on frappe en Grande Loge de France ».",
+       "Le Grand Maître entre le dernier ; le cortège longe le Septentrion en marquant les angles.",
+       "MdC devant le Trésorier, Expert devant l'Hospitalier : canne et épée croisées en équerre au-dessus de la tête du Grand Maître.",
+       "Après l'accueil : Flambeau posé côté Midi, porte-épées reconduits."
+      ]
+     },
+     {
+      "titre": "Sortie des délégations",
+      "paragraphes": [
+       "Les délégations de Loges assistent à la clôture et sortent avec tous les membres de la Loge, sans cérémonial particulier.",
+       "Pour le Conseil Fédéral (et les délégations reçues avec les mêmes honneurs) : après l'allocution du Grand Maître ou de son délégué, aucun Frère ne pouvant plus prendre la parole après lui, le V∴M∴ annonce la reconduite, appelle Surveillants, Expert, MdC et porte-épées, fait former la voûte d'acier, épée en main gauche, maillets battants.",
+       "Le MdC, canne en main droite, prend le Flambeau sur le plateau du V∴M∴, descend la marche de l'Orient vers le Midi, demande aux porte-épées de le suivre, contourne le Tableau de Loge et vient quérir les dignitaires. Il conduit la délégation hors de la Loge, l'Expert fermant la marche, épée en main droite, garde au col ; le Couvreur ouvre à deux battants. Les porte-épées sont suivis du Grand Maître, des membres des délégations, puis des Conseillers Fédéraux, dans l'ordre inverse de l'entrée.",
+       "Le MdC marque un temps face au V∴M∴ avant de pivoter côté droit, dextrorsum, et sortir ; les porte-épées font de même sans saluer ; les membres de la délégation saluent le V∴M∴ ; l'Expert marque un temps face au V∴M∴ avant de pivoter et sortir. Le MdC revient dans la Loge, précédant les trois porte-épées qu'il conduit à leur place, suivi de l'Expert ; les travaux reprennent leur cours."
+      ],
+      "retenir": [
+       "Sortie du Conseil Fédéral : Flambeau repris, descente vers le Midi, contournement du Tableau, dignitaires quéris, Expert en queue.",
+       "Le MdC et l'Expert marquent un temps face au V∴M∴ et pivotent à droite, sans saluer ; les dignitaires saluent.",
+       "Le MdC ramène ensuite les porte-épées à leur place."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Annonce du Conseil Fédéral",
+      "texte": "Rédiger l'annonce d'une délégation fictive de six membres dans l'ordre de préséance du Mémento, puis la dire à voix haute sans lire.",
+      "cadence": "mensuel"
+     }
+    ],
+    "reflexion": [
+     "Suis-je capable de tenir le Flambeau main gauche et la canne main droite en marquant les angles ?"
+    ],
+    "quiz": [
+     {
+      "question": "Comment le MdC frappe-t-il à la porte pour annoncer une délégation du Conseil Fédéral ?",
+      "options": [
+       "Selon le degré des travaux",
+       "Trois coups",
+       "Trois fois trois coups",
+       "Cinq coups"
+      ],
+      "bonne": 2,
+      "explication": "Le MdC frappe rituellement trois fois trois coups ; le Couvreur annonce « on frappe en Grande Loge de France »."
+     },
+     {
+      "question": "Dans quelle main le MdC porte-t-il le Flambeau à trois étoiles pour les Honneurs ?",
+      "options": [
+       "Main droite, la canne main gauche",
+       "Main gauche, la canne main droite",
+       "Les deux mains, canne posée",
+       "Il ne porte pas de Flambeau : c'est l'Expert"
+      ],
+      "bonne": 1,
+      "explication": "Le MdC tient sa canne de la main droite et le Flambeau à trois étoiles de la main gauche."
+     },
+     {
+      "question": "Où se placent le MdC et l'Expert quand le Grand Maître arrive au pied de l'Orient ?",
+      "options": [
+       "Le MdC devant le Trésorier, l'Expert devant l'Hospitalier, canne et épée croisées en équerre au-dessus du Grand Maître",
+       "Tous deux à la porte",
+       "Le MdC à l'Orient, l'Expert entre les colonnes",
+       "Le MdC devant l'Hospitalier, l'Expert devant le Trésorier"
+      ],
+      "bonne": 0,
+      "explication": "MdC devant le plateau du Trésorier, Expert devant celui de l'Hospitalier ; ils croisent canne et épée en équerre au-dessus de la tête du Grand Maître ou de son délégué."
+     },
+     {
+      "question": "Dans quel ordre les membres d'une délégation entrent-ils ?",
+      "options": [
+       "Le plus élevé en premier",
+       "Dans l'ordre de l'annonce",
+       "Dans l'ordre inverse de l'annonce, le plus élevé en dernier",
+       "Par ordre alphabétique"
+      ],
+      "bonne": 2,
+      "explication": "L'entrée a lieu dans l'ordre inverse de la qualité ou de la fonction : le Frère le plus élevé pénètre le dernier."
+     },
+     {
+      "question": "Combien de Maîtres porte-épées accompagnent l'Expert et le MdC ?",
+      "options": [
+       "Deux",
+       "Trois",
+       "Cinq",
+       "Sept"
+      ],
+      "bonne": 1,
+      "explication": "Trois Frères Maîtres au signe d'Ordre, épée en main gauche, lame verticale, garde à hauteur du visage."
+     },
+     {
+      "question": "Une délégation de Loge assiste à la clôture. Comment sort-elle ?",
+      "options": [
+       "Avec les Honneurs, voûte d'acier",
+       "Avant la fermeture, conduite par le MdC",
+       "Avec tous les membres de la Loge, sans cérémonial particulier",
+       "Après tous les Frères"
+      ],
+      "bonne": 2,
+      "explication": "Les délégations de Loges sortent avec tous les membres de la Loge, sans cérémonial particulier ; seul le Conseil Fédéral et les délégations reçues avec les mêmes honneurs sont reconduits."
+     },
+     {
+      "question": "À quel moment le V∴M∴ commence-t-il la batterie de maillets à l'entrée du Conseil Fédéral ?",
+      "options": [
+       "Quand le Couvreur annonce",
+       "Quand le MdC pénètre dans la Loge",
+       "Quand le Grand Maître franchit le seuil",
+       "Après la voûte d'acier"
+      ],
+      "bonne": 1,
+      "explication": "Le V∴M∴ commence la batterie de maillets quand le MdC pénètre dans la Loge."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Honneurs maçonniques",
+      "definition": "Protocole d'accueil réservé aux délégations officielles en sautoirs, avec cortège, annonce et, pour le Conseil Fédéral, voûte d'acier et maillets battants."
+     },
+     {
+      "terme": "Voûte d'acier",
+      "definition": "Haie d'honneur formée par les Frères, épée en main gauche, sous laquelle passe la délégation."
+     },
+     {
+      "terme": "Maillets battants",
+      "definition": "Batterie continue des maillets du V∴M∴ et des Surveillants pendant l'entrée d'une délégation, interrompue par un coup plus fort à l'arrivée à l'Autel."
+     },
+     {
+      "terme": "Porte-épées",
+      "definition": "Trois Maîtres au signe d'Ordre, épée en main gauche, lame verticale, garde à hauteur du visage, qui précèdent la délégation du Conseil Fédéral."
+     },
+     {
+      "terme": "Conseil Fédéral",
+      "definition": "Organe exécutif de la Grande Loge de France ; ses membres reçoivent les Honneurs, étant en délégation permanente."
+     }
+    ]
+   },
+   {
+    "numero": 9,
+    "titre": "La canne du Maître des Cérémonies et le Collège",
+    "objectifs": [
+     "Connaître l'origine et la forme de la canne du MdC selon le Mémento.",
+     "Situer le MdC dans le Collège et les règles de remplacement.",
+     "Savoir ce que le rituel attend de l'officier lors de la mise à l'Ordre."
+    ],
+    "sections": [
+     {
+      "titre": "La canne d'ambassade",
+      "paragraphes": [
+       "Dans les débuts du R∴E∴A∴A∴, un document précise que le MdC doit être muni d'une « canne d'ambassade » (manuscrit BN FM4 72, section 7, art. 12). On la voit représentée sur une esquisse du peintre Devosges à la même époque. C'est une canne de « présentation », qui arrive à hauteur du visage ; on peut penser aussi à une canne de Suisse.",
+       "La canne est souvent noire à pommeau blanc, ébène et ivoire, mais on en trouve de diverses factures. La canne courte de type compagnonnique, que l'on rencontre dans certaines Loges, a une affectation beaucoup plus personnelle, voire intime ; son apparition en Loge est tardive, comme les interférences Maçonnerie-Compagnonnage. Il est conseillé d'avoir un support de canne."
+      ],
+      "retenir": [
+       "Canne d'ambassade, de présentation, à hauteur du visage ; souvent noire à pommeau blanc.",
+       "La canne courte compagnonnique est une intrusion tardive.",
+       "Prévoir un support de canne."
+      ]
+     },
+     {
+      "titre": "Le Collège des Officiers et les remplacements",
+      "paragraphes": [
+       "Pour qu'une Loge se réunisse régulièrement, sept Maîtres Maçons au moins doivent être présents, dont cinq membres de la Loge ; le Collège complet compte douze officiers. Des adjoints ou remplaçants, Compagnons ou Apprentis, peuvent compléter le Collège pour l'ouverture si l'on manque de Maîtres.",
+       "Il est préférable que les offices soient tenus par leurs titulaires, mais en cas d'absence des Frères Orateur, Expert et Secrétaire, ces offices doivent être tenus par des Maîtres expérimentés. Si le 1er Surveillant remplace le V∴M∴ absent, les offices de 2e Surveillant et d'Expert restent en principe tenus par leurs titulaires ; on veille à maintenir l'Expert titulaire dans son office, sauf s'il doit remplacer le V∴M∴ quand celui-ci et les Surveillants sont absents.",
+       "Mise à l'Ordre des officiers : lorsque l'ensemble des Frères se met à l'Ordre à la demande du V∴M∴, l'Expert et le MdC prennent leur position spécifique ; le V∴M∴ et les Surveillants portent le maillet sur la poitrine, sauf s'ils doivent battre maillet, auquel cas tous trois se lèvent en portant le maillet sur la poitrine ; le Couvreur se met à l'Ordre sans son épée ; les autres officiers comme tous les Frères."
+      ],
+      "retenir": [
+       "Sept Maîtres dont cinq de la Loge ; Collège complet de douze.",
+       "Absence d'Orateur, Expert ou Secrétaire : un Maître expérimenté.",
+       "À la mise à l'Ordre : MdC et Expert en position d'office, maillets sur la poitrine, Couvreur sans épée."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Quelle hauteur a la canne d'ambassade décrite par le Mémento ?",
+      "options": [
+       "À la taille",
+       "À l'épaule",
+       "À hauteur du visage",
+       "Au-dessus de la tête"
+      ],
+      "bonne": 2,
+      "explication": "C'est une canne de présentation qui arrive à hauteur du visage."
+     },
+     {
+      "question": "Combien de Maîtres Maçons au moins pour une réunion régulière ?",
+      "options": [
+       "Cinq, dont trois de la Loge",
+       "Sept, dont cinq de la Loge",
+       "Neuf",
+       "Douze"
+      ],
+      "bonne": 1,
+      "explication": "Sept Maîtres Maçons au moins, dont cinq membres de la Loge ; le Collège complet compte douze officiers."
+     },
+     {
+      "question": "Que dit le Mémento de la canne courte de type compagnonnique ?",
+      "options": [
+       "C'est la canne prescrite",
+       "Elle a une affectation personnelle et son apparition en Loge est tardive",
+       "Elle est réservée au 3e degré",
+       "Elle remplace l'épée de l'Expert"
+      ],
+      "bonne": 1,
+      "explication": "La canne courte compagnonnique a une affectation beaucoup plus personnelle, voire intime ; son apparition en Loge est tardive."
+     },
+     {
+      "question": "Lors de la mise à l'Ordre, que fait le Couvreur ?",
+      "options": [
+       "Il se met à l'Ordre, épée en main",
+       "Il se met à l'Ordre sans son épée",
+       "Il reste à la porte sans signe",
+       "Il prend la position de l'Expert"
+      ],
+      "bonne": 1,
+      "explication": "Le Couvreur se met à l'Ordre comme tous les Frères, sans son épée."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Canne d'ambassade",
+      "definition": "Canne de présentation, à hauteur du visage, attestée dès les débuts du R∴E∴A∴A∴ (manuscrit BN FM4 72) et représentée par Devosges."
+     },
+     {
+      "terme": "Collège des Officiers",
+      "definition": "Ensemble des douze officiers de la Loge ; sept Maîtres suffisent pour ouvrir, l'Expert cumulant alors l'office de MdC."
+     }
+    ]
+   }
+  ]
+ },
+ "ouvertures-degres": {
+  "id": "ouvertures-degres",
+  "emoji": "🔑",
+  "titre": "Ouverture des travaux aux trois degrés",
+  "sousTitre": "Déroulé au R∴E∴A∴A∴ et rôle du Maître des Cérémonies",
+  "tagline": "1er, 2e et 3e degrés, pas à pas",
+  "intro": "Le déroulé de l'ouverture des travaux aux trois degrés symboliques du Rite Écossais Ancien et Accepté, et, à chaque étape, ce que fait le Maître des Cérémonies. Le rôle du MdC et l'entrée réglée sont tirés du Mémento des Officiers de la GLDF (édition 2019) ; le déroulé des dialogues d'ouverture suit la structure des rituels REAA publiés (versions de type GLDF et GLNF) et doit être confronté au rituel de la Loge : les passages marqués « à vérifier » signalent les variantes connues entre éditions.",
+  "accent": "#5a3e85",
+  "accentDark": "#3d2a5c",
+  "accentSoft": "#ede8f5",
+  "math": false,
+  "groupes": [
+   {
+    "label": "Avant",
+    "chapters": [
+     1
+    ]
+   },
+   {
+    "label": "Les trois ouvertures",
+    "chapters": [
+     2,
+     3,
+     4
+    ]
+   },
+   {
+    "label": "Synthèse",
+    "chapters": [
+     5
+    ]
+   }
+  ],
+  "chapitres": [
+   {
+    "numero": 1,
+    "titre": "Avant l'ouverture : le Temple et l'entrée réglée",
+    "objectifs": [
+     "Préparer le Temple pour une tenue au 1er degré.",
+     "Dérouler l'entrée réglée du Mémento.",
+     "Savoir ce qui, avant l'invocation, ne se fait pas encore (angles, Ordre)."
+    ],
+    "sections": [
+     {
+      "titre": "Le Temple avant les Frères",
+      "paragraphes": [
+       "Le Mémento confie au MdC la préparation du Temple, laissé dans la pénombre. Il allume l'Étoile, figure de la Lumière éternelle, sur le plateau du V∴M∴ côté colonne du Nord ; elle reste allumée en permanence. Il dispose côté Midi le Flambeau à trois étoiles, éteint. Les trois piliers Sagesse, Force et Beauté sont éteints : ils seront allumés à l'ouverture. Le Tableau de Loge du 1er degré est roulé ou couvert, le Volume de la Loi Sacrée fermé sur l'Autel des Serments, l'Équerre et le Compas posés dessus ; c'est l'Expert qui les disposera.",
+       "Le MdC vérifie son inventaire : outils du degré, décors, bougies, feu sur lui, sac aux propositions, pupitre à portée, boules et bulletins si un vote est prévu. Il contrôle la tenue et les décors des Frères à mesure qu'ils se présentent sur le Parvis."
+      ],
+      "retenir": [
+       "Pénombre ; Étoile allumée au Nord du plateau ; Flambeau éteint au Midi ; piliers éteints ; V∴L∴S∴ fermé.",
+       "Inventaire et feu sur soi avant d'ouvrir la porte."
+      ]
+     },
+     {
+      "titre": "L'entrée réglée en sept temps",
+      "paragraphes": [
+       "1. Entrée des Frères par grade : Apprentis, Compagnons, Maîtres, visiteurs de chaque grade à la suite ; mots de semestre donnés au Couvreur ; placement direct, sans angle ; les Frères restent debout, silencieux, pas à l'Ordre ; le MdC équilibre les colonnes.",
+       "2. « Mes FF∴, le Collège des Officiers » : porte ouverte à deux battants, les officiers entrent sur deux files de part et d'autre du MdC, sans mots de semestre, et attendent au pied de l'Orient.",
+       "3. Le MdC prend le Flambeau à trois étoiles éteint sur le plateau du V∴M∴, sort sur le Parvis, l'allume. 4. « Le Vénérable Maître ». 5. Le V∴M∴ se couvre et entre ; le MdC le conduit dextrorsum à l'Orient, l'Expert ferme la marche, épée contre l'épaule. 6. Le Couvreur referme ; le MdC dépose le Flambeau allumé côté Midi. 7. Le V∴M∴ ou le Frère chargé de l'éclairage illumine le Delta ; sur son ordre, les officiers rejoignent leurs plateaux."
+      ],
+      "retenir": [
+       "Avant l'invocation d'ouverture : pas d'angle, pas d'Ordre.",
+       "Le MdC annonce deux fois : le Collège, puis le V∴M∴.",
+       "Le Flambeau allumé finit côté Midi du plateau du V∴M∴."
+      ]
+     },
+     {
+      "titre": "Le même déroulé dans le livret du rituel (p. 17)",
+      "paragraphes": [
+       "Le rituel officiel du 2e degré (Convent 2016 – édition 2017) ouvre par une page « Entrée en Loge au premier degré » qui recoupe le Mémento avec ses propres mots. Trois précisions à retenir : l'entrée se donne « après avoir demandé et obtenu le silence » ; les officiers entrent « suivis du Député » ; et avant d'aller chercher le chandelier, le MdC « allume les lumières de confort sur les plateaux des Surveillants ».",
+       "Le vocabulaire diffère : « chandelier à trois branches » pour le Flambeau à trois étoiles, et « Le V∴M∴ de la L∴ » pour l'annonce du Vénérable. Le livret rappelle aussi que « tant qu'il n'a pas été procédé à l'Ouverture des Travaux au 1er degré, il n'y a pas lieu de marquer les angles »."
+      ],
+      "retenir": [
+       "Silence obtenu, Député derrière les officiers, lumières de confort des Surveillants : trois gestes du livret.",
+       "Chandelier = Flambeau ; « Le V∴M∴ de la L∴ » = « Le Vénérable Maître ».",
+       "Pas d'angles avant l'ouverture au 1er degré."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Avant l'entrée des Frères, quel est l'état des trois piliers ?",
+      "options": [
+       "Allumés par le MdC",
+       "Éteints, ils seront allumés à l'ouverture",
+       "Allumé pour la Sagesse seulement",
+       "Allumés par le Couvreur"
+      ],
+      "bonne": 1,
+      "explication": "Les piliers sont allumés au cours de l'ouverture ; avant, le Temple est dans la pénombre avec la seule Étoile."
+     },
+     {
+      "question": "Les Frères entrés et placés attendent…",
+      "options": [
+       "assis",
+       "debout, à l'Ordre",
+       "debout, silencieux, sans être à l'Ordre",
+       "à genoux"
+      ],
+      "bonne": 2,
+      "explication": "Les Frères ne sont pas à l'Ordre et restent debout en gardant le silence."
+     },
+     {
+      "question": "Selon le livret du rituel (p. 17), à quel moment le MdC allume-t-il les lumières de confort des Surveillants ?",
+      "options": [
+       "Avant l'entrée des Frères",
+       "Après avoir conduit les officiers au pied de l'Orient, avant d'aller chercher le chandelier",
+       "Après l'entrée du V∴M∴",
+       "Il ne les allume pas : c'est le Couvreur"
+      ],
+      "bonne": 1,
+      "explication": "Le livret place ce geste juste après l'entrée du Collège et avant que le MdC ne se saisisse du chandelier éteint pour aller sur le Parvis."
+     },
+     {
+      "question": "Qui allume le Flambeau à trois étoiles et où ?",
+      "options": [
+       "Le V∴M∴ à son plateau",
+       "Le MdC, sur le Parvis",
+       "L'Expert, à la porte",
+       "Le Couvreur, dans le Temple"
+      ],
+      "bonne": 1,
+      "explication": "Le MdC se rend sur le Parvis avec le Flambeau éteint et l'allume avant d'annoncer le V∴M∴."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Trois piliers",
+      "definition": "Sagesse, Force et Beauté, allumés à l'ouverture des travaux ; on les contourne."
+     },
+     {
+      "terme": "Trois Grandes Lumières",
+      "definition": "Volume de la Loi Sacrée, Équerre et Compas sur l'Autel des Serments ; leur disposition relève de l'Expert."
+     }
+    ]
+   },
+   {
+    "numero": 2,
+    "titre": "Ouverture au 1er degré (Loge d'Apprentis)",
+    "objectifs": [
+     "Suivre les étapes de l'ouverture au 1er degré dans l'ordre.",
+     "Identifier les trois moments où le MdC agit ou bouge.",
+     "Prendre la position d'office aux bons signaux."
+    ],
+    "sections": [
+     {
+      "titre": "Structure de l'ouverture",
+      "paragraphes": [
+       "L'ouverture au 1er degré du R∴E∴A∴A∴ suit une progression constante : (1) le V∴M∴ frappe un coup de maillet et fait vérifier que le Temple est couvert, par le Couvreur, via les Surveillants ; (2) il fait vérifier que tous les présents sont Francs-Maçons : les Surveillants mettent leurs colonnes debout et à l'Ordre et les passent en revue ; (3) le catéchisme d'ouverture entre le V∴M∴ et les Surveillants (devoir des Surveillants, âge de l'Apprenti — trois ans — heure d'ouverture — midi) ; (4) l'invocation « À la gloire du Grand Architecte de l'Univers » et la déclaration d'ouverture, portée par les Surveillants sur leurs colonnes ; (5) « À moi, mes FF∴ » : signe, batterie du grade (trois coups), acclamation ; (6) « Prenez place, mes FF∴ ».",
+       "Entre (3) et (4) prennent place les gestes de lumière et d'ouverture : l'allumage des trois piliers (Sagesse par le V∴M∴, Force par le 1er Surveillant, Beauté par le 2e), l'ouverture du Volume de la Loi Sacrée et la disposition de l'Équerre et du Compas par l'Expert, le dévoilement ou le tracé du Tableau de Loge par l'Expert. L'ordre exact de ces gestes et la formule de chaque allumage varient selon l'édition du rituel : à vérifier dans le rituel de la Loge."
+      ],
+      "retenir": [
+       "Six étapes : couvert, tous Maçons, catéchisme (3 ans, midi), invocation et ouverture, signe-batterie-acclamation, prenez place.",
+       "Apprenti : âge trois ans, ouverture à midi, batterie de trois coups.",
+       "L'Expert dispose les Grandes Lumières et le Tableau ; le V∴M∴ et les Surveillants allument les piliers."
+      ]
+     },
+     {
+      "titre": "Ce que fait le Maître des Cérémonies",
+      "paragraphes": [
+       "Le Mémento est formel : pendant l'ouverture des travaux, le MdC reste à sa place, sauf s'il précède l'Expert lorsque ce dernier trace le Tableau. Trois situations seulement le font agir.",
+       "Position d'office : chaque fois que le V∴M∴ met la Loge à l'Ordre (« Debout et à l'Ordre, mes FF∴ »), le MdC prend sa position spécifique, pieds en équerre, canne main droite, bras tendu ; il ne se met pas à l'Ordre du grade. Au « À moi, mes FF∴ », il reste ainsi ; à « par le Signe Pénal », il lève la canne en oblique et forme l'équerre avec l'Expert jusqu'à la fin de l'acclamation.",
+       "Lumière : dans la pratique de nombreuses Loges de la GLDF, le MdC porte la flamme du Flambeau à trois étoiles au V∴M∴ pour la Sagesse, puis aux Surveillants pour la Force et la Beauté, dans l'ordre Orient, Occident, Midi, avant de rapporter le Flambeau au plateau du V∴M∴. Le Mémento ne décrit pas ce trajet ; il précise seulement que le MdC doit avoir du feu sur lui. À vérifier dans le rituel de la Loge.",
+       "Tableau : si le Tableau est tracé ou déroulé par l'Expert, le MdC peut le précéder ; l'Expert se place côté Septentrion pour le tracé (et côté Midi pour l'effacement), et peut remettre son épée au MdC plutôt que de la poser à terre. Une fois les travaux ouverts par l'invocation, les angles se marquent : le premier trajet du MdC après l'ouverture est le premier où il marque les angles."
+      ],
+      "exemple": "Dialogue-repère (structure, non verbatim) : V∴M∴ — « F∴ 1er Surveillant, quel est le premier devoir d'un Surveillant en Loge ? » — « De s'assurer que le Temple est couvert, V∴M∴. » — « Assurez-vous-en. » Le 2e Surveillant s'en fait assurer par le Couvreur, qui vérifie la porte ; la réponse remonte : « Le Temple est couvert, V∴M∴. » Pendant ce temps le MdC est à son plateau.",
+      "retenir": [
+       "Règle de base : à sa place pendant l'ouverture.",
+       "Trois exceptions : position d'office aux mises à l'Ordre et à l'acclamation ; porter la lumière aux piliers (selon usage de la Loge, à vérifier) ; précéder l'Expert au tracé du Tableau et tenir son épée.",
+       "Après l'invocation d'ouverture, les angles se marquent."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Ouverture chronométrée",
+      "texte": "Suivre l'ouverture au 1er degré sur le rituel de la Loge en notant, ligne par ligne, les trois signaux du MdC : mise à l'Ordre, « par le Signe Pénal », tracé du Tableau. Vérifier si la Loge fait porter la lumière par le MdC.",
+      "cadence": "une fois, puis à chaque changement de rituel"
+     }
+    ],
+    "reflexion": [
+     "Dans ma Loge, qui porte la flamme aux Surveillants ?",
+     "À quel moment exactement ai-je marqué mon premier angle lors de la dernière tenue ?"
+    ],
+    "quiz": [
+     {
+      "question": "Pendant l'ouverture au 1er degré, où est le MdC ?",
+      "options": [
+       "Il circule dextrorsum",
+       "À sa place, sauf pour précéder l'Expert au tracé du Tableau",
+       "Devant la porte, avec le Couvreur",
+       "À l'Autel des Serments"
+      ],
+      "bonne": 1,
+      "explication": "C'est la prescription du Mémento : pendant l'ouverture, le MdC reste à sa place, sauf s'il précède l'Expert lorsque celui-ci trace le Tableau."
+     },
+     {
+      "question": "Quel est l'âge de l'Apprenti et l'heure d'ouverture des travaux ?",
+      "options": [
+       "Cinq ans, midi",
+       "Trois ans, midi",
+       "Sept ans, minuit",
+       "Trois ans, minuit"
+      ],
+      "bonne": 1,
+      "explication": "Au R∴E∴A∴A∴, l'Apprenti a trois ans et les travaux s'ouvrent à midi."
+     },
+     {
+      "question": "Qui dispose l'Équerre et le Compas sur le Volume de la Loi Sacrée ?",
+      "options": [
+       "Le MdC",
+       "Le V∴M∴",
+       "L'Expert",
+       "Le Secrétaire"
+      ],
+      "bonne": 2,
+      "explication": "L'Expert dispose les trois Grandes Lumières ; le Mémento lui permet de poser son épée sur le rebord de l'Autel à ce moment."
+     },
+     {
+      "question": "De quel côté l'Expert se place-t-il pour tracer le Tableau de Loge ?",
+      "options": [
+       "Côté Midi",
+       "Côté Septentrion",
+       "À l'Orient",
+       "À l'Occident"
+      ],
+      "bonne": 1,
+      "explication": "Pour le tracé, l'Expert se place côté Septentrion ; pour l'effacement, côté Midi."
+     },
+     {
+      "question": "Quand le MdC marque-t-il des angles pour la première fois dans une tenue ?",
+      "options": [
+       "Dès l'entrée réglée",
+       "Dès l'entrée du V∴M∴",
+       "Après l'invocation d'ouverture des travaux",
+       "Après la lecture de la planche tracée"
+      ],
+      "bonne": 2,
+      "explication": "Les angles ne sont marqués que pendant la période entre les invocations d'ouverture et de fermeture des travaux."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Catéchisme d'ouverture",
+      "definition": "Dialogue rituel entre le V∴M∴ et les Surveillants (devoirs, âge, heure) qui précède l'invocation d'ouverture."
+     },
+     {
+      "terme": "Invocation",
+      "definition": "« À la gloire du Grand Architecte de l'Univers » : formule qui ouvre (et ferme) les travaux ; entre les deux invocations, les angles se marquent."
+     },
+     {
+      "terme": "Tableau de Loge",
+      "definition": "Tableau symbolique du degré, tracé ou dévoilé par l'Expert à l'ouverture et effacé ou couvert à la fermeture ; on le contourne."
+     }
+    ]
+   },
+   {
+    "numero": 3,
+    "titre": "Ouverture au 2e degré (Loge de Compagnons)",
+    "objectifs": [
+     "Enchaîner l'ouverture au 2e degré après celle du 1er.",
+     "Conduire les Apprentis hors du Temple et les y ramener.",
+     "Placer l'Étoile flamboyante et savoir qui l'éclaire."
+    ],
+    "sections": [
+     {
+      "titre": "Structure de l'ouverture au 2e degré",
+      "paragraphes": [
+       "L'ouverture au 2e degré ne se fait qu'après l'ouverture au 1er. Le V∴M∴ annonce le passage au 2e degré et prie les Apprentis de couvrir le Temple. Une fois la Loge composée de Compagnons et de Maîtres, le catéchisme d'ouverture reprend avec le 2e Surveillant : « Êtes-vous Compagnon ? » — « Éprouvez-moi. » — « Par quel instrument d'architecture désirez-vous être éprouvé ? » — « Par l'Équerre. » Suivent les questions sur la reconnaissance (« J'ai vu l'Étoile flamboyante »), l'âge du Compagnon (cinq ans) et le devoir des Surveillants en Loge de Compagnons.",
+       "Les gestes de lumière du degré : l'Expert substitue le Tableau du 2e degré à celui du 1er (ou le déroule par-dessus) et modifie la position de l'Équerre et du Compas sur le Volume de la Loi Sacrée, une pointe du Compas étant désormais découverte ; l'Étoile flamboyante est éclairée à l'Orient. Puis invocation, déclaration d'ouverture au 2e degré, signe, batterie du grade (cinq coups), acclamation, « Prenez place »."
+      ],
+      "retenir": [
+       "Toujours après l'ouverture au 1er degré.",
+       "Compagnon : cinq ans, éprouvé par l'Équerre, a vu l'Étoile flamboyante, batterie de cinq coups.",
+       "Tableau du 2e degré et Compas à une pointe découverte : l'Expert.",
+       "Étoile flamboyante éclairée à l'Orient."
+      ]
+     },
+     {
+      "titre": "Disposition de la Loge au 2e degré selon le livret (p. 18)",
+      "paragraphes": [
+       "Aux éléments du 1er degré s'ajoutent : le Tableau de Loge du 2e degré, « tracé ou découvert sur celui du 1er degré déjà placé sur le Pavé mosaïque » ; l'Équerre et le Compas « entrecroisés sur le V∴L∴S∴ » au cours de l'ouverture, « la branche du Compas apparente étant celle du Midi, c'est-à-dire à côté des Compagnons » ; une Étoile flamboyante à cinq branches portant la lettre G, disposée à l'Orient ; le Delta rayonnant qui reste illuminé.",
+       "Deux règles de mouvement : le sens dextrorsum « est régulièrement suivi dès le début de l'Ouverture des Travaux au 2e degré », et « en aucune façon les Travaux ne peuvent être ouverts au 2e degré sans qu'il n'ait été procédé à l'Ouverture des Travaux au 1er degré ». Le livret ne dit pas qui pose ni qui éclaire l'Étoile : c'est la didascalie de la cérémonie (p. 68) qui confie l'éclairage à l'Expert."
+      ],
+      "retenir": [
+       "Compas entrecroisé avec l'Équerre, branche apparente côté Midi (côté des Compagnons).",
+       "Étoile à cinq branches avec G à l'Orient ; Delta toujours allumé.",
+       "Dextrorsum dès le début de l'ouverture au 2e ; jamais sans le 1er degré avant."
+      ]
+     },
+     {
+      "titre": "Ce que fait le Maître des Cérémonies",
+      "paragraphes": [
+       "Sortie des Apprentis : sur l'ordre du V∴M∴ (« F∴ Maître des Cérémonies, veuillez conduire les Apprentis sur le Parvis »), le MdC quitte son plateau et dit : « FF∴ Apprentis, veuillez vous mettre debout et à l'Ordre et me suivre. » Les Apprentis se lèvent, le suivent, se placent entre les colonnes, saluent rituellement le V∴M∴ (et, selon l'usage de la Loge, les deux Surveillants, dans l'ordre V∴M∴, 1er, 2e Surveillant) et couvrent le Temple. Le MdC les accompagne à la porte et revient dans le Temple.",
+       "Mise en place de l'Étoile flamboyante : dans le rituel de type GLDF, le MdC, revenu dans le Temple, place à l'Orient l'Étoile flamboyante sans l'éclairer. C'est ensuite l'Expert qui l'éclaire au moment prescrit. Dans la version GLNF, c'est le MdC qui l'éclaire : la répartition est donc à vérifier dans le rituel de la Loge, mais la pose de l'Étoile est bien un acte du MdC.",
+       "Disposition du Temple : certaines éditions font dire au V∴M∴ « FF∴ Expert et Maître des Cérémonies, veuillez disposer le Temple pour le travail en Chambre de Compagnon » ; le MdC assiste alors l'Expert pour le Tableau et les Grandes Lumières. Aux mises à l'Ordre et à l'acclamation, position d'office et équerre avec l'Expert, comme au 1er degré. Le MdC circule ici en marquant les angles, puisque les travaux sont ouverts.",
+       "Retour des Apprentis : à la fin des travaux au 2e degré, après la fermeture de ce degré et la reprise au 1er, le V∴M∴ ordonne : « F∴ Maître des Cérémonies, faites entrer les Apprentis qui se trouveraient encore sur le Parvis. » Les Apprentis entrent rituellement à la suite du MdC et reprennent place sur le rang arrière de la colonne du Nord. À la fermeture du 2e degré, l'Expert remet le Tableau du 1er degré et l'Étoile flamboyante est retirée (par l'Expert dans le texte de type GLDF, par le MdC dans la version GLNF ; à vérifier)."
+      ],
+      "exemple": "Une tenue avec passage au grade de Compagnon : les Apprentis sortent, sauf le récipiendaire que l'Expert prépare sur le Parvis ; le MdC pose l'Étoile ; la Loge s'ouvre au 2e degré ; Expert et MdC vont chercher le récipiendaire à la porte ; en fin de cérémonie, le MdC reconduit le nouveau Compagnon en tête de la colonne du Midi, puis, après reprise au 1er degré, fait rentrer les Apprentis.",
+      "retenir": [
+       "Réplique du MdC : « FF∴ Apprentis, veuillez vous mettre debout et à l'Ordre et me suivre. »",
+       "Le MdC pose l'Étoile flamboyante à l'Orient, sans l'éclairer ; l'éclairage revient à l'Expert (GLDF) ou au MdC (GLNF) : à vérifier.",
+       "Le MdC ramène les Apprentis sur le rang arrière de la colonne du Nord après la reprise au 1er degré."
+      ]
+     }
+    ],
+    "pratiques": [
+     {
+      "titre": "Sortie des Apprentis",
+      "texte": "Répéter la réplique et le trajet : quitter le plateau, dire la formule, rassembler les Apprentis entre les colonnes face à l'Orient, salut, conduite à la porte, retour et pose de l'Étoile.",
+      "cadence": "avant chaque tenue au 2e degré"
+     }
+    ],
+    "reflexion": [
+     "Dans ma Loge, qui éclaire l'Étoile flamboyante à l'ouverture au 2e degré ?"
+    ],
+    "quiz": [
+     {
+      "question": "Que dit le MdC aux Apprentis avant de les conduire sur le Parvis ?",
+      "options": [
+       "« Mes FF∴, gardons le silence »",
+       "« FF∴ Apprentis, veuillez vous mettre debout et à l'Ordre et me suivre »",
+       "« Passez, mes FF∴ »",
+       "Il ne dit rien"
+      ],
+      "bonne": 1,
+      "explication": "C'est la réplique du rituel de type GLDF ; les Apprentis se lèvent, le suivent, saluent entre les colonnes et couvrent le Temple."
+     },
+     {
+      "question": "Où les Apprentis saluent-ils avant de sortir ?",
+      "options": [
+       "À la porte",
+       "À l'Orient",
+       "Entre les colonnes, face au V∴M∴",
+       "À leur place"
+      ],
+      "bonne": 2,
+      "explication": "Ils se placent entre les colonnes, saluent rituellement le V∴M∴ et couvrent le Temple."
+     },
+     {
+      "question": "Dans le texte de type GLDF, qui pose l'Étoile flamboyante à l'Orient, et dans quel état ?",
+      "options": [
+       "L'Expert, allumée",
+       "Le MdC, sans l'éclairer",
+       "Le V∴M∴, allumée",
+       "Le Couvreur, éteinte"
+      ],
+      "bonne": 1,
+      "explication": "Le MdC revient dans le Temple et place à l'Orient l'Étoile flamboyante sans l'éclairer ; l'Expert l'éclaire ensuite."
+     },
+     {
+      "question": "Par quel instrument le Compagnon demande-t-il à être éprouvé ?",
+      "options": [
+       "Le Niveau",
+       "La Perpendiculaire",
+       "L'Équerre",
+       "Le Compas"
+      ],
+      "bonne": 2,
+      "explication": "« Par quel instrument d'architecture désirez-vous être éprouvé ? — Par l'Équerre. »"
+     },
+     {
+      "question": "Au 2e degré, de quel côté la branche du Compas est-elle apparente sur le V∴L∴S∴ ?",
+      "options": [
+       "Côté Septentrion",
+       "Côté Midi, à côté des Compagnons",
+       "Les deux branches sont couvertes",
+       "Les deux branches sont découvertes"
+      ],
+      "bonne": 1,
+      "explication": "Le livret (p. 18) : Équerre et Compas entrecroisés, la branche apparente du Compas étant celle du Midi, côté des Compagnons."
+     },
+     {
+      "question": "Où reprennent place les Apprentis à leur retour ?",
+      "options": [
+       "En tête de la colonne du Nord",
+       "Sur le rang arrière de la colonne du Nord",
+       "Sur la colonne du Midi",
+       "Entre les colonnes, debout"
+      ],
+      "bonne": 1,
+      "explication": "Les Apprentis entrent rituellement à la suite du MdC et prennent place sur le rang arrière de la colonne du Nord."
+     },
+     {
+      "question": "Quelle est la batterie du 2e degré ?",
+      "options": [
+       "Trois coups",
+       "Cinq coups également espacés",
+       "Sept coups",
+       "Trois fois trois"
+      ],
+      "bonne": 1,
+      "explication": "La batterie du Compagnon compte cinq coups également espacés ; son âge est de cinq ans."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Étoile flamboyante",
+      "definition": "Étoile à cinq branches portant la lettre G, grand symbole du Compagnon, placée à l'Orient à l'ouverture au 2e degré et éclairée au moment prescrit."
+     },
+     {
+      "terme": "Couvrir le Temple",
+      "definition": "Sortir de la Loge ; les Apprentis couvrent le Temple avant l'ouverture au 2e degré."
+     },
+     {
+      "terme": "Chambre de Compagnon",
+      "definition": "Loge ouverte au 2e degré, réunissant Compagnons et Maîtres."
+     }
+    ]
+   },
+   {
+    "numero": 4,
+    "titre": "Ouverture au 3e degré (Chambre du Milieu)",
+    "objectifs": [
+     "Enchaîner l'ouverture au 3e degré après le 1er et le 2e.",
+     "Conduire les Compagnons hors du Temple.",
+     "Connaître les usages propres au 3e degré qui changent la conduite du MdC."
+    ],
+    "sections": [
+     {
+      "titre": "Structure de l'ouverture au 3e degré",
+      "paragraphes": [
+       "La Chambre du Milieu ne s'ouvre qu'après les travaux au 1er et au 2e degré. Le président y est appelé Très Vénérable Maître ; les Maîtres qui demandent la parole s'adressent directement à lui. Le V∴M∴ prie les Compagnons de couvrir le Temple ; le MdC les conduit sur le Parvis.",
+       "Le Temple est disposé pour le 3e degré : tentures et ornements de deuil, Tableau du 3e degré, lumières réduites — le Mémento indique que seule une Étoile est allumée sur le plateau du V∴M∴ —, Équerre et Compas disposés par l'Expert, le Compas cette fois découvert. Le catéchisme d'ouverture reprend : « Êtes-vous Maître ? » — « L'acacia m'est connu. », l'âge du Maître (sept ans et plus), les questions sur la mort et le relèvement du Maître Hiram, l'heure. Puis invocation, ouverture de la Chambre du Milieu, signe, batterie du grade (trois fois trois coups), acclamation. Les répliques exactes et l'heure varient selon les éditions : à vérifier."
+      ],
+      "retenir": [
+       "Après le 1er et le 2e degré ; Très Vénérable Maître.",
+       "Maître : « L'acacia m'est connu », sept ans et plus, batterie de trois fois trois.",
+       "Temple en deuil, lumière réduite, Compas découvert : l'Expert dispose."
+      ]
+     },
+     {
+      "titre": "Ce que fait le Maître des Cérémonies",
+      "paragraphes": [
+       "Sortie des Compagnons : même mécanique qu'au 2e degré, sur ordre du V∴M∴ ; les Compagnons se lèvent, suivent le MdC, saluent entre les colonnes et couvrent le Temple. Le MdC revient et assiste l'Expert pour disposer le Temple (tentures, Tableau, extinction des lumières), dans les limites de ce que le rituel de la Loge lui confie.",
+       "Jamais d'angle au 3e degré : le Mémento est catégorique. Le MdC circule donc en trajets directs ou en dextrorsum simple, sans marquer les angles, à ce degré comme dans les cérémonies blanches. Le tablier de Maître n'est jamais retourné ; seuls les cordons se retournent, à l'Ordre de deuil, que le MdC prend comme tous les Frères.",
+       "Position d'office et acclamation : inchangées dans leur principe (canne, équerre avec l'Expert au Signe Pénal), avec la batterie et l'acclamation du grade. Quand les travaux reprennent au 2e puis au 1er degré, le MdC fait rentrer les Compagnons puis les Apprentis, chacun à sa colonne, sur l'ordre du V∴M∴."
+      ],
+      "exemple": "Élévation à la Maîtrise : les Compagnons sortent, sauf le récipiendaire préparé par l'Expert ; la Chambre du Milieu s'ouvre ; le MdC, sans marquer d'angle, assiste l'Expert dans la conduite du récipiendaire aux moments où le rituel l'appelle ; à la fermeture, le Temple est remis au 1er degré avant le retour des Frères des degrés inférieurs.",
+      "retenir": [
+       "Sortie des Compagnons conduite par le MdC, même mécanique qu'au 2e degré.",
+       "Pas d'angle au 3e degré ; tablier jamais retourné ; cordons retournés à l'Ordre de deuil.",
+       "Retour des Compagnons puis des Apprentis à la reprise des degrés inférieurs."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Comment appelle-t-on le président de la Loge au 3e degré ?",
+      "options": [
+       "Vénérable Maître",
+       "Très Vénérable Maître",
+       "Très Respectable Maître",
+       "Grand Maître"
+      ],
+      "bonne": 1,
+      "explication": "Le Mémento le nomme ainsi : au 3e degré, les Vénérables Maîtres demandent la parole directement au Très Vénérable Maître."
+     },
+     {
+      "question": "Marque-t-on les angles au 3e degré ?",
+      "options": [
+       "Oui, comme aux autres degrés",
+       "Seulement le MdC",
+       "Jamais",
+       "Seulement pendant l'élévation"
+      ],
+      "bonne": 2,
+      "explication": "Le Mémento : il n'y a jamais d'angle au 3e degré."
+     },
+     {
+      "question": "Quel est l'éclairage du Temple au 3e degré selon le Mémento ?",
+      "options": [
+       "Tous les piliers allumés",
+       "Seule une Étoile est allumée sur le plateau du V∴M∴",
+       "Le Delta seulement",
+       "Aucune lumière"
+      ],
+      "bonne": 1,
+      "explication": "Seule une Étoile est allumée sur le plateau du V∴M∴ ; le Temple est en deuil."
+     },
+     {
+      "question": "Que répond le Maître à « Êtes-vous Maître ? »",
+      "options": [
+       "« Éprouvez-moi »",
+       "« J'ai vu l'Étoile flamboyante »",
+       "« L'acacia m'est connu »",
+       "« Par l'Équerre »"
+      ],
+      "bonne": 2,
+      "explication": "« L'acacia m'est connu » est la réponse de reconnaissance du Maître."
+     },
+     {
+      "question": "À l'Ordre de deuil au 3e degré, que retourne le MdC ?",
+      "options": [
+       "Son tablier",
+       "Son sautoir",
+       "Son cordon",
+       "Rien"
+      ],
+      "bonne": 2,
+      "explication": "On ne retourne ni les sautoirs ni les tabliers, seuls les cordons ; le tablier de Maître n'est jamais retourné à la GLDF."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Chambre du Milieu",
+      "definition": "Loge ouverte au 3e degré, réservée aux Maîtres, présidée par le Très Vénérable Maître."
+     },
+     {
+      "terme": "Acacia",
+      "definition": "Symbole du 3e degré ; « L'acacia m'est connu » est la réponse de reconnaissance du Maître."
+     },
+     {
+      "terme": "Ordre de deuil",
+      "definition": "Attitude prescrite par le Mémento : cordons retournés, index et médius sur les paupières closes, pouce en équerre."
+     }
+    ]
+   },
+   {
+    "numero": 5,
+    "titre": "Synthèse : le MdC degré par degré",
+    "objectifs": [
+     "Comparer d'un coup d'œil les trois ouvertures.",
+     "Retenir les constantes du MdC et ce qui change avec le degré.",
+     "Lister les points à confronter au rituel de la Loge."
+    ],
+    "sections": [
+     {
+      "titre": "Tableau comparatif",
+      "points": [
+       "1er degré — âge 3 ans, ouverture à midi, batterie 3 coups, Tableau du 1er degré, piliers allumés, Compas couvert par l'Équerre. MdC : à sa place ; position d'office aux mises à l'Ordre ; précède l'Expert au tracé du Tableau ; porte éventuellement la lumière aux piliers (à vérifier).",
+       "2e degré — âge 5 ans, éprouvé par l'Équerre, batterie 5 coups, Tableau du 2e degré, Étoile flamboyante à l'Orient, une pointe du Compas découverte. MdC : sort les Apprentis (« FF∴ Apprentis, veuillez vous mettre debout et à l'Ordre et me suivre »), pose l'Étoile sans l'éclairer, assiste l'Expert, fait rentrer les Apprentis après reprise au 1er degré.",
+       "3e degré — âge 7 ans et plus, « L'acacia m'est connu », batterie 3 × 3, Tableau du 3e degré, Temple en deuil, seule une Étoile allumée, Compas découvert, Très Vénérable Maître. MdC : sort les Compagnons, assiste l'Expert à disposer le Temple, ne marque jamais d'angle, cordon retourné à l'Ordre de deuil.",
+       "Constantes à tous les degrés — à sa place pendant l'ouverture ; position d'office et équerre avec l'Expert à « par le Signe Pénal » ; sort et rentre avec un temps d'arrêt face à l'Orient, pivot à droite, sans saluer ; conduit tous les Frères sauf l'Expert."
+      ],
+      "retenir": [
+       "Ce qui change avec le degré : qui sort, ce qui se pose à l'Orient, les angles (jamais au 3e).",
+       "Ce qui ne change pas : la place du MdC pendant l'ouverture et sa position d'office."
+      ]
+     },
+     {
+      "titre": "À confronter au rituel de la Loge",
+      "points": [
+       "Qui porte la flamme aux piliers au 1er degré (V∴M∴ et Surveillants seuls, ou lumière apportée par le MdC).",
+       "Qui éclaire et qui retire l'Étoile flamboyante au 2e degré (Expert dans le texte de type GLDF, MdC dans la version GLNF).",
+       "Si les Apprentis saluent seulement le V∴M∴ ou aussi les deux Surveillants avant de couvrir.",
+       "L'ordre entre allumage des piliers, ouverture du V∴L∴S∴ et tracé du Tableau au 1er degré.",
+       "Les répliques exactes du catéchisme d'ouverture à chaque degré et l'heure au 3e degré.",
+       "Si le V∴M∴ dit « FF∴ Expert et Maître des Cérémonies, veuillez disposer le Temple » au changement de degré."
+      ],
+      "retenir": [
+       "Six points de variante ; les trancher avec le rituel de la Loge et le noter dans la marge de cette tuile."
+      ]
+     }
+    ],
+    "quiz": [
+     {
+      "question": "Quel acte du MdC est propre à l'ouverture au 2e degré ?",
+      "options": [
+       "Allumer le Delta",
+       "Poser l'Étoile flamboyante à l'Orient",
+       "Tracer le Tableau",
+       "Ouvrir le Volume de la Loi Sacrée"
+      ],
+      "bonne": 1,
+      "explication": "La pose de l'Étoile flamboyante, sans l'éclairer, est l'acte spécifique du MdC à l'ouverture au 2e degré."
+     },
+     {
+      "question": "Quelle règle de déplacement distingue le 3e degré ?",
+      "options": [
+       "On ne marche pas sur le Pavé mosaïque",
+       "On ne marque jamais les angles",
+       "On circule senestrorsum",
+       "Le MdC ne se déplace pas"
+      ],
+      "bonne": 1,
+      "explication": "Il n'y a jamais d'angle au 3e degré."
+     },
+     {
+      "question": "Qui le MdC ne conduit-il jamais dans ses déplacements ?",
+      "options": [
+       "Le Couvreur",
+       "Le Secrétaire",
+       "L'Expert",
+       "Les visiteurs"
+      ],
+      "bonne": 2,
+      "explication": "Pendant les travaux, le MdC conduit tous les Frères, hormis l'Expert, qui se déplace seul."
+     },
+     {
+      "question": "Les âges des trois grades sont…",
+      "options": [
+       "3, 5, 7 ans et plus",
+       "1, 3, 5 ans",
+       "3, 7, 9 ans",
+       "5, 7, 9 ans"
+      ],
+      "bonne": 0,
+      "explication": "Apprenti trois ans, Compagnon cinq ans, Maître sept ans et plus."
+     },
+     {
+      "question": "Après une tenue au 3e degré, dans quel ordre les Frères des degrés inférieurs rentrent-ils ?",
+      "options": [
+       "Apprentis puis Compagnons",
+       "Compagnons à la reprise au 2e degré, puis Apprentis à la reprise au 1er",
+       "Tous ensemble après la fermeture",
+       "Ils ne rentrent pas"
+      ],
+      "bonne": 1,
+      "explication": "Les degrés se referment dans l'ordre inverse de l'ouverture ; le MdC fait rentrer les Compagnons puis les Apprentis, chacun à sa colonne."
+     }
+    ],
+    "glossaire": [
+     {
+      "terme": "Reprise des travaux",
+      "definition": "Retour au degré inférieur après fermeture du degré supérieur ; le MdC fait alors rentrer les Frères de ce degré."
+     },
+     {
+      "terme": "Position d'office",
+      "definition": "Attitude du MdC en fonction, identique à tous les degrés : pieds en équerre, canne main droite, bras tendu latéralement."
+     }
+    ]
+   }
+  ]
+ }
+}
