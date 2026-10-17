@@ -102,6 +102,9 @@ h2.page-title{font-size:1.55rem;margin-bottom:4px;line-height:1.3}
 .progress-fill.green{background:linear-gradient(90deg,#2e8b57,#4aab74)}
 /* landing */
 .landing-wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+.ver-logo{display:inline-flex;align-items:center;gap:12px;background:var(--card);box-shadow:var(--shadow);border-radius:18px;padding:8px 16px 8px 8px;margin-bottom:18px;text-align:left}
+.ver-logo .ver-name{font-weight:800;font-size:1.02rem;letter-spacing:.02em}
+.ver-logo .ver-num{font-size:.82rem;color:var(--muted);font-weight:600}
 .landing-hero{text-align:center;margin-bottom:36px}
 .landing-hero h1{font-size:2rem;margin-bottom:10px}
 .landing-hero p{color:var(--muted);max-width:600px;margin:0 auto}
@@ -430,9 +433,18 @@ function renderNav(){
 }
 
 // ---- landing ----
+function versionLogo(){
+  const n=String(APP_VERSION).replace(/^v/,"");
+  return `<div class="ver-logo" title="Version installée">
+    <svg viewBox="0 0 64 64" width="54" height="54" aria-hidden="true"><defs><linearGradient id="vlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#232d52"/><stop offset="1" stop-color="#1f8a70"/></linearGradient></defs>
+    <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#vlg)"/><path d="M14 22 L32 14 L50 22 L32 30 Z" fill="#fff" opacity=".95"/><path d="M20 26 v9 c0 4 24 4 24 0 v-9" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/>
+    <text x="32" y="53" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,Arial" font-weight="800" font-size="13" fill="#fff">v${n}</text></svg>
+    <div class="ver-txt"><div class="ver-name">Formations</div><div class="ver-num">Version ${n} · ${APP_DATE}</div></div></div>`;
+}
+
 function renderLanding(){
   let h=`<div class="landing-wrap">
-    <div class="landing-hero"><h1>Vos formations interactives</h1>
+    <div class="landing-hero">${versionLogo()}<h1>Vos formations interactives</h1>
     <p>Choisissez un parcours. Chaque formation propose des leçons complètes, des quiz corrigés et un suivi de progression enregistré dans votre navigateur.</p></div>
     <div class="formation-grid">`;
   for(const fid of Object.keys(FORMATIONS)){
@@ -462,6 +474,21 @@ function renderLanding(){
         <div class="cta" style="color:#0e5a4a">${cs.doneToday?`✅ Fait aujourd'hui · 🔥 ${cs.count} j`:(cs.count?`🔥 Série ${cs.count} j — séance du jour →`:"Commencer aujourd'hui →")}</div>
       </div></button>`;
   }
+  // --- Plan anglais oral 8 semaines (suivi & KPI) ---
+  {
+    const st8=p8Store(); let meta="8 semaines · 55 min/jour · suivi & KPI", cta="Démarrer le plan →", pct=0;
+    if(st8.start){ const s8=p8Stats(st8); const raw8=p8DayIndex(st8,coachDate(0)); pct=Math.max(0,Math.min(100,Math.round((s8.ti+1)/56*100)));
+      meta=`Jour ${Math.max(1,s8.ti+1)}/56 · régularité ${s8.wkAdh} % cette semaine`; cta=raw8<0?"Démarre bientôt":(raw8>55?"🏁 Voir le bilan →":`Aujourd'hui : ${p8DayScore(st8,coachDate(0))}/5 blocs →`); }
+    h+=`<button class="formation-card" onclick="goPlan8()">
+      <div class="banner" style="background:linear-gradient(120deg,#7a2e0e,#d9822b)">
+        <div class="emoji">🚀</div><h3>Anglais oral : plan 8 semaines</h3><p>Programme intensif quotidien, suivi et indicateurs</p>
+      </div>
+      <div class="body">
+        <div class="meta">${meta}</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${pct}%;--accent:#d9822b;--accent-dark:#7a2e0e"></div></div>
+        <div class="cta" style="color:#7a2e0e">${cta}</div>
+      </div></button>`;
+  }
   // --- Espace protégé (contenu chiffré, phrase secrète requise) ---
   h+=`<a class="formation-card" href="./entretien/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#232d52,#39466f)">
@@ -480,6 +507,15 @@ function renderLanding(){
         <div class="meta">Contenu chiffré · phrase secrète requise</div>
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#2f5891;--accent-dark:#20406b"></div></div>
         <div class="cta" style="color:#20406b">🔐 Déverrouiller →</div>
+      </div></a>`;
+  h+=`<a class="formation-card" href="./initiation/" style="text-decoration:none;color:inherit">
+      <div class="banner" style="background:linear-gradient(120deg,#1b2a4a,#5a4a8a)">
+        <div class="emoji">🕯️</div><h3>Initiation — fiches du Maître des Cérémonies</h3><p>3 candidats · déroulé complet · espace protégé</p>
+      </div>
+      <div class="body">
+        <div class="meta">Contenu chiffré · mot de passe requis</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#5a4a8a;--accent-dark:#1b2a4a"></div></div>
+        <div class="cta" style="color:#1b2a4a">🔐 Déverrouiller →</div>
       </div></a>`;
   // --- Programme transversal : sous-app autonome (renforcement du transverse) ---
   h+=`<a class="formation-card" href="./transverse/" style="text-decoration:none;color:inherit">
@@ -974,7 +1010,7 @@ function webSpeech(inputId){
     let r; try{ r=new SR(); }catch(e){ stopDictation(); micSay("⚠️ Micro non disponible ici."); return; }
     recog=r; r.__folded=false; let got=false;
     r.lang=scnFr()?"fr-FR":"en-US"; r.interimResults=true; r.continuous=false; r.maxAlternatives=1;
-    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); if(handsMode&&inputId===handsInput) handsTurn("rec"); micSay(handsMode?"🎙️ [v41] Micro ouvert — appuyez sur le bandeau rouge pour terminer et envoyer.":"🎤 [v41] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
+    r.onstart=()=>{ if(myGen!==micGen) return; setMic(true); if(handsMode&&inputId===handsInput) handsTurn("rec"); micSay(handsMode?"🎙️ ["+APP_VERSION+"] Micro ouvert — appuyez sur le bandeau rouge pour terminer et envoyer.":"🎤 ["+APP_VERSION+"] Micro actif — parlez librement, re-touchez 🎤 quand vous avez fini."); };
     r.onresult=e=>{ if(myGen!==micGen) return; got=true; lastHeard=Date.now();
       // Android re-émet des copies grandissantes du même passage : on ne garde QUE le dernier segment, jamais de concaténation.
       const lastRes=e.results[e.results.length-1]; if(!lastRes) return;
@@ -1380,6 +1416,7 @@ function coachApplySRS(usedIds){
     else { e.box=Math.max(0,(e.box||0)-1); e.due=coachDate(1); }
     st.srs[b.id]=e; }
   const s=coachStreak(); if(!s.doneToday) st.streak={count:s.count+1,last:coachDate(0)};
+  st.log=st.log||{}; st.log[coachDate(0)]=(st.log[coachDate(0)]||0)+1;
   coachSaveStore(st);
 }
 function goCoach(){ view={formation:null,page:"coach",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
@@ -1538,6 +1575,227 @@ function renderCoach(){
   $("#main").innerHTML=h;
   const box=document.getElementById("chatbox"); if(box) box.scrollTop=box.scrollHeight;
 }
+
+// ---- Plan anglais oral 8 semaines : programme quotidien + KPI (v42) ----
+const P8_BLOCKS=[
+ {id:"coach", ic:"🗣️", t:"Coach 5 minutes", min:5, talk:3, how:"La séance du jour dans la tuile Coach (3 briques, 3 min de conversation IA, 1 correction). Cochée automatiquement quand vous validez la séance."},
+ {id:"shadow", ic:"🎧", t:"Shadowing", min:10, talk:8, how:"Écoutez le texte de la semaine, puis parlez EN MÊME TEMPS que la voix, au même rythme, 6 à 8 passages. Suivez la mélodie et les mots qui se lient, pas la perfection."},
+ {id:"srs", ic:"🃏", t:"Révision des phrases", min:10, talk:3, how:"Relisez à voix haute les phrases-briques échues (Coach) et les phrases-clés de la semaine ci-dessous. Cachez l'anglais, dites-le, vérifiez."},
+ {id:"m432", ic:"⏱️", t:"Monologue 4-3-2", min:10, talk:9, how:"Sujet du jour : parlez 4 min, puis redites la même chose en 3 min, puis en 2 min. Même contenu, plus vite, moins d'hésitations. Tout seul, à voix haute, en marchant si possible."},
+ {id:"input", ic:"📺", t:"Écoute compréhensible", min:20, talk:0, how:"20 min d'anglais que vous comprenez à ~80 % : podcast BBC « 6 Minute English », série avec sous-titres anglais, vidéo métier. Dans les transports, c'est parfait."}
+];
+const P8_TUTOR={id:"tutor", ic:"👥", t:"Conversation avec un humain (30 min)", min:30, talk:20, how:"3 séances par semaine avec un tuteur en ligne (Preply, italki…) ou un collègue anglophone. Donnez-lui le thème de la semaine et demandez-lui de vous corriger 3 fois maximum par séance."};
+const P8_WEEKS=[
+ {t:"Fondations : se présenter, parler de son travail", goal:"Je peux me présenter et décrire mon poste pendant 2 minutes sans m'arrêter.",
+  keys:["I'm in charge of a team of about fifty people.","My job is to make sure our rating models run smoothly.","Let me give you a bit of background.","What I like most about my job is…","Could you say that again, please?"],
+  shadow:"Hi, I'm Paul. I work for a large bank in Paris. I'm in charge of a team that builds and runs the tools our risk department uses every day. Most of my time goes into meetings: I check where projects stand, I help people solve problems, and I make decisions when things get stuck. It's a busy job, but I really like working with my team.",
+  prompts:["Introduce yourself: name, job, company, team.","Describe a typical working day, from morning to evening.","Explain what your team does and why it matters.","Talk about a project you are proud of.","Describe your office and your colleagues.","What do you like and dislike about your job?","Retell your week in two minutes."]},
+ {t:"Le quotidien et le passé : raconter, small talk", goal:"Je peux raconter ce que j'ai fait hier ou le week-end dernier et relancer une conversation.",
+  keys:["Last week I went to…","How was your weekend?","That sounds great! What did you do?","I didn't have time to…","By the way, have you ever been to…?"],
+  shadow:"Last weekend was quite relaxing. On Saturday morning I went to the market with my wife, and in the afternoon we visited some friends near the river. On Sunday I stayed at home, read a book and cooked a big lunch for the family. I didn't check my emails at all, which was a nice change. How about you? How was your weekend?",
+  prompts:["What did you do last weekend?","Tell the story of your last holiday.","Describe your last business trip.","Talk about a film or a series you watched recently.","Explain how you started your career.","Describe a problem you solved last month.","Make small talk: weather, transport, weekend plans."]},
+ {t:"Réunions (1) : donner son avis, être d'accord ou non", goal:"Je peux donner mon opinion, la justifier et exprimer un désaccord poliment.",
+  keys:["In my opinion, we should…","I see your point, but…","I totally agree with you.","I'm not sure that's the best option.","The main reason is that…"],
+  shadow:"I see your point, but I'm not sure that's the best option. If we move the deadline again, the team will lose motivation and the budget will go up. In my opinion, we should keep the date and reduce the scope instead. The main reason is that the business needs the core features first. We can add the rest in a second release.",
+  prompts:["Should people work from home? Give your opinion.","Argue for a four-day working week.","Your team wants a new tool: agree or disagree?","Is AI good or bad for banks? Give two reasons each.","Defend a decision you made recently.","Disagree politely with a colleague's proposal.","Compare two options and recommend one."]},
+ {t:"Réunions (2) : clarifier, reformuler, conclure", goal:"Je peux faire répéter, vérifier ma compréhension et résumer les décisions d'une réunion.",
+  keys:["Sorry, could you clarify what you mean by…?","So, if I understand correctly…","Let me sum up what we've agreed.","Who will take care of that?","Let's set a deadline for this."],
+  shadow:"Let me sum up what we've agreed. First, Anna will update the test plan by Friday. Second, the vendor will send us a new delivery date before the end of the week. Third, we'll meet again next Tuesday to check progress. If I understand correctly, the go-live stays in June. Does everyone agree? Great, thank you all for your time.",
+  prompts:["Summarise the last meeting you attended.","Explain a decision and who does what next.","Ask three clarifying questions about a project.","Run the opening of a meeting: agenda and goals.","Close a meeting: decisions, owners, deadlines.","Reformulate a complex request in simple words.","Explain a delay and propose a new plan."]},
+ {t:"Compliance (1) : expliquer la surveillance des marchés", goal:"Je peux expliquer à un non-spécialiste ce que fait un outil de surveillance des marchés.",
+  keys:["The tool detects suspicious trading patterns.","An alert is reviewed by an analyst.","We need to reduce false positives.","Market abuse includes insider dealing and spoofing.","Suspicious cases are reported to the regulator."],
+  shadow:"Our surveillance tool looks at every trade and order the bank sends to the market. When it detects a suspicious pattern, like spoofing or insider dealing, it creates an alert. An analyst then reviews the alert and decides whether it's a real problem. Most alerts are false positives, so we spend a lot of time calibrating the scenarios to reduce the noise.",
+  prompts:["Explain what market abuse is, with two examples.","Describe how an alert is handled, step by step.","Why do false positives matter?","Explain why the bank is replacing its surveillance tools.","Describe the products the tool must cover.","Explain the role of the regulator.","Teach a new joiner the basics of trade surveillance."]},
+ {t:"Compliance (2) : piloter le projet, risques, planning", goal:"Je peux présenter l'état d'un projet (RAG), ses risques et ses prochaines étapes.",
+  keys:["Overall, the project is amber.","The main risk is the data migration.","We're on track for the parallel run.","We need a decision on the budget.","The next milestone is user acceptance testing."],
+  shadow:"Overall, the project is amber. We're on track for the parallel run in March, but the main risk is the data migration: some historical orders are incomplete. To mitigate this, we've added two data analysts and a weekly check with the vendor. The next milestone is user acceptance testing. We need a decision from the committee on the extra budget by the end of the month.",
+  prompts:["Give a RAG status of your current project.","Present the top three risks and their mitigation.","Explain the plan from testing to go-live.","Ask a steering committee for a decision.","Explain a dependency on another team.","Report bad news: a milestone will be late.","Present the benefits of the new tool."]},
+ {t:"Convaincre et négocier", goal:"Je peux défendre une position, répondre à une objection et obtenir un accord.",
+  keys:["I understand your concern, however…","What if we tried…?","Can we meet halfway?","That's a fair point. Let me explain.","If you agree, we can start next week."],
+  shadow:"I understand your concern about the cost. However, if we don't upgrade the tool now, we'll face higher risks and possibly a fine from the regulator. What if we split the budget over two years? That way, the impact this year is limited, and we still meet the deadline. That's a fair compromise, isn't it? If you agree, we can start next week.",
+  prompts:["Convince your manager to hire one more person.","Answer the objection: 'It's too expensive.'","Negotiate a new delivery date with a vendor.","Propose a compromise between two teams.","Pitch your project in one minute.","Handle a difficult question from a committee member.","Ask for more time without losing credibility."]},
+ {t:"Autonomie : conversations libres et bilan", goal:"Je peux tenir une conversation de 15 minutes sur mon travail et ma vie, en gérant mes trous.",
+  keys:["How can I put it…","What I mean is…","That's a good question, let me think.","I'm not sure of the word, but…","It was a pleasure talking to you."],
+  shadow:"That's a good question, let me think. What I mean is that the project is not only about technology. It's also about people: the analysts need to trust the new alerts, and the managers need clear reports. How can I put it? If people don't use the tool, it doesn't matter how good it is. That's why training is a big part of our plan.",
+  prompts:["Talk freely for two minutes about your career.","What have you learned in these eight weeks?","Describe your ideal team.","Explain a complex topic from your job simply.","Tell a funny or surprising story from work.","Talk about your plans for next year.","Final rehearsal: present your project as in a real committee."]}
+];
+const P8_CANDO=["Me présenter et décrire mon travail","Raconter ce que j'ai fait (passé)","Donner et défendre mon avis","Faire répéter, clarifier, résumer","Expliquer la surveillance des marchés","Présenter un statut projet et ses risques"];
+const P8_TEST_PROMPT="Talk for one minute about your job, your week, and one thing you want to improve.";
+const P8_TALK_DAY=P8_BLOCKS.reduce((a,b)=>a+b.talk,0);
+
+function p8Store(){ try{ return JSON.parse(localStorage.getItem("plan8")||"{}"); }catch(e){ return {}; } }
+function p8Save(st){ try{ localStorage.setItem("plan8",JSON.stringify(st)); }catch(e){} }
+function p8DayIndex(st,dateStr){ if(!st.start) return -1; const a=new Date(st.start+"T12:00:00"), b=new Date((dateStr||coachDate(0))+"T12:00:00"); return Math.round((b-a)/864e5); }
+function p8DateOf(st,i){ const d=new Date(st.start+"T12:00:00"); d.setDate(d.getDate()+i); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function p8Day(st,ds){ st.days=st.days||{}; return st.days[ds]||{}; }
+function p8CoachDoneOn(ds){ const s=(coachStore().streak)||{}; const log=(coachStore().log)||{}; return s.last===ds || !!log[ds]; }
+function p8BlockDone(st,ds,id){ if(id==="coach" && p8CoachDoneOn(ds)) return true; return !!p8Day(st,ds)[id]; }
+function p8DayScore(st,ds){ return P8_BLOCKS.filter(b=>p8BlockDone(st,ds,b.id)).length; }
+function p8Toggle(id){ const st=p8Store(); const ds=coachDate(0); st.days=st.days||{}; const d=st.days[ds]||{}; d[id]=!d[id]; st.days[ds]=d; p8Save(st); render(); }
+function p8Start(){ const st=p8Store(); const v=(document.getElementById("p8start")||{}).value; st.start=v||coachDate(0); p8Save(st); render(); }
+function p8Reset(){ if(!window.confirm("Effacer tout le suivi du plan (cases, tests, auto-évaluations) ?")) return; try{ localStorage.removeItem("plan8"); }catch(e){} render(); }
+function goPlan8(){ view={formation:null,page:"plan8",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
+
+function p8Stats(st){
+  const today=coachDate(0); const ti=Math.max(0,Math.min(55,p8DayIndex(st,today)));
+  let doneBlocks=0, dueBlocks=0, talk=0, tutors=0, wkDone=0, wkDue=0, wkTut=0;
+  const week=Math.floor(ti/7);
+  for(let i=0;i<=ti;i++){ const ds=p8DateOf(st,i); const d=p8Day(st,ds);
+    const n=p8DayScore(st,ds); doneBlocks+=n; dueBlocks+=P8_BLOCKS.length;
+    talk+=P8_BLOCKS.filter(b=>p8BlockDone(st,ds,b.id)).reduce((a,b)=>a+b.talk,0);
+    if(d.tutor){ tutors++; talk+=P8_TUTOR.talk; }
+    if(Math.floor(i/7)===week){ wkDone+=n; wkDue+=P8_BLOCKS.length; if(d.tutor) wkTut++; } }
+  // série : jours consécutifs (jusqu'à hier ou aujourd'hui) avec au moins 4 blocs sur 5
+  let streak=0; for(let i=ti;i>=0;i--){ const n=p8DayScore(st,p8DateOf(st,i)); if(n>=4) streak++; else if(i===ti) continue; else break; }
+  const talkTarget=(ti+1)*P8_TALK_DAY + Math.round((ti+1)/7*3)*P8_TUTOR.talk;
+  return {ti,week,adh:dueBlocks?Math.round(doneBlocks/dueBlocks*100):0,wkAdh:wkDue?Math.round(wkDone/wkDue*100):0,talk,talkTarget,tutors,wkTut,streak};
+}
+function p8Alerts(st,s){
+  const out=[]; const today=coachDate(0);
+  if(s.ti>0){ const y=p8DayScore(st,p8DateOf(st,s.ti-1)); if(y<4) out.push(["warn",`Hier : ${y}/5 blocs seulement. Rattrapez aujourd'hui le bloc « Monologue 4-3-2 » en plus de la séance normale.`]); }
+  const dow=(s.ti%7); if(dow>=3 && s.wkTut<Math.min(3,Math.floor(dow/2))) out.push(["warn",`Conversations humaines cette semaine : ${s.wkTut}/3. Réservez dès maintenant vos créneaux pour la fin de semaine.`]);
+  if(s.wkAdh>=90 && s.ti%7>=2) out.push(["ok",`Semaine à ${s.wkAdh} % : rythme tenu, continuez exactement comme ça.`]);
+  const wk=s.week+1; const tests=st.tests||{}; if(s.ti%7===6 && !tests[wk]) out.push(["info","Aujourd'hui : test hebdomadaire d'une minute (bas de page). Il mesure votre débit et le compare aux semaines précédentes."]);
+  if(s.ti>=7 && !tests[wk-1] && s.ti%7<6) out.push(["warn",`Le test de la semaine ${wk-1} n'a pas été fait : faites-le aujourd'hui pour garder la courbe de progression.`]);
+  if(p8DayScore(st,today)===5) out.push(["ok","Les 5 blocs du jour sont faits. 👏"]);
+  return out;
+}
+function p8Heat(st,s){
+  let h=`<div style="display:grid;grid-template-columns:auto repeat(7,1fr);gap:4px;font-size:.72rem;align-items:center">`;
+  h+=`<span></span>`+["J1","J2","J3","J4","J5","J6","J7"].map(x=>`<span style="text-align:center;color:var(--muted)">${x}</span>`).join("");
+  for(let w=0;w<8;w++){ h+=`<span style="color:var(--muted);padding-right:4px">S${w+1}</span>`;
+    for(let d=0;d<7;d++){ const i=w*7+d; const ds=p8DateOf(st,i); const n=p8DayScore(st,ds); const tut=p8Day(st,ds).tutor;
+      const fut=i>s.ti; const bg=fut?"var(--border)":["#f3d6d6","#f0dcc4","#efe6b8","#d8ebc4","#b9e0bf","#1f8a70"][n];
+      h+=`<span title="${ds} : ${n}/5${tut?' + tuteur':''}" style="height:22px;border-radius:5px;background:${bg};${i===s.ti?'outline:2px solid #0e5a4a;':''}display:flex;align-items:center;justify-content:center;color:${n===5?'#fff':'#333'}">${tut?'👥':''}</span>`; } }
+  return h+`</div>`;
+}
+function p8Spark(st){
+  const tests=st.tests||{}; const vals=[]; for(let w=1;w<=8;w++) vals.push(tests[w]?tests[w].wpm:null);
+  const max=Math.max(120,...vals.filter(v=>v!=null));
+  let h=`<div style="display:flex;align-items:flex-end;gap:6px;height:110px;padding-top:6px">`;
+  vals.forEach((v,i)=>{ h+=`<div style="flex:1;text-align:center;font-size:.7rem"><div style="font-weight:700">${v!=null?v:""}</div><div style="height:${v!=null?Math.max(4,Math.round(v/max*80)):3}px;background:${v!=null?'#1f8a70':'var(--border)'};border-radius:4px 4px 0 0"></div><div style="color:var(--muted)">S${i+1}</div></div>`; });
+  return h+`</div><div style="font-size:.75rem;color:var(--muted)">Mots prononcés en 1 minute (test du 7e jour de chaque semaine).</div>`;
+}
+let p8Test={running:false,t0:0,timer:null};
+function p8TestStart(){
+  const el=document.getElementById("p8testInput"); if(!el) return; el.value="";
+  p8Test.running=true; p8Test.t0=Date.now(); dictate("p8testInput");
+  const btn=document.getElementById("p8testBtn"); if(btn) btn.disabled=true;
+  if(p8Test.timer) clearInterval(p8Test.timer);
+  p8Test.timer=setInterval(()=>{ const left=60-Math.round((Date.now()-p8Test.t0)/1000); const c=document.getElementById("p8clock");
+    if(c) c.textContent=left>0?("⏱ "+left+" s — parlez sans vous arrêter"):"⏱ Terminé";
+    if(left<=0){ clearInterval(p8Test.timer); p8Test.timer=null; p8Test.running=false;
+      if(typeof mediaRec!=="undefined" && mediaRec){ try{ mediaRec.stop(); }catch(e){} } else stopDictation();
+      const b2=document.getElementById("p8testBtn"); if(b2) b2.disabled=false;
+      micSay("Vérifiez le texte transcrit (corrigez si besoin), puis enregistrez le résultat."); } },500);
+}
+function p8TestSave(){
+  const el=document.getElementById("p8testInput"); const txt=(el?el.value:"").trim(); if(!txt){ micSay("Aucun texte : lancez l'enregistrement d'abord."); return; }
+  const words=txt.toLowerCase().match(/[a-z']+/g)||[]; const uniq=new Set(words).size;
+  const st=p8Store(); const s=p8Stats(st); st.tests=st.tests||{}; st.tests[s.week+1]={wpm:words.length,uniq,date:coachDate(0),text:txt.slice(0,1500)}; p8Save(st); render();
+}
+async function p8TestAI(){
+  const st=p8Store(); const s=p8Stats(st); const t=(st.tests||{})[s.week+1]; if(!t) return;
+  if(!(apiCfg.key&&apiCfg.provider)){ alert("Renseignez votre clé IA dans le Coach 5 minutes pour obtenir l'évaluation."); return; }
+  const box=document.getElementById("p8ai"); if(box) box.textContent="⏳ Analyse en cours…";
+  try{ const r=await callAI("You are an English speaking examiner. The text is an automatic transcript of a French professional speaking English for one minute. Reply in FRENCH, briefly: 1) estimated CEFR speaking level (A2, B1, B2…), 2) the two most useful corrections (wrong → right), 3) one concrete goal for next week. Ignore punctuation and small transcription errors.",[{role:"user",content:t.text}]);
+    const st2=p8Store(); st2.tests[s.week+1].ai=r; p8Save(st2); render(); }
+  catch(e){ if(box) box.textContent="⚠️ "+(e.message||e); }
+}
+function p8SetCando(i,v){ const st=p8Store(); const s=p8Stats(st); st.cando=st.cando||{}; const w=s.week+1; st.cando[w]=st.cando[w]||[]; st.cando[w][i]=v; p8Save(st); render(); }
+
+function renderPlan8(){
+  $("#sidebar").innerHTML="";
+  const st=p8Store();
+  let h=`<div class="landing-wrap"><div style="max-width:820px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+      <button class="btn ghost sm" onclick="goHomeSelector()">← Accueil</button>
+      <button class="btn ghost sm" onclick="goCoach()">🗣️ Coach 5 minutes</button></div>
+    <h2 class="page-title" style="margin-top:4px">🚀 Anglais oral : plan 8 semaines</h2>`;
+  if(!st.start){
+    h+=`<div class="card"><p><b>Objectif :</b> parler un anglais simple mais fluide sur votre travail et votre quotidien en 8 semaines.</p>
+      <p><b>Le contrat :</b> environ <b>55 minutes par jour</b> en 5 blocs, plus <b>3 conversations de 30 minutes par semaine</b> avec un humain. Soit à peu près 25 heures de parole réelle à l'arrivée.</p>
+      <p style="font-size:.9rem;color:var(--muted)">Chaque bloc applique une méthode dont l'efficacité est documentée : le shadowing (répéter en même temps qu'un locuteur natif), la répétition espacée des phrases, la technique 4-3-2 pour la fluidité, l'écoute de contenus compréhensibles, et la conversation réelle avec correction ciblée. Le suivi mesure chaque jour votre régularité et chaque semaine votre débit de parole.</p>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px">
+        <label>Date de début <input class="sel" type="date" id="p8start" value="${coachDate(0)}"></label>
+        <button class="btn" onclick="p8Start()">▶ Démarrer le plan</button></div></div></div></div>`;
+    $("#main").innerHTML=h; return;
+  }
+  const s=p8Stats(st); const ds=coachDate(0); const raw=p8DayIndex(st,ds);
+  if(raw<0){ h+=`<div class="card">Le plan démarre le <b>${st.start}</b>. Revenez ce jour-là ! <button class="btn ghost sm" onclick="p8Reset()">Changer la date</button></div></div></div>`; $("#main").innerHTML=h; return; }
+  const W=P8_WEEKS[s.week]; const dayInWeek=s.ti%7; const finished=raw>55;
+  h+=`<p class="page-sub">${finished?"🏁 Plan terminé — voici votre bilan.":`Jour <b>${s.ti+1}</b> / 56 · Semaine <b>${s.week+1}</b> / 8 — <b>${esc(W.t)}</b>`}</p>`;
+  // KPI
+  const lastT=(st.tests||{}); const ws=Object.keys(lastT).map(Number).sort((a,b)=>a-b);
+  const first=ws.length?lastT[ws[0]].wpm:null, last=ws.length?lastT[ws[ws.length-1]].wpm:null;
+  const srs=coachStore().srs||{}; const acq=COACH_BRICKS.filter(b=>srs[b.id]&&srs[b.id].box>=3).length;
+  const cw=(st.cando||{})[s.week+1]||[]; const cvals=cw.filter(v=>v!=null); const cavg=cvals.length?(cvals.reduce((a,b)=>a+b,0)/cvals.length).toFixed(1):"—";
+  const col=v=>v>=85?"#1f8a70":v>=70?"#b7791f":"#b03a3a";
+  h+=`<div class="stats-row" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+    <div class="stat"><div class="v" style="color:${col(s.wkAdh)}">${s.wkAdh} %</div><div class="l">Régularité cette semaine (objectif ≥ 85 %)</div></div>
+    <div class="stat"><div class="v" style="color:${col(s.adh)}">${s.adh} %</div><div class="l">Régularité depuis le début</div></div>
+    <div class="stat"><div class="v">🔥 ${s.streak}</div><div class="l">Jours d'affilée (≥ 4 blocs sur 5)</div></div>
+    <div class="stat"><div class="v">${Math.round(s.talk/60*10)/10} h</div><div class="l">Parole cumulée / objectif ${Math.round(s.talkTarget/60*10)/10} h</div></div>
+    <div class="stat"><div class="v">${s.wkTut} / 3</div><div class="l">Conversations humaines cette semaine (total ${s.tutors} / 24)</div></div>
+    <div class="stat"><div class="v">${last!=null?last:"—"}${first!=null&&last!=null&&ws.length>1?` <span style="font-size:.8rem;color:${last>=first?'#1f8a70':'#b03a3a'}">(${last>=first?'+':''}${Math.round((last-first)/first*100)} %)</span>`:""}</div><div class="l">Débit : mots par minute (dernier test)</div></div>
+    <div class="stat"><div class="v">${acq} / ${COACH_BRICKS.length}</div><div class="l">Phrases-briques acquises (Coach)</div></div>
+    <div class="stat"><div class="v">${cavg}</div><div class="l">Auto-évaluation de la semaine (sur 5)</div></div></div>`;
+  const al=p8Alerts(st,s);
+  if(al.length&&!finished) h+=al.map(([k,m])=>`<div style="padding:10px 14px;border-radius:10px;margin:8px 0;font-size:.92rem;background:${k==='warn'?'#fdecea':k==='ok'?'#e6f4ee':'#eef2fa'};border-left:4px solid ${k==='warn'?'#b03a3a':k==='ok'?'#1f8a70':'#3b5b9a'}">${k==='warn'?'⚠️':k==='ok'?'✅':'📌'} ${m}</div>`).join("");
+  // Aujourd'hui
+  if(!finished){
+    const n=p8DayScore(st,ds); const dd=p8Day(st,ds);
+    h+=`<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>Aujourd'hui — ${n}/5 blocs</b><span style="color:var(--muted);font-size:.85rem">≈ 55 min · cochez au fur et à mesure</span></div>
+      <div style="height:8px;background:var(--border);border-radius:6px;margin:8px 0 12px"><div style="height:8px;width:${n*20}%;background:#1f8a70;border-radius:6px"></div></div>`;
+    for(const b of P8_BLOCKS){ const done=p8BlockDone(st,ds,b.id); const auto=(b.id==="coach"&&p8CoachDoneOn(ds));
+      let extra="";
+      if(b.id==="coach") extra=`<button class="btn ghost sm" onclick="goCoach()">Ouvrir le Coach →</button>`;
+      if(b.id==="shadow") extra=`<div style="margin-top:6px;padding:8px 10px;background:var(--accent-soft,#eef6f3);border-radius:8px;font-size:.88rem">${esc(W.shadow)}</div>
+        <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn ghost sm" onclick="p8Say(0.85)">🔊 Lent</button><button class="btn ghost sm" onclick="p8Say(1)">🔊 Normal</button><button class="btn ghost sm" onclick="try{speechSynthesis.cancel()}catch(e){}">⏹</button></div>`;
+      if(b.id==="srs") extra=`<ul style="margin:6px 0 0 18px;font-size:.88rem">${W.keys.map(k=>`<li>${esc(k)} <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(k)}">🔊</button></li>`).join("")}</ul>`;
+      if(b.id==="m432") extra=`<div style="margin-top:6px;font-size:.95rem">🎯 <b>${esc(W.prompts[dayInWeek])}</b></div>`;
+      h+=`<div style="border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:8px;${done?'background:#f1f8f4':''}">
+        <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" ${done?'checked':''} ${auto?'disabled':''} onchange="p8Toggle('${b.id}')" style="transform:scale(1.35);margin-top:4px">
+        <div style="flex:1"><b>${b.ic} ${b.t}</b> <span style="color:var(--muted);font-size:.82rem">· ${b.min} min${auto?' · validé par le Coach':''}</span>
+        <div style="font-size:.85rem;color:var(--muted)">${b.how}</div></div></label>${extra}</div>`; }
+    h+=`<div style="border:1px dashed #1f8a70;border-radius:12px;padding:10px 12px"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" ${dd.tutor?'checked':''} onchange="p8Toggle('tutor')" style="transform:scale(1.35);margin-top:4px">
+      <div><b>${P8_TUTOR.ic} ${P8_TUTOR.t}</b> <span style="color:var(--muted);font-size:.82rem">· 3 par semaine</span><div style="font-size:.85rem;color:var(--muted)">${P8_TUTOR.how} Thème à lui donner : <b>${esc(W.t)}</b>.</div></div></label></div></div>`;
+  }
+  // Objectif de la semaine + auto-évaluation
+  h+=`<div class="card"><b>🎯 Objectif de la semaine ${s.week+1}</b><p style="margin:6px 0 10px">${esc(W.goal)}</p>
+    <b>Auto-évaluation</b> <span style="color:var(--muted);font-size:.85rem">(0 = impossible, 5 = facile et fluide — à remplir en fin de semaine)</span>`;
+  P8_CANDO.forEach((c,i)=>{ const v=cw[i]; h+=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:.9rem"><span>${esc(c)}</span><span>${[0,1,2,3,4,5].map(x=>`<button class="btn ${v===x?'':'ghost'} sm" style="min-width:34px;padding:4px 8px" onclick="p8SetCando(${i},${x})">${x}</button>`).join(" ")}</span></div>`; });
+  h+=`</div>`;
+  // Test hebdo
+  const tw=(st.tests||{})[s.week+1];
+  h+=`<div class="card"><b>📏 Test hebdomadaire (1 minute)</b>
+    <p style="font-size:.9rem;color:var(--muted);margin:4px 0">Toujours le même sujet, pour comparer d'une semaine à l'autre. Parlez sans vous arrêter pendant 60 secondes : la dictée compte vos mots.</p>
+    <p style="margin:6px 0"><b>${esc(P8_TEST_PROMPT)}</b> <button class="spk-btn" onclick="speak(this.dataset.say)" data-say="${escA(P8_TEST_PROMPT)}">🔊</button></p>
+    ${tw?`<div style="padding:8px 12px;background:#e6f4ee;border-radius:8px;margin-bottom:8px">Semaine ${s.week+1} : <b>${tw.wpm} mots/min</b> · ${tw.uniq} mots différents (${tw.date}).</div>`:""}
+    ${tw&&tw.ai?`<div style="border-left:4px solid #1f8a70;padding:8px 12px;margin-bottom:8px;font-size:.9rem">${esc(tw.ai).replace(/\n/g,"<br>")}</div>`:""}
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" id="p8testBtn" onclick="p8TestStart()">🎤 ${tw?"Refaire le test":"Démarrer (60 s)"}</button><span id="p8clock" style="font-weight:700;color:#b03a3a"></span></div>
+    <textarea id="p8testInput" class="sel" style="width:100%;min-height:90px;margin-top:8px" placeholder="La transcription apparaît ici (vous pouvez corriger les erreurs de transcription)."></textarea>
+    <div id="micStatus" class="mic-status"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="btn ghost sm" onclick="p8TestSave()">💾 Enregistrer le résultat</button>${tw?`<button class="btn ghost sm" onclick="p8TestAI()">🤖 Évaluation IA (niveau + corrections)</button>`:""}</div><div id="p8ai" style="font-size:.85rem;margin-top:6px"></div>
+    <div style="margin-top:12px">${p8Spark(st)}</div></div>`;
+  // Carte des 8 semaines
+  h+=`<div class="card"><b>🗓️ Les 56 jours</b> <span style="color:var(--muted);font-size:.82rem">— couleur = nombre de blocs faits, 👥 = conversation humaine</span><div style="margin-top:8px">${p8Heat(st,s)}</div></div>`;
+  // Programme
+  h+=`<div class="card"><b>📚 Le programme</b>${P8_WEEKS.map((w,i)=>`<details ${i===s.week?'open':''} style="margin-top:8px"><summary><b>S${i+1}</b> · ${esc(w.t)}</summary><div style="font-size:.88rem;margin:6px 0 0 10px"><div>🎯 ${esc(w.goal)}</div><div style="margin-top:4px">Sujets 4-3-2 : ${w.prompts.map(esc).join(" · ")}</div></div></details>`).join("")}
+    <details style="margin-top:12px"><summary><b>Pourquoi cette méthode ?</b></summary><div style="font-size:.88rem;margin-top:6px;line-height:1.5">
+    <p><b>Parler tous les jours, dès le premier jour.</b> La fluidité vient de la pratique orale répétée, pas seulement de la grammaire. Le plan vous fait parler environ 25 minutes par jour.</p>
+    <p><b>Shadowing.</b> Dans l'étude de Foote et McDonough (2017), des apprenants qui répétaient en même temps que l'audio au moins 4 fois par semaine pendant 8 semaines ont été jugés plus fluides et plus compréhensibles. Sur l'accent, l'effet n'est pas démontré.</p>
+    <p><b>4-3-2.</b> Redire le même contenu en moins de temps (technique de Maurice et Nation) réduit les pauses et allonge les passages fluides.</p>
+    <p><b>Répétition espacée.</b> Revoir une phrase juste avant de l'oublier (1, 3, 7, 15 jours…) la fixe durablement. C'est le moteur du Coach.</p>
+    <p><b>Écoute compréhensible.</b> Beaucoup d'anglais compris à environ 80 % nourrit le vocabulaire et l'oreille.</p>
+    <p><b>Conversation humaine + correction ciblée.</b> Une à trois corrections par séance, pas plus : c'est ce qui se retient.</p>
+    <p style="color:var(--muted)">Aucune méthode ne garantit un niveau précis. Si vous tenez ≥ 85 % de régularité et vos 3 conversations par semaine, vous devez voir votre débit et votre aisance progresser nettement sur le test hebdomadaire. Si le débit stagne deux semaines de suite, augmentez la part de conversation humaine.</p></div></details>
+    <div style="margin-top:12px;text-align:right"><button class="btn ghost sm" onclick="p8Reset()">Réinitialiser le suivi</button></div></div>`;
+  h+=`</div></div>`;
+  $("#main").innerHTML=h;
+}
+function p8Say(rate){ const st=p8Store(); const s=p8Stats(st); const txt=P8_WEEKS[s.week].shadow; if(!("speechSynthesis" in window)) return;
+  try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(txt); u.lang="en-US"; if(ttsVoice) u.voice=ttsVoice; u.rate=rate; speechSynthesis.speak(u); }catch(e){} }
 
 // ---- thèmes & champ lexical ----
 function renderThemes(){
@@ -1765,7 +2023,7 @@ function typeset(el){
 
 // ---- render ----
 function render(){
-  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else renderLanding(); typeset(); return; }
+  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else renderLanding(); typeset(); return; }
   document.body.classList.remove("landing");
   clearStudioTimers();
   applyAccent(F());
@@ -1784,7 +2042,8 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v41";
+const APP_VERSION="v42";
+const APP_DATE="17 octobre 2026";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
