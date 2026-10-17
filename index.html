@@ -953,6 +953,12 @@ function importProgress(ev){
 let conv = { theme:null, niveau:"A2", mode:"script", stepIdx:0, log:[], waitStep:null, done:false };
 let ia = { messages:[], loading:false, started:false, correct:true, error:null };
 let apiCfg = {}; try{ apiCfg=JSON.parse(localStorage.getItem("english-api")||"{}"); }catch(e){}
+// v46 : seuls les modèles de conversation (texte) conviennent ; image, audio, temps réel… provoquent des erreurs.
+const NON_CHAT=/(image|dall-?e|tts|whisper|transcribe|audio|realtime|embedding|moderation|search|computer-use|sora|codex|instruct|davinci|babbage)/i;
+function isChatModel(m){ return !!m && !NON_CHAT.test(m); }
+function bestDefaultModel(ids,p){ const pref = p==="anthropic" ? [/haiku/i,/sonnet/i] : [/^gpt-4o-mini$/i,/^gpt-4\.1-mini$/i,/^gpt-5-mini$/i,/^gpt-4o$/i,/mini/i];
+  for(const r of pref){ const f=ids.find(id=>r.test(id)); if(f) return f; } return ids[0]; }
+if(apiCfg.model && !isChatModel(apiCfg.model)){ apiCfg.model=""; try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
 function saveApiCfg(){ try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
 // ---- modèles IA : liste réelle depuis l'API du fournisseur ----
 let aiModels=[], aiModelsLoading=false, aiModelsErr=null;
@@ -967,6 +973,7 @@ async function loadModels(){
   const d=await r.json();
   let ids=(d.data||[]).map(m=>m.id);
   if(p==="openai") ids=ids.filter(id=>/^(gpt-|o[13457]|chatgpt)/i.test(id));
+  ids=ids.filter(isChatModel);
   ids.sort();
   return ids;
 }
@@ -977,7 +984,7 @@ async function doLoadModels(){
   if(keyEl && keyEl.value.trim()) apiCfg.key=keyEl.value.trim();
   if(!apiCfg.key){ aiModelsErr="Entrez d'abord votre clé API."; render(); return; }
   aiModelsLoading=true; aiModelsErr=null; render();
-  try{ aiModels=await loadModels(); if(aiModels.length && !aiModels.includes(apiCfg.model)) apiCfg.model=aiModels[0]; saveApiCfg(); }
+  try{ aiModels=await loadModels(); if(aiModels.length && !aiModels.includes(apiCfg.model)) apiCfg.model=bestDefaultModel(aiModels,apiCfg.provider); saveApiCfg(); }
   catch(e){ aiModelsErr="Impossible de charger les modèles : "+String(e.message||e); }
   aiModelsLoading=false; render();
 }
@@ -1352,11 +1359,11 @@ async function iaSend(){
 async function callAI(system,messages){
   const p=apiCfg.provider||"openai";
   if(p==="anthropic"){
-    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiCfg.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true","content-type":"application/json"},body:JSON.stringify({model:apiCfg.model||"claude-3-5-haiku-latest",max_tokens:400,system,messages})});
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiCfg.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true","content-type":"application/json"},body:JSON.stringify({model:(isChatModel(apiCfg.model)&&apiCfg.model)||"claude-3-5-haiku-latest",max_tokens:400,system,messages})});
     if(!r.ok) throw new Error(" — "+r.status+" : "+(await r.text()).slice(0,160));
     const d=await r.json(); return (d.content||[]).map(b=>b.text||"").join("").trim();
   } else {
-    const r=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+apiCfg.key,"content-type":"application/json"},body:JSON.stringify({model:apiCfg.model||"gpt-4o-mini",max_tokens:400,messages:[{role:"system",content:system},...messages]})});
+    const r=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+apiCfg.key,"content-type":"application/json"},body:JSON.stringify({model:(isChatModel(apiCfg.model)&&apiCfg.model)||"gpt-4o-mini",max_tokens:400,messages:[{role:"system",content:system},...messages]})});
     if(!r.ok) throw new Error(" — "+r.status+" : "+(await r.text()).slice(0,160));
     const d=await r.json(); return d.choices[0].message.content.trim();
   }
@@ -2258,7 +2265,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v45";
+const APP_VERSION="v46";
 const APP_DATE="17 octobre 2026";
 function showVersionBadge(){
   try{
