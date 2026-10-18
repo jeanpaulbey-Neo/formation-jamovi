@@ -757,7 +757,12 @@ function renderTraining(c){
   });
   if(s.checked){
     const good=s.sel===q.bonne;
+    const say=(F().id==="english")?trainSayText(q):"";
     h+=`<div class="explain ${good?'good':'bad'}"><b>${good?'✅ Correct !':'❌ La bonne réponse était '+"ABCD"[q.bonne]+'.'}</b>${esc(q.explication)}</div>
+    ${say?`<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-4px 0 12px;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3)">
+      <span style="flex:1;min-width:180px">🗣️ <b>${esc(say)}</b></span>
+      <button class="btn sm" onclick="trainSay(this.dataset.say,1)" data-say="${escA(say)}">🔊 Écouter</button>
+      <button class="btn ghost sm" onclick="trainSay(this.dataset.say,0.7)" data-say="${escA(say)}">🐢 Lentement</button></div>`:""}
     <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
       <button class="btn ghost sm" onclick="setView('chap',${c.numero},'quiz')">Arrêter & passer au quiz</button>
       <button class="btn" onclick="trainNext(${c.numero})">${s.pos+1<total?'Question suivante →':'Voir le bilan 🏁'}</button></div>`;
@@ -768,6 +773,14 @@ function renderTraining(c){
   }
   return h+`</div>`;
 }
+// v47 : faire prononcer la bonne réponse (formation anglais). Phrase à trou « … ___ … » → phrase complète.
+function trainSayText(q){
+  const ans=String(q.options[q.bonne]||"").trim(); if(!ans) return "";
+  const m=String(q.question).match(/[«"“]\s*([^»"”]*_{2,}[^»"”]*)\s*[»"”]/);
+  if(m) return m[1].replace(/_{2,}/,ans).replace(/\s+/g," ").trim();
+  return ans;
+}
+function trainSay(t,rate){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice) u.voice=ttsVoice; u.rate=rate||1; speechSynthesis.speak(u); }catch(e){} }
 function trainSelect(i){ const s=getTrain(view.chap); if(s.checked)return; s.sel=i; render(); }
 function trainCheck(n){ const s=getTrain(n),c=chap(n); if(s.sel==null||s.checked)return; s.checked=true; s.answered++; if(s.sel===c.entrainement[s.order[s.pos]].bonne)s.correct++; persistTrain(n,s); render(); }
 function trainNext(n){ const s=getTrain(n); s.pos++; s.sel=null; s.checked=false; persistTrain(n,s); render(); }
@@ -2265,7 +2278,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v46";
+const APP_VERSION="v47";
 const APP_DATE="17 octobre 2026";
 function showVersionBadge(){
   try{
