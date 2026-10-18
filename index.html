@@ -759,10 +759,7 @@ function renderTraining(c){
     const good=s.sel===q.bonne;
     const say=(F().id==="english")?trainSayText(q):"";
     h+=`<div class="explain ${good?'good':'bad'}"><b>${good?'✅ Correct !':'❌ La bonne réponse était '+"ABCD"[q.bonne]+'.'}</b>${esc(q.explication)}</div>
-    ${say?`<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-4px 0 12px;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3)">
-      <span style="flex:1;min-width:180px">🗣️ <b>${esc(say)}</b></span>
-      <button class="btn sm" onclick="trainSay(this.dataset.say,1)" data-say="${escA(say)}">🔊 Écouter</button>
-      <button class="btn ghost sm" onclick="trainSay(this.dataset.say,0.7)" data-say="${escA(say)}">🐢 Lentement</button></div>`:""}
+    ${say?pronBox(c.numero,s,say):""}
     <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
       <button class="btn ghost sm" onclick="setView('chap',${c.numero},'quiz')">Arrêter & passer au quiz</button>
       <button class="btn" onclick="trainNext(${c.numero})">${s.pos+1<total?'Question suivante →':'Voir le bilan 🏁'}</button></div>`;
@@ -773,17 +770,87 @@ function renderTraining(c){
   }
   return h+`</div>`;
 }
-// v47 : faire prononcer la bonne réponse (formation anglais). Phrase à trou « … ___ … » → phrase complète.
+// v48 : faire prononcer la bonne réponse (formation anglais) + vérifier la prononciation de l'utilisateur.
 function trainSayText(q){
   const ans=String(q.options[q.bonne]||"").trim(); if(!ans) return "";
   const m=String(q.question).match(/[«"“]\s*([^»"”]*_{2,}[^»"”]*)\s*[»"”]/);
-  if(m) return m[1].replace(/_{2,}/,ans).replace(/\s+/g," ").trim();
-  return ans;
+  if(m){
+    const blanks=(m[1].match(/_{2,}/g)||[]).length;
+    const parts=blanks>1 ? ans.split(/\s*\/\s*/) : [ans];
+    if(blanks>1 && parts.length!==blanks) return "";
+    let i=0; return m[1].replace(/_{2,}/g,()=>parts[i++]||"").replace(/\s+/g," ").trim();
+  }
+  if(/[àâçéèêëîïôûùü]|\b(de|des|du|deux|le|la|les|et|un|une|pour|avec|verbe|ou|en|est)\b/i.test(ans)) return "";  // explication en français : rien à prononcer
+  if(/\//.test(ans)) return "";
+  return ans.replace(/\s*\.{3}\s*$|…$/,"").trim();
 }
 function trainSay(t,rate){ if(!t||!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(ttsVoice) u.voice=ttsVoice; u.rate=rate||1; speechSynthesis.speak(u); }catch(e){} }
+const PRON_NUM={"0":"zero","1":"one","2":"two","3":"three","4":"four","5":"five","6":"six","7":"seven","8":"eight","9":"nine","10":"ten","11":"eleven","12":"twelve","20":"twenty"};
+function pronNorm(t){ return String(t).toLowerCase().replace(/[’`]/g,"'")
+  .replace(/\bcan't\b/g,"cannot").replace(/\bwon't\b/g,"will not").replace(/n't\b/g," not").replace(/'re\b/g," are").replace(/'m\b/g," am").replace(/'ve\b/g," have").replace(/'ll\b/g," will").replace(/'d\b/g," would")
+  .replace(/\bcan not\b/g,"cannot").replace(/[^a-z0-9' ]+/g," ").split(/\s+/).filter(Boolean).map(w=>PRON_NUM[w]||w); }
+function pronScore(target,said){
+  const a=pronNorm(target), b=pronNorm(said); if(!a.length) return {score:0,missing:[]};
+  const D=[...Array(a.length+1)].map((_,i)=>[i,...Array(b.length).fill(0)]); for(let j=1;j<=b.length;j++) D[0][j]=j;
+  for(let i=1;i<=a.length;i++) for(let j=1;j<=b.length;j++) D[i][j]=Math.min(D[i-1][j]+1,D[i][j-1]+1,D[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  const bs=new Set(b); return {score:Math.max(0,1-D[a.length][b.length]/a.length), missing:a.filter(w=>!bs.has(w))};
+}
+let pronRec=null, pronMedia=null;
+function pronResult(n,target,alts){
+  const s=getTrain(n); let best={score:-1,said:"",missing:[]};
+  for(const said of alts){ const r=pronScore(target,said); if(r.score>best.score) best={score:r.score,said,missing:r.missing}; }
+  s.pron={said:best.said,score:Math.round(best.score*100),ok:best.score>=0.85,missing:best.missing,tries:((s.pron&&s.pron.tries)||0)+1,state:"done"};
+  if(s.pron.ok){ s.pronOk=(s.pronOk||0)+1; }
+  persistTrain(n,s); render();
+}
+function pronSetState(n,st,msg){ const s=getTrain(n); s.pron=Object.assign({},s.pron||{},{state:st,msg:msg||""}); render(); }
+async function trainPron(n){
+  const s=getTrain(n); const c=chap(n); const q=c.entrainement[s.order[s.pos]]; const target=trainSayText(q); if(!target) return;
+  if(s.pron&&s.pron.state==="rec"){ try{ if(pronRec) pronRec.stop(); if(pronMedia) pronMedia.stop(); }catch(e){} return; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const ncNote=(typeof nonChromeVoiceNote==="function")?nonChromeVoiceNote():null;
+  if(SR && !ncNote && !voiceKey()){
+    let r; try{ r=new SR(); }catch(e){ pronSetState(n,"err","Micro non disponible ici."); return; }
+    pronRec=r; r.lang="en-US"; r.continuous=false; r.interimResults=false; r.maxAlternatives=5; let got=false;
+    r.onresult=e=>{ got=true; const alts=[]; const res=e.results[0]; for(let i=0;i<res.length;i++) alts.push(res[i].transcript); pronRec=null; pronResult(n,target,alts); };
+    r.onerror=e=>{ pronRec=null; pronSetState(n,"err",e.error==="not-allowed"?"Micro refusé : autorisez le microphone (icône 🔒).":e.error==="no-speech"?"Je n'ai rien entendu — réessayez.":"Reconnaissance vocale : "+e.error); };
+    r.onend=()=>{ if(!got && pronRec){ pronRec=null; pronSetState(n,"err","Je n'ai rien entendu — réessayez."); } };
+    pronSetState(n,"rec"); try{ r.start(); }catch(e){ pronSetState(n,"err",String(e.message||e)); }
+    return;
+  }
+  if(voiceKey() && navigator.mediaDevices && window.MediaRecorder){
+    let stream; try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); }catch(e){ pronSetState(n,"err","Micro refusé : autorisez le microphone (icône 🔒)."); return; }
+    let mime=""; ["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg"].forEach(m=>{ if(!mime && MediaRecorder.isTypeSupported(m)) mime=m; });
+    const chunks=[]; const mr=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream); pronMedia=mr;
+    mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+    mr.onstop=async()=>{ pronMedia=null; stream.getTracks().forEach(t=>t.stop()); pronSetState(n,"wait");
+      try{ const txt=await whisperTranscribe(new Blob(chunks,{type:mr.mimeType||mime||"audio/webm"}),mr.mimeType||mime||"audio/webm"); pronResult(n,target,[txt||""]); }
+      catch(e){ pronSetState(n,"err","Transcription : "+(e.message||e)); } };
+    pronSetState(n,"rec"); mr.start(); setTimeout(()=>{ if(pronMedia===mr) try{ mr.stop(); }catch(e){} },9000);
+    return;
+  }
+  pronSetState(n,"err",(ncNote||"Reconnaissance vocale indisponible.")+" Ouvrez l'app dans Google Chrome, ou ajoutez une clé OpenAI pour la dictée.");
+}
+function pronBox(n,s,say){
+  const p=s.pron||{};
+  let h=`<div style="margin:-4px 0 12px;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3)">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="flex:1;min-width:180px">🗣️ <b>${esc(say)}</b></span>
+      <button class="btn sm" onclick="trainSay(this.dataset.say,1)" data-say="${escA(say)}">🔊 Écouter</button>
+      <button class="btn ghost sm" onclick="trainSay(this.dataset.say,0.7)" data-say="${escA(say)}">🐢 Lentement</button></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn ${p.state==='rec'?'':'ghost'} sm" style="${p.state==='rec'?'background:#b03a3a;border-color:#b03a3a;color:#fff':''}" onclick="trainPron(${n})">${p.state==='rec'?'⏹ Je vous écoute… (toucher pour arrêter)':p.state==='done'?'🎤 Recommencer':'🎤 À vous : dites la phrase'}</button>
+      ${p.state==='wait'?'<span>⏳ Vérification…</span>':''}</div>`;
+  if(p.state==="done"){
+    h+=p.ok?`<div style="margin-top:8px;color:#1f6f50;font-weight:600">✅ Bien prononcé ! (${p.score} %${p.tries>1?` · ${p.tries} essais`:''})</div><div style="font-size:.85rem;color:var(--muted)">Compris : « ${esc(p.said)} »</div>`
+      :`<div style="margin-top:8px;color:#9a5b00;font-weight:600">🔁 Pas encore (${p.score} %) — écoutez à nouveau puis recommencez.</div><div style="font-size:.85rem">Compris : « ${esc(p.said||"…")} »${p.missing&&p.missing.length?`<br>Mots à travailler : <b>${p.missing.map(esc).join(", ")}</b>`:""}</div>`;
+  }
+  if(p.state==="err") h+=`<div style="margin-top:8px;color:#b03a3a;font-size:.9rem">⚠️ ${esc(p.msg)}</div>`;
+  return h+`</div>`;
+}
 function trainSelect(i){ const s=getTrain(view.chap); if(s.checked)return; s.sel=i; render(); }
 function trainCheck(n){ const s=getTrain(n),c=chap(n); if(s.sel==null||s.checked)return; s.checked=true; s.answered++; if(s.sel===c.entrainement[s.order[s.pos]].bonne)s.correct++; persistTrain(n,s); render(); }
-function trainNext(n){ const s=getTrain(n); s.pos++; s.sel=null; s.checked=false; persistTrain(n,s); render(); }
+function trainNext(n){ const s=getTrain(n); try{ if(pronRec) pronRec.abort(); }catch(e){} s.pos++; s.sel=null; s.checked=false; s.pron=null; persistTrain(n,s); render(); }
 function trainRestart(n){ const total=chap(n).entrainement.length; const s={order:shuffleArr([...Array(total).keys()]),pos:0,correct:0,answered:0,sel:null,checked:false}; trainSessions[view.formation+"-t-"+n]=s; persistTrain(n,s); render(); }
 
 // ---- reconstruction ----
@@ -2278,7 +2345,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v47";
+const APP_VERSION="v48";
 const APP_DATE="17 octobre 2026";
 function showVersionBadge(){
   try{
