@@ -1920,7 +1920,7 @@ function renderPlan8(){
   let h=`<div class="landing-wrap"><div style="max-width:820px;margin:0 auto">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
       <button class="btn ghost sm" onclick="goHomeSelector()">← Accueil</button>
-      <span style="display:flex;gap:6px"><button class="btn ghost sm" onclick="goCoach()">🗣️ Coach</button><button class="btn sm" onclick="goP8Conv()">💬 Conversations IA</button></span></div>
+      <span style="display:flex;gap:6px"><button class="btn ghost sm" onclick="goCoach()">🗣️ Coach</button><button class="btn ghost sm" onclick="goP8Prep()">🧰 Préparer</button><button class="btn sm" onclick="goP8Conv()">💬 Conversations IA</button></span></div>
     <h2 class="page-title" style="margin-top:4px">🚀 Anglais oral : plan 8 semaines</h2>`;
   if(!st.start){
     h+=`<div class="card"><p><b>Objectif :</b> parler un anglais simple mais fluide sur votre travail et votre quotidien en 8 semaines.</p>
@@ -2099,12 +2099,116 @@ async function p8cDebrief(){
   catch(e){ p8c.error=String(e.message||e); }
   p8c.loading=false; render();
 }
+// ---- Préparation à la conversation (v52) : kit par semaine — vocabulaire, phrases utiles, dialogue modèle, questions probables ----
+const P8_TOOLKIT=[
+ {t:"Démarrer et relancer",items:[["Nice to meet you.","Ravi de vous rencontrer."],["How are things going on your side?","Comment ça se passe de votre côté ?"],["That's interesting. Tell me more.","Intéressant. Dites-m'en plus."],["What about you?","Et vous ?"]]},
+ {t:"Gagner du temps",items:[["Let me think for a second.","Laissez-moi réfléchir une seconde."],["That's a good question.","Bonne question."],["How can I put it…","Comment dire…"],["I'm not sure of the word, but…","Je ne connais pas le mot exact, mais…"]]},
+ {t:"Faire répéter, vérifier",items:[["Sorry, could you say that again?","Pardon, pouvez-vous répéter ?"],["Could you speak a bit more slowly?","Pouvez-vous parler un peu plus lentement ?"],["So, if I understand correctly…","Donc, si je comprends bien…"],["What do you mean by…?","Qu'entendez-vous par… ?"]]},
+ {t:"Réagir",items:[["I see.","Je vois."],["Really? I didn't know that.","Vraiment ? Je ne savais pas."],["That makes sense.","Ça se tient."],["Exactly!","Exactement !"]]},
+ {t:"Conclure",items:[["It was great talking to you.","Ravi d'avoir échangé avec vous."],["Let's keep in touch.","Restons en contact."],["I'll send you an email.","Je vous envoie un e-mail."],["Have a good day!","Bonne journée !"]]}
+];
+const P8_PREP=[
+ {vocab:[["team","équipe","TIIM"],["manager","responsable","MA-ni-djeur"],["department","service, direction","di-PÂRT-meunt"],["in charge of","responsable de","in TCHÂRDJ euv"],["bank","banque","BANK"],["project","projet","PRO-djèkt"],["colleague","collègue","KO-liig"],["meeting","réunion","MII-ting"],["background","parcours","BAK-graound"],["daily","quotidien","DÉÏ-li"],["challenge","défi","TCHA-lindj"],["proud","fier","PRAOUD"]],
+  phrases:[["My name is Jean-Paul, I work for a bank in Paris.","Je m'appelle Jean-Paul, je travaille pour une banque à Paris."],["I'm in charge of a team of about fifty people.","Je suis responsable d'une équipe d'environ cinquante personnes."],["We build and run the tools our risk department uses.","Nous construisons et faisons tourner les outils de notre direction des risques."],["Most of my time goes into meetings and decisions.","La plupart de mon temps passe en réunions et en décisions."],["What I like most is working with my team.","Ce que je préfère, c'est travailler avec mon équipe."],["I've been in this job for … years.","J'occupe ce poste depuis … ans."]],
+  dialog:[["A","Hi, I'm Emma from the London office. Nice to meet you."],["B","Nice to meet you too. I'm Jean-Paul, from Paris."],["A","What do you do there?"],["B","I'm in charge of a team that builds tools for our risk department."],["A","Sounds interesting. How big is your team?"],["B","About fifty people. It's a busy job, but I really like it."],["A","What's the biggest challenge right now?"],["B","Let me think… Probably keeping all the projects on time."]],
+  questions:[["What do you do?","I'm in charge of… / I work as…"],["How big is your team?","My team has about… people."],["What does a typical day look like?","Usually I start with… then…"],["What are you working on at the moment?","Right now we're working on…"]]},
+ {vocab:[["weekend","week-end","WIIK-ènd"],["trip","voyage, déplacement","TRIP"],["last week","la semaine dernière","lâst WIIK"],["yesterday","hier","YÈS-teur-déï"],["went","suis allé","WÈNT"],["met","ai rencontré","MÈT"],["flight","vol","FLAÏT"],["hotel","hôtel","hôou-TÈL"],["holiday","vacances","HO-li-déï"],["relaxing","reposant","ri-LAK-sing"],["busy","chargé","BI-zi"],["weather","temps (météo)","WÈ-dheur"]],
+  phrases:[["How was your weekend?","Comment s'est passé votre week-end ?"],["It was quite relaxing, thanks.","Plutôt reposant, merci."],["Last week I went to London for a meeting.","La semaine dernière, je suis allé à Londres pour une réunion."],["I didn't have time to visit the city.","Je n'ai pas eu le temps de visiter la ville."],["Have you ever been to Paris?","Vous êtes déjà allé à Paris ?"],["The weather was terrible!","Il a fait un temps affreux !"]],
+  dialog:[["A","Good morning! How was your weekend?"],["B","Quite relaxing, thanks. I went to the market and saw some friends. And you?"],["A","I went hiking with my kids. It was great, but tiring."],["B","Where did you go?"],["A","To the mountains, about two hours from here."],["B","Sounds lovely. Was the weather good?"],["A","Sunny on Saturday, rainy on Sunday!"],["B","Typical! Well, have a good week."]],
+  questions:[["How was your weekend?","It was… I went… / I stayed…"],["Did you travel recently?","Yes, last month I went to…"],["What did you do yesterday?","Yesterday I…"],["Where did you spend your last holiday?","I spent it in… We…"]]},
+ {vocab:[["opinion","avis","eu-PI-nieun"],["agree","être d'accord","eu-GRII"],["disagree","ne pas être d'accord","dis-eu-GRII"],["option","option","OP-cheun"],["reason","raison","RII-zeun"],["cost","coût","KOST"],["risk","risque","RISK"],["benefit","avantage","BÈ-ni-fit"],["deadline","échéance","DÈD-laïn"],["scope","périmètre","SKÔOUP"],["priority","priorité","praï-O-ri-ti"],["trade-off","compromis","TRÉÏD-of"]],
+  phrases:[["In my opinion, we should…","À mon avis, nous devrions…"],["I see your point, but…","Je comprends votre point de vue, mais…"],["I'm not sure that's the best option.","Je ne suis pas sûr que ce soit la meilleure option."],["The main reason is that…","La raison principale est que…"],["I totally agree with you.","Je suis tout à fait d'accord avec vous."],["On the other hand, …","D'un autre côté, …"]],
+  dialog:[["A","I think we should move the deadline to September."],["B","I see your point, but I'm not sure that's the best option."],["A","Why not?"],["B","The main reason is the cost: every month adds budget."],["A","But the team is under a lot of pressure."],["B","True. What if we reduce the scope instead?"],["A","That could work. Which features would we drop?"],["B","Let's keep the core features and move the rest to phase two."]],
+  questions:[["What do you think about remote work?","In my opinion… because…"],["Which option would you choose?","I'd choose… The main reason is…"],["Do you agree with this decision?","I partly agree, but…"],["What's the main risk here?","The main risk is…"]]},
+ {vocab:[["agenda","ordre du jour","eu-DJÈN-deu"],["to clarify","clarifier","KLA-ri-faï"],["to sum up","résumer","teu SAM ap"],["action item","action à mener","AK-cheun AÏ-teum"],["owner","responsable","ÔOU-neur"],["follow-up","suivi","FO-lôou-ap"],["update","point d'avancement","AP-déït"],["delay","retard","di-LÉÏ"],["to postpone","reporter","pôoust-PÔOUN"],["minutes","compte rendu","MI-nits"],["by Friday","d'ici vendredi","baï FRAÏ-déï"],["next steps","prochaines étapes","nèkst STÈPS"]],
+  phrases:[["Let's go through the agenda.","Passons en revue l'ordre du jour."],["Sorry, could you clarify what you mean by…?","Pardon, pouvez-vous préciser ce que vous entendez par… ?"],["So, if I understand correctly, …","Donc, si je comprends bien, …"],["Who will take care of that?","Qui s'en occupe ?"],["Let me sum up what we've agreed.","Je résume ce que nous avons décidé."],["Let's meet again next Tuesday.","Revoyons-nous mardi prochain."]],
+  dialog:[["A","We need the new reporting format soon."],["B","Sorry, could you clarify what you mean by 'soon'?"],["A","Ideally before the end of the month."],["B","OK. So, if I understand correctly, the deadline is the 30th?"],["A","Yes, that's right."],["B","Who will be the owner on your side?"],["A","Anna will take care of it."],["B","Great. Let me sum up: Anna owns it, deadline the 30th, we check progress next Tuesday."]],
+  questions:[["What are the next steps?","First… then… We'll meet again on…"],["Who is responsible for this?","… will take care of it."],["Can you give us a quick update?","Sure. So far we've… Next we'll…"],["When can you deliver?","We can deliver by…"]]},
+ {vocab:[["market abuse","abus de marché","MÂR-kit eu-BIOUSS"],["insider dealing","délit d'initié","in-SAÏ-deur DII-ling"],["spoofing","manipulation par ordres fictifs","SPOU-fing"],["alert","alerte","eu-LEURT"],["false positive","faux positif","FÔLSS PO-zi-tiv"],["analyst","analyste","A-neu-list"],["to review","examiner","ri-VIOU"],["to report","déclarer","ri-PÔRT"],["regulator","régulateur","RÈ-guiou-léï-teur"],["suspicious","suspect","seu-SPI-cheuss"],["trade","transaction","TRÉÏD"],["scenario","scénario (règle de détection)","si-NÂ-ri-ôou"]],
+  phrases:[["Our tool monitors every trade and order.","Notre outil surveille chaque transaction et chaque ordre."],["When it detects a suspicious pattern, it creates an alert.","Quand il détecte un schéma suspect, il crée une alerte."],["An analyst reviews the alert and decides.","Un analyste examine l'alerte et décide."],["Most alerts are false positives.","La plupart des alertes sont des faux positifs."],["Suspicious cases are reported to the regulator.","Les cas suspects sont déclarés au régulateur."],["We calibrate the scenarios to reduce the noise.","Nous calibrons les scénarios pour réduire le bruit."]],
+  dialog:[["A","So what does trade surveillance actually do?"],["B","It monitors every trade and order the bank sends to the market."],["A","Looking for what?"],["B","Suspicious patterns, like insider dealing or spoofing."],["A","And then?"],["B","The tool creates an alert, and an analyst reviews it."],["A","Are most alerts real cases?"],["B","No, most are false positives. That's why we calibrate the scenarios."]],
+  questions:[["What is market abuse?","It's when someone… for example…"],["How is an alert handled?","First the tool… then an analyst…"],["Why are false positives a problem?","Because they take time and…"],["Why are you replacing the tool?","The current tool… The new one will…"]]},
+ {vocab:[["status","état d'avancement","STÉÏ-teuss"],["on track","dans les temps","on TRAK"],["behind schedule","en retard","bi-HAÏND CHÈ-djoul"],["milestone","jalon","MAÏL-stôoun"],["go-live","mise en production","gôou-LAÏV"],["parallel run","marche en parallèle","PA-reu-lèl RANE"],["testing","tests","TÈS-ting"],["mitigation","mesure d'atténuation","mi-ti-GUÉÏ-cheun"],["dependency","dépendance","di-PÈN-deunn-si"],["budget","budget","BA-djit"],["steering committee","comité de pilotage","STI-ring keu-MI-ti"],["decision","décision","di-SI-jeun"]],
+  phrases:[["Overall, the project is amber.","Globalement, le projet est orange."],["We're on track for the parallel run.","Nous sommes dans les temps pour la marche en parallèle."],["The main risk is the data migration.","Le risque principal est la migration des données."],["To mitigate this, we've added two analysts.","Pour l'atténuer, nous avons ajouté deux analystes."],["The next milestone is user acceptance testing.","Le prochain jalon est la recette utilisateur."],["We need a decision on the budget by the end of the month.","Il nous faut une décision sur le budget d'ici la fin du mois."]],
+  dialog:[["A","Can you give us a quick status?"],["B","Sure. Overall, the project is amber."],["A","Why amber?"],["B","We're on track for testing, but the data migration is behind schedule."],["A","What are you doing about it?"],["B","We've added two analysts and a weekly check with the vendor."],["A","Do you need anything from us?"],["B","Yes, a decision on the extra budget by the end of the month."]],
+  questions:[["What's the status of the project?","Overall it's… because…"],["What are the main risks?","The main risk is… To mitigate it, we…"],["When is the go-live?","The go-live is planned for…"],["What do you need from the committee?","We need a decision on…"]]},
+ {vocab:[["to negotiate","négocier","ni-GÔOU-chi-éït"],["concern","inquiétude","keun-SEURN"],["compromise","compromis","KOM-preu-maïz"],["to meet halfway","couper la poire en deux","miit hâf-WÉÏ"],["offer","offre","O-feur"],["discount","remise","DIS-kaount"],["resource","ressource","ri-ZÔRSS"],["headcount","effectif","HÈD-kaount"],["to convince","convaincre","keun-VINNSS"],["argument","argument","ÂR-guiou-meunt"],["fair","juste, raisonnable","FÈR"],["deal","accord","DIIL"]],
+  phrases:[["I understand your concern, however…","Je comprends votre inquiétude, cependant…"],["What if we tried…?","Et si nous essayions… ?"],["Can we meet halfway?","Peut-on couper la poire en deux ?"],["That's a fair point. Let me explain.","C'est juste. Laissez-moi expliquer."],["If we don't act now, the risk will increase.","Si nous n'agissons pas maintenant, le risque augmentera."],["If you agree, we can start next week.","Si vous êtes d'accord, nous pouvons démarrer la semaine prochaine."]],
+  dialog:[["A","One more person on the team? It's too expensive."],["B","I understand your concern. However, without it we'll miss the deadline."],["A","Can't the team work harder?"],["B","They're already at full capacity. What if we hired someone for six months only?"],["A","Six months… and then?"],["B","Then we review together. That's a fair compromise, isn't it?"],["A","OK, let's meet halfway: four months."],["B","Deal. If you agree, we can start next week."]],
+  questions:[["Why do you need more people?","Because… Without it, we'll…"],["Isn't it too expensive?","I understand, however…"],["What's your best offer?","We could… if you…"],["What happens if we say no?","If we don't…, the risk is…"]]},
+ {vocab:[["career","carrière","keu-RIR"],["experience","expérience","ik-SPI-ri-euns"],["skills","compétences","SKILZ"],["leadership","leadership","LII-deur-chip"],["achievement","réalisation","eu-TCHIIV-meunt"],["goal","objectif","GÔOUL"],["to improve","s'améliorer","im-PROUV"],["strength","point fort","STRÈNGTH"],["weakness","point faible","WIIK-niss"],["future","avenir","FIOU-tcheur"],["to manage","gérer","MA-nidj"],["lessons learned","leçons apprises","LÈ-seunz LEURND"]],
+  phrases:[["I started my career as…","J'ai commencé ma carrière comme…"],["My main achievement was…","Ma principale réalisation a été…"],["One thing I'd like to improve is…","Une chose que j'aimerais améliorer, c'est…"],["What I've learned is that…","Ce que j'ai appris, c'est que…"],["In the next few years, I'd like to…","Dans les prochaines années, j'aimerais…"],["It was a pleasure talking to you.","Ce fut un plaisir d'échanger avec vous."]],
+  dialog:[["A","Tell me about your career."],["B","I started as a researcher in applied mathematics, then moved into banking."],["A","What's your main achievement?"],["B","Building a team that delivers a critical rating engine."],["A","And what would you like to improve?"],["B","My spoken English! That's why I'm practising every day."],["A","It's already quite good. What's next for you?"],["B","In the next few years, I'd like to lead international projects."]],
+  questions:[["Tell me about yourself.","I'm… I started… Today I…"],["What's your biggest achievement?","My main achievement was…"],["What did you learn from a difficult situation?","What I learned is that…"],["Where do you see yourself in five years?","In five years, I'd like to…"]]}
+];
+let p8p={card:0,show:false,mode:"kit"};
+function p8pStore(){ try{ return JSON.parse(localStorage.getItem("plan8-prep")||"{}"); }catch(e){ return {}; } }
+function p8pSave(st){ try{ localStorage.setItem("plan8-prep",JSON.stringify(st)); }catch(e){} }
+function p8pAns(w,i,v){ const st=p8pStore(); st.ans=st.ans||{}; st.ans[w+"-"+i]=v; p8pSave(st); }
+function p8pKnown(w,id,v){ const st=p8pStore(); st.known=st.known||{}; st.known[w+"-"+id]=v; p8pSave(st); }
+function goP8Prep(w){ if(typeof w==="number") p8p.week=w; p8p.card=0; p8p.show=false; view={formation:null,page:"p8prep",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
+function p8pSpk(t){ return `<button class="spk-btn" title="Écouter" onclick="speak(this.dataset.say)" data-say="${escA(t)}">🔊</button><button class="spk-btn" title="Mot à mot, lentement" onclick="trainSaySlow(this.dataset.say,'')" data-say="${escA(t)}">🐢</button>`; }
+async function p8pCorrect(w,i,q){
+  const el=document.getElementById("p8pa"+i); const v=(el?el.value:"").trim(); if(!v) return;
+  p8pAns(w,i,v); const out=document.getElementById("p8pc"+i);
+  if(!(apiCfg.key&&apiCfg.provider)){ if(out) out.textContent="Renseignez votre clé IA dans le Coach pour obtenir une correction."; return; }
+  if(out) out.textContent="⏳ Correction…";
+  try{ const r=await callAI("You are an English coach for a French professional. The learner prepared a spoken answer to an interview-style question. Reply in FRENCH, briefly: 1) la version corrigée et naturelle de sa réponse, en anglais (3 phrases max, simple, facile à dire à l'oral) ; 2) les 1 ou 2 corrections importantes expliquées en une ligne chacune.",[{role:"user",content:"Question: "+q+"\nMy answer: "+v}]);
+    const st=p8pStore(); st.corr=st.corr||{}; st.corr[w+"-"+i]=r; p8pSave(st); render(); }
+  catch(e){ if(out) out.textContent="⚠️ "+(e.message||e); }
+}
+function renderP8Prep(){
+  $("#sidebar").innerHTML="";
+  const wk=(typeof p8p.week==="number")?p8p.week:p8Week(); const W=P8_WEEKS[wk], K=P8_PREP[wk]; const st=p8pStore(); const known=st.known||{};
+  const cards=[...K.vocab.map((v,i)=>({id:"v"+i,en:v[0],fr:v[1],ph:v[2]})),...K.phrases.map((p,i)=>({id:"p"+i,en:p[0],fr:p[1]}))];
+  const nKnown=cards.filter(c=>known[wk+"-"+c.id]).length;
+  let h=`<div class="landing-wrap"><div style="max-width:800px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><button class="btn ghost sm" onclick="goPlan8()">← Plan 8 semaines</button><button class="btn sm" onclick="goP8Conv()">💬 Passer à la conversation →</button></div>
+    <h2 class="page-title" style="margin-top:6px">🧰 Préparer la conversation</h2>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px">${P8_WEEKS.map((x,i)=>`<button class="btn ${i===wk?'':'ghost'} sm" onclick="goP8Prep(${i})">S${i+1}</button>`).join("")}</div>
+    <p class="page-sub">Semaine ${wk+1} — <b>${esc(W.t)}</b>. Objectif : ${esc(W.goal)}</p>
+    <div style="display:flex;gap:6px;margin-bottom:10px"><button class="btn ${p8p.mode==='kit'?'':'ghost'} sm" onclick="p8p.mode='kit';render()">📖 Le kit</button><button class="btn ${p8p.mode==='cards'?'':'ghost'} sm" onclick="p8p.mode='cards';p8p.card=0;p8p.show=false;render()">🃏 S'entraîner (${nKnown}/${cards.length} sus)</button></div>`;
+  if(p8p.mode==="cards"){
+    const order=cards;
+    const c=order[p8p.card%order.length];
+    h+=`<div class="card" style="text-align:center;padding:24px 16px">
+      <div style="color:var(--muted);font-size:.85rem">Carte ${p8p.card%order.length+1} / ${order.length} — dites-le en anglais à voix haute, puis retournez</div>
+      <div style="font-size:1.25rem;font-weight:700;margin:14px 0">${esc(c.fr)}</div>
+      ${p8p.show?`<div style="font-size:1.2rem;color:#0e5a4a;font-weight:700">${esc(c.en)} ${p8pSpk(c.en)}</div><div style="color:#3b4a6b;margin-top:4px">🔤 ${esc(c.ph?phonFr(c.ph):phonSentence(c.en))}</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button class="btn ghost" onclick="p8pKnown(${wk},'${c.id}',false);p8p.card++;p8p.show=false;render()">🔁 À revoir</button><button class="btn" onclick="p8pKnown(${wk},'${c.id}',true);p8p.card++;p8p.show=false;render()">✅ Je savais</button></div>`
+      :`<button class="btn" style="margin-top:6px" onclick="p8p.show=true;render();speak(${JSON.stringify(c.en).replace(/"/g,'&quot;')})">👀 Retourner</button>`}
+    </div>`;
+  } else {
+    h+=`<div class="card"><b>1. Vocabulaire de la semaine</b> <span style="color:var(--muted);font-size:.85rem">— touchez 🔊 et répétez chaque mot deux fois</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px;margin-top:8px">${K.vocab.map(v=>`<div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px"><b>${esc(v[0])}</b> ${p8pSpk(v[0])}<div style="font-size:.85rem;color:var(--muted)">${esc(v[1])}</div><div style="font-size:.85rem;color:#3b4a6b">🔤 ${esc(phonFr(v[2]))}</div></div>`).join("")}</div></div>
+    <div class="card"><b>2. Phrases à placer</b> <span style="color:var(--muted);font-size:.85rem">— adaptez-les à votre situation</span>
+      ${K.phrases.map(p=>`<div style="border-top:1px solid var(--border);padding:8px 0"><b>${esc(p[0])}</b> ${p8pSpk(p[0])}<div style="font-size:.85rem;color:var(--muted)">${esc(p[1])}</div></div>`).join("")}</div>
+    <div class="card"><b>3. Dialogue modèle</b> <span style="color:var(--muted);font-size:.85rem">— lisez-le à voix haute, puis jouez le rôle B sans regarder</span>
+      <div style="margin:6px 0"><button class="btn ghost sm" onclick="p8pPlayDialog(${wk})">▶ Écouter tout le dialogue</button></div>
+      ${K.dialog.map(d=>`<div style="display:flex;gap:8px;padding:5px 0"><span style="font-weight:800;color:${d[0]==='A'?'#2a7fb8':'#1f8a70'};min-width:18px">${d[0]}</span><span style="flex:1">${esc(d[1])} ${p8pSpk(d[1])}</span></div>`).join("")}</div>
+    <div class="card"><b>4. Les questions qu'on va vous poser</b> <span style="color:var(--muted);font-size:.85rem">— préparez votre réponse, puis dites-la à voix haute</span>
+      ${K.questions.map((q,i)=>{ const a=(st.ans||{})[wk+"-"+i]||""; const c=(st.corr||{})[wk+"-"+i]||"";
+        return `<div style="border-top:1px solid var(--border);padding:10px 0"><b>❓ ${esc(q[0])}</b> ${p8pSpk(q[0])}<div style="font-size:.85rem;color:var(--muted)">Amorce : <i>${esc(q[1])}</i></div>
+        <textarea id="p8pa${i}" class="sel" style="width:100%;min-height:60px;margin-top:6px" placeholder="Votre réponse en anglais (2-3 phrases simples)…" onchange="p8pAns(${wk},${i},this.value)">${esc(a)}</textarea>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><button class="btn ghost sm" onclick="p8pCorrect(${wk},${i},this.dataset.q)" data-q="${escA(q[0])}">🤖 Corriger avec l'IA</button><button class="btn ghost sm" onclick="speak(document.getElementById('p8pa${i}').value)">🔊 Écouter ma réponse</button></div>
+        <div id="p8pc${i}" style="font-size:.88rem;margin-top:6px">${c?`<div style="border-left:4px solid #1f8a70;padding:6px 10px;background:var(--accent-soft,#eef6f3)">${esc(c).replace(/\n/g,"<br>")}</div>`:""}</div></div>`; }).join("")}</div>
+    <div class="card"><b>5. Boîte à outils (toutes les semaines)</b>
+      ${P8_TOOLKIT.map(g=>`<div style="margin-top:8px"><div style="font-weight:700;color:#0e5a4a">${esc(g.t)}</div>${g.items.map(x=>`<div style="padding:3px 0">${esc(x[0])} ${p8pSpk(x[0])} <span style="font-size:.85rem;color:var(--muted)">— ${esc(x[1])}</span></div>`).join("")}</div>`).join("")}</div>
+    <div style="text-align:center;margin:10px 0 20px"><button class="btn" onclick="goP8Conv()">💬 Je suis prêt : lancer une conversation →</button></div>`;
+  }
+  h+=`</div></div>`; $("#main").innerHTML=h;
+}
+function p8pPlayDialog(wk){ if(!("speechSynthesis" in window)) return; try{ speechSynthesis.cancel(); }catch(e){}
+  const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)); const vA=vs[0]||null, vB=vs[1]||vs[0]||null;
+  P8_PREP[wk].dialog.forEach(d=>{ const u=new SpeechSynthesisUtterance(d[1]); u.lang="en-US"; const v=d[0]==="A"?vA:vB; if(v) u.voice=v; u.rate=d[0]==="A"?0.95:0.9; u.pitch=d[0]==="A"?1.1:0.9; speechSynthesis.speak(u); }); }
+
 function renderP8Conv(){
   $("#sidebar").innerHTML="";
   const st=p8Store(); const wkI=p8Week(); const s=st.start?p8Stats(st):{week:0}; const W=P8_WEEKS[wkI]; const list=P8_CONV[wkI];
   let h=`<div class="landing-wrap"><div style="max-width:780px;margin:0 auto">
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><button class="btn ghost sm" onclick="${p8c.phase==='idle'?'goPlan8()':'p8cExit()'}">← ${p8c.phase==='idle'?'Plan 8 semaines':'Arrêter'}</button></div>
     <h2 class="page-title" style="margin-top:6px">💬 Conversations avec l'IA</h2>`;
+  if(p8c.phase==="idle") h+=`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span>🧰 <b>Avant de parler</b> : vocabulaire, phrases utiles, dialogue modèle et questions probables de la semaine.</span><button class="btn sm" onclick="goP8Prep()">Préparer la conversation</button></div>`;
   if(p8c.phase==="idle"){
     const convs=(st.convs||[]); const wkStart=st.start?p8DateOf(st,s.week*7):"0000"; const wk=convs.filter(c=>c.date>=wkStart);
     const mins=Math.round(convs.reduce((a,c)=>a+c.secs,0)/60);
@@ -2371,7 +2475,7 @@ function typeset(el){
 
 // ---- render ----
 function render(){
-  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else renderLanding(); typeset(); return; }
+  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else if(view.page==="p8prep") renderP8Prep(); else renderLanding(); typeset(); return; }
   document.body.classList.remove("landing");
   clearStudioTimers();
   applyAccent(F());
@@ -2390,8 +2494,8 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v51";
-const APP_DATE="20 octobre 2026";
+const APP_VERSION="v52";
+const APP_DATE="22 octobre 2026";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
