@@ -567,6 +567,16 @@ function renderLanding(){
         <div class="cta" style="color:#7a2e0e">${cta}</div>
       </div></button>`;
   }
+  { const ms=m1kStore(), mst=m1kStats(ms);
+  h+=`<button class="formation-card" onclick="goM1K()">
+      <div class="banner" style="background:linear-gradient(120deg,#3d1f73,#7b4bc4)">
+        <div class="emoji">📚</div><h3>Les 1000 mots de la conversation</h3><p>Sens, prononciation, usage et exemple — répétition espacée</p>
+      </div>
+      <div class="body">
+        <div class="meta">${mst.known} acquis · ${mst.seen} vus · ${mst.due} à réviser</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${mst.known/10}%;--accent:#7b4bc4;--accent-dark:#3d1f73"></div></div>
+        <div class="cta" style="color:#3d1f73">${mst.seen?"Session du jour →":"Commencer →"}</div>
+      </div></button>`; }
   h+=`<button class="formation-card" onclick="goP8Conv()">
       <div class="banner" style="background:linear-gradient(120deg,#0b3d5c,#2a7fb8)">
         <div class="emoji">💬</div><h3>Conversations avec l'IA</h3><p>Jeux de rôle oraux de 10 min — dans l'app ou ChatGPT / Claude vocal</p>
@@ -1920,7 +1930,7 @@ function renderPlan8(){
   let h=`<div class="landing-wrap"><div style="max-width:820px;margin:0 auto">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
       <button class="btn ghost sm" onclick="goHomeSelector()">← Accueil</button>
-      <span style="display:flex;gap:6px"><button class="btn ghost sm" onclick="goCoach()">🗣️ Coach</button><button class="btn ghost sm" onclick="goP8Prep()">🧰 Préparer</button><button class="btn sm" onclick="goP8Conv()">💬 Conversations IA</button></span></div>
+      <span style="display:flex;gap:6px"><button class="btn ghost sm" onclick="goCoach()">🗣️ Coach</button><button class="btn ghost sm" onclick="goM1K()">📚 1000 mots</button><button class="btn ghost sm" onclick="goP8Prep()">🧰 Préparer</button><button class="btn sm" onclick="goP8Conv()">💬 Conversations IA</button></span></div>
     <h2 class="page-title" style="margin-top:4px">🚀 Anglais oral : plan 8 semaines</h2>`;
   if(!st.start){
     h+=`<div class="card"><p><b>Objectif :</b> parler un anglais simple mais fluide sur votre travail et votre quotidien en 8 semaines.</p>
@@ -2202,6 +2212,159 @@ function p8pPlayDialog(wk){ if(!("speechSynthesis" in window)) return; try{ spee
   const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)); const vA=vs[0]||null, vB=vs[1]||vs[0]||null;
   P8_PREP[wk].dialog.forEach(d=>{ const u=new SpeechSynthesisUtterance(d[1]); u.lang="en-US"; const v=d[0]==="A"?vA:vB; if(v) u.voice=v; u.rate=d[0]==="A"?0.95:0.9; u.pitch=d[0]==="A"?1.1:0.9; speechSynthesis.speak(u); }); }
 
+// ---- v53 : les 1000 mots de la conversation (fréquence de l'anglais parlé) — sens, prononciation, usage, exemple ; répétition espacée ----
+let M1K=null, m1kLoading=null;
+let m1k={mode:"home",lesson:0,q:[],i:0,show:false,search:"",quiz:null,mic:null};
+const M1K_INT=[0,1,2,4,8,16,32,64];
+function m1kLoad(){ if(M1K) return Promise.resolve(M1K); if(!m1kLoading) m1kLoading=fetch("./mots1000.json?v="+APP_VERSION).then(r=>r.json()).then(d=>{ M1K=d; return d; }).catch(e=>{ m1kLoading=null; throw e; }); return m1kLoading; }
+function m1kStore(){ try{ const s=JSON.parse(localStorage.getItem("mots1000")||"{}"); s.b=s.b||{}; s.log=s.log||{}; s.goal=s.goal||15; return s; }catch(e){ return {b:{},log:{},goal:15}; } }
+function m1kSave(s){ try{ localStorage.setItem("mots1000",JSON.stringify(s)); }catch(e){} }
+function m1kToday(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function m1kAddDays(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function m1kStats(s){ const t=m1kToday(); let seen=0,known=0,due=0; Object.values(s.b).forEach(x=>{ seen++; if(x[0]>=4) known++; if(x[1]<=t) due++; });
+  let streak=0; for(let k=0;k<400;k++){ const d=m1kAddDays(-k); if(s.log[d]) streak++; else if(k>0) break; }
+  return {seen,known,due,streak,today:s.log[t]||0}; }
+function m1kPh(e){ return phonFr(e.ph)+(/th/i.test(e.en)?" 👅":""); }
+function goM1K(mode,lesson){ view={formation:null,page:"m1k",chap:null,tab:"lecon"}; m1k.mode=mode||"home"; if(typeof lesson==="number") m1k.lesson=lesson; m1k.show=false; render(); window.scrollTo({top:0}); }
+function m1kSay(t,rate){ if(!("speechSynthesis" in window)||!t) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(typeof ttsVoice!=="undefined"&&ttsVoice) u.voice=ttsVoice; u.rate=rate||0.9; speechSynthesis.speak(u); }catch(e){} }
+function m1kSpk(t){ return `<button class="spk-btn" title="Écouter" onclick="event.stopPropagation();m1kSay(this.dataset.say)" data-say="${escA(t)}">🔊</button>`; }
+function m1kSpkSlow(t){ return `<button class="spk-btn" title="Lentement" onclick="event.stopPropagation();m1kSay(this.dataset.say,0.55)" data-say="${escA(t)}">🐢</button>`; }
+function m1kSession(lesson){
+  const s=m1kStore(), t=m1kToday(); let due=[], fresh=[];
+  M1K.forEach((e,i)=>{ const b=s.b[e.en]; if(typeof lesson==="number"){ if(Math.floor(i/50)!==lesson) return; if(!b) fresh.push(i); else if(b[1]<=t) due.push(i); }
+    else { if(b&&b[1]<=t) due.push(i); else if(!b&&fresh.length<s.goal) fresh.push(i); } });
+  if(typeof lesson==="number" && !due.length && !fresh.length){ M1K.forEach((e,i)=>{ if(Math.floor(i/50)===lesson) due.push(i); }); }
+  due.sort((a,b)=>(s.b[M1K[a].en][0]-s.b[M1K[b].en][0])||a-b);
+  m1k.q=due.slice(0,60).concat(fresh); m1k.i=0; m1k.show=false; m1k.mic=null; m1k.done={ok:0,ko:0}; m1k.mode="learn"; render(); window.scrollTo({top:0});
+  const e=M1K[m1k.q[0]]; if(e && !m1kReverse(e)) setTimeout(()=>m1kSay(e.en),250);
+}
+function m1kReverse(e){ const b=m1kStore().b[e.en]; return !!(b && b[0]>=2); }
+function m1kGrade(ok){
+  const s=m1kStore(), e=M1K[m1k.q[m1k.i]], t=m1kToday(); const b=s.b[e.en]||[0,t];
+  if(ok){ b[0]=Math.min(7,b[0]+1); b[1]=m1kAddDays(M1K_INT[b[0]]); m1k.done.ok++; }
+  else { b[0]=1; b[1]=t; m1k.done.ko++; if(m1k.q.slice(m1k.i+1).indexOf(m1k.q[m1k.i])<0) m1k.q.push(m1k.q[m1k.i]); }
+  s.b[e.en]=b; s.log[t]=(s.log[t]||0)+1; m1kSave(s);
+  m1k.i++; m1k.show=false; m1k.mic=null; render();
+  const n=M1K[m1k.q[m1k.i]]; if(n && !m1kReverse(n)) setTimeout(()=>m1kSay(n.en),200);
+}
+function m1kReveal(){ m1k.show=true; render(); const e=M1K[m1k.q[m1k.i]]; if(e&&m1kReverse(e)) m1kSay(e.en); }
+async function m1kMic(target){
+  const done=(alts)=>{ let best={score:0}; alts.forEach(a=>{ const r=pronScore(target,a); if(r.score>best.score) best={score:r.score,said:a}; }); if(!best.said) best.said=alts[0]||"";
+    m1k.mic={state:"done",ok:best.score>=0.85,said:best.said}; render(); };
+  const fail=(m)=>{ m1k.mic={state:"err",msg:m}; render(); };
+  const ncNote=(typeof nonChromeVoiceNote==="function")?nonChromeVoiceNote():null;
+  if(SR && !ncNote && !voiceKey()){
+    let r; try{ r=new SR(); }catch(e){ fail("Micro non disponible ici."); return; }
+    r.lang="en-US"; r.continuous=false; r.interimResults=false; r.maxAlternatives=5; let got=false;
+    r.onresult=e=>{ got=true; const alts=[]; const res=e.results[0]; for(let i=0;i<res.length;i++) alts.push(res[i].transcript); done(alts); };
+    r.onerror=e=>{ got=true; fail(e.error==="not-allowed"?"Micro refusé : autorisez le microphone.":e.error==="no-speech"?"Je n'ai rien entendu — réessayez.":"Reconnaissance vocale : "+e.error); };
+    r.onend=()=>{ if(!got) fail("Je n'ai rien entendu — réessayez."); };
+    m1k.mic={state:"rec"}; render(); try{ r.start(); }catch(e){ fail(String(e.message||e)); } return;
+  }
+  if(voiceKey() && navigator.mediaDevices && window.MediaRecorder){
+    let stream; try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); }catch(e){ fail("Micro refusé : autorisez le microphone."); return; }
+    let mime=""; ["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg"].forEach(m=>{ if(!mime && MediaRecorder.isTypeSupported(m)) mime=m; });
+    const chunks=[]; const mr=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+    mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+    mr.onstop=async()=>{ stream.getTracks().forEach(t=>t.stop()); m1k.mic={state:"wait"}; render();
+      try{ const txt=await whisperTranscribe(new Blob(chunks,{type:mr.mimeType||mime||"audio/webm"}),mr.mimeType||mime||"audio/webm"); done([txt||""]); } catch(e){ fail("Transcription : "+(e.message||e)); } };
+    m1k.mic={state:"rec"}; render(); mr.start(); setTimeout(()=>{ try{ mr.stop(); }catch(e){} },4000); return;
+  }
+  fail((ncNote||"Reconnaissance vocale indisponible.")+" Ouvrez l'app dans Google Chrome.");
+}
+function m1kMicBox(target){
+  const m=m1k.mic||{};
+  let h=`<div style="margin-top:12px"><button class="btn ghost sm" ${m.state==="rec"||m.state==="wait"?"disabled":""} onclick="m1kMic(this.dataset.t)" data-t="${escA(target)}">${m.state==="rec"?"🔴 Je vous écoute…":m.state==="wait"?"⏳ Analyse…":"🎤 Je le prononce"}</button>`;
+  if(m.state==="done") h+=`<div style="margin-top:6px;font-weight:700;color:${m.ok?"#1f8a70":"#b4441b"}">${m.ok?"✅ Bien prononcé !":"🔁 Entendu : « "+esc(m.said)+" » — réécoutez 🐢 et réessayez"}</div>`;
+  if(m.state==="err") h+=`<div style="margin-top:6px;color:#b4441b">${esc(m.msg)}</div>`;
+  return h+`</div>`;
+}
+function m1kDetail(e){
+  return `<div style="font-size:.85rem;color:#3b4a6b;margin-top:2px">🔤 ${esc(m1kPh(e))} · <i>${esc(e.pos)}</i></div>
+    <div style="margin-top:6px"><b>${esc(e.fr)}</b></div>
+    <div style="font-size:.88rem;color:var(--muted);margin-top:4px">💡 ${esc(e.use)}</div>
+    <div style="margin-top:6px;padding:6px 10px;border-left:4px solid #2a7fb8;background:var(--accent-soft,#eef6f3);border-radius:6px">« ${esc(e.ex)} » ${m1kSpk(e.ex)}${m1kSpkSlow(e.ex)}<div style="font-size:.85rem;color:var(--muted)">${esc(e.exfr)}</div></div>`;
+}
+function m1kQuizStart(lesson){
+  const s=m1kStore(); let pool=M1K.map((e,i)=>i).filter(i=>typeof lesson==="number"?Math.floor(i/50)===lesson:!!s.b[M1K[i].en]);
+  if(pool.length<4) pool=M1K.map((e,i)=>i).slice(0,50);
+  pool.sort(()=>Math.random()-0.5);
+  const qs=pool.slice(0,10).map((i,k)=>{ const rev=k%2===1; const others=[]; while(others.length<3){ const j=Math.floor(Math.random()*Math.min(M1K.length,Math.max(100,i+60))); if(j!==i && others.indexOf(j)<0 && M1K[j].fr!==M1K[i].fr) others.push(j); }
+    const opts=[i,...others].sort(()=>Math.random()-0.5); return {i,rev,opts,ans:null}; });
+  m1k.quiz={qs,k:0,score:0,lesson}; m1k.mode="quiz"; render(); window.scrollTo({top:0});
+  if(!qs[0].rev) setTimeout(()=>m1kSay(M1K[qs[0].i].en),250);
+}
+function m1kQuizAns(j){
+  const Q=m1k.quiz, q=Q.qs[Q.k]; if(q.ans!==null) return; q.ans=j; const ok=j===q.i; if(ok) Q.score++;
+  if(!ok){ const s=m1kStore(); const e=M1K[q.i]; const b=s.b[e.en]; if(b){ b[0]=1; b[1]=m1kToday(); m1kSave(s); } }
+  m1kSay(M1K[q.i].en); render();
+}
+function m1kQuizNext(){ const Q=m1k.quiz; Q.k++; render(); const q=Q.qs[Q.k]; if(q && !q.rev) setTimeout(()=>m1kSay(M1K[q.i].en),200); }
+function m1kSetGoal(v){ const s=m1kStore(); s.goal=v; m1kSave(s); render(); }
+function renderM1K(){
+  $("#sidebar").innerHTML="";
+  if(!M1K){ $("#main").innerHTML=`<div class="landing-wrap"><p style="text-align:center;margin-top:40px">⏳ Chargement des 1000 mots…</p></div>`; m1kLoad().then(()=>{ if(view.page==="m1k") render(); }).catch(()=>{ $("#main").innerHTML=`<div class="landing-wrap"><p style="text-align:center;margin-top:40px">⚠️ Impossible de charger la liste (connexion ?). <button class="btn sm" onclick="render()">Réessayer</button></p></div>`; }); return; }
+  const s=m1kStore(), st=m1kStats(s), t=m1kToday();
+  const back=m1k.mode==="home"?`<button class="btn ghost sm" onclick="goHomeSelector()">← Accueil</button>`:`<button class="btn ghost sm" onclick="goM1K('home')">← Les 1000 mots</button>`;
+  let h=`<div class="landing-wrap"><div style="max-width:800px;margin:0 auto"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">${back}</div>`;
+  if(m1k.mode==="home"){
+    const freshToday=Math.max(0,Math.min(s.goal,M1K.length-st.seen));
+    h+=`<h2 class="page-title" style="margin-top:6px">📚 Les 1000 mots de la conversation</h2>
+    <p class="page-sub">Les 1000 mots les plus fréquents de l'anglais parlé (fréquence mesurée sur des millions de dialogues), classés du plus utile au moins utile. Ils couvrent environ 85 % de ce qui se dit dans une conversation courante. Pour chacun : le sens, la prononciation « par son », l'usage le plus courant et une phrase d'exemple.</p>
+    <div class="stats-row"><div class="stat"><div class="v">${st.known}</div><div class="l">Mots acquis / 1000</div></div><div class="stat"><div class="v">${st.seen}</div><div class="l">Mots vus</div></div><div class="stat"><div class="v">${st.due}</div><div class="l">À réviser aujourd'hui</div></div><div class="stat"><div class="v">${st.streak} 🔥</div><div class="l">Jours d'affilée</div></div></div>
+    <div class="progress-track" style="margin:8px 0 14px"><div class="progress-fill" style="width:${st.known/10}%;--accent:#7b4bc4;--accent-dark:#3d1f73"></div></div>
+    <div class="card" style="text-align:center">
+      <button class="btn" onclick="m1kSession()">▶ Session du jour : ${st.due} révision${st.due>1?"s":""} + ${freshToday} nouveaux mots</button>
+      <div style="margin-top:10px;font-size:.88rem;color:var(--muted)">Nouveaux mots par jour : ${[10,15,20,30].map(v=>`<button class="btn ${s.goal===v?'':'ghost'} sm" onclick="m1kSetGoal(${v})">${v}</button>`).join(" ")}</div>
+      <div style="margin-top:8px;font-size:.85rem;color:var(--muted)">À 15 mots par jour, les 1000 mots sont vus en un peu plus de 2 mois. Un mot est « acquis » après 4 rappels réussis, espacés de 1, 2 puis 4 jours.</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px"><button class="btn ghost sm" onclick="m1kQuizStart()">🎯 Quiz rapide (10 questions)</button><button class="btn ghost sm" onclick="m1k.search='';goM1K('list',-1)">🔎 Chercher un mot</button></div>
+    </div>
+    <h3 style="margin:16px 0 8px">Les 20 leçons de 50 mots</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">${Array.from({length:Math.ceil(M1K.length/50)},(_,L)=>{ const ws=M1K.slice(L*50,L*50+50); const k=ws.filter(e=>(s.b[e.en]||[0])[0]>=4).length; const v=ws.filter(e=>s.b[e.en]).length;
+      return `<button class="card" style="text-align:left;cursor:pointer;padding:10px;margin:0" onclick="goM1K('list',${L})"><b>Leçon ${L+1}</b><div style="font-size:.8rem;color:var(--muted)">${L*50+1}–${L*50+ws.length} · ${esc(ws.slice(0,3).map(e=>e.en).join(", "))}…</div><div class="progress-track" style="margin-top:6px"><div class="progress-fill" style="width:${k*2}%;--accent:#7b4bc4;--accent-dark:#3d1f73"></div></div><div style="font-size:.75rem;color:var(--muted);margin-top:3px">${k} acquis · ${v} vus</div></button>`; }).join("")}</div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:14px">${esc(PHON_LEGEND)}</p>`;
+  } else if(m1k.mode==="list"){
+    const L=m1k.lesson; const q=(m1k.search||"").trim().toLowerCase();
+    let rows=M1K.map((e,i)=>({e,i})); if(L>=0 && !q) rows=rows.slice(L*50,L*50+50);
+    if(q) rows=rows.filter(r=>r.e.en.toLowerCase().indexOf(q)>=0||r.e.fr.toLowerCase().indexOf(q)>=0);
+    h+=`<h2 class="page-title" style="margin-top:6px">${L>=0&&!q?"📖 Leçon "+(L+1)+" — mots "+(L*50+1)+" à "+(L*50+50):"🔎 Chercher un mot"}</h2>
+    <input id="m1kSearch" class="sel" style="width:100%;margin:6px 0 10px" placeholder="Chercher en anglais ou en français…" value="${escA(m1k.search||"")}" oninput="m1k.search=this.value;clearTimeout(window._m1kT);window._m1kT=setTimeout(()=>{render();const el=document.getElementById('m1kSearch');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length);}},250)">
+    ${L>=0&&!q?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn sm" onclick="m1kSession(${L})">▶ Apprendre cette leçon</button><button class="btn ghost sm" onclick="m1kQuizStart(${L})">🎯 Quiz sur cette leçon</button>${L>0?`<button class="btn ghost sm" onclick="goM1K('list',${L-1})">← Leçon ${L}</button>`:""}${L<19?`<button class="btn ghost sm" onclick="goM1K('list',${L+1})">Leçon ${L+2} →</button>`:""}</div>`:""}
+    ${rows.slice(0,100).map(({e,i})=>{ const b=s.b[e.en]; const badge=!b?"":b[0]>=4?"✅":"🔄";
+      return `<div class="card" style="padding:10px 12px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="color:var(--muted);font-size:.8rem;min-width:34px">#${i+1}</span><b style="font-size:1.1rem">${esc(e.en)}</b> ${m1kSpk(e.en)}${m1kSpkSlow(e.en)} <span style="margin-left:auto">${badge}</span></div>${m1kDetail(e)}</div>`; }).join("")}
+    ${q&&!rows.length?`<p>Aucun mot trouvé.</p>`:""}`;
+  } else if(m1k.mode==="learn"){
+    const e=M1K[m1k.q[m1k.i]];
+    if(!e){ h+=`<div class="card" style="text-align:center;padding:24px"><div style="font-size:2rem">🎉</div><h3>Session terminée</h3><p>${m1k.done.ok} rappel${m1k.done.ok>1?"s":""} réussi${m1k.done.ok>1?"s":""} · ${m1k.done.ko} à revoir.</p><p style="color:var(--muted)">Les mots reviendront au bon moment : demain, dans 2 jours, dans 4 jours…</p><button class="btn" onclick="goM1K('home')">Retour</button></div>`; }
+    else {
+      const rev=m1kReverse(e); const b=s.b[e.en];
+      h+=`<div style="color:var(--muted);font-size:.85rem;margin:8px 0">Carte ${m1k.i+1} / ${m1k.q.length} · ${!b?"🆕 nouveau mot":rev?"🇫🇷 → 🇬🇧 dites-le en anglais":"🇬🇧 → 🇫🇷 retrouvez le sens"} · #${M1K.indexOf(e)+1}</div>
+      <div class="card" style="text-align:center;padding:22px 16px">`;
+      if(rev && !m1k.show){
+        h+=`<div style="font-size:1.3rem;font-weight:700">${esc(e.fr)}</div><div style="font-size:.85rem;color:var(--muted);margin-top:4px">${esc(e.pos)}</div><div style="margin-top:6px;font-size:.9rem;color:var(--muted)">« ${esc(e.exfr)} »</div>
+          <div style="margin-top:14px;color:var(--muted);font-size:.88rem">Dites le mot anglais à voix haute, puis retournez la carte.</div><button class="btn" style="margin-top:10px" onclick="m1kReveal()">👀 Retourner</button>`;
+      } else {
+        h+=`<div style="font-size:1.6rem;font-weight:800;color:#3d1f73">${esc(e.en)} ${m1kSpk(e.en)}${m1kSpkSlow(e.en)}</div><div style="color:#3b4a6b;margin-top:2px">🔤 ${esc(m1kPh(e))}</div>`;
+        if(!m1k.show){ h+=`<div style="margin-top:14px;color:var(--muted);font-size:.88rem">${b?"Que veut dire ce mot ? Répondez dans votre tête, puis retournez la carte.":"Écoutez, répétez le mot deux fois à voix haute, puis découvrez son sens."}</div><button class="btn" style="margin-top:10px" onclick="m1kReveal()">👀 ${b?"Voir le sens":"Découvrir"}</button>`; }
+        else { h+=`<div style="text-align:left;margin-top:10px">${m1kDetail(e).replace(/^<div[^>]*>.*?<\/div>/,"")}</div>${m1kMicBox(e.en)}
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">${b?`<button class="btn ghost" onclick="m1kGrade(false)">🔁 À revoir</button><button class="btn" onclick="m1kGrade(true)">✅ Je savais</button>`:`<button class="btn" onclick="m1kGrade(true)">👍 Compris, suivant</button>`}</div>`; }
+      }
+      h+=`</div>`;
+    }
+  } else if(m1k.mode==="quiz"){
+    const Q=m1k.quiz, q=Q.qs[Q.k];
+    if(!q){ h+=`<div class="card" style="text-align:center;padding:24px"><div style="font-size:2rem">${Q.score>=8?"🏆":Q.score>=5?"👍":"💪"}</div><h3>${Q.score} / ${Q.qs.length}</h3><p style="color:var(--muted)">Les mots ratés repassent dans vos révisions du jour.</p><div style="display:flex;gap:8px;justify-content:center"><button class="btn ghost" onclick="m1kQuizStart(m1k.quiz.lesson)">🔁 Un autre quiz</button><button class="btn" onclick="goM1K('home')">Retour</button></div></div>`; }
+    else { const e=M1K[q.i];
+      h+=`<div style="color:var(--muted);font-size:.85rem;margin:8px 0">Question ${Q.k+1} / ${Q.qs.length} · score ${Q.score}</div><div class="card" style="text-align:center;padding:20px 16px">
+        ${q.rev?`<div style="font-size:.85rem;color:var(--muted)">Quel est le mot anglais pour…</div><div style="font-size:1.3rem;font-weight:700;margin:8px 0">${esc(e.fr)}</div>`:`<div style="font-size:.85rem;color:var(--muted)">Que veut dire…</div><div style="font-size:1.5rem;font-weight:800;color:#3d1f73;margin:8px 0">${esc(e.en)} ${m1kSpk(e.en)}</div>`}
+        <div style="display:grid;gap:8px;margin-top:10px">${q.opts.map(j=>{ const o=M1K[j]; const lab=q.rev?o.en:o.fr; let st=""; if(q.ans!==null){ if(j===q.i) st="background:#d8f3e8;border-color:#1f8a70"; else if(j===q.ans) st="background:#fde2d8;border-color:#b4441b"; }
+          return `<button class="btn ghost" style="text-align:left;${st}" onclick="m1kQuizAns(${j})">${esc(lab)}</button>`; }).join("")}</div>
+        ${q.ans!==null?`<div style="text-align:left;margin-top:12px;border-top:1px solid var(--border);padding-top:8px"><b>${esc(e.en)}</b> ${m1kSpk(e.en)}${m1kDetail(e)}</div><button class="btn" style="margin-top:12px" onclick="m1kQuizNext()">Suivant →</button>`:""}
+      </div>`; }
+  }
+  h+=`</div></div>`; $("#main").innerHTML=h;
+}
+
 function renderP8Conv(){
   $("#sidebar").innerHTML="";
   const st=p8Store(); const wkI=p8Week(); const s=st.start?p8Stats(st):{week:0}; const W=P8_WEEKS[wkI]; const list=P8_CONV[wkI];
@@ -2475,7 +2638,7 @@ function typeset(el){
 
 // ---- render ----
 function render(){
-  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else if(view.page==="p8prep") renderP8Prep(); else renderLanding(); typeset(); return; }
+  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else if(view.page==="p8prep") renderP8Prep(); else if(view.page==="m1k") renderM1K(); else renderLanding(); typeset(); return; }
   document.body.classList.remove("landing");
   clearStudioTimers();
   applyAccent(F());
@@ -2494,8 +2657,8 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v52";
-const APP_DATE="22 octobre 2026";
+const APP_VERSION="v53";
+const APP_DATE="26 octobre 2026";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
