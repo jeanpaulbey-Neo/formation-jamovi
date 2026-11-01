@@ -615,6 +615,17 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#d4af7a;--accent-dark:#b08d57"></div></div>
         <div class="cta" style="color:#8c6a2f">Ouvrir le programme →</div>
       </div></a>`;
+  // --- v54 : Assiette à pied — posture du cavalier hors cheval, sous-app autonome avec minuteur ---
+  { let n7=0; try{ const hh=JSON.parse(localStorage.getItem("assiette.hist")||"[]"); n7=hh.filter(x=>x.d>Date.now()-7*864e5).length; }catch(e){}
+  h+=`<a class="formation-card" href="./assiette/" style="text-decoration:none;color:inherit">
+      <div class="banner" style="background:linear-gradient(120deg,#1f3d2e,#2f5d46)">
+        <div class="emoji">🐎</div><h3>Assiette à pied</h3><p>Posture du cavalier — exercices hors cheval</p>
+      </div>
+      <div class="body">
+        <div class="meta">17 exercices illustrés · minuteur guidé · ${n7} séance${n7>1?"s":""} cette semaine</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${Math.min(100,Math.round(n7/3*100))}%;--accent:#a87a22;--accent-dark:#2f5d46"></div></div>
+        <div class="cta" style="color:#2f5d46">${n7>=3?"✅ Objectif de la semaine atteint →":"Lancer une séance →"}</div>
+      </div></a>`; }
   h+=`</div>
     <p class="footer-note">Jamovi : d'après Navarro &amp; Foxcroft (trad. Meunier), CC BY-SA 4.0. — Zaremba : d'après les documents de reconstruction fournis.</p>
   </div>`;
@@ -2657,8 +2668,8 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v53";
-const APP_DATE="26 octobre 2026";
+const APP_VERSION="v54";
+const APP_DATE="1er novembre 2026";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
