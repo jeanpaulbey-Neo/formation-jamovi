@@ -402,7 +402,7 @@ function applyAccent(f){
   r.setProperty("--accent",f.accent); r.setProperty("--accent-dark",f.accentDark); r.setProperty("--accent-soft",f.accentSoft);
 }
 function goFormation(fid){ view={formation:fid,page:"home",chap:null,tab:"lecon"}; render(); closeMenu(); window.scrollTo({top:0}); }
-function goHomeSelector(){ if(view.formation&&FM_FIDS.includes(view.formation)&&mdcUnlocked()){ fmOpen(); return; } view={formation:null,page:"home",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
+function goHomeSelector(){ if(view.formation&&FM_FIDS.includes(view.formation)&&mdcUnlocked()){ fmOpen(); return; } const g=(typeof groupeDe==="function")?groupeDe(view):null; if(g&&view.page!=="groupe"){ goGroupe(g); return; } view={formation:null,page:"home",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
 function setView(page,n=null,tab="lecon"){ view.page=page; view.chap=n; view.tab=tab; render(); closeMenu(); window.scrollTo({top:0}); }
 function closeMenu(){ document.body.classList.remove("menu-open"); $("#sidebar").classList.remove("open"); }
 
@@ -518,13 +518,34 @@ function versionLogo(){
     <div class="ver-txt"><div class="ver-name">Formations</div><div class="ver-num">Version ${n} · ${APP_DATE}</div></div></div>`;
 }
 
-function renderLanding(){
-  let h=`<div class="landing-wrap">
-    <div class="landing-hero">${versionLogo()}<h1>Vos formations interactives</h1>
-    <p>Choisissez un parcours. Chaque formation propose des leçons complètes, des quiz corrigés et un suivi de progression enregistré dans votre navigateur.</p></div>
-    <div class="formation-grid">`;
-  for(const fid of Object.keys(FORMATIONS)){
-    if(fid==="mdc-office"||fid==="ouvertures-degres") continue;
+// ---- v56 : accueil organisé en thèmes (tuiles) et sous-thèmes (sous-tuiles) ----
+// Une sous-tuile = "f:<id formation>" (formation du DATA) ou le nom d'une tuile spéciale (TUILES_SPE).
+// Toute formation absente des thèmes apparaît automatiquement dans « Autres formations ».
+const GROUPES=[
+  {id:"anglais",emoji:"🇬🇧",titre:"Anglais",sousTitre:"Cours, vocabulaire, conversation et entraînement quotidien",c1:"#0b3d5c",c2:"#2a7fb8",
+   tuiles:["f:english","coach","plan8","m1k","p8conv"]},
+  {id:"pro",emoji:"💼",titre:"Vie professionnelle",sousTitre:"Réglementation, prise de parole, entretiens et réunions",c1:"#232d52",c2:"#4a5d8f",
+   tuiles:["f:reglementation-surveillance","f:parole","entretien","reunion"]},
+  {id:"sciences",emoji:"🎓",titre:"Sciences & mathématiques",sousTitre:"Statistiques et démonstrations",c1:"#123c3a",c2:"#2a8a7f",
+   tuiles:["f:jamovi","f:zaremba-preuves"]},
+  {id:"bienetre",emoji:"🌿",titre:"Bien-être & corps",sousTitre:"Esprit apaisé, gainage et posture",c1:"#1f3d2e",c2:"#5a8a4a",
+   tuiles:["f:zen","transverse","assiette"]}
+];
+const FID_HORS_GROUPE=["mdc-office","ouvertures-degres"]; // sous-tuiles de la Franc-Maçonnerie
+const PAGE_GROUPE={coach:"anglais",plan8:"anglais",m1k:"anglais",p8conv:"anglais",p8prep:"anglais"};
+function groupesEffectifs(){
+  const pris=new Set(); GROUPES.forEach(g=>g.tuiles.forEach(t=>{ if(t.startsWith("f:")) pris.add(t.slice(2)); }));
+  const autres=Object.keys(FORMATIONS).filter(fid=>!pris.has(fid)&&!FID_HORS_GROUPE.includes(fid)).map(fid=>"f:"+fid);
+  const gs=GROUPES.map(g=>({...g,tuiles:g.tuiles.filter(t=>!t.startsWith("f:")||FORMATIONS[t.slice(2)])}));
+  if(autres.length) gs.push({id:"autres",emoji:"🧩",titre:"Autres formations",sousTitre:"Formations non classées",c1:"#3a3a4a",c2:"#6a6a80",tuiles:autres});
+  return gs;
+}
+function groupeDe(view){
+  if(view.formation){ const g=groupesEffectifs().find(g=>g.tuiles.includes("f:"+view.formation)); return g?g.id:null; }
+  return PAGE_GROUPE[view.page]||null;
+}
+function goGroupe(id){ view={formation:null,page:"groupe",groupe:id,chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
+function tuileFormation(fid){ let h="";
     const f=FORMATIONS[fid];
     const done=f.chapitres.filter(c=>chapDone(fid,c)).length;
     const pct=Math.round(done/f.chapitres.length*100);
@@ -537,8 +558,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill ${pct===100?'green':''}" style="width:${pct}%;--accent:${f.accent};--accent-dark:${f.accentDark}"></div></div>
         <div class="cta" style="color:${f.accentDark}">${done>0?`Reprendre · ${pct}% du parcours`:"Commencer →"}</div>
       </div></button>`;
-  }
-  h+=fmTile();
+  return h; }
+function tuileCoach(){ let h="";
   // --- Coach 5 minutes : rituel quotidien d'anglais oral ---
   {
     const cs=coachStreak(); const srs=coachStore().srs||{}; const seen=Object.keys(srs).length;
@@ -552,6 +573,8 @@ function renderLanding(){
         <div class="cta" style="color:#0e5a4a">${cs.doneToday?`✅ Fait aujourd'hui · 🔥 ${cs.count} j`:(cs.count?`🔥 Série ${cs.count} j — séance du jour →`:"Commencer aujourd'hui →")}</div>
       </div></button>`;
   }
+  return h; }
+function tuilePlan8(){ let h="";
   // --- Plan anglais oral 8 semaines (suivi & KPI) ---
   {
     const st8=p8Store(); let meta="8 semaines · 55 min/jour · suivi & KPI", cta="Démarrer le plan →", pct=0;
@@ -567,6 +590,8 @@ function renderLanding(){
         <div class="cta" style="color:#7a2e0e">${cta}</div>
       </div></button>`;
   }
+  return h; }
+function tuileM1K(){ let h="";
   { const ms=m1kStore(), mst=m1kStats(ms);
   h+=`<button class="formation-card" onclick="goM1K()">
       <div class="banner" style="background:linear-gradient(120deg,#3d1f73,#7b4bc4)">
@@ -577,6 +602,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${mst.known/10}%;--accent:#7b4bc4;--accent-dark:#3d1f73"></div></div>
         <div class="cta" style="color:#3d1f73">${mst.seen?"Session du jour →":"Commencer →"}</div>
       </div></button>`; }
+  return h; }
+function tuileP8Conv(){ let h="";
   h+=`<button class="formation-card" onclick="goP8Conv()">
       <div class="banner" style="background:linear-gradient(120deg,#0b3d5c,#2a7fb8)">
         <div class="emoji">💬</div><h3>Conversations avec l'IA</h3><p>Jeux de rôle oraux de 10 min — dans l'app ou ChatGPT / Claude vocal</p>
@@ -586,7 +613,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#2a7fb8;--accent-dark:#0b3d5c"></div></div>
         <div class="cta" style="color:#0b3d5c">Parler maintenant →</div>
       </div></button>`;
-  // --- Espace protégé (contenu chiffré, phrase secrète requise) ---
+  return h; }
+function tuileEntretien(){ let h="";
   h+=`<a class="formation-card" href="./entretien/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#232d52,#39466f)">
         <div class="emoji">🎯</div><h3>Préparation entretien</h3><p>Espace personnel protégé</p>
@@ -596,6 +624,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#39466f;--accent-dark:#232d52"></div></div>
         <div class="cta" style="color:#232d52">🔐 Déverrouiller →</div>
       </div></a>`;
+  return h; }
+function tuileReunion(){ let h="";
   h+=`<a class="formation-card" href="./reunion/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#20406b,#2f5891)">
         <div class="emoji">🗒️</div><h3>Prépa réunion</h3><p>Espace personnel protégé</p>
@@ -605,6 +635,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#2f5891;--accent-dark:#20406b"></div></div>
         <div class="cta" style="color:#20406b">🔐 Déverrouiller →</div>
       </div></a>`;
+  return h; }
+function tuileTransverse(){ let h="";
   // --- Programme transversal : sous-app autonome (renforcement du transverse) ---
   h+=`<a class="formation-card" href="./transverse/" style="text-decoration:none;color:inherit">
       <div class="banner" style="background:linear-gradient(120deg,#14120f,#b08d57)">
@@ -615,6 +647,8 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;--accent:#d4af7a;--accent-dark:#b08d57"></div></div>
         <div class="cta" style="color:#8c6a2f">Ouvrir le programme →</div>
       </div></a>`;
+  return h; }
+function tuileAssiette(){ let h="";
   // --- v54 : Assiette à pied — posture du cavalier hors cheval, sous-app autonome avec minuteur ---
   { let n7=0; try{ const hh=JSON.parse(localStorage.getItem("assiette.hist")||"[]"); n7=hh.filter(x=>x.d>Date.now()-7*864e5).length; }catch(e){}
   h+=`<a class="formation-card" href="./assiette/" style="text-decoration:none;color:inherit">
@@ -626,12 +660,50 @@ function renderLanding(){
         <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill" style="width:${Math.min(100,Math.round(n7/3*100))}%;--accent:#a87a22;--accent-dark:#2f5d46"></div></div>
         <div class="cta" style="color:#2f5d46">${n7>=3?"✅ Objectif de la semaine atteint →":"Lancer une séance →"}</div>
       </div></a>`; }
+  return h; }
+const TUILES_SPE={coach:tuileCoach,plan8:tuilePlan8,m1k:tuileM1K,p8conv:tuileP8Conv,entretien:tuileEntretien,reunion:tuileReunion,transverse:tuileTransverse,assiette:tuileAssiette};
+const TUILE_NOM={coach:"Coach 5 minutes",plan8:"Plan 8 semaines",m1k:"Les 1000 mots",p8conv:"Conversations IA",entretien:"Préparation entretien",reunion:"Prépa réunion",transverse:"Le Transverse",assiette:"Assiette à pied"};
+function tuile(t){ try{ return t.startsWith("f:")?tuileFormation(t.slice(2)):(TUILES_SPE[t]?TUILES_SPE[t]():""); }catch(e){ return ""; } }
+function tuileNom(t){ if(t.startsWith("f:")){ const f=FORMATIONS[t.slice(2)]; return f?f.titre.split(" — ")[0]:""; } return TUILE_NOM[t]||t; }
+function tuileGroupe(g){
+  const noms=g.tuiles.map(tuileNom).filter(Boolean);
+  const fids=g.tuiles.filter(t=>t.startsWith("f:")).map(t=>t.slice(2));
+  let tot=0,done=0; for(const fid of fids){ const f=FORMATIONS[fid]; tot+=f.chapitres.length; done+=f.chapitres.filter(c=>chapDone(fid,c)).length; }
+  const pct=tot?Math.round(done/tot*100):0;
+  return `<button class="formation-card" onclick="goGroupe('${g.id}')">
+      <div class="banner" style="background:linear-gradient(120deg,${g.c1},${g.c2})">
+        <div class="emoji">${g.emoji}</div><h3>${esc(g.titre)}</h3><p>${esc(g.sousTitre)}</p>
+      </div>
+      <div class="body">
+        <div class="meta">${g.tuiles.length} sous-thème${g.tuiles.length>1?"s":""} · ${noms.map(esc).join(" · ")}</div>
+        <div class="progress-track" style="margin-bottom:10px"><div class="progress-fill ${pct===100?'green':''}" style="width:${pct}%;--accent:${g.c2};--accent-dark:${g.c1}"></div></div>
+        <div class="cta" style="color:${g.c1}">Ouvrir →</div>
+      </div></button>`;
+}
+function renderLanding(){
+  let h=`<div class="landing-wrap">
+    <div class="landing-hero">${versionLogo()}<h1>Vos formations interactives</h1>
+    <p>Choisissez un thème, puis un parcours. Chaque formation propose des leçons complètes, des quiz corrigés et un suivi de progression enregistré dans votre navigateur.</p></div>
+    <div class="formation-grid">`;
+  for(const g of groupesEffectifs()) h+=tuileGroupe(g);
+  h+=fmTile();
   h+=`</div>
     <p class="footer-note">Jamovi : d'après Navarro &amp; Foxcroft (trad. Meunier), CC BY-SA 4.0. — Zaremba : d'après les documents de reconstruction fournis.</p>
   </div>`;
   $("#main").innerHTML=h;
   $("#sidebar").innerHTML="";
 }
+function renderGroupe(){
+  const g=groupesEffectifs().find(x=>x.id===view.groupe);
+  if(!g){ view.page="home"; renderLanding(); return; }
+  let h=`<div class="landing-wrap"><button class="btn ghost sm" onclick="goAccueil()">← Tous les thèmes</button>
+    <div class="landing-hero" style="margin-top:10px"><h1>${g.emoji} ${esc(g.titre)}</h1><p>${esc(g.sousTitre)}</p></div><div class="formation-grid">`;
+  for(const t of g.tuiles) h+=tuile(t);
+  h+=`</div></div>`;
+  $("#main").innerHTML=h;
+  $("#sidebar").innerHTML="";
+}
+function goAccueil(){ view={formation:null,page:"home",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
 
 // ---- dashboard ----
 function renderHome(){
@@ -2649,7 +2721,7 @@ function typeset(el){
 
 // ---- render ----
 function render(){
-  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else if(view.page==="p8prep") renderP8Prep(); else if(view.page==="m1k") renderM1K(); else renderLanding(); typeset(); return; }
+  if(view.formation===null){ document.body.classList.add("landing"); if(view.page==="coach") renderCoach(); else if(view.page==="plan8") renderPlan8(); else if(view.page==="mdclock") renderMdcLock(); else if(view.page==="fm") renderFM(); else if(view.page==="p8conv") renderP8Conv(); else if(view.page==="p8prep") renderP8Prep(); else if(view.page==="m1k") renderM1K(); else if(view.page==="groupe") renderGroupe(); else renderLanding(); typeset(); return; }
   document.body.classList.remove("landing");
   clearStudioTimers();
   applyAccent(F());
@@ -2668,8 +2740,8 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v55";
-const APP_DATE="1er novembre 2026";
+const APP_VERSION="v56";
+const APP_DATE="5 novembre 2026";
 function showVersionBadge(){
   try{
     let b=document.getElementById("appver");
