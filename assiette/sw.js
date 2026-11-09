@@ -1,4 +1,4 @@
-const CACHE = "assiette-v1";
+const CACHE = "assiette-v2";
 const ASSETS = ["./", "./index.html"];
 
 self.addEventListener("install", e => {

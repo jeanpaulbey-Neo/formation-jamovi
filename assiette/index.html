@@ -88,6 +88,11 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outlin
 .ring .track{stroke:var(--line)}
 .ring .bar{stroke:var(--ring);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
 .time{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(3.2rem,15vw,5rem);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.mtype{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.02em}
+.mtype.st{background:rgba(168,122,34,.16);color:#8a6418}.mtype.dy{background:rgba(47,93,70,.16);color:#2f5d46}
+@media (prefers-color-scheme:dark){.mtype.st{color:#e0b860}.mtype.dy{color:#8fd1ad}}
+.mv{color:var(--fg);max-width:42ch;font-size:.95rem;margin-top:2px}
+.exlist .mline{grid-column:1/-1;display:flex;flex-direction:column;gap:3px;align-items:flex-start;margin-top:2px}
 .reps{font-weight:600;color:var(--fg)}
 .cue{color:var(--muted);max-width:42ch;font-size:.98rem}
 .next{font-size:.88rem;color:var(--muted)}
@@ -167,6 +172,8 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outlin
       <div class="time" id="time" aria-live="off">0</div>
     </div>
     <div class="reps" id="reps"></div>
+    <div id="mtype"></div>
+    <div class="mv" id="mv"></div>
     <div class="cue" id="cue"></div>
     <div class="next" id="next"></div>
   </div>
@@ -184,64 +191,65 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outlin
 </div>
 
 <script>
+function mtag(e){return e.ty?`<span class="mtype ${e.ty}">${e.ty==="st"?"⏸ Statique":"🔁 Dynamique"}</span>`:""}
 /* Poses : n=épaules, h=tête, p=bassin, c=courbure du dos, e/w=coude/poignet, k/f/t=genou/cheville/pointe ; 1=membre proche, 2=membre éloigné (grisé). Repère 160×100, sol à y=88. */
 const STAND={n:[80,22],h:[80,13],p:[80,50],k1:[81,69],f1:[80,88],t1:[90,88],e1:[80,36],w1:[82,50]};
 const QUAD={n:[100,56],h:[112,50],p:[56,56],e1:[100,71],w1:[100,86],k1:[56,86],f1:[32,86],e2:[103,71],w2:[103,86],k2:[59,86],f2:[35,86]};
 const BALL={p:[78,58],n:[78,30],h:[78,21],k1:[100,60],f1:[100,88],t1:[110,88],e1:[80,44],w1:[92,52]};
 const BLOCKS=[
  {id:"gainage",name:"Gainage",goal:"Stabilité du buste",ex:[
-  {n:"Planche sur les avant-bras",d:45,c:"Corps aligné de la tête aux talons, comme la ligne oreille–épaule–hanche–talon en selle.",pl:[
+  {n:"Planche sur les avant-bras",ty:"st",mv:"Aucun mouvement : corps gainé en ligne droite, tenu tout le temps indiqué.",d:45,c:"Corps aligné de la tête aux talons, comme la ligne oreille–épaule–hanche–talon en selle.",pl:[
    {cap:"Genoux au sol, coudes sous les épaules",f:{n:[112,66],h:[123,60],p:[76,74],k1:[58,86],f1:[34,84],e1:[112,86],w1:[132,86]}},
    {cap:"Décollez les genoux, corps en ligne droite",f:{n:[112,66],h:[123,60],p:[70,73],k1:[45,79],f1:[20,86],e1:[112,86],w1:[132,86]},x:[{dash:[18,77,128,53]}]}]},
-  {n:"Planche latérale",d:30,s:true,c:"Hanches hautes, épaule au-dessus du coude. Renforce le maintien latéral dans les courbes.",pl:[
+  {n:"Planche latérale",ty:"st",mv:"Montez le bassin puis gardez-le haut, sans bouger, jusqu'à la fin du temps.",d:30,s:true,c:"Hanches hautes, épaule au-dessus du coude. Renforce le maintien latéral dans les courbes.",pl:[
    {cap:"Sur le côté, coude sous l'épaule",f:{n:[104,72],h:[114,64],p:[66,84],k1:[42,86],f1:[18,86],e1:[104,86],w1:[124,86],e2:[92,76],w2:[78,80],k2:[42,83],f2:[18,83]}},
    {cap:"Montez le bassin et tenez",f:{n:[104,64],h:[114,56],p:[64,73],k1:[40,80],f1:[18,86],e1:[104,86],w1:[124,86],e2:[104,48],w2:[104,34],k2:[40,77],f2:[18,83]},x:[{ar:[64,64,64,50]}]}]},
-  {n:"Bird-dog",d:40,s:true,r:"10 répétitions",c:"Bras et jambe opposés, bassin immobile. Travaille la dissociation haut / bas du corps.",pl:[
+  {n:"Bird-dog",ty:"dy",mv:"Tendez un bras et la jambe opposée, marquez 2 s, revenez à quatre pattes, puis changez de côté.",d:40,s:true,r:"10 répétitions",c:"Bras et jambe opposés, bassin immobile. Travaille la dissociation haut / bas du corps.",pl:[
    {cap:"À quatre pattes, dos plat",f:QUAD},
    {cap:"Tendez le bras et la jambe opposés",f:{...QUAD,e2:[118,54],w2:[136,52],k2:[36,56],f2:[14,56]},x:[{ar:[116,44,136,42]},{ar:[38,46,16,46]}]}]},
-  {n:"Dead bug",d:45,r:"10 répétitions",c:"Bas du dos plaqué au sol. Le bassin reste stable pendant que les membres bougent.",pl:[
+  {n:"Dead bug",ty:"dy",mv:"Sur le dos, descendez lentement un bras et la jambe opposée vers le sol, revenez, puis alternez.",d:45,r:"10 répétitions",c:"Bas du dos plaqué au sol. Le bassin reste stable pendant que les membres bougent.",pl:[
    {cap:"Sur le dos, genoux et bras à 90°",f:{p:[60,82],n:[100,82],h:[112,80],k1:[60,60],f1:[82,60],e1:[100,68],w1:[100,52]}},
    {cap:"Allongez bras et jambe opposés, dos au sol",f:{p:[60,82],n:[100,82],h:[112,80],k1:[60,60],f1:[82,60],e1:[116,76],w1:[134,74],e2:[104,66],w2:[104,50],k2:[40,72],f2:[18,78]},x:[{ar:[118,64,136,62]},{ar:[42,62,22,68]}]}]}]},
  {id:"jambes",name:"Jambes et assiette",goal:"Jambe sous le corps",ex:[
-  {n:"Squat lent",d:60,r:"15 répétitions",c:"Pieds écartés à la largeur de la selle, dos droit, descente en 3 secondes.",pl:[
+  {n:"Squat lent",ty:"dy",mv:"Descendez en 3 s jusqu'aux cuisses presque parallèles au sol, puis remontez en 1 à 2 s.",d:60,r:"15 répétitions",c:"Pieds écartés à la largeur de la selle, dos droit, descente en 3 secondes.",pl:[
    {cap:"Debout, pieds largeur de selle",f:STAND},
    {cap:"Descendez en 3 s, dos droit",f:{n:[86,40],h:[90,31],p:[64,64],k1:[92,70],f1:[82,88],t1:[92,88],e1:[100,44],w1:[116,44]},x:[{ar:[44,36,44,62]}]}]},
-  {n:"Chaise contre un mur",d:45,c:"Genoux légèrement ouverts, comme autour du cheval. Respirez calmement.",pl:[
+  {n:"Chaise contre un mur",ty:"st",mv:"Dos au mur, cuisses à l'horizontale : tenez la position sans bouger.",d:45,c:"Genoux légèrement ouverts, comme autour du cheval. Respirez calmement.",pl:[
    {cap:"Dos au mur, pieds avancés",f:{p:[54,50],n:[53,22],h:[55,13],k1:[66,68],f1:[74,88],t1:[84,88],e1:[54,36],w1:[56,50]},x:[{wall:48}]},
    {cap:"Glissez jusqu'aux cuisses horizontales",f:{p:[54,66],n:[53,38],h:[55,29],k1:[80,66],f1:[80,88],t1:[90,88],e1:[60,52],w1:[72,62]},x:[{wall:48},{ar:[112,30,112,56]}]}]},
-  {n:"Pont fessier",d:45,r:"15 répétitions",c:"Serrez les fessiers en haut, sans creuser les lombaires.",pl:[
+  {n:"Pont fessier",ty:"dy",mv:"Montez le bassin en serrant les fessiers, tenez 1 s en haut, puis redescendez lentement.",d:45,r:"15 répétitions",c:"Serrez les fessiers en haut, sans creuser les lombaires.",pl:[
    {cap:"Sur le dos, pieds près des fesses",f:{n:[104,84],h:[116,82],p:[66,84],k1:[52,64],f1:[40,88],e1:[90,86],w1:[76,86]}},
    {cap:"Montez le bassin, fessiers serrés",f:{n:[104,84],h:[116,82],p:[68,66],k1:[50,62],f1:[40,88],e1:[90,86],w1:[76,86]},x:[{ar:[72,56,72,40]}]}]},
-  {n:"Montées sur pointes, descente du talon",d:45,r:"15 répétitions",c:"Au bord d'une marche, descendez lentement le talon : c'est le talon bas et souple.",pl:[
+  {n:"Montées sur pointes, descente du talon",ty:"dy",mv:"Montez sur la pointe des pieds, puis descendez lentement le talon sous le niveau de la marche.",d:45,r:"15 répétitions",c:"Au bord d'une marche, descendez lentement le talon : c'est le talon bas et souple.",pl:[
    {cap:"Talon descendu sous le bord de la marche",f:{n:[66,28],h:[66,19],p:[66,50],k1:[68,66],f1:[66,82],t1:[78,78],e1:[66,40],w1:[68,52]},x:[{step:[70,78,70,10]},{ar:[50,68,50,86]}]},
    {cap:"Montez sur la pointe, redescendez lentement",f:{n:[70,16],h:[70,7],p:[70,38],k1:[72,54],f1:[72,70],t1:[80,78],e1:[70,28],w1:[72,40]},x:[{step:[70,78,70,10]},{ar:[100,62,100,38]}]}]}]},
  {id:"equilibre",name:"Équilibre",goal:"Assiette profonde",ex:[
-  {n:"Ballon : pieds décollés",d:30,c:"Assis sur le ballon, levez les pieds et tenez, buste grand.",pl:[
+  {n:"Ballon : pieds décollés",ty:"st",mv:"Pieds décollés du sol, buste grand : tenez l'équilibre sans bouger.",d:30,c:"Assis sur le ballon, levez les pieds et tenez, buste grand.",pl:[
    {cap:"Assis, pieds au sol, buste grand",f:BALL,x:[{ball:[78,74,14]}]},
    {cap:"Décollez les pieds et tenez",f:{p:[78,58],n:[76,30],h:[76,21],k1:[98,52],f1:[112,64],t1:[118,60],e1:[90,32],w1:[106,30]},x:[{ball:[78,74,14]},{ar:[128,78,128,62]}]}]},
-  {n:"Ballon : cercles de bassin",d:45,c:"Petits cercles puis bascules avant / arrière. Le buste reste tranquille, seul le bassin bouge.",pl:[
+  {n:"Ballon : cercles de bassin",ty:"dy",mv:"Petits cercles du bassin dans un sens puis dans l'autre, ensuite bascules avant / arrière.",d:45,c:"Petits cercles puis bascules avant / arrière. Le buste reste tranquille, seul le bassin bouge.",pl:[
    {cap:"Petits cercles du bassin",f:BALL,x:[{ball:[78,74,14]},{arc:"M58 60 A20 8 0 1 0 98 60"}]},
    {cap:"Bascules avant et arrière",f:{...BALL,n:[75,30],h:[74,21]},x:[{ball:[78,74,14]},{ar:[66,46,50,46]},{ar:[92,46,108,46]}]}]},
-  {n:"Trot enlevé simulé",d:45,c:"En demi-squat ou sur le ballon, montez et descendez en rythme « un-deux ».",pl:[
+  {n:"Trot enlevé simulé",ty:"dy",mv:"Montez et descendez en rythme régulier « un-deux », comme au trot enlevé.",d:45,c:"En demi-squat ou sur le ballon, montez et descendez en rythme « un-deux ».",pl:[
    {cap:"« Un » : assis en demi-flexion",f:{p:[70,60],n:[82,34],h:[86,25],k1:[92,64],f1:[86,88],t1:[96,88],e1:[92,46],w1:[106,48]}},
    {cap:"« Deux » : debout, bassin vers l'avant",f:{p:[80,48],n:[84,22],h:[86,13],k1:[88,66],f1:[86,88],t1:[96,88],e1:[94,34],w1:[108,38]},x:[{ar:[56,62,70,46]}]}]},
-  {n:"Unipodal, yeux fermés",d:30,s:true,c:"Genou souple, regard intérieur. Développe l'équilibre sans repère visuel.",pl:[
+  {n:"Unipodal, yeux fermés",ty:"st",mv:"Debout sur un pied, yeux fermés : tenez l'équilibre sans bouger.",d:30,s:true,c:"Genou souple, regard intérieur. Développe l'équilibre sans repère visuel.",pl:[
    {cap:"Debout, regard à l'horizon",f:STAND},
    {cap:"Levez un pied, fermez les yeux",f:{...STAND,k1:[80,69],e1:[72,36],w1:[62,46],e2:[88,36],w2:[98,46],k2:[94,58],f2:[90,74],t2:[100,74]},x:[{ar:[110,80,110,64]}]}]}]},
  {id:"etirements",name:"Étirements",goal:"Hanches et dos ouverts",ex:[
-  {n:"Fléchisseurs de hanche",d:30,s:true,c:"En fente, genou au sol, avancez le bassin. Libère la jambe pour qu'elle descende.",pl:[
+  {n:"Fléchisseurs de hanche",ty:"st",mv:"Étirement tenu : avancez le bassin puis gardez la position en respirant calmement.",d:30,s:true,c:"En fente, genou au sol, avancez le bassin. Libère la jambe pour qu'elle descende.",pl:[
    {cap:"Fente, genou arrière au sol",f:{n:[74,34],h:[75,25],p:[74,62],k1:[104,64],f1:[104,88],t1:[114,88],k2:[52,88],f2:[28,88],e1:[88,48],w1:[100,60]}},
    {cap:"Avancez le bassin, buste droit",f:{n:[84,38],h:[85,29],p:[84,66],k1:[110,66],f1:[104,88],t1:[114,88],k2:[56,88],f2:[32,88],e1:[96,52],w1:[106,62]},x:[{ar:[58,54,76,54]}]}]},
-  {n:"Papillon des adducteurs",d:45,c:"Plantes des pieds jointes, laissez tomber les genoux sans forcer.",pl:[
+  {n:"Papillon des adducteurs",ty:"st",mv:"Étirement tenu : plantes des pieds jointes, genoux qui tombent, sans à-coups.",d:45,c:"Plantes des pieds jointes, laissez tomber les genoux sans forcer.",pl:[
    {cap:"Assis, plantes des pieds jointes",front:true,f:{p:[80,80],n:[80,50],h:[80,41],k1:[58,70],f1:[78,86],k2:[102,70],f2:[82,86],e1:[68,64],w1:[76,82],e2:[92,64],w2:[84,82]},x:[{txt:[8,14,"de face"]}]},
    {cap:"Laissez descendre les genoux",front:true,f:{p:[80,80],n:[80,50],h:[80,41],k1:[52,80],f1:[78,86],k2:[108,80],f2:[82,86],e1:[68,64],w1:[76,82],e2:[92,64],w2:[84,82]},x:[{txt:[8,14,"de face"]},{ar:[50,62,44,74]},{ar:[110,62,116,74]}]}]},
-  {n:"Mollets contre le mur",d:30,s:true,c:"Jambe arrière tendue, talon au sol.",pl:[
+  {n:"Mollets contre le mur",ty:"st",mv:"Étirement tenu : talon arrière au sol, gardez la position.",d:30,s:true,c:"Jambe arrière tendue, talon au sol.",pl:[
    {cap:"Face au mur, pieds décalés",f:{n:[104,24],h:[104,15],p:[100,52],k1:[104,70],f1:[106,88],t1:[116,88],k2:[90,70],f2:[78,88],t2:[88,88],e1:[114,34],w1:[128,34]},x:[{wall:132}]},
    {cap:"Penchez-vous, talon arrière au sol",f:{n:[108,30],h:[114,23],p:[86,56],k1:[106,70],f1:[108,88],t1:[118,88],k2:[70,72],f2:[54,88],t2:[64,88],e1:[118,40],w1:[130,36]},x:[{wall:132},{ar:[96,14,110,20]}]}]},
-  {n:"Ouverture thoracique",d:30,s:true,c:"Allongé sur le côté, ouvrez le bras du dessus vers l'arrière. Contre le dos rond.",pl:[
+  {n:"Ouverture thoracique",ty:"dy",mv:"Allongé sur le côté, ouvrez le bras du dessus vers l'arrière en expirant, revenez, et répétez lentement.",d:30,s:true,c:"Allongé sur le côté, ouvrez le bras du dessus vers l'arrière. Contre le dos rond.",pl:[
    {cap:"Sur le côté, genoux pliés, bras devant",nognd:true,f:{n:[104,46],h:[116,46],p:[64,46],k1:[64,70],f1:[44,70],k2:[67,72],f2:[47,72],e1:[104,62],w1:[104,78],e2:[107,64],w2:[107,80]},x:[{txt:[8,14,"vue de dessus"]}]},
    {cap:"Ouvrez le bras du dessus vers l'arrière",nognd:true,f:{n:[104,46],h:[116,46],p:[64,46],k1:[64,70],f1:[44,70],k2:[67,72],f2:[47,72],e1:[104,62],w1:[104,78],e2:[104,30],w2:[104,14]},x:[{txt:[8,14,"vue de dessus"]},{arc:"M118 76 Q140 46 118 16"}]}]},
-  {n:"Chat-vache",d:45,c:"Enroulez puis creusez le dos lentement, au rythme de la respiration.",pl:[
+  {n:"Chat-vache",ty:"dy",mv:"À quatre pattes, enroulez le dos (expiration) puis creusez-le (inspiration), en alternance lente.",d:45,c:"Enroulez puis creusez le dos lentement, au rythme de la respiration.",pl:[
    {cap:"Chat : dos rond, tête rentrée",f:{...QUAD,c:[78,32],h:[106,70]},x:[{ar:[78,28,78,12]}]},
    {cap:"Vache : dos creux, regard devant",f:{...QUAD,c:[78,72],h:[112,44]},x:[{ar:[78,44,78,58]}]}]}]}
 ];
@@ -307,7 +315,7 @@ function renderHome(){
   list.forEach(s=>{const nEx=s.blocks.reduce((a,b)=>a+b.ex.length,0);const b=document.createElement("button");b.className="session"+(s.id==="full"?" full":"");
     b.innerHTML=`<h2>${s.name}</h2><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="meta">${s.goal} · ${nEx} exercices · ${fmtMin(totalSec(s.blocks))}</span>`;
     b.setAttribute("aria-label",`Lancer ${s.name}, ${fmtMin(totalSec(s.blocks))}`);b.onclick=()=>start(s);box.appendChild(b)});
-  $("exlist").innerHTML=BLOCKS.map(b=>`<li><strong>${b.name}</strong><span>${b.goal}</span></li>`+b.ex.map(e=>`<li><span>${e.n}${e.s?" (chaque côté)":""}</span><span>${e.r?e.r+" · ":""}${e.d} s</span><small>${e.c}</small><div class="plates">${plates(e)}</div></li>`).join("")).join("");
+  $("exlist").innerHTML=BLOCKS.map(b=>`<li><strong>${b.name}</strong><span>${b.goal}</span></li>`+b.ex.map(e=>`<li><span>${e.n}${e.s?" (chaque côté)":""}</span><span>${e.r?e.r+" · ":""}${e.d} s</span>${e.ty?`<div class="mline">${mtag(e)}<span>${e.ty==="st"?"Position : ":"Mouvement : "}${e.mv}</span></div>`:""}<small>${e.c}</small><div class="plates">${plates(e)}</div></li>`).join("")).join("");
 }
 $("voice").onchange=e=>{st.voice=e.target.checked;save()};
 
@@ -336,6 +344,7 @@ function enter(){
   $("exname").innerHTML=s.ex.n+(s.ex.side?`<span class="side">${s.ex.side}</span>`:"");
   $("reps").textContent=s.t==="work"&&s.ex.r?s.ex.r:"";
   $("cue").textContent=s.ex.c;
+  $("mtype").innerHTML=mtag(s.ex);$("mv").textContent=s.ex.mv?(s.ex.ty==="st"?"Position : ":"Mouvement : ")+s.ex.mv:"";
   $("plates").innerHTML=plates(s.ex);pl.classList.add("withplates");
   const nx=P.q.slice(P.k+1).find(x=>x.t==="work"&&x.i!==s.i);
   $("next").innerHTML=s.t==="work"?(nx?`Ensuite : <b>${nx.ex.n}${nx.ex.side?" ("+nx.ex.side+")":""}</b>`:"Dernier exercice"):"";
