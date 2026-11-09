@@ -60,6 +60,8 @@ h1{font-size:2.1rem;line-height:1.1}
 .session h2{font-size:1.25rem}
 .session .meta{grid-column:1;color:var(--muted);font-size:.86rem;min-width:0}
 .session .go{grid-row:1/3;grid-column:2;width:44px;height:44px;border-radius:50%;background:var(--arena);color:var(--bg);display:grid;place-items:center}
+.shead{margin:14px 0 2px}.shead:first-child{margin-top:0}.shead h3{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--arena);font-weight:700}.shead p{color:var(--muted);font-size:.88rem;margin-top:3px}
+.session .badge{display:block;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--brass);margin-bottom:3px;font-family:var(--body)}
 .session.full .go{background:var(--brass)}
 details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
 summary{cursor:pointer;font-weight:600}
@@ -137,7 +139,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outlin
   <header>
     <div class="eyebrow">Posture du cavalier · hors cheval</div>
     <h1>Assiette à pied</h1>
-    <p class="lede">Séances guidées pour la stabilité du buste, une jambe sous le corps et un bassin mobile. Choisissez une séance, le minuteur enchaîne tout seul.</p>
+    <p class="lede">Séances guidées pour la stabilité du buste, une jambe sous le corps et un bassin mobile. Suivez le programme A → B → C : la prochaine séance vous est proposée, le minuteur enchaîne tout seul.</p>
   </header>
 
   <div class="stats" id="stats"></div>
@@ -254,6 +256,69 @@ const BLOCKS=[
    {cap:"Vache : dos creux, regard devant",f:{...QUAD,c:[78,72],h:[112,44]},x:[{ar:[78,44,78,58]}]}]}]}
 ];
 const PREP=10;
+/* v2 : 14 exercices complémentaires, répartis dans les blocs existants */
+const NEWEX={
+ gainage:[
+  {n:"Superman",ty:"dy",mv:"À plat ventre, levez bras et jambes ensemble, tenez 2 s, puis redescendez.",d:40,r:"10 répétitions",c:"Regard vers le sol, nuque longue. Muscle le dos pour rester droit en selle.",pl:[
+   {cap:"À plat ventre, bras tendus devant",f:{p:[62,84],n:[96,84],h:[107,80],k1:[42,85],f1:[24,85],t1:[22,88],e1:[110,86],w1:[124,86]}},
+   {cap:"Levez bras et jambes, tenez 2 s",f:{p:[62,84],n:[96,80],h:[107,74],k1:[42,82],f1:[24,76],t1:[20,78],e1:[110,75],w1:[124,69]},x:[{ar:[132,80,132,64]},{ar:[16,86,16,70]}]}]},
+  {n:"Position banane",ty:"st",mv:"Sur le dos, épaules et jambes décollées, bas du dos plaqué : tenez sans bouger.",d:30,c:"Bas du dos collé au sol. Si c'est trop dur, pliez les genoux.",pl:[
+   {cap:"Sur le dos, bras le long du corps",f:{p:[66,84],n:[100,84],h:[112,82],k1:[46,85],f1:[26,85],t1:[24,80],e1:[88,85],w1:[76,85]}},
+   {cap:"Décollez épaules et jambes, tenez",f:{p:[66,84],c:[84,88],n:[98,76],h:[109,71],k1:[46,79],f1:[27,73],t1:[24,68],e1:[112,72],w1:[126,67]},x:[{ar:[100,66,100,54]},{ar:[30,64,30,52]}]}]},
+  {n:"Planche, touchers d'épaule",ty:"dy",mv:"En planche bras tendus, touchez l'épaule opposée d'une main, reposez-la, puis alternez.",d:40,r:"20 touchers",c:"Pieds écartés pour plus de stabilité. Le bassin ne doit pas se balancer.",pl:[
+   {cap:"Planche bras tendus, mains sous les épaules",f:{n:[112,58],h:[123,53],p:[70,67],k1:[45,76],f1:[22,84],t1:[18,88],e1:[112,72],w1:[112,86]},x:[{dash:[18,86,124,54]}]},
+   {cap:"Touchez l'épaule opposée, bassin immobile",f:{n:[112,58],h:[123,53],p:[70,67],k1:[45,76],f1:[22,84],t1:[18,88],e1:[112,72],w1:[112,86],e2:[124,68],w2:[115,60]},x:[{dash:[18,86,124,54]},{ar:[136,78,124,64]}]}]},
+  {n:"Anti-rotation à l'élastique",ty:"st",mv:"Bras tendus devant la poitrine, résistez à la traction de l'élastique sans laisser le buste tourner.",d:30,s:true,c:"Élastique accroché à hauteur de poitrine (poignée de porte). Gainez sans tourner le buste.",pl:[
+   {cap:"Élastique sur le côté, mains contre la poitrine",front:true,f:{n:[86,24],h:[86,14],p:[86,52],k1:[78,70],f1:[76,88],k2:[94,70],f2:[96,88],e1:[76,38],w1:[86,42],e2:[96,38],w2:[86,42]},x:[{wall:10},{dash:[10,42,86,42]},{txt:[118,14,"de face"]}]},
+   {cap:"Bras tendus devant : ne tournez pas",front:true,f:{n:[86,24],h:[86,14],p:[86,52],k1:[78,70],f1:[76,88],k2:[94,70],f2:[96,88],e1:[80,34],w1:[86,36],e2:[92,34],w2:[86,36]},x:[{wall:10},{dash:[10,36,86,36]},{txt:[118,14,"de face"]},{ar:[100,30,120,30]}]}]}],
+ jambes:[
+  {n:"Équilibre en suspension",ty:"st",mv:"Fléchissez hanches et genoux, buste incliné, mains devant comme sur les rênes : tenez.",d:45,c:"Talons bas, genoux souples, dos plat. C'est la position du galop en suspension.",pl:[
+   {cap:"Debout, pieds largeur de selle",f:STAND},
+   {cap:"Fléchissez, buste incliné, mains « aux rênes »",f:{p:[66,56],n:[88,34],h:[96,27],k1:[88,68],f1:[82,88],t1:[92,88],e1:[98,46],w1:[112,50]},x:[{dash:[60,62,96,26]}]}]},
+  {n:"Fente latérale",ty:"dy",mv:"Grand pas sur le côté, fléchissez la jambe d'appui, revenez au centre, puis alternez.",d:45,r:"8 de chaque côté",c:"Pied de la jambe tendue à plat, dos droit. Ouvre les adducteurs pour une jambe qui descend.",pl:[
+   {cap:"Debout, pieds écartés",front:true,f:{n:[80,24],h:[80,14],p:[80,52],k1:[68,70],f1:[62,88],k2:[92,70],f2:[98,88],e1:[70,38],w1:[72,52],e2:[90,38],w2:[88,52]},x:[{txt:[8,14,"de face"]}]},
+   {cap:"Fléchissez une jambe, l'autre tendue",front:true,f:{n:[62,38],h:[62,28],p:[60,64],k1:[42,68],f1:[40,88],k2:[90,76],f2:[118,88],e1:[54,50],w1:[60,58],e2:[70,50],w2:[62,58]},x:[{txt:[8,14,"de face"]},{ar:[30,44,30,64]}]}]},
+  {n:"Clamshell (ouverture de genou)",ty:"dy",mv:"Couché sur le côté, genoux pliés : ouvrez le genou du dessus, puis refermez lentement.",d:30,s:true,r:"15 répétitions",c:"Les pieds restent joints, le bassin ne bascule pas en arrière.",pl:[
+   {cap:"Sur le côté, genoux pliés, pieds joints",f:{p:[72,80],n:[106,80],h:[120,76],k1:[50,84],f1:[30,80],e1:[120,86],w1:[128,82],e2:[96,86],w2:[86,86]}},
+   {cap:"Ouvrez le genou du dessus, pieds joints",f:{p:[72,80],n:[106,80],h:[120,76],k1:[50,84],f1:[30,80],k2:[54,62],f2:[32,78],e1:[120,86],w1:[128,82],e2:[96,86],w2:[86,86]},x:[{ar:[46,74,48,56]}]}]},
+  {n:"Fente arrière lente",ty:"dy",mv:"Reculez une jambe, descendez en 3 s, remontez, puis changez de jambe.",d:45,r:"8 de chaque côté",c:"Genou avant au-dessus de la cheville, buste droit.",pl:[
+   {cap:"Debout, mains sur les hanches",f:{...STAND,e1:[90,38],w1:[82,50]}},
+   {cap:"Reculez une jambe, descendez en 3 s",f:{p:[78,62],n:[80,34],h:[81,25],k1:[96,68],f1:[94,88],t1:[104,88],k2:[70,82],f2:[52,84],t2:[46,88],e1:[90,46],w1:[82,60]},x:[{ar:[118,40,118,60]}]}]}],
+ equilibre:[
+  {n:"Mains fixes au trot simulé",ty:"dy",mv:"Trot enlevé simulé « un-deux » : le bassin monte et descend, les mains restent fixes.",d:45,c:"Tenez un verre d'eau ou une serviette tendue : les mains ne bougent pas pendant que le corps monte et descend.",pl:[
+   {cap:"« Un » : assis, mains devant",f:{p:[70,60],n:[82,34],h:[86,25],k1:[92,64],f1:[86,88],t1:[96,88],e1:[92,46],w1:[110,42]},x:[{step:[107,32,7,9]},{dash:[100,42,140,42]}]},
+   {cap:"« Deux » : debout, les mains n'ont pas bougé",f:{p:[80,48],n:[84,22],h:[86,13],k1:[88,66],f1:[86,88],t1:[96,88],e1:[96,34],w1:[110,42]},x:[{step:[107,32,7,9]},{dash:[100,42,140,42]},{ar:[56,62,70,46]}]}]},
+  {n:"Rotations du buste sur ballon",ty:"dy",mv:"Assis sur le ballon, tournez épaules et regard vers la droite, revenez, puis vers la gauche.",d:40,c:"Le bassin et les genoux restent immobiles : c'est le regard qui guide le tournant.",pl:[
+   {cap:"Assis, buste grand, regard devant",front:true,f:{p:[80,60],n:[80,32],h:[80,23],k1:[64,66],f1:[62,88],k2:[96,66],f2:[98,88],e1:[70,44],w1:[80,48],e2:[90,44],w2:[80,48]},x:[{ball:[80,74,14]},{txt:[8,14,"de face"]}]},
+   {cap:"Tournez épaules et regard, bassin fixe",front:true,f:{p:[80,60],n:[80,32],h:[80,23],k1:[64,66],f1:[62,88],k2:[96,66],f2:[98,88],e1:[72,40],w1:[60,44],e2:[88,42],w2:[74,46]},x:[{ball:[80,74,14]},{txt:[8,14,"de face"]},{arc:"M96 16 Q80 6 64 16"}]}]},
+  {n:"Marche talon-pointe",ty:"dy",mv:"Marchez sur une ligne en posant le talon contre la pointe de l'autre pied, pas à pas.",d:45,c:"Avancez lentement sur une ligne au sol. Quand c'est facile, fermez les yeux.",pl:[
+   {cap:"Talon contre la pointe, sur une ligne",f:{...STAND,k2:[88,69],f2:[94,88],t2:[104,88],e1:[72,34],w1:[62,40]}},
+   {cap:"Avancez pas à pas, puis yeux fermés",f:{n:[88,22],h:[89,13],p:[86,50],k1:[80,69],f1:[72,84],t1:[80,88],k2:[94,69],f2:[96,88],t2:[106,88],e1:[78,34],w1:[68,40]},x:[{ar:[110,74,136,74]}]}]}],
+ etirements:[
+  {n:"Mobilité de cheville au mur",ty:"dy",mv:"Face au mur, poussez le genou vers le mur sans décoller le talon, puis revenez.",d:30,s:true,r:"12 répétitions",c:"Le talon reste collé au sol. Assouplit la cheville pour un talon bas.",pl:[
+   {cap:"Face au mur, pied avant près du mur",f:{n:[102,22],h:[104,13],p:[100,50],k1:[108,69],f1:[112,88],t1:[122,88],k2:[94,70],f2:[88,88],t2:[98,88],e1:[114,30],w1:[130,28]},x:[{wall:132}]},
+   {cap:"Genou vers le mur, talon au sol",f:{n:[106,24],h:[108,15],p:[104,52],k1:[122,68],f1:[112,88],t1:[122,88],k2:[96,70],f2:[88,88],t2:[98,88],e1:[118,32],w1:[130,30]},x:[{wall:132},{ar:[108,60,124,60]}]}]},
+  {n:"Étirement des pectoraux",ty:"st",mv:"Avant-bras contre le cadre de porte, avancez doucement la poitrine et tenez.",d:30,c:"Coude à hauteur d'épaule, sans forcer. Ouvre les épaules, contre le dos rond.",pl:[
+   {cap:"Avant-bras contre le cadre de porte",f:{n:[94,24],h:[96,15],p:[94,52],k1:[96,70],f1:[94,88],t1:[104,88],e1:[78,24],w1:[78,8]},x:[{wall:76}]},
+   {cap:"Avancez la poitrine, tenez",f:{n:[104,26],h:[108,17],p:[98,52],k1:[102,70],f1:[98,88],t1:[108,88],e1:[86,22],w1:[78,8]},x:[{wall:76},{ar:[114,40,130,40]}]}]},
+  {n:"Respiration abdominale",ty:"st",mv:"Allongé, inspirez 4 temps en gonflant le ventre, expirez 6 temps. Le corps reste immobile.",d:60,c:"Expirez plus longtemps que vous n'inspirez : le corps se relâche, et le cheval le sent.",pl:[
+   {cap:"Allongé, une main sur le ventre",f:{p:[64,84],n:[100,84],h:[112,82],k1:[52,66],f1:[40,88],e1:[92,74],w1:[80,80]}},
+   {cap:"Inspirez 4 temps, expirez 6",f:{p:[64,84],c:[82,72],n:[100,84],h:[112,82],k1:[52,66],f1:[40,88],e1:[92,72],w1:[80,74]},x:[{ar:[82,66,82,52]}]}]}]
+};
+BLOCKS.forEach(b=>b.ex.push(...(NEWEX[b.id]||[])));
+
+/* Programme en 3 séances A → B → C, la suivante est proposée automatiquement */
+const EXN={};BLOCKS.forEach(b=>b.ex.forEach(e=>{EXN[e.n]=e}));
+const PROG=[
+ {sid:"A",name:"Séance A · Gainage et dos",goal:"Buste stable, dos tonique",names:["Planche sur les avant-bras","Planche latérale","Bird-dog","Dead bug","Superman","Position banane","Planche, touchers d'épaule","Anti-rotation à l'élastique","Pont fessier"]},
+ {sid:"B",name:"Séance B · Jambes et équilibre",goal:"Jambe sous le corps, assiette profonde",names:["Squat lent","Chaise contre un mur","Montées sur pointes, descente du talon","Équilibre en suspension","Fente latérale","Fente arrière lente","Clamshell (ouverture de genou)","Unipodal, yeux fermés","Ballon : pieds décollés","Trot enlevé simulé","Mains fixes au trot simulé"]},
+ {sid:"C",name:"Séance C · Souplesse et coordination",goal:"Hanches libres, regard et mains indépendants",names:["Chat-vache","Ballon : cercles de bassin","Rotations du buste sur ballon","Marche talon-pointe","Fléchisseurs de hanche","Papillon des adducteurs","Mollets contre le mur","Mobilité de cheville au mur","Étirement des pectoraux","Ouverture thoracique","Respiration abdominale"]}
+];
+PROG.forEach(p=>{p.id=p.sid;p.blocks=[{name:p.name,goal:p.goal,ex:p.names.map(n=>EXN[n]).filter(Boolean)}];if(p.blocks[0].ex.length!==p.names.length)console.warn("Programme "+p.sid+" : exercice introuvable")});
+function lastProg(){const h=history();for(let i=h.length-1;i>=0;i--){if(h[i].sid&&"ABC".includes(h[i].sid))return h[i]}return null}
+function nextProg(){const l=lastProg();return l?PROG[("ABC".indexOf(l.sid)+1)%3]:PROG[0]}
+const fmtDay=t=>new Date(t).toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
+
 
 /* Dessin des planches */
 let MK=0;
@@ -302,7 +367,7 @@ const fmtMin=s=>Math.round(s/60)+" min";
 function segment(el,vals,key,fmt){el.innerHTML="";vals.forEach(v=>{const b=document.createElement("button");b.textContent=fmt(v);b.setAttribute("aria-pressed",st[key]===v);b.onclick=()=>{st[key]=v;save();renderHome()};el.appendChild(b)})}
 function save(){try{localStorage.setItem("assiette.set",JSON.stringify(st))}catch(e){}}
 function history(){try{return JSON.parse(localStorage.getItem("assiette.hist")||"[]")}catch(e){return[]}}
-function logDone(name,sec){const h=history();h.push({d:Date.now(),name,sec});try{localStorage.setItem("assiette.hist",JSON.stringify(h.slice(-200)))}catch(e){}}
+function logDone(name,sec,sid){const h=history();h.push(sid?{d:Date.now(),name,sec,sid}:{d:Date.now(),name,sec});try{localStorage.setItem("assiette.hist",JSON.stringify(h.slice(-200)))}catch(e){}}
 
 function renderHome(){
   segment($("seg-rest"),[10,15,20,30],"rest",v=>v+" s");
@@ -310,11 +375,18 @@ function renderHome(){
   $("voice").checked=st.voice;
   const h=history(),wk=Date.now()-7*864e5;const w=h.filter(x=>x.d>wk);
   $("stats").innerHTML=`<span class="chip">${w.length} séance${w.length>1?"s":""} cette semaine</span><span class="chip b">${Math.round(w.reduce((a,x)=>a+x.sec,0)/60)} min d'entraînement</span><span class="chip">Objectif : 3 par semaine</span>`;
-  const list=[{id:"full",name:"Séance complète",goal:"Les quatre blocs enchaînés",blocks:BLOCKS},...BLOCKS.map(b=>({id:b.id,name:b.name,goal:b.goal,blocks:[b]}))];
+  const list=[{id:"full",name:"Séance complète",goal:"Tous les exercices enchaînés",blocks:BLOCKS},...BLOCKS.map(b=>({id:b.id,name:b.name,goal:b.goal,blocks:[b]}))];
   const box=$("sessions");box.innerHTML="";
-  list.forEach(s=>{const nEx=s.blocks.reduce((a,b)=>a+b.ex.length,0);const b=document.createElement("button");b.className="session"+(s.id==="full"?" full":"");
-    b.innerHTML=`<h2>${s.name}</h2><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="meta">${s.goal} · ${nEx} exercices · ${fmtMin(totalSec(s.blocks))}</span>`;
-    b.setAttribute("aria-label",`Lancer ${s.name}, ${fmtMin(totalSec(s.blocks))}`);b.onclick=()=>start(s);box.appendChild(b)});
+  const nxt=nextProg(),lp=lastProg();
+  const head=(t,sub)=>{const d=document.createElement("div");d.className="shead";d.innerHTML=`<h3>${t}</h3>${sub?`<p>${sub}</p>`:""}`;box.appendChild(d)};
+  const card=(s,cls,badge)=>{const nEx=s.blocks.reduce((a,b)=>a+b.ex.length,0);const b=document.createElement("button");b.className="session"+cls;
+    b.innerHTML=`<h2>${badge?`<span class="badge">${badge}</span>`:""}${s.name}</h2><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="meta">${s.goal} · ${nEx} exercices · ${fmtMin(totalSec(s.blocks))}</span>`;
+    b.setAttribute("aria-label",`Lancer ${s.name}, ${fmtMin(totalSec(s.blocks))}`);b.onclick=()=>start(s);box.appendChild(b)};
+  head("Programme A → B → C",lp?`Dernière séance : <b>${lp.sid}</b> le ${fmtDay(lp.d)}. La suivante vous est proposée.`:"Commencez par la séance A, puis enchaînez B et C.");
+  card(nxt," full","👉 Séance proposée");
+  PROG.filter(p=>p!==nxt).forEach(p=>{const n=history().filter(x=>x.sid===p.sid&&x.d>wk).length;card(p,"",n?"✓ faite cette semaine":"")});
+  head("Autres séances","");
+  list.forEach(s=>card(s,"",""));
   $("exlist").innerHTML=BLOCKS.map(b=>`<li><strong>${b.name}</strong><span>${b.goal}</span></li>`+b.ex.map(e=>`<li><span>${e.n}${e.s?" (chaque côté)":""}</span><span>${e.r?e.r+" · ":""}${e.d} s</span>${e.ty?`<div class="mline">${mtag(e)}<span>${e.ty==="st"?"Position : ":"Mouvement : "}${e.mv}</span></div>`:""}<small>${e.c}</small><div class="plates">${plates(e)}</div></li>`).join("")).join("");
 }
 $("voice").onchange=e=>{st.voice=e.target.checked;save()};
@@ -377,9 +449,9 @@ function jumpWork(dir){
 $("skip").onclick=()=>P&&jumpWork(1);
 $("prev").onclick=()=>P&&jumpWork(-1);
 function finish(){
-  const sec=P.elapsed;logDone(P.s.name,sec);beep(880,.18);setTimeout(()=>beep(1175,.3),200);say("Séance terminée. Bravo.");
+  const sec=P.elapsed;logDone(P.s.name,sec,P.s.sid);beep(880,.18);setTimeout(()=>beep(1175,.3),200);say("Séance terminée. Bravo.");
   $("pbar").style.width="100%";$("stage").hidden=true;$("controls").hidden=true;$("done").hidden=false;
-  $("donetxt").textContent=`${P.s.name} : ${P.n} exercices, ${Math.max(1,Math.round(sec/60))} min de travail effectif.`;
+  $("donetxt").textContent=`${P.s.name} : ${P.n} exercices, ${Math.max(1,Math.round(sec/60))} min de travail effectif.`+(P.s.sid?` Prochaine fois : ${nextProg().name}.`:"");
   P=null;unlock();
 }
 function quit(){P=null;unlock();try{speechSynthesis.cancel()}catch(e){}$("player").hidden=true;$("home").hidden=false;renderHome()}
