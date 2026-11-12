@@ -54,7 +54,7 @@ img,svg,table{max-width:100%}
 .kx{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
 #app{display:flex;min-height:100vh}
 #sidebar{width:292px;background:var(--sidebar);color:var(--sidebar-ink);position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:40;transition:transform .25s ease;display:flex;flex-direction:column}
-#main{flex:1;margin-left:292px;padding:32px clamp(18px,4vw,56px) 80px;max-width:1150px}
+#main{flex:1;min-width:0;margin-left:292px;padding:32px clamp(18px,4vw,56px) 80px;max-width:1150px}
 body.landing #sidebar{transform:translateX(-100%)}
 body.landing #main{margin-left:0}
 #sidebar .brand{padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -212,7 +212,7 @@ h2.page-title{font-size:1.55rem;margin-bottom:4px;line-height:1.3}
 .opt.wrong{border-color:var(--red);background:var(--red-soft)}
 .opt.wrong .letter{background:var(--red);color:#fff}
 .opt:disabled{cursor:default}
-.explain{border-radius:10px;padding:14px 17px;margin:14px 0;font-size:.9rem}
+.explain{border-radius:10px;padding:14px 17px;margin:14px 0;font-size:.9rem;overflow-wrap:anywhere}
 .explain.good{background:var(--green-soft);border:1px solid #cde7d8}
 .explain.bad{background:var(--red-soft);border:1px solid #f2cfca}
 .explain b{display:block;margin-bottom:4px}
@@ -238,7 +238,7 @@ mark{background:#ffe9a8;border-radius:3px;padding:0 2px}
 .lvl-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .sel{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.9rem;font-family:inherit;background:#fff}
 .chat{display:flex;flex-direction:column;gap:10px;margin:10px 0}
-.bubble{max-width:82%;padding:10px 14px;border-radius:14px;font-size:.95rem;line-height:1.4}
+.bubble{max-width:82%;padding:10px 14px;border-radius:14px;font-size:.95rem;line-height:1.4;overflow-wrap:anywhere}
 .bubble .fr{display:block;font-size:.8rem;color:var(--muted);margin-top:3px}
 .bubble.app{align-self:flex-start;background:#eef1f5;border-bottom-left-radius:4px}
 .bubble.user{align-self:flex-end;background:var(--accent-soft);border-bottom-right-radius:4px}
@@ -1175,7 +1175,7 @@ let apiCfg = {}; try{ apiCfg=JSON.parse(localStorage.getItem("english-api")||"{}
 // v46 : seuls les modèles de conversation (texte) conviennent ; image, audio, temps réel… provoquent des erreurs.
 const NON_CHAT=/(image|dall-?e|tts|whisper|transcribe|audio|realtime|embedding|moderation|search|computer-use|sora|codex|instruct|davinci|babbage)/i;
 function isChatModel(m){ return !!m && !NON_CHAT.test(m); }
-function bestDefaultModel(ids,p){ const pref = p==="anthropic" ? [/haiku/i,/sonnet/i] : [/^gpt-4o-mini$/i,/^gpt-4\.1-mini$/i,/^gpt-5-mini$/i,/^gpt-4o$/i,/mini/i];
+function bestDefaultModel(ids,p){ const pref = p==="anthropic" ? [/^claude-haiku-5-5$/i,/^claude-haiku-/i,/haiku/i,/sonnet/i] : [/^gpt-4o-mini$/i,/^gpt-4\.1-mini$/i,/^gpt-5-mini$/i,/^gpt-4o$/i,/mini/i];
   for(const r of pref){ const f=ids.find(id=>r.test(id)); if(f) return f; } return ids[0]; }
 if(apiCfg.model && !isChatModel(apiCfg.model)){ apiCfg.model=""; try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
 function saveApiCfg(){ try{ localStorage.setItem("english-api",JSON.stringify(apiCfg)); }catch(e){} }
@@ -1193,7 +1193,7 @@ async function loadModels(){
   let ids=(d.data||[]).map(m=>m.id);
   if(p==="openai") ids=ids.filter(id=>/^(gpt-|o[13457]|chatgpt)/i.test(id));
   ids=ids.filter(isChatModel);
-  ids.sort();
+  if(p!=="anthropic") ids.sort(); // Anthropic : la liste arrive du plus récent au plus ancien
   return ids;
 }
 function setModel(m){ apiCfg.model=m; saveApiCfg(); }
@@ -1575,13 +1575,35 @@ async function iaSend(){
   catch(e){ ia.error=String(e.message||e); }
   ia.loading=false; render(); iaAfterReply();
 }
+const CLAUDE_DEFAULT="claude-haiku-5-5";
+function claudeExtras(m){
+  if(/^claude-haiku-[5-9]/.test(m)) return {thinking:{type:"disabled"}};            // réponses courtes : pas de réflexion préalable
+  if(/^claude-(opus|sonnet|fable|mythos)-([5-9]|4-[6-9])/.test(m)) return {output_config:{effort:"low"}};
+  return {};
+}
+function claudeFetch(model,system,messages,mt){
+  return fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiCfg.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true","content-type":"application/json"},body:JSON.stringify({model,max_tokens:mt,system,messages,...claudeExtras(model)})});
+}
+function apiErrMsg(status,txt){
+  if(status===401) return " — clé API refusée (401). Vérifiez la clé dans les réglages IA.";
+  if(status===404&&/model/i.test(txt)) return " — modèle introuvable (404). Cliquez « Charger mes modèles disponibles » et choisissez un modèle Haiku.";
+  if(status===429) return " — trop de requêtes ou crédit épuisé (429). Réessayez dans un instant ou vérifiez votre crédit.";
+  if(status===400&&/credit|billing/i.test(txt)) return " — crédit API insuffisant. Ajoutez du crédit sur console.anthropic.com.";
+  return " — "+status+" : "+txt.slice(0,160);
+}
 async function callAI(system,messages,maxTok){
   const mt=maxTok||400;
   const p=apiCfg.provider||"openai";
   if(p==="anthropic"){
-    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiCfg.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true","content-type":"application/json"},body:JSON.stringify({model:(isChatModel(apiCfg.model)&&apiCfg.model)||"claude-3-5-haiku-latest",max_tokens:mt,system,messages})});
-    if(!r.ok) throw new Error(" — "+r.status+" : "+(await r.text()).slice(0,160));
-    const d=await r.json(); return (d.content||[]).map(b=>b.text||"").join("").trim();
+    let model=(isChatModel(apiCfg.model)&&apiCfg.model)||CLAUDE_DEFAULT;
+    let r=await claudeFetch(model,system,messages,mt), txt="";
+    if(!r.ok){ txt=await r.text();
+      if(r.status===404&&/not_found/.test(txt)&&/model/i.test(txt)){ // modèle retiré : on prend le plus récent disponible et on réessaie une fois
+        try{ const ids=await loadModels(); const nm=bestDefaultModel(ids,"anthropic"); if(nm&&nm!==model){ aiModels=ids; apiCfg.model=nm; saveApiCfg(); model=nm; r=await claudeFetch(model,system,messages,mt); txt=r.ok?"":await r.text(); } }catch(e){}
+      }
+    }
+    if(!r.ok) throw new Error(apiErrMsg(r.status,txt));
+    const d=await r.json(); return (d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
   } else {
     const r=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+apiCfg.key,"content-type":"application/json"},body:JSON.stringify({model:(isChatModel(apiCfg.model)&&apiCfg.model)||"gpt-4o-mini",max_tokens:mt,messages:[{role:"system",content:system},...messages]})});
     if(!r.ok) throw new Error(" — "+r.status+" : "+(await r.text()).slice(0,160));
@@ -2886,7 +2908,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v59";
+const APP_VERSION="v60";
 const APP_DATE="12 novembre 2026";
 function showVersionBadge(){
   try{
