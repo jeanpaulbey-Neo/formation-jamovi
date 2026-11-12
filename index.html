@@ -1691,22 +1691,45 @@ const COACH_BRICKS=[
  {"id": "k15", "cat": "cmp", "en": "My recommendation is to…", "fr": "Ma recommandation est de…", "ex": "My recommendation is to extend the parallel run."},
  {"id": "k16", "cat": "cmp", "en": "I suggest we take it offline.", "fr": "Je propose qu'on en reparle en dehors de la réunion.", "ex": "Interesting debate — I suggest we take it offline."},
  {"id": "k17", "cat": "cmp", "en": "The tool covers all asset classes.", "fr": "L'outil couvre toutes les classes d'actifs.", "ex": "The tool covers all asset classes, listed and OTC."},
- {"id": "k18", "cat": "cmp", "en": "We backtest against historical data.", "fr": "Nous testons sur les données historiques.", "ex": "We backtest the scenarios against six months of data."}
+ {"id": "k18", "cat": "cmp", "en": "We backtest against historical data.", "fr": "Nous testons sur les données historiques.", "ex": "We backtest the scenarios against six months of data."},
+ {id:"t01",cat:"scn",en:"What brings you to the conference?",fr:"Qu'est-ce qui vous amène à la conférence ?",ex:"Hi, I'm Paul. What brings you to the conference?"},
+ {id:"t02",cat:"scn",en:"Which talk did you enjoy the most?",fr:"Quelle intervention avez-vous préférée ?",ex:"So far, which talk did you enjoy the most?"},
+ {id:"t03",cat:"scn",en:"It was nice meeting you.",fr:"Ravi d'avoir fait votre connaissance.",ex:"I have to go — it was nice meeting you."},
+ {id:"t04",cat:"scn",en:"In my current role, I…",fr:"Dans mon poste actuel, je…",ex:"In my current role, I lead a team of twelve engineers."},
+ {id:"t05",cat:"scn",en:"One of my biggest achievements was…",fr:"L'une de mes plus grandes réussites a été…",ex:"One of my biggest achievements was migrating our data centre."},
+ {id:"t06",cat:"scn",en:"I'm looking for a role where I can…",fr:"Je cherche un poste où je peux…",ex:"I'm looking for a role where I can grow a bigger team."},
+ {id:"t07",cat:"scn",en:"What exactly is causing the delay?",fr:"Qu'est-ce qui cause exactement le retard ?",ex:"I understand, but what exactly is causing the delay?"},
+ {id:"t08",cat:"scn",en:"Can you commit to a new date?",fr:"Pouvez-vous vous engager sur une nouvelle date ?",ex:"Can you commit to a new date in writing?"},
+ {id:"t09",cat:"scn",en:"This delay has an impact on…",fr:"Ce retard a un impact sur…",ex:"This delay has an impact on our own launch."},
+ {id:"t10",cat:"scn",en:"Let me show you around.",fr:"Laissez-moi vous faire visiter.",ex:"Welcome to the team! Let me show you around."},
+ {id:"t11",cat:"scn",en:"You'll be working closely with…",fr:"Vous travaillerez étroitement avec…",ex:"You'll be working closely with the testing team."},
+ {id:"t12",cat:"scn",en:"Feel free to ask me anything.",fr:"N'hésitez pas à me poser toutes vos questions.",ex:"It's a lot at first — feel free to ask me anything."},
+ {id:"t13",cat:"scn",en:"Something urgent has come up.",fr:"Un imprévu urgent est survenu.",ex:"I'm sorry, something urgent has come up this afternoon."},
+ {id:"t14",cat:"scn",en:"Would Thursday morning suit you?",fr:"Jeudi matin vous conviendrait-il ?",ex:"Would Thursday morning suit you instead?"},
+ {id:"t15",cat:"scn",en:"I'm afraid I can't make it on…",fr:"Je crains de ne pas pouvoir être là le…",ex:"I'm afraid I can't make it on Tuesday."},
+ {id:"t16",cat:"scn",en:"Could we have a table for two, please?",fr:"Pourrions-nous avoir une table pour deux, s'il vous plaît ?",ex:"Good evening! Could we have a table for two, please?"},
+ {id:"t17",cat:"scn",en:"What would you recommend?",fr:"Que nous recommandez-vous ?",ex:"Everything looks good — what would you recommend?"},
+ {id:"t18",cat:"scn",en:"I'll have the…, please.",fr:"Je vais prendre le…, s'il vous plaît.",ex:"I'll have the grilled fish, please."},
+ {id:"t19",cat:"scn",en:"I'm allergic to…",fr:"Je suis allergique à…",ex:"Does it contain nuts? I'm allergic to nuts."},
+ {id:"t20",cat:"scn",en:"Could we have the bill, please?",fr:"Pourrions-nous avoir l'addition, s'il vous plaît ?",ex:"That was delicious. Could we have the bill, please?"},
+ {id:"t21",cat:"scn",en:"I think there's a mistake on the bill.",fr:"Je crois qu'il y a une erreur sur l'addition.",ex:"Sorry, I think there's a mistake on the bill: we had two coffees."},
+ {id:"t22",cat:"scn",en:"Is service included?",fr:"Le service est-il compris ?",ex:"Is service included, or should I leave a tip?"},
+ {id:"t23",cat:"scn",en:"The trip went really well overall.",fr:"Le déplacement s'est très bien passé dans l'ensemble.",ex:"The trip went really well overall — the client was happy."}
 ];
 const COACH_SCENARIOS=[
- {fr:"Point d'équipe hebdo avec un collègue international",en:"You are a colleague from an international delivery team; you and the learner are preparing the agenda and decisions of a weekly project meeting."},
- {fr:"Pause café en conférence : small talk",en:"You are a friendly stranger at a conference coffee break; make small talk about work, travel and the event."},
- {fr:"Entretien d'embauche pour un poste de manager IT",en:"You are a recruiter interviewing the learner for an IT management position; ask about experience, team leadership and motivation."},
- {fr:"Un prestataire est en retard sur une livraison",en:"You are a service provider whose delivery is late; the learner must get explanations, a new date and commitments from you."},
- {fr:"Accueillir un nouveau collègue dans l'équipe",en:"You are a new team member on your first day; the learner explains how the team works and answers your questions."},
- {fr:"Appel pour déplacer une réunion",en:"You call the learner to reschedule an important meeting; negotiate a new time slot and agree on the agenda."},
- {fr:"Dîner au restaurant à l'étranger",en:"You are a waiter in a restaurant abroad; take the learner's order, make recommendations and handle a small problem with the bill."},
- {fr:"Débrief d'un déplacement professionnel",en:"You are a colleague asking the learner about a recent business trip: how it went, what was decided, what happens next."}
+ {fr:"Point d'équipe hebdo avec un collègue international",b:["p06","p07","p08","p09","p12","p17","p19","p21"],en:"You are a colleague from an international delivery team; you and the learner are preparing the agenda and decisions of a weekly project meeting."},
+ {fr:"Pause café en conférence : small talk",b:["t01","t02","t03","c01","c03","c04","c19","c27"],en:"You are a friendly stranger at a conference coffee break; make small talk about work, travel and the event."},
+ {fr:"Entretien d'embauche pour un poste de manager IT",b:["t04","t05","t06","p20","p26","c02","c16","p11"],en:"You are a recruiter interviewing the learner for an IT management position; ask about experience, team leadership and motivation."},
+ {fr:"Un prestataire est en retard sur une livraison",b:["t07","t08","t09","p09","p23","p27","p18","p21"],en:"You are a service provider whose delivery is late; the learner must get explanations, a new date and commitments from you."},
+ {fr:"Accueillir un nouveau collègue dans l'équipe",b:["t10","t11","t12","p20","p26","c20","c11","p24"],en:"You are a new team member on your first day; the learner explains how the team works and answers your questions."},
+ {fr:"Appel pour déplacer une réunion",b:["t13","t14","t15","p24","p02","c26","p05","p19"],en:"You call the learner to reschedule an important meeting; negotiate a new time slot and agree on the agenda."},
+ {fr:"Dîner au restaurant à l'étranger",b:["t16","t17","t18","t19","t20","t21","t22","c26"],en:"You are a waiter in a restaurant abroad; take the learner's order, make recommendations and handle a small problem with the bill."},
+ {fr:"Débrief d'un déplacement professionnel",b:["t23","c15","c23","c28","c29","c21","p07","p19"],en:"You are a colleague asking the learner about a recent business trip: how it went, what was decided, what happens next."}
 ];
 const COACH_CMP_SCENARIOS=[
- {"fr": "Point d'avancement projet avec un chef de programme anglophone", "en": "You are an English-speaking programme manager; the learner leads the compliance workstream of a project replacing the bank's trade surveillance tools. Ask for status, risks, dependencies and next steps on migration, testing, parallel run and go-live."},
- {"fr": "Comité de pilotage : obtenir un arbitrage", "en": "You are a demanding senior steering committee member; the learner chairs the meeting and must present a RAG status and obtain a decision (staffing or timeline). Challenge the cost and the surveillance risk, and at some point disclose a potential conflict of interest with a vendor so the learner must handle your recusal."},
- {"fr": "Expliquer la surveillance des marchés à un nouveau venu", "en": "You are a new joiner curious about market surveillance; the learner explains what trade surveillance does: market abuse patterns (insider dealing, spoofing), alerts, false positives, calibration, STOR reports, and which products are covered (equities, bonds, derivatives, FX, OTC)."}
+ {"fr": "Point d'avancement projet avec un chef de programme anglophone", "b": ["k02", "k03", "k14", "k10", "k15", "k09", "p17"], "en": "You are an English-speaking programme manager; the learner leads the compliance workstream of a project replacing the bank's trade surveillance tools. Ask for status, risks, dependencies and next steps on migration, testing, parallel run and go-live."},
+ {"fr": "Comité de pilotage : obtenir un arbitrage", "b": ["k04", "k15", "k14", "k03", "k09", "k16", "p21"], "en": "You are a demanding senior steering committee member; the learner chairs the meeting and must present a RAG status and obtain a decision (staffing or timeline). Challenge the cost and the surveillance risk, and at some point disclose a potential conflict of interest with a vendor so the learner must handle your recusal."},
+ {"fr": "Expliquer la surveillance des marchés à un nouveau venu", "b": ["k05", "k06", "k07", "k08", "k17", "k18", "k01"], "en": "You are a new joiner curious about market surveillance; the learner explains what trade surveillance does: market abuse patterns (insider dealing, spoofing), alerts, false positives, calibration, STOR reports, and which products are covered (equities, bonds, derivatives, FX, OTC)."}
 ];
 
 const COACH_INT=[1,3,7,15,30,60];
@@ -1721,19 +1744,15 @@ function coachStreak(){ const s=(coachStore().streak)||{count:0,last:null};
   if(!s.last) return {count:0,doneToday:false};
   if(s.last===coachDate(0)) return {count:s.count,doneToday:true};
   return {count:s.last===coachDate(-1)?s.count:0,doneToday:false}; }
-function coachPickBricks(){
-  const POOL=coachPool();
+function coachPickBricks(scn){
+  const byId={}; COACH_BRICKS.forEach(x=>byId[x.id]=x);
+  const POOL=(scn&&scn.b)?scn.b.map(id=>byId[id]).filter(Boolean):coachPool();
   const srs=coachStore().srs||{}, today=coachDate(0);
-  const due=POOL.filter(b=>srs[b.id]&&srs[b.id].due<=today).sort((a,b)=>srs[a.id].due<srs[b.id].due?-1:1);
+  const due=POOL.filter(x=>srs[x.id]&&srs[x.id].due<=today).sort((x,y)=>srs[x.id].due<srs[y.id].due?-1:1);
   const out=due.slice(0,3);
-  const fresh=POOL.filter(b=>!srs[b.id]&&!out.includes(b));
-  let want=(out.length&&out[out.length-1].cat==="pro")?"conv":"pro";
-  while(out.length<3&&fresh.length){
-    let i=(coachFocus()==="mix")?fresh.findIndex(b=>b.cat===want):0; if(i<0)i=0;
-    out.push(fresh.splice(i,1)[0]); want=want==="pro"?"conv":"pro";
-  }
-  // tout vu et rien d'échu : réviser les plus anciennes
-  if(out.length<3){ const rest=POOL.filter(b=>!out.includes(b)).sort((a,b)=>((srs[a.id]||{}).due||"")<((srs[b.id]||{}).due||"")?-1:1); while(out.length<3&&rest.length) out.push(rest.shift()); }
+  const fresh=POOL.filter(x=>!srs[x.id]&&!out.includes(x));
+  while(out.length<3&&fresh.length) out.push(fresh.shift());
+  if(out.length<3){ const rest=POOL.filter(x=>!out.includes(x)).sort((x,y)=>((srs[x.id]||{}).due||"")<((srs[y.id]||{}).due||"")?-1:1); while(out.length<3&&rest.length) out.push(rest.shift()); }
   return out;
 }
 function coachApplySRS(usedIds){
@@ -1749,9 +1768,11 @@ function coachApplySRS(usedIds){
 function goCoach(){ view={formation:null,page:"coach",chap:null,tab:"lecon"}; render(); window.scrollTo({top:0}); }
 function coachStopAudio(){ stopDictation(); try{ speechSynthesis.cancel(); }catch(e){} if(coach.timer){ clearInterval(coach.timer); coach.timer=null; } handsMode=false; handsInput="iaInput"; }
 function coachExit(){ coachStopAudio(); coach={phase:"idle",bricks:[],scn:null,messages:[],loading:false,error:null,t0:0,wrap:false,debrief:null,used:{},timer:null}; goHomeSelector(); }
+function coachScnList(){ return (coachFocus()==="cmp")?COACH_CMP_SCENARIOS:COACH_SCENARIOS; }
+function coachNextScn(){ const L=coachScnList(); coach.scn=L[(L.indexOf(coach.scn)+1)%L.length]; coach.bricks=coachPickBricks(coach.scn); render(); window.scrollTo({top:0}); }
 function coachBegin(){
-  coach.bricks=coachPickBricks();
-  const d=new Date(); const SCN=(coachFocus()==="cmp")?COACH_CMP_SCENARIOS:COACH_SCENARIOS; coach.scn=SCN[(d.getDate()+d.getMonth())%SCN.length];
+  const d=new Date(); const SCN=coachScnList(); coach.scn=SCN[(d.getDate()+d.getMonth())%SCN.length];
+  coach.bricks=coachPickBricks(coach.scn);
   coach.phase="warmup"; coach.messages=[]; coach.error=null; coach.debrief=null; coach.used={}; coach.wrap=false;
   render(); window.scrollTo({top:0});
 }
@@ -1854,9 +1875,9 @@ function renderCoach(){
   }
   else if(coach.phase==="warmup"){
     h+=`<div class="card"><b>Étape 1/3 — Échauffement (1 min)</b>
-    <p style="font-size:.9rem;color:var(--muted)">Vos 3 briques du jour. Écoutez chacune (🔊), puis répétez-la <b>deux fois à voix haute</b>. Pendant la conversation, vous devrez les placer naturellement.</p>
+    <div style="margin:8px 0;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3);font-size:.95rem;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span>🎬 Scénario du jour : <b>${esc(coach.scn.fr)}</b></span><button class="btn ghost sm" onclick="coachNextScn()">🔀 Autre scénario</button></div>
+    <p style="font-size:.9rem;color:var(--muted)">Vos 3 briques pour ce scénario. Écoutez chacune (🔊), puis répétez-la <b>deux fois à voix haute</b>. Pendant la conversation, vous devrez les placer naturellement.</p>
     ${coach.bricks.map((b,i)=>coachBrickCard(b,i,false)).join("")}
-    <div style="margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--accent-soft,#eef6f3);font-size:.9rem">🎬 Scénario du jour : <b>${esc(coach.scn.fr)}</b></div>
     <div style="text-align:center;margin-top:14px"><button class="btn" onclick="coachStartConv()">✅ C'est répété → Étape 2 : conversation</button></div></div>`;
   }
   else if(coach.phase==="conv"){
@@ -2908,7 +2929,7 @@ function render(){
 }
 $("#burger").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); document.body.classList.toggle("menu-open"); });
 $("#overlay").addEventListener("click",closeMenu);
-const APP_VERSION="v60";
+const APP_VERSION="v61";
 const APP_DATE="12 novembre 2026";
 function showVersionBadge(){
   try{
